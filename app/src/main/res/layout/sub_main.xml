@@ -30,16 +30,133 @@
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/conlayoutCardSet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#CACACA"
+        android:layout_height="0dp"
+        android:background="#DAE6FF"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu">
 
         <TextView
             android:id="@+id/txtBtnCardSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:text="카드 세트"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TableLayout
+            android:id="@+id/tablelaoutCardSet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:stretchColumns="0,1,2"
+            app:layout_constraintTop_toBottomOf="@id/txtBtnCardSet">
+
+            <TableRow>
+                //카드세트1
+
+                <ImageView
+                    android:id="@+id/imgCardSet1"
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/imgCardSet2"
+                    app:srcCompat="@drawable/aman" />
+                //카드세트2
+
+                <ImageView
+                    android:id="@+id/imgCardSet2"
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    app:srcCompat="@drawable/aman" />
+                //카드세트3
+
+                <ImageView
+                    android:id="@+id/imgCardSet3"
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/imgCardSet2"
+                    app:srcCompat="@drawable/aman" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/txtCardSet1"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgCardSet1"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/txtCardSet2"
+                    android:padding="10dp"
+                    android:text="카드세트1"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtCardSet2"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgCardSet2"
+                    android:layout_centerHorizontal="true"
+                    android:padding="10dp"
+                    android:text="카드세트2"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtCardSet3"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgCardSet3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/txtCardSet2"
+                    android:padding="10dp"
+                    android:text="카드세트3"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+            </TableRow>
+
+        </TableLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tablelaoutCardSet"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    //구분선
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/conlayoutCardSet"
+        app:layout_constraintBottom_toTopOf="@id/conlayoutCardbookStats"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/conlayoutCardbookStats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#B0FFE0B7"
+        app:layout_constraintTop_toBottomOf="@+id/conlayoutCardSet"
+        app:layout_constraintVertical_weight="2">
+
+        <TextView
+            android:id="@+id/txtBtnCardBookStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카드 도감 특성"
             android:textSize="25dp"
             android:textStyle="bold"
             android:padding="10dp"
@@ -48,82 +165,131 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
+        <TableLayout
+            android:id="@+id/tablelayoutCardbookStats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtBtnCardBookStats"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:stretchColumns="0,1,2">
 
-        <RelativeLayout
+            <TableRow android:background="@color/black">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#FFC2DF"
+                    android:text="치명"
+                    android:textSize="20dp"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FFC2DF"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginHorizontal="1dp"
+                    android:text="특화"
+                    android:textSize="20dp"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FFC2DF"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:text="신속"
+                    android:textSize="20dp"
+                    android:textAlignment="center"/>
+            </TableRow>
+            <TableRow android:background="@color/black">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="00"
+                    android:textSize="20dp"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginHorizontal="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="00"
+                    android:textSize="20dp"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="00"
+                    android:textSize="20dp"
+                    android:textAlignment="center"/>
+            </TableRow>
+        </TableLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/tablelayoutCardbookStats"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    //구분선
+    <View
+        android:id="@+id/lineBetweenCardbookAndDemonDMG"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/conlayoutCardbookStats"
+        app:layout_constraintBottom_toTopOf="@id/conlayoutDemonExtraDMG"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/conlayoutDemonExtraDMG"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFEBEB"
+        app:layout_constraintTop_toBottomOf="@+id/conlayoutCardbookStats"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_weight="1">
+
+
+        <TextView
+            android:id="@+id/txtBtnDemonExtraDmg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="악마 추가 피해"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtDemonExtraDmg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/txtBtnCardSet"
-            android:layout_marginTop="10dp">
-
-            //카드세트1
-            <ImageView
-                android:id="@+id/imgCardSet1"
-                android:background="@color/black"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@id/imgCardSet2"
-                app:srcCompat="@drawable/amanCard" />
-            <TextView
-                android:id="@+id/txtCardSet1"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_below="@id/imgCardSet1"
-                android:layout_toLeftOf="@id/txtCardSet2"
-                android:text="카드세트1"
-                android:textAlignment="center"
-                android:padding="10dp"
-                android:textSize="18dp"/>
-
-            //카드세트2
-            <ImageView
-                android:id="@+id/imgCardSet2"
-                android:background="@color/black"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/amanCard" />
-            <TextView
-                android:id="@+id/txtCardSet2"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgCardSet2"
-                android:layout_centerHorizontal="true"
-                android:text="카드세트2"
-                android:textAlignment="center"
-                android:padding="10dp"
-                android:textSize="18dp" />
-
-            //카드세트3
-            <ImageView
-                android:id="@+id/imgCardSet3"
-                android:background="@color/black"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/imgCardSet2"
-                app:srcCompat="@drawable/amanCard" />
-            <TextView
-                android:id="@+id/txtCardSet3"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_below="@id/imgCardSet3"
-                android:layout_toRightOf="@id/txtCardSet2"
-                android:text="카드세트3"
-                android:textAlignment="center"
-                android:padding="10dp"
-                android:textSize="18dp" />
-            //구분선
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/txtCardSet3"
-                android:layout_marginTop="15dp"
-                android:background="@color/black"/>
-        </RelativeLayout>
-
+            android:text="0.00%"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/txtBtnDemonExtraDmg"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
