@@ -15,22 +15,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.draw_main);
+        setContentView(R.layout.card_set_page);
 
-        /*
-        ImageView imgBtnMenu;
 
-        imgBtnMenu = (ImageView) findViewById(R.id.imgBtnMenu);
-        imgBtnMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayoutSideMenu);
-                if(!drawer.isDrawerOpen(Gravity.LEFT)){
-                    drawer.openDrawer(Gravity.LEFT);
-                }
-            }
-        });
-        */
+
     }
 
 
