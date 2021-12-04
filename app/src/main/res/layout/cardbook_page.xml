@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="#404040"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            app:srcCompat="@drawable/abc_vector_test" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/txtMenuBtnCardSet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="카드 세트"
+            android:textColor="#E8E8E8"
+            android:textSize="25dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/txtMenuBtnCardBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="카드 도감 특성"
+            android:textColor="#E8E8E8"
+            android:textSize="25dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/txtMenuBtnDemonExtraDmg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="악마 추가 피해"
+            android:textColor="#E8E8E8"
+            android:textSize="25dp" />
+
+    </LinearLayout>
+    //카드 도감 특성
+    //완성된 도감은 노란빛 배경
+    //미획득 카드는 흑백으로
+    //완성 도감 숨기기 기능
+    //스크롤 바 구현
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/idTopMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#AE000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/conlayoutCardBookStatus"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:id="@+id/imgBtnMenu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                app:srcCompat="@drawable/fix01menu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:text="카드 도감 특성"
+                android:textColor="#E3E3E3"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/conlayoutCardBookStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:stretchColumns="2"
+                android:layout_margin="15dp">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtBtnCritical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="치명 + 00"
+                        android:textSize="16dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----------------------"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:id="@+id/txtBtnNotAchievedSpecificityCritical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="치명 특성 미 달성 도감 개수 : 00개"
+                        android:textAlignment="textEnd"
+                        android:textSize="16dp"/>
+                </TableRow>
+                <TableRow android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/txtBtnSpecaility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="특화 + 00"
+                        android:textSize="16dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----------------------"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:id="@+id/txtBtnNotAchievedSpecificitySpecaility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="특화 특성 미 달성 도감 개수 : 00개"
+                        android:textAlignment="textEnd"
+                        android:textSize="16dp"/>
+                </TableRow>
+                <TableRow android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/txtBtnAgility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="신속 + 00"
+                        android:textSize="16dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----------------------"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:id="@+id/txtBtnNotAchievedSpecificityAgility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="신속 특성 미 달성 도감 개수 : 00개"
+                        android:textAlignment="textEnd"
+                        android:textSize="16dp"/>
+                </TableRow>
+
+            </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/conlayoutCardBookStatus"/>
+
+        //카드 도감 이름 추가 요망
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

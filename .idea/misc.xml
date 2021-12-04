@@ -8,6 +8,7 @@
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/card_set_detail.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/card_set_page.xml" value="0.25" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/cardbook_page.xml" value="0.14" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/draw_main.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/main_page.xml" value="0.22" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/sub_main.xml" value="0.25" />
@@ -21,5 +22,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.14" />
+      </ProjectState>
+    </option>
   </component>
 </project>
