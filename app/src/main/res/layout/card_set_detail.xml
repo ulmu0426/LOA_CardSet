@@ -97,7 +97,7 @@
             app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="lineBetweenCardSetNameToCardForce"
+            app:layout_constraintBottom_toTopOf="@id/lineBetweenCardSetNameToCardForce"
             android:background="#D8D3E1FF">
             <TextView
                 android:id="@+id/txtCardSetName"
