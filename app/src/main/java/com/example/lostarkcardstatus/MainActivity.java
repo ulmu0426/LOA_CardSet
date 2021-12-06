@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cardbook_page);
+        setContentView(R.layout.cardbook_name_and_cardlist);
 
 
 
