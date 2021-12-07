@@ -87,65 +87,73 @@
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
                 android:text="카드 도감 특성"
+                android:gravity="center"
                 android:textColor="#E3E3E3"
                 android:textSize="25dp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/conlayoutCardBookStatus"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
-            app:layout_constraintRight_toRightOf="parent"
+            android:background="#B0FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idTopMenu">
+
             <TextView
                 android:id="@+id/txtCardBookName_incardbooknamexmlpage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:text="카드 도감 이름"
                 android:textSize="30dp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="30dp"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginRight="30dp"
                 android:text="특성 + 0"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="45dp"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TableLayout
                 android:id="@+id/tablelayoutCardSetDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/txtCardBookName_incardbooknamexmlpage"
-                app:layout_constraintRight_toRightOf="parent"
+                android:stretchColumns="*"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:stretchColumns="*">
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardBookName_incardbooknamexmlpage">
 
                 <TableRow>
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg0"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg1"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
 
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg2"
@@ -156,139 +164,159 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg3"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg4"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
 
 
                 </TableRow>
+
                 <TableRow android:layout_marginTop="5dp">
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname0"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname1"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname2"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname3"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname4"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
                 </TableRow>
+
                 <TableRow android:layout_marginTop="30dp">
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg5"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg6"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg7"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg8"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
+
                     <ImageView
                         android:id="@+id/imgCardBookName_CardImg9"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
-                        app:srcCompat="@drawable/aman"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/aman" />
 
 
                 </TableRow>
+
                 <TableRow android:layout_marginTop="5dp">
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname5"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname6"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname7"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname8"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                     <TextView
                         android:id="@+id/txtCardBookName_Cardname9"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:text="카드 이름"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
                 </TableRow>
 
             </TableLayout>
