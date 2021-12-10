@@ -1,0 +1,54 @@
+데이터 테이블 명 cardList
+id integer : 번호ex001
+name text : 카드 이름 ex aman
+grade text : 카드 등급 ex legend(L, E, R, U, C)
+count integer : 보유 카드 개수
+awake integer: 카드 각성 수치
+
+
+데이터 테이블 cardBookList
+id integer : 번호
+name text : 카드 도감 이름
+stat text : 카드 도감 완성시 주는 스텟 명
+card1 ~ card10 text: 도감에 들어가는 카드 명(10개 미만시 null)
+
+
+데이터 테이블 demonExtraDmgList
+id integer : 번호
+name text : 악추피 도감 이름
+card1 ~ card10 text : 악추피 도감에 들어가는 카드 명
+dmg_percent1 ~ dmg_percent3 real : 각성 합 단계별 추가 데미지 0.00
+
+
+-----
+
+작업 진행단계
+
+cardlist 레전드 카드만 등록 완료
+
+----
+데이터베이스 진입
+sqlite3 데이터베이스파일 명(확장자까지)
+
+주 사용 쿼리문
+(터미널에서 테이블을 보기 편하게 하기 위한 것)
+.mode column
+.header on
+
+(테이블 생성)
+create table (TABLE_NAME) (columnName Type, columnName Type, columnName Type, ...)
+
+(테이블 보기)
+select * from (테이블명)
+
+(데이터 저장)
+insert into (테이블명) values(,,,)
+
+(컬럼추가)(컬럼삭제는 불가능하므로 신중히 할 것)
+alter table (테이블명) add column (컬럼 명) (데이터 타입);
+
+(데이터 삭제)
+delete from 테이블명 where 조건식(id = 3(아이디가 3인것) or id < 5(id가 5 미만인것))
+
+(데이터 수정)
+update 테이블명 set 컬럼명1 = 수정값, ... where 조건식;
