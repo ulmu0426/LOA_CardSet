@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/kcor2/Documents/Project LOA Card/loaCardDb.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1212"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">INSERT INTO cardBookList values(9,'장로님, 우리 장로님','치명',1,'오크 장로 질록','고블린 장로 발루','토토마','사트라',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(10,'창천구검','치명',2,'하백','금강','길달','원포','호동','한손','미령','만포','하리',NULL);
+INSERT INTO cardBookList values(11,'가디언의 응징','치명',2,'쿤겔라니움','데스칼루다','하누마탄',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(12,'타락한 불꽃','치명',1,'게르디아','에페르니아',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(13,'업그레이드!','치명',1,'지휘관 솔','솔 그랑데',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(14,'질병군단','치명',2,'일리아칸','역병 인도자','하르잘','칼라도세','역병군단 바르토','루아브','나크슌','도륙자 아르르','나잔',NULL);
+INSERT INTO cardBookList values(15,'냠냠꿀꺽 먹고 싶어!','치명',1,'알리페르','아벤','투란',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(16,'백귀야행','치명',2,'반다','미령','도철','삭월',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(17,'1절만 해','치명',1,'니아','하리야',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);</sql><current_tab id="0"/></tab_sql></sqlb_project>

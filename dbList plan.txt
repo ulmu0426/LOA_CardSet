@@ -1,4 +1,5 @@
 데이터 테이블 명 cardList
+전설,영웅,희귀,고급,일반, 스페셜 구분해서 따로 저장(카드가 추가되면 확장성을 갖기위함)
 id integer : 번호ex001
 name text : 카드 이름 ex aman
 grade text : 카드 등급 ex legend(L, E, R, U, C)
@@ -7,9 +8,11 @@ awake integer: 카드 각성 수치
 
 
 데이터 테이블 cardBookList
+치명, 특화, 신속 구분해서 3개로(도감이 추가되면 확장성을 갖기 위함)
 id integer : 번호
 name text : 카드 도감 이름
 stat text : 카드 도감 완성시 주는 스텟 명
+value integer : 카드 도감 완성시 주는 스텟 수치
 card1 ~ card10 text: 도감에 들어가는 카드 명(10개 미만시 null)
 
 
@@ -24,7 +27,10 @@ dmg_percent1 ~ dmg_percent3 real : 각성 합 단계별 추가 데미지 0.00
 
 작업 진행단계
 
-cardlist 레전드 카드만 등록 완료
+cardlist 작업 리빌드 필요
+cardimg 추가
+cardbooklist 작업 시작
+cardbooklist 치명 도감까지 완성
 
 ----
 데이터베이스 진입
@@ -52,3 +58,14 @@ delete from 테이블명 where 조건식(id = 3(아이디가 3인것) or id < 5(
 
 (데이터 수정)
 update 테이블명 set 컬럼명1 = 수정값, ... where 조건식;
+
+
+INSERT INTO cardBookList values(9,'장로님, 우리 장로님','치명',1,'오크 장로 질록','고블린 장로 발루','토토마','사트라',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(10,'창천구검','치명',2,'하백','금강','길달','원포','호동','한손','미령','만포','하리',NULL);
+INSERT INTO cardBookList values(11,'가디언의 응징','치명',2,'쿤겔라니움','데스칼루다','하누마탄',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(12,'타락한 불꽃','치명',1,'게르디아','에페르니아',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(13,'업그레이드!','치명',1,'지휘관 솔','솔 그랑데',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(14,'질병군단','치명',2,'일리아칸','역병 인도자','하르잘','칼라도세','역병군단 바르토','루아브','나크슌','도륙자 아르르','나잔',NULL);
+INSERT INTO cardBookList values(15,'냠냠꿀꺽 먹고 싶어!','치명',1,'알리페르','아벤','투란',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(16,'백귀야행','치명',2,'반다','미령','도철','삭월',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO cardBookList values(17,'1절만 해','치명',1,'니아','하리야',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
