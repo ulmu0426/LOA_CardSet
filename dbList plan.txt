@@ -32,6 +32,8 @@ cardimg 추가
 cardbooklist 작업 시작
 cardbooklist 치명 도감까지 완성
 
+cardlist_grade별로 구분해서 테이블 생성 및 데이터 삽입 완료
+
 ----
 데이터베이스 진입
 sqlite3 데이터베이스파일 명(확장자까지)
@@ -59,13 +61,3 @@ delete from 테이블명 where 조건식(id = 3(아이디가 3인것) or id < 5(
 (데이터 수정)
 update 테이블명 set 컬럼명1 = 수정값, ... where 조건식;
 
-
-INSERT INTO cardBookList values(9,'장로님, 우리 장로님','치명',1,'오크 장로 질록','고블린 장로 발루','토토마','사트라',NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO cardBookList values(10,'창천구검','치명',2,'하백','금강','길달','원포','호동','한손','미령','만포','하리',NULL);
-INSERT INTO cardBookList values(11,'가디언의 응징','치명',2,'쿤겔라니움','데스칼루다','하누마탄',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO cardBookList values(12,'타락한 불꽃','치명',1,'게르디아','에페르니아',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO cardBookList values(13,'업그레이드!','치명',1,'지휘관 솔','솔 그랑데',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO cardBookList values(14,'질병군단','치명',2,'일리아칸','역병 인도자','하르잘','칼라도세','역병군단 바르토','루아브','나크슌','도륙자 아르르','나잔',NULL);
-INSERT INTO cardBookList values(15,'냠냠꿀꺽 먹고 싶어!','치명',1,'알리페르','아벤','투란',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO cardBookList values(16,'백귀야행','치명',2,'반다','미령','도철','삭월',NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO cardBookList values(17,'1절만 해','치명',1,'니아','하리야',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
