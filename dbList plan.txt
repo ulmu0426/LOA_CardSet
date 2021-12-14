@@ -33,6 +33,10 @@ cardbooklist 작업 시작
 cardbooklist 치명 도감까지 완성
 
 cardlist_grade별로 구분해서 테이블 생성 및 데이터 삽입 완료
+cardbook_stat별로 구분해서 테이블 생성 및 데이터 삽입 완료
+
+타이달로스 -> 타이탈로스
+db, img name 변경
 
 ----
 데이터베이스 진입
