@@ -27,16 +27,11 @@ dmg_percent1 ~ dmg_percent3 real : 각성 합 단계별 추가 데미지 0.00
 
 작업 진행단계
 
-cardlist 작업 리빌드 필요
-cardimg 추가
-cardbooklist 작업 시작
-cardbooklist 치명 도감까지 완성
-
-cardlist_grade별로 구분해서 테이블 생성 및 데이터 삽입 완료
-cardbook_stat별로 구분해서 테이블 생성 및 데이터 삽입 완료
 
 타이달로스 -> 타이탈로스
 db, img name 변경
+루드벡 카드 이미지 추가
+악추피 테이블 생성 및 데이터 삽입 완료
 
 ----
 데이터베이스 진입

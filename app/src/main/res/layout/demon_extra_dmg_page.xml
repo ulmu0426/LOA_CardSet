@@ -87,8 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:text="카드 도감 특성"
                 android:gravity="center"
+                android:text="악마 추가 피해"
                 android:textColor="#E3E3E3"
                 android:textSize="25dp"
                 android:textStyle="bold" />

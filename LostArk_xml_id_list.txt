@@ -1,0 +1,17 @@
+메인 페이지 (draw_main.xml)
+id 목록
+
+카드 세트
+txtCardSet1-3 = 카드세트 이름 1~3까지
+imgCardSet1-3 = 카드세트 이미지 1~3까지(카드세트의 최고등급or중요카드로 작성할것)
+
+카드 도감 특성
+txtCardBookStat_Critical = 도감작으로 획득한 치명 스텟 합
+txtCardBookStat_Speciality = 도감작으로 획득한 특화 스텟 합
+txtCardBookStat_Agility = = 도감작으로 획득한 신속 스텟 합
+
+악마 추가 피해
+txtDemonExtraDmg = 악추피 작으로 증가한 악추피 값
+
+----------------------------------------------------------------
+카드 세트 페이지(카드세트 디자인)
