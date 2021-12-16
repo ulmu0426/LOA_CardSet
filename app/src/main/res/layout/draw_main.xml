@@ -170,7 +170,7 @@
                     android:id="@+id/txtBtnCardBookStats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="카드 도감 특성"
+                    android:text="카드 도감"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:padding="10dp"

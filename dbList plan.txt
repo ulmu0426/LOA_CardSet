@@ -6,6 +6,9 @@ grade text : 카드 등급 ex legend(L, E, R, U, C)
 count integer : 보유 카드 개수
 awake integer: 카드 각성 수치
 
+카드 획득처 추가 요망
+----
+
 
 데이터 테이블 cardBookList
 치명, 특화, 신속 구분해서 3개로(도감이 추가되면 확장성을 갖기 위함)
