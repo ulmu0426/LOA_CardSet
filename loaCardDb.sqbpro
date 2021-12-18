@@ -1,23 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/kcor2/Documents/Project LOA Card/loaCardDb.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2372"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">INSERT INTO demon_extra_dmg VALUES(0, '거인 토토이크', '모카모카','토토마','수호자 에오로','수호자 티르','수호자 페오스','하이비 집행관','아크의 수호자 오셀','토토이끼','창조의 알','창조의 아크 오르투스',20,40,50, 0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(1, '고립된 영원의 섬', '시그나투스','마리 파우렌츠',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4,8,10,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(2, '고스트 버스터즈', '한이 서린 여인','에이케르','나베르','에스더 루테란','아비시나','마법사 로나운',NULL,NULL,NULL,NULL,12,24,30, 0.10,0.10,0.10);
-INSERT INTO demon_extra_dmg VALUES(3, '광기의 주인이시여...!', '사교도 대제사장','쿠크세이튼',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4,8,10,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(4, '네가 보고 싶었어!', '가디언 루','니나브',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4,8,10, 0.10,0.10,0.10);
-INSERT INTO demon_extra_dmg VALUES(5, '니나브와 아이들', '혼재의 추오','토토이끼','니나브','다람쥐 욤','여우 사피아노',NULL,NULL,NULL,NULL,NULL,10,20,35,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(6, '다르키엘의 저주', '히바이크','붉은 남작 에디','세티노','녹스',NULL,NULL,NULL,NULL,NULL,NULL,8,16,20,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(7, '두근두근 파푸니카', '니아','샤나','자하라','나기','리루',NULL,NULL,NULL,NULL,NULL,10,20,35,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(8, '만월의 고택', '삭월','미령',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4,8,10,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(9, '모르모트', '아이히만 박사','크리스틴','바스티안','실험체 타르마쿰',NULL,NULL,NULL,NULL,NULL,NULL,8,16,20,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(10, '못다한 승부', '발탄','에스더 루테란','패자의 검','에스더 갈라투르',NULL,NULL,NULL,NULL,NULL,NULL,8,16,20,0.13,0.13,0.14);
-INSERT INTO demon_extra_dmg VALUES(11, '미스트라시아의 비밀', '미스틱','쿠크세이튼','니나브',NULL,NULL,NULL,NULL,NULL,NULL,NULL,6,12,15,0.10,0.10,0.10);
-INSERT INTO demon_extra_dmg VALUES(12, '바위의 요람', '세티노','모카모카','붉은 남작 에디','토토이끼','창조의 알',NULL,NULL,NULL,NULL,NULL,10,20,25,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(13, '보레아 기사단', '하울로크','아자란','가비슈',NULL,NULL,NULL,NULL,NULL,NULL,NULL,6,12,15,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(14, '사령술의 대가', '지그문트','가룸','나베갈','고르곤',NULL,NULL,NULL,NULL,NULL,NULL,8,16,20,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(15, '새벽의 사제', '바루투','아만','페데리코',NULL,NULL,NULL,NULL,NULL,NULL,NULL,6,12,15,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(16, '세상을 구하는 빛', '샨디','아제나&amp;이난나','니나브','카단','바훈투르','실리안','웨이',NULL,NULL,NULL,14,28,35,0.13,0.13,0.14);
-INSERT INTO demon_extra_dmg VALUES(17, '어둠군단', '카멘','지그문트','나베갈','카이슈르','아드모스','칼트말루스',NULL,NULL,NULL,NULL,12,24,30,0.10,0.10,0.10);
-INSERT INTO demon_extra_dmg VALUES(18, '침묵하는 거인의 숲', '거신 카스피엘','모카모카','수호자 티르',NULL,NULL,NULL,NULL,NULL,NULL,NULL,6,12,15,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(19, '태양의 기사단', '라하르트','제레온','하템','키에사','루드벡','테르나크','나베갈',NULL,NULL,NULL,14,28,35,0.06,0.07,0.07);
-INSERT INTO demon_extra_dmg VALUES(20, '파괴된 제나일', '아브렐슈드','아제나&amp;이난나','에아달린','아델','엘레노아','아드린느',NULL,NULL,NULL,NULL,12,24,30,0.13,0.13,0.14);
-INSERT INTO demon_extra_dmg VALUES(21, '해적시대', '검은이빨','히바이크','녹스','세티노','붉은 남작 에디','칼바서스',NULL,NULL,NULL,NULL,12,24,30,0.06,0.07,0.07);
-</sql><current_tab id="0"/></tab_sql></sqlb_project>
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/kcor2/Documents/Project LOA Card/loaCardDb.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2372"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,11:maincard_common"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="card_common" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="21"/><column index="2" value="106"/><column index="3" value="62"/><column index="4" value="53"/><column index="5" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">
+UPDATE card_common SET acquisition_info = '[호감도] 니아 마을 - 베르베로' WHERE name = '베르베로';</sql><current_tab id="0"/></tab_sql></sqlb_project>
