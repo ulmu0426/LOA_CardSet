@@ -1,7 +1,8 @@
 package com.example.lostarkcardstatus;
 
-import android.content.ContentValues;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -13,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class LOA_Card_DB extends SQLiteOpenHelper {
     private Context context;
@@ -29,7 +31,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String TABLE_CARD_RARE = "card_rare";
     private static final String TABLE_CARD_UNCOMMON = "card_uncommon";
     private static final String TABLE_CARD_COMMON = "card_common";
-    private static final String TABLE_CARD_SPECIAL = "card_common";
+    private static final String TABLE_CARD_SPECIAL = "card_special";
     //카드테이블이 공유하는 column
     private static final String CARD_COLUMN_ID ="id";            //테이블별 카드 번호
     private static final String CARD_COLUMN_NAME ="name";        //카드 이름
@@ -128,4 +130,301 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         //카드 id 값으로 카드를 파악하고 해당 카드의 각성도 조절.
         updateColumInfo.execSQL("UPDATE " + tableName + " SET " + number + " = " + input + " WHERE id = " + cardId);
     }
+    //SELECT : 카드 가져오기(카드 이름, 보유 카드 개수, 카드 각성 수치)
+    //L,E,R,U,C
+    @SuppressLint("Range")
+    public  ArrayList<CardInfo> getCardInfoL(){     //전설카드 목록 넣기
+        ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LEGEND + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+    }
+
+    @SuppressLint("Range")
+    public  ArrayList<CardInfo> getCardInfoE(){     //영웅카드 목록 넣기
+        ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_EPIC + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+    }
+
+    @SuppressLint("Range")
+    public  ArrayList<CardInfo> getCardInfoR(){     //희귀카드 목록 넣기
+        ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_RARE + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+    @SuppressLint("Range")
+    public  ArrayList<CardInfo> getCardInfoU(){     //고급카드 목록 넣기
+        ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_UNCOMMON + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+    @SuppressLint("Range")
+    public  ArrayList<CardInfo> getCardInfoC(){     //일반카드 목록 넣기기
+       ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_COMMON + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+    @SuppressLint("Range")
+    public  ArrayList<CardInfo> getCardInfoS(){     //스페셜카드 목록 넣기기
+        ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SPECIAL + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+    //SELECT : 카드 도감 가져오기(도감 명, 도감 완성 특성 추가 값, 도감에 속한 카드 명(최대10)
+    @SuppressLint("Range")
+    public ArrayList<Cardbook> getCardBookInfo_Critical(){       //카드도감 치명 항목 가져오기
+        ArrayList<Cardbook> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_CRITICAL + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_NAME));
+                int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
+                String card0 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0));
+                String card1 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1));
+                String card2 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2));
+                String card3 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3));
+                String card4 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4));
+                String card5 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5));
+                String card6 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6));
+                String card7 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7));
+                String card8 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8));
+                String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
+
+                Cardbook cardbook_info = new Cardbook();
+                cardbook_info.setId(id);
+                cardbook_info.setName(name);
+                cardbook_info.setValue(value);
+                cardbook_info.setCard0(card0);
+                cardbook_info.setCard1(card1);
+                cardbook_info.setCard2(card2);
+                cardbook_info.setCard3(card3);
+                cardbook_info.setCard4(card4);
+                cardbook_info.setCard5(card5);
+                cardbook_info.setCard6(card6);
+                cardbook_info.setCard7(card7);
+                cardbook_info.setCard8(card8);
+                cardbook_info.setCard9(card9);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Cardbook> getCardBookInfo_Specility(){       //카드도감 특화 항목 가져오기
+        ArrayList<Cardbook> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_SPECIALITY + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_NAME));
+                int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
+                String card0 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0));
+                String card1 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1));
+                String card2 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2));
+                String card3 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3));
+                String card4 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4));
+                String card5 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5));
+                String card6 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6));
+                String card7 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7));
+                String card8 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8));
+                String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
+
+                Cardbook cardbook_info = new Cardbook();
+                cardbook_info.setId(id);
+                cardbook_info.setName(name);
+                cardbook_info.setValue(value);
+                cardbook_info.setCard0(card0);
+                cardbook_info.setCard1(card1);
+                cardbook_info.setCard2(card2);
+                cardbook_info.setCard3(card3);
+                cardbook_info.setCard4(card4);
+                cardbook_info.setCard5(card5);
+                cardbook_info.setCard6(card6);
+                cardbook_info.setCard7(card7);
+                cardbook_info.setCard8(card8);
+                cardbook_info.setCard9(card9);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Cardbook> getCardBookInfo_Agility(){       //카드도감 크리티컬 항목 가져오기
+        ArrayList<Cardbook> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_AGILITY + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_NAME));
+                int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
+                String card0 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0));
+                String card1 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1));
+                String card2 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2));
+                String card3 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3));
+                String card4 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4));
+                String card5 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5));
+                String card6 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6));
+                String card7 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7));
+                String card8 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8));
+                String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
+
+                Cardbook cardbook_info = new Cardbook();
+                cardbook_info.setId(id);
+                cardbook_info.setName(name);
+                cardbook_info.setValue(value);
+                cardbook_info.setCard0(card0);
+                cardbook_info.setCard1(card1);
+                cardbook_info.setCard2(card2);
+                cardbook_info.setCard3(card3);
+                cardbook_info.setCard4(card4);
+                cardbook_info.setCard5(card5);
+                cardbook_info.setCard6(card6);
+                cardbook_info.setCard7(card7);
+                cardbook_info.setCard8(card8);
+                cardbook_info.setCard9(card9);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
 }

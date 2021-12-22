@@ -4,19 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
+    private LOA_Card_DB cardDBHelper;
+    private ArrayList<CardInfo> cardLegend;
+    private ArrayList<Cardbook> cardbookCritical;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.draw_main);
+
+        setInit();
+
 
         //카드 세트로 이동.
         TextView txtBtnCardSet = (TextView) findViewById(R.id.txtBtnCardSet);
@@ -29,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //카드 세트 디테일 페이지로 바로 이동.(imgCardSet1-3 클릭시)
+        ImageView imgCardSet1 = (ImageView)findViewById(R.id.imgCardSet1);
+        imgCardSet1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CardSet_Detail.class);
+                startActivity(intent);
+            }
+        });
 
         //카드 도감으로 이동.
         TextView txtBtnCardBook = (TextView) findViewById(R.id.txtBtnCardBookStats);
@@ -49,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setInit() {
+        cardDBHelper = new LOA_Card_DB(this);
+
+        cardLegend = new ArrayList<>();
+        cardbookCritical = new ArrayList<>();
     }
 
     //뒤로가기 2회 터치시 종료(2.5초 안에 두번 눌러야 함)

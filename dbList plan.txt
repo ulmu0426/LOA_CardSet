@@ -6,15 +6,17 @@ grade text : 카드 등급 ex legend(L, E, R, U, C)
 count integer : 보유 카드 개수
 awake integer: 카드 각성 수치
 
-카드 획득처 추가 요망
 ----
-
+데이터 테이블 cardSet
+id integer : 카드세트 번호
+name text : 카드세트 명
+card0~6 text : 카드세트에 포함된 카드 명
+set_bonus0~5 text : 카드세트 수집 및 활성화 각성도 보너스
 
 데이터 테이블 cardBookList
 치명, 특화, 신속 구분해서 3개로(도감이 추가되면 확장성을 갖기 위함)
 id integer : 번호
 name text : 카드 도감 이름
-stat text : 카드 도감 완성시 주는 스텟 명
 value integer : 카드 도감 완성시 주는 스텟 수치
 card1 ~ card10 text: 도감에 들어가는 카드 명(10개 미만시 null)
 
