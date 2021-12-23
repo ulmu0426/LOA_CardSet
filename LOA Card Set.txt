@@ -8,6 +8,7 @@
 하늘을 비추는 사막 : 소금거인, 천둥, 모리나, 다단, 자이언트 웜, 타나토스
 해적 시대 : 검은이빨, 히바이크, 녹스, 세티노, 붉은 남작 에디, 칼바서스
 무기여 잘 있거라 : 패자의 검, 벨크루제, 파르쿠나스, 진멸의 창, 피요르긴, 나히니르
+
 에어가이츠 계획 : 마리 파우렌츠, 에스, 제이, 안톤, 세비엘, 진화의 군주 카인
 사령술의 대가 : 지그문트, 가룸, 나베갈, 고르곤
 남부에 떠오른 태양 : 제레온, 루드벡, 하템, 키에사
@@ -18,6 +19,7 @@
 책을 읽읍시다 : 오렐다, 루티아, 에아달린, 토토마
 자연의 정령들 : 자히아, 리게아스, 에페르니아, 그노시스, 실페리온, 운다트
 카제로스의 군단장 : 발탄, 일리아칸, 비아키스, 아브렐슈드, 카멘, 쿠크세이튼
+
 살아서 다시 보길 바란다 : 진 매드닉, 바에단, 시안
 세 우마르가 오리라 : 에이케르, 나베르, 에스더 갈라투르
 침묵하는 거인의 숲 : 거신 카스피엘, 모카모카, 수호자 티르
@@ -31,3 +33,14 @@
 가디언의 응징 : 데스칼루다, 쿤겔라니움, 하누마탄
 가디언의 위협 : 흑야의 요호, 칼벤투스, 헬가이아, 베르투스, 홍염의 요호, 타이탈로스
 미녀 삼총사 : 축제를 즐기는 니나브, 축제를 즐기는 에르제베트, 축제를 즐기는 사샤
+
+INSERT INTO cardSet VALUES(0,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(1,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(2,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(3,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(4,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(5,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(6,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(7,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(8,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
+INSERT INTO cardSet VALUES(9,'','card0','card1','card2','card3','card4','card5','card6','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0','set_bonus0');
