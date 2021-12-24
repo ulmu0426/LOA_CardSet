@@ -78,7 +78,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
             this.close();
             try {
                 copyDataBase();
-                Log.e("Log", "createDatabase database created");
             }
             catch (IOException mIOExeption){
                 throw new Error("ErrorCopyingDataBase");
@@ -114,6 +113,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
 
     }
 
@@ -151,6 +151,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardinfo.setName(name);
                 cardinfo.setCount(count);
                 cardinfo.setAwake(awake);
+                getInfo.add(cardinfo);
             }
         }
         cursor.close();

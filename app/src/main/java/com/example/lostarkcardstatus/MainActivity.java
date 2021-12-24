@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -25,7 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.draw_main);
 
-        setInit();
+        try {
+            setInit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
 
         //카드 세트로 이동.
@@ -69,11 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setInit() {
+    private void setInit() throws IOException {
         cardDBHelper = new LOA_Card_DB(this);
+        cardDBHelper.createDataBase();
 
-        cardLegend = new ArrayList<>();
-        cardbookCritical = new ArrayList<>();
     }
 
     //뒤로가기 2회 터치시 종료(2.5초 안에 두번 눌러야 함)
