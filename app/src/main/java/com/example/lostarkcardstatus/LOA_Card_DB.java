@@ -178,6 +178,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardinfo.setName(name);
                 cardinfo.setCount(count);
                 cardinfo.setAwake(awake);
+                getInfo.add(cardinfo);
             }
         }
         cursor.close();
@@ -204,6 +205,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardinfo.setName(name);
                 cardinfo.setCount(count);
                 cardinfo.setAwake(awake);
+                getInfo.add(cardinfo);
             }
         }
         cursor.close();
@@ -231,6 +233,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardinfo.setName(name);
                 cardinfo.setCount(count);
                 cardinfo.setAwake(awake);
+                getInfo.add(cardinfo);
             }
         }
         cursor.close();
@@ -258,6 +261,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardinfo.setName(name);
                 cardinfo.setCount(count);
                 cardinfo.setAwake(awake);
+                getInfo.add(cardinfo);
             }
         }
         cursor.close();
@@ -285,6 +289,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardinfo.setName(name);
                 cardinfo.setCount(count);
                 cardinfo.setAwake(awake);
+                getInfo.add(cardinfo);
             }
         }
         cursor.close();
@@ -330,6 +335,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard7(card7);
                 cardbook_info.setCard8(card8);
                 cardbook_info.setCard9(card9);
+                getInfo.add((cardbook_info));
             }
         }
         cursor.close();
@@ -375,6 +381,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard7(card7);
                 cardbook_info.setCard8(card8);
                 cardbook_info.setCard9(card9);
+                getInfo.add((cardbook_info));
             }
         }
         cursor.close();
@@ -420,6 +427,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard7(card7);
                 cardbook_info.setCard8(card8);
                 cardbook_info.setCard9(card9);
+                getInfo.add((cardbook_info));
             }
         }
         cursor.close();

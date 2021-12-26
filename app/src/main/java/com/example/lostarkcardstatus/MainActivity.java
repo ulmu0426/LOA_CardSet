@@ -18,8 +18,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private LOA_Card_DB cardDBHelper;
-    private ArrayList<CardInfo> cardLegend;
-    private ArrayList<Cardbook> cardbookCritical;
+    protected ArrayList<CardInfo> cardLegend;
+    protected ArrayList<CardInfo> cardEpic;
+    protected ArrayList<CardInfo> cardRare;
+    protected ArrayList<CardInfo> cardUncommon;
+    protected ArrayList<CardInfo> cardCommon;
+    protected ArrayList<CardInfo> cardSpecial;
+    protected ArrayList<Cardbook> cardbookCritical;
+    protected ArrayList<Cardbook> cardbookSpeciality;
+    protected ArrayList<Cardbook> cardbookAgility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +39,18 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //카드 DB정보 ArrayList에 전달
+        cardLegend = cardDBHelper.getCardInfoL();
+        cardEpic = cardDBHelper.getCardInfoE();
+        cardRare = cardDBHelper.getCardInfoR();
+        cardUncommon = cardDBHelper.getCardInfoU();
+        cardCommon = cardDBHelper.getCardInfoC();
+        cardSpecial = cardDBHelper.getCardInfoS();
 
+        //카드 도감 DB정보 ArrayList에 전달
+        cardbookCritical = cardDBHelper.getCardBookInfo_Critical();
+        cardbookSpeciality = cardDBHelper.getCardBookInfo_Specility();
+        cardbookAgility = cardDBHelper.getCardBookInfo_Agility();
 
 
         //카드 세트로 이동.
@@ -76,10 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //DB정보 App에 입력
     private void setInit() throws IOException {
         cardDBHelper = new LOA_Card_DB(this);
         cardDBHelper.createDataBase();
 
+    }
+
+    protected boolean nullCheck(String str){
+        boolean tf = false;
+        if(str.isEmpty())
+            tf = true;
+        return tf;
     }
 
     //뒤로가기 2회 터치시 종료(2.5초 안에 두번 눌러야 함)

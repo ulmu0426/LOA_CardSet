@@ -44,7 +44,7 @@ public class Cardbook {
     }
 
     public void setCard0(String card0) {
-        nullCheck(card0);
+        //nullCheck(card0);
         this.card0 = card0;
     }
 
@@ -53,7 +53,7 @@ public class Cardbook {
     }
 
     public void setCard1(String card1) {
-        nullCheck(card1);
+        //nullCheck(card1);
         this.card1 = card1;
     }
 
@@ -62,7 +62,7 @@ public class Cardbook {
     }
 
     public void setCard2(String card2) {
-        nullCheck(card2);
+        //nullCheck(card2);
         this.card2 = card2;
     }
 
@@ -71,7 +71,7 @@ public class Cardbook {
     }
 
     public void setCard3(String card3) {
-        nullCheck(card3);
+        //nullCheck(card3);
         this.card3 = card3;
     }
 
@@ -80,7 +80,7 @@ public class Cardbook {
     }
 
     public void setCard4(String card4) {
-        nullCheck(card4);
+        //nullCheck(card4);
         this.card4 = card4;
     }
 
@@ -89,7 +89,7 @@ public class Cardbook {
     }
 
     public void setCard5(String card5) {
-        nullCheck(card5);
+        //nullCheck(card5);
         this.card5 = card5;
     }
 
@@ -98,7 +98,7 @@ public class Cardbook {
     }
 
     public void setCard6(String card6) {
-        nullCheck(card6);
+        //nullCheck(card6);
         this.card6 = card6;
     }
 
@@ -107,7 +107,7 @@ public class Cardbook {
     }
 
     public void setCard7(String card7) {
-        nullCheck(card7);
+        //nullCheck(card7);
         this.card7 = card7;
     }
 
@@ -116,7 +116,7 @@ public class Cardbook {
     }
 
     public void setCard8(String card8) {
-        nullCheck(card8);
+        //nullCheck(card8);
         this.card8 = card8;
     }
 
@@ -125,7 +125,7 @@ public class Cardbook {
     }
 
     public void setCard9(String card9) {
-        nullCheck(card9);
+        //nullCheck(card9);
         this.card9 = card9;
     }
 
