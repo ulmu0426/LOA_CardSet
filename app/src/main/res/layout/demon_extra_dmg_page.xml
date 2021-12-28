@@ -116,233 +116,17 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
-
-        <ScrollView
-            android:id="@+id/scrollViewCardDetailPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/lineDemon"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDemonExtraDmg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/lineDemon">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scrollViewInCardbook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFE188">
-                //해당 리니어 레이아웃에 도감 목록 넣을 예정
-                <LinearLayout
-                    android:id="@+id/linearlayoutCardBookList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:orientation="vertical">
+        </androidx.recyclerview.widget.RecyclerView>
 
-                    //예시
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:id="@+id/txtCardBookName001"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
-                                android:layout_weight="1"
-                                android:text="카드 도감 이름"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                            <TextView
-                                android:id="@+id/txtCardBookStat001"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
-                                android:text="특성 + 0"
-                                app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </LinearLayout>
-
-                        <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginTop="5dp"
-                            android:stretchColumns="*">
-                            <TableRow>
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    android:layout_marginRight="5dp"
-                                    app:srcCompat="@drawable/aman" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="60dp"
-                                    app:srcCompat="@drawable/aman" />
-                            </TableRow>
-
-                            <TableRow>
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:text="카드이름"
-                                    android:textAlignment="center"
-                                    android:textSize="10dp" />
-
-                            </TableRow>
-
-                        </TableLayout>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="카드 00장 수집
-                            \n각성 단계 합계 00 : 악마 추가 피해 + 0.00%
-                            \n각성 단계 합계 00 : 악마 추가 피해 + 0.00%
-                            \n각성 단계 합계 00 : 악마 추가 피해 + 0.00%"
-                            />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/black"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </ScrollView>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -366,6 +150,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

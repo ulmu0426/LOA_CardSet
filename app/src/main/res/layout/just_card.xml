@@ -15,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/constlayoutcardImgAndDrop">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -26,6 +25,7 @@
             android:textSize="25dp"
             android:textStyle="bold" />
     </RelativeLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constlayoutcardImgAndDrop"
         android:layout_width="match_parent"
