@@ -43,6 +43,8 @@
             android:id="@+id/rvCardSet"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:orientation="vertical"
+            tools:listitem="@layout/rv_cardset"
             app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="1dp"

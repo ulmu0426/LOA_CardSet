@@ -220,7 +220,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDED_cardAwake1"/>
 
     <View
-        android:id="@+id/bottomLine"
+        android:id="@+id/demonExtraDmgBottomLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"

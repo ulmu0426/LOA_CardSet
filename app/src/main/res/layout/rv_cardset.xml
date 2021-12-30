@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cvCardSetBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,6 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_margin="10dp"
         android:text="카드세트 이름"
+        android:textSize="18dp"
         android:textAlignment="center"/>
     <TextView
         android:id="@+id/txtCardSetAwake"
@@ -80,7 +82,8 @@
                     android:layout_height="60dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
             </TableRow>
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="5dp">
                 <TextView
                     android:id="@+id/txtCardbook_Cardname0"
                     android:layout_width="0dp"
@@ -142,7 +145,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/bottomLine"
+        android:id="@+id/cardSetBottomLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
