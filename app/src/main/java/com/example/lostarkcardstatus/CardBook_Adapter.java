@@ -20,13 +20,15 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
     private ArrayList<Cardbook> cardbookAgility;        //신속도감
     private ArrayList<Cardbook> cardbookSpeciality;     //특화도감
     private ArrayList<Cardbook> cardbookCritical;       //치명도감
+    private ArrayList<Cardbook_All> cardbook_all;
     private Context context;
     private LOA_Card_DB cardDbHelper;
 
-    public CardBook_Adapter(ArrayList<Cardbook> cardbookAgility, Context context) {
-        this.cardbookAgility = cardbookAgility;
+    public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all, Context context) {
+        //this.cardbookAgility = cardbookAgility;
         //this.cardbookSpeciality = cardbookSpeciality;
         //this.cardbookCritical = cardbookCritical;
+        this.cardbook_all = cardbook_all;
         this.context = context;
         cardDbHelper = new LOA_Card_DB(context);
     }
@@ -41,26 +43,37 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
 
     @Override
     public void onBindViewHolder(@NonNull CardBook_Adapter.ViewHolder holder, int position) {
-        holder.txtCardbookName.setText(cardbookAgility.get(position).getName());
-        holder.txtCardbookValue.setText("신속 + " + cardbookAgility.get(position).getValue());
+        holder.txtCardbookName.setText(cardbook_all.get(position).getName());
+        holder.txtCardbookValue.setText(cardbook_all.get(position).getOption() + " + " + cardbook_all.get(position).getValue());
         //이미지뷰 구현할것
+        holder.imgCardBook0.setImageResource(R.drawable.card_legend_kadan);
+        holder.imgCardBook1.setImageResource(R.drawable.card_legend_ninab);
+        holder.imgCardBook2.setImageResource(R.drawable.card_legend_shandi);
+        holder.imgCardBook3.setImageResource(R.drawable.card_legend_azena_inanna);
+        holder.imgCardBook4.setImageResource(R.drawable.card_legend_bahuntur);
+        holder.imgCardBook5.setImageResource(R.drawable.card_legend_silian);
+        holder.imgCardBook6.setImageResource(R.drawable.card_legend_wei);
+        holder.imgCardBook7.setImageResource(R.drawable.card_legend_dereonaman);
+        holder.imgCardBook8.setImageResource(R.drawable.card_legend_kamaine);
+        holder.imgCardBook9.setImageResource(R.drawable.card_legend_aman);
         //텍스트 구현
-        holder.txtCardbook_Cardname0.setText(cardbookAgility.get(position).getCard0());
-        holder.txtCardbook_Cardname1.setText(cardbookAgility.get(position).getCard1());
-        holder.txtCardbook_Cardname2.setText(cardbookAgility.get(position).getCard2());
-        holder.txtCardbook_Cardname3.setText(cardbookAgility.get(position).getCard3());
-        holder.txtCardbook_Cardname4.setText(cardbookAgility.get(position).getCard4());
-        holder.txtCardbook_Cardname5.setText(cardbookAgility.get(position).getCard5());
-        holder.txtCardbook_Cardname6.setText(cardbookAgility.get(position).getCard6());
-        holder.txtCardbook_Cardname7.setText(cardbookAgility.get(position).getCard7());
-        holder.txtCardbook_Cardname8.setText(cardbookAgility.get(position).getCard8());
-        holder.txtCardbook_Cardname9.setText(cardbookAgility.get(position).getCard9());
+        holder.txtCardbook_Cardname0.setText(cardbook_all.get(position).getCard0());
+        holder.txtCardbook_Cardname1.setText(cardbook_all.get(position).getCard1());
+        holder.txtCardbook_Cardname2.setText(cardbook_all.get(position).getCard2());
+        holder.txtCardbook_Cardname3.setText(cardbook_all.get(position).getCard3());
+        holder.txtCardbook_Cardname4.setText(cardbook_all.get(position).getCard4());
+        holder.txtCardbook_Cardname5.setText(cardbook_all.get(position).getCard5());
+        holder.txtCardbook_Cardname6.setText(cardbook_all.get(position).getCard6());
+        holder.txtCardbook_Cardname7.setText(cardbook_all.get(position).getCard7());
+        holder.txtCardbook_Cardname8.setText(cardbook_all.get(position).getCard8());
+        holder.txtCardbook_Cardname9.setText(cardbook_all.get(position).getCard9());
     }
 
     @Override
     public int getItemCount() {
-        return cardbookAgility.size()+cardbookSpeciality.size()+cardbookCritical.size();    //세 도감 수의 합
+        return cardbook_all.size();    //세 도감 수의 합
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView txtCardbookName;
@@ -115,9 +128,9 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         }
     }
 
-    //액티비에서 호출되는 함수. 현재 어댑터에 새로운 아이템을 전달받아 추가하는 목적
+    //액티비티에서 호출되는 함수. 현재 어댑터에 새로운 아이템을 전달받아 추가하는 목적
     public void addItem(Cardbook cb){
-
+        cardbookAgility.add(cb);
     }
 
 }

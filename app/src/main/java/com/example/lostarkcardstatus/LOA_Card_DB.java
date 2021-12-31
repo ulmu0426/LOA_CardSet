@@ -43,20 +43,24 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String TABLE_CARDBOOK_CRITICAL = "cardbook_critical";
     private static final String TABLE_CARDBOOK_SPECIALITY = "cardbook_speciality";
     private static final String TABLE_CARDBOOK_AGILITY = "cardbook_agility";
+    //all 도감 테이블1개
+    private static final String TABLE_CARDBOOK_ALL = "cardbook_all";
     //도감 테이블이 공유하는 column
     private static final String CARDBOOK_COLUMN_ID ="id";            //테이블별 카드 번호
     private static final String CARDBOOK_COLUMN_NAME ="name";        //카드도감 이름
-    private static final String CARDBOOK_COLUMN_VALUE ="value";    //카드 특성 증가량
+    private static final String CARDBOOK_COLUMN_VALUE ="value";      //카드 특성 증가량
     private static final String CARDBOOK_COLUMN_CARD0 ="card0";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD1 ="card1";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD2 ="card2";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD3 ="card3";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD4 ="card4";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD5 ="card5";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD6 ="card6";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD7 ="card7";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD8 ="card8";      //카드1
-    private static final String CARDBOOK_COLUMN_CARD9 ="card9";      //카드1
+    private static final String CARDBOOK_COLUMN_CARD1 ="card1";      //카드2
+    private static final String CARDBOOK_COLUMN_CARD2 ="card2";      //카드3
+    private static final String CARDBOOK_COLUMN_CARD3 ="card3";      //카드4
+    private static final String CARDBOOK_COLUMN_CARD4 ="card4";      //카드5
+    private static final String CARDBOOK_COLUMN_CARD5 ="card5";      //카드6
+    private static final String CARDBOOK_COLUMN_CARD6 ="card6";      //카드7
+    private static final String CARDBOOK_COLUMN_CARD7 ="card7";      //카드8
+    private static final String CARDBOOK_COLUMN_CARD8 ="card8";      //카드9
+    private static final String CARDBOOK_COLUMN_CARD9 ="card9";      //카드10
+    //all 도감 테이블 column
+    private static final String CARDBOOK_COLUMN_OPTION = "option";   //옵션
 
     public LOA_Card_DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -427,6 +431,54 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard7(card7);
                 cardbook_info.setCard8(card8);
                 cardbook_info.setCard9(card9);
+                getInfo.add((cardbook_info));
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Cardbook_All> getCardBookInfo_All(){       //카드도감 전체 항목 가져오기
+        ArrayList<Cardbook_All> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_NAME));
+                int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
+                String card0 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0));
+                String card1 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1));
+                String card2 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2));
+                String card3 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3));
+                String card4 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4));
+                String card5 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5));
+                String card6 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6));
+                String card7 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7));
+                String card8 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8));
+                String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
+                String option = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_OPTION));
+
+                Cardbook_All cardbook_info = new Cardbook_All();
+                cardbook_info.setId(id);
+                cardbook_info.setName(name);
+                cardbook_info.setValue(value);
+                cardbook_info.setCard0(card0);
+                cardbook_info.setCard1(card1);
+                cardbook_info.setCard2(card2);
+                cardbook_info.setCard3(card3);
+                cardbook_info.setCard4(card4);
+                cardbook_info.setCard5(card5);
+                cardbook_info.setCard6(card6);
+                cardbook_info.setCard7(card7);
+                cardbook_info.setCard8(card8);
+                cardbook_info.setCard9(card9);
+                cardbook_info.setOption(option);
                 getInfo.add((cardbook_info));
             }
         }

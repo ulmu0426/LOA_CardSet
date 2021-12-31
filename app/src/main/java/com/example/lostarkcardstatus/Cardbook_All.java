@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class Cardbook {
+public class Cardbook_All {
     private int id;
     private String name;
     private int value;
@@ -14,6 +14,7 @@ public class Cardbook {
     private String card7;
     private String card8;
     private String card9;
+    private String option;
 
     public int getId() {
         return id;
@@ -117,6 +118,14 @@ public class Cardbook {
 
     public void setCard9(String card9) {
         this.card9 = card9;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
     }
 
 

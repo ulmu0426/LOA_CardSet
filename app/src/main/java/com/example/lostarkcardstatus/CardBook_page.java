@@ -1,8 +1,11 @@
 package com.example.lostarkcardstatus;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 public class CardBook_page extends AppCompatActivity {
     private RecyclerView rv;
     private LOA_Card_DB dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +28,10 @@ public class CardBook_page extends AppCompatActivity {
 
         rv = findViewById(R.id.rvCardbookList);
         dbHelper = new LOA_Card_DB(this);
-        ArrayList<Cardbook> agility = dbHelper.getCardBookInfo_Agility();
-        CardBook_Adapter adapter = new CardBook_Adapter(agility, this);
+        ArrayList<Cardbook_All> allCardBook = dbHelper.getCardBookInfo_All();
+        CardBook_Adapter adapter = new CardBook_Adapter(allCardBook, this);
 
+        rv.setAdapter(adapter);
 
 
     }
