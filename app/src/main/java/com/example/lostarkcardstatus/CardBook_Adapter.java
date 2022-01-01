@@ -1,9 +1,6 @@
 package com.example.lostarkcardstatus;
 
-import static com.example.lostarkcardstatus.R.drawable.card_legend_aman;
-
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -17,7 +17,7 @@
         android:text="악마 추가 피해 도감 이름"
         android:textAlignment="center"/>
     <TextView
-        android:id="@+id/txtCardbookValue"
+        android:id="@+id/txtDEDSumValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,68 +42,68 @@
             android:stretchColumns="*">
             <TableRow>
                 <ImageView
-                    android:id="@+id/imgCardBook0"
+                    android:id="@+id/imgDEDCard0"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook1"
+                    android:id="@+id/imgDEDCard1"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook2"
+                    android:id="@+id/imgDEDCard2"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook3"
+                    android:id="@+id/imgDEDCard3"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook4"
+                    android:id="@+id/imgDEDCard4"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook5"
+                    android:id="@+id/imgDEDCard5"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook6"
+                    android:id="@+id/imgDEDCard6"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook7"
+                    android:id="@+id/imgDEDCard7"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook8"
+                    android:id="@+id/imgDEDCard8"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
-                    android:id="@+id/imgCardBook9"
+                    android:id="@+id/imgDEDCard9"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
             </TableRow>
             <TableRow>
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname0"
+                    android:id="@+id/txtDEDCardName0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -111,7 +111,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname1"
+                    android:id="@+id/txtDEDCardName1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -119,7 +119,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname2"
+                    android:id="@+id/txtDEDCardName2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -127,7 +127,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname3"
+                    android:id="@+id/txtDEDCardName3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -135,7 +135,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname4"
+                    android:id="@+id/txtDEDCardName4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -143,7 +143,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname5"
+                    android:id="@+id/txtDEDCardName5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -151,7 +151,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname6"
+                    android:id="@+id/txtDEDCardName6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -159,7 +159,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname7"
+                    android:id="@+id/txtDEDCardName7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -167,7 +167,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname8"
+                    android:id="@+id/txtDEDCardName8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -175,7 +175,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname9"
+                    android:id="@+id/txtDEDCardName9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드이름"

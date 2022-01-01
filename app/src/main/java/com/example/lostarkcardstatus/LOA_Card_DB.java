@@ -62,6 +62,18 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     //all 도감 테이블 column
     private static final String CARDBOOK_COLUMN_OPTION = "option";   //옵션
 
+
+    //악추피 테이블
+    private static final String TABLE_DEMON_EXTRA_DMG = "demon_extra_dmg";
+    //악추피 column
+    //도감테이블 column id~card9까지 동일
+    private static final String DED_COLUMN_AWAKE_SUM0 = "awake_sum0";   //int
+    private static final String DED_COLUMN_AWAKE_SUM1 = "awake_sum1";
+    private static final String DED_COLUMN_AWAKE_SUM2 = "awake_sum2";
+    private static final String DED_COLUMN_DMG_P0 = "dmg_p0";           //float
+    private static final String DED_COLUMN_DMG_P1 = "dmg_p1";
+    private static final String DED_COLUMN_DMG_P2 = "dmg_p2";
+
     public LOA_Card_DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if(android.os.Build.VERSION.SDK_INT >= 17){
@@ -480,6 +492,64 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard9(card9);
                 cardbook_info.setOption(option);
                 getInfo.add((cardbook_info));
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
+
+    @SuppressLint("Range")
+    public ArrayList<DemonExtraDmgInfo> getDemonExtraDmgInfo(){       //악추피 항목 가져오기
+        ArrayList<DemonExtraDmgInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DEMON_EXTRA_DMG + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_NAME));
+                String card0 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0));
+                String card1 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1));
+                String card2 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2));
+                String card3 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3));
+                String card4 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4));
+                String card5 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5));
+                String card6 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6));
+                String card7 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7));
+                String card8 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8));
+                String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
+                int awake_sum0 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_AWAKE_SUM0));
+                int awake_sum1 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_AWAKE_SUM1));
+                int awake_sum2 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_AWAKE_SUM2));
+                float dmg_p0 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P0));
+                float dmg_p1 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P1));
+                float dmg_p2 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P2));
+
+
+                DemonExtraDmgInfo demonExtraDmgInfo = new DemonExtraDmgInfo();
+                demonExtraDmgInfo.setId(id);
+                demonExtraDmgInfo.setName(name);
+                demonExtraDmgInfo.setCard0(card0);
+                demonExtraDmgInfo.setCard1(card1);
+                demonExtraDmgInfo.setCard2(card2);
+                demonExtraDmgInfo.setCard3(card3);
+                demonExtraDmgInfo.setCard4(card4);
+                demonExtraDmgInfo.setCard5(card5);
+                demonExtraDmgInfo.setCard6(card6);
+                demonExtraDmgInfo.setCard7(card7);
+                demonExtraDmgInfo.setCard8(card8);
+                demonExtraDmgInfo.setCard9(card9);
+                demonExtraDmgInfo.setAwake_sum0(awake_sum0);
+                demonExtraDmgInfo.setAwake_sum1(awake_sum1);
+                demonExtraDmgInfo.setAwake_sum2(awake_sum2);
+                demonExtraDmgInfo.setDmg_p0(dmg_p0);
+                demonExtraDmgInfo.setDmg_p1(dmg_p1);
+                demonExtraDmgInfo.setDmg_p2(dmg_p2);
+                getInfo.add((demonExtraDmgInfo));
             }
         }
         cursor.close();
