@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected ArrayList<Cardbook> cardbookSpeciality;
     protected ArrayList<Cardbook> cardbookAgility;
     protected ArrayList<Cardbook_All> cardbook_all;
+    protected ArrayList<CardSetInfo> cardSetInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         cardbookSpeciality = cardDBHelper.getCardBookInfo_Specility();
         cardbookAgility = cardDBHelper.getCardBookInfo_Agility();
         cardbook_all = cardDBHelper.getCardBookInfo_All();
+        cardSetInfo = cardDBHelper.getCardSetInfo();
 
         //카드 세트로 이동.
         TextView txtBtnCardSet = (TextView) findViewById(R.id.txtBtnCardSet);

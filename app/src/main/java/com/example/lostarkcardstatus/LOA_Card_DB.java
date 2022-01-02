@@ -74,6 +74,21 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String DED_COLUMN_DMG_P1 = "dmg_p1";
     private static final String DED_COLUMN_DMG_P2 = "dmg_p2";
 
+
+    //카드 세트 column
+    //도감테이블 column id~card6까지 동일
+    private static final String TABLE_CARDSET = "cardSet";
+    private static final String CARDSET_SETBONUS0 = "set_bonus0";
+    private static final String CARDSET_SETBONUS1 = "set_bonus1";
+    private static final String CARDSET_SETBONUS2 = "set_bonus2";
+    private static final String CARDSET_SETBONUS3 = "set_bonus3";
+    private static final String CARDSET_SETBONUS4 = "set_bonus4";
+    private static final String CARDSET_SETBONUS5 = "set_bonus5";
+    private static final String CARDSET_HAVECARD = "haveCard";
+    private static final String CARDSET_HAVEAWAKE = "haveAwake";
+
+
+
     public LOA_Card_DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if(android.os.Build.VERSION.SDK_INT >= 17){
@@ -557,5 +572,63 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         return getInfo;
 
     }
+
+
+
+    @SuppressLint("Range")
+    public ArrayList<CardSetInfo> getCardSetInfo(){       //카드 세트 항목 가져오기
+        ArrayList<CardSetInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDSET + " ORDER BY id DESC", null);
+        if(cursor.getCount() != 0){
+            //데이터가 조회된 경우 수행
+            while(cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_NAME));
+                String card0 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0));
+                String card1 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1));
+                String card2 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2));
+                String card3 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3));
+                String card4 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4));
+                String card5 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5));
+                String card6 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6));
+                String set_bonus0 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS0));
+                String set_bonus1 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS1));
+                String set_bonus2 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS2));
+                String set_bonus3 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS3));
+                String set_bonus4 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS4));
+                String set_bonus5 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS5));
+                int haveCard = cursor.getInt(cursor.getColumnIndex(CARDSET_HAVECARD));
+                int haveAwake = cursor.getInt(cursor.getColumnIndex(CARDSET_HAVECARD));
+
+
+                CardSetInfo cardSetInfo = new CardSetInfo();
+                cardSetInfo.setId(id);
+                cardSetInfo.setName(name);
+                cardSetInfo.setCard0(card0);
+                cardSetInfo.setCard1(card1);
+                cardSetInfo.setCard2(card2);
+                cardSetInfo.setCard3(card3);
+                cardSetInfo.setCard4(card4);
+                cardSetInfo.setCard5(card5);
+                cardSetInfo.setCard6(card6);
+                cardSetInfo.setSet_bonus0(set_bonus0);
+                cardSetInfo.setSet_bonus1(set_bonus1);
+                cardSetInfo.setSet_bonus2(set_bonus2);
+                cardSetInfo.setSet_bonus3(set_bonus3);
+                cardSetInfo.setSet_bonus4(set_bonus4);
+                cardSetInfo.setSet_bonus5(set_bonus5);
+                cardSetInfo.setHaveCard(haveCard);
+                cardSetInfo.setHaveAwake(haveAwake);
+                getInfo.add((cardSetInfo));
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+
+    }
+
 
 }

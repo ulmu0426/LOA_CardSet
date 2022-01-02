@@ -85,7 +85,7 @@
             <TableRow
                 android:layout_marginTop="5dp">
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname0"
+                    android:id="@+id/txtCardSet_Cardname0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -93,7 +93,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname1"
+                    android:id="@+id/txtCardSet_Cardname1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -101,7 +101,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname5"
+                    android:id="@+id/txtCardSet_Cardname2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -109,7 +109,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname6"
+                    android:id="@+id/txtCardSet_Cardname3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -117,7 +117,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname7"
+                    android:id="@+id/txtCardSet_Cardname4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -125,7 +125,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname8"
+                    android:id="@+id/txtCardSet_Cardname5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -133,7 +133,7 @@
                     android:textAlignment="center"
                     android:textSize="10dp" />
                 <TextView
-                    android:id="@+id/txtCardbook_Cardname9"
+                    android:id="@+id/txtCardSet_Cardname6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드이름"
