@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -53,6 +54,16 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         holder.imgCardBook7.setImageResource(R.drawable.card_legend_dereonaman);
         holder.imgCardBook8.setImageResource(R.drawable.card_legend_kamaine);
         holder.imgCardBook9.setImageResource(R.drawable.card_legend_aman);
+        //없는 카드는 안 보이게
+        imgVisibility(cardbook_all.get(position).getCard2(),holder.imgCardBook2);
+        imgVisibility(cardbook_all.get(position).getCard3(),holder.imgCardBook3);
+        imgVisibility(cardbook_all.get(position).getCard4(),holder.imgCardBook4);
+        imgVisibility(cardbook_all.get(position).getCard5(),holder.imgCardBook5);
+        imgVisibility(cardbook_all.get(position).getCard6(),holder.imgCardBook6);
+        imgVisibility(cardbook_all.get(position).getCard7(),holder.imgCardBook7);
+        imgVisibility(cardbook_all.get(position).getCard8(),holder.imgCardBook8);
+        imgVisibility(cardbook_all.get(position).getCard9(),holder.imgCardBook9);
+
         //텍스트 구현
         holder.txtCardbook_Cardname0.setText(cardbook_all.get(position).getCard0());
         holder.txtCardbook_Cardname1.setText(cardbook_all.get(position).getCard1());
@@ -98,6 +109,7 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             txtCardbookName = itemView.findViewById(R.id.txtCardbookName);
             txtCardbookValue = itemView.findViewById(R.id.txtCardbookValue);
             imgCardBook0 = itemView.findViewById(R.id.imgCardBook0);
@@ -128,6 +140,14 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
     //액티비티에서 호출되는 함수. 현재 어댑터에 새로운 아이템을 전달받아 추가하는 목적
     public void addItem(Cardbook cb){
         cardbookAgility.add(cb);
+    }
+
+    //도감에 없는 카드는 안보이게
+    private void imgVisibility(String card, ImageView imageView){
+        if(card.isEmpty())
+            imageView.setVisibility(View.INVISIBLE);
+        else
+            imageView.setVisibility(View.VISIBLE);
     }
 
 }

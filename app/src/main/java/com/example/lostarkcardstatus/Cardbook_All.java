@@ -15,6 +15,26 @@ public class Cardbook_All {
     private String card8;
     private String card9;
     private String option;
+    private int card0_check;
+    private int card1_check;
+    private int card2_check;
+    private int card3_check;
+    private int card4_check;
+    private int card5_check;
+    private int card6_check;
+    private int card7_check;
+    private int card8_check;
+    private int card9_check;
+
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public int getId() {
         return id;
@@ -126,6 +146,86 @@ public class Cardbook_All {
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    public int getCard0_check() {
+        return card0_check;
+    }
+
+    public void setCard0_check(int card0_check) {
+        this.card0_check = card0_check;
+    }
+
+    public int getCard1_check() {
+        return card1_check;
+    }
+
+    public void setCard1_check(int card1_check) {
+        this.card1_check = card1_check;
+    }
+
+    public int getCard2_check() {
+        return card2_check;
+    }
+
+    public void setCard2_check(int card2_check) {
+        this.card2_check = card2_check;
+    }
+
+    public int getCard3_check() {
+        return card3_check;
+    }
+
+    public void setCard3_check(int card3_check) {
+        this.card3_check = card3_check;
+    }
+
+    public int getCard4_check() {
+        return card4_check;
+    }
+
+    public void setCard4_check(int card4_check) {
+        this.card4_check = card4_check;
+    }
+
+    public int getCard5_check() {
+        return card5_check;
+    }
+
+    public void setCard5_check(int card5_check) {
+        this.card5_check = card5_check;
+    }
+
+    public int getCard6_check() {
+        return card6_check;
+    }
+
+    public void setCard6_check(int card6_check) {
+        this.card6_check = card6_check;
+    }
+
+    public int getCard7_check() {
+        return card7_check;
+    }
+
+    public void setCard7_check(int card7_check) {
+        this.card7_check = card7_check;
+    }
+
+    public int getCard8_check() {
+        return card8_check;
+    }
+
+    public void setCard8_check(int card8_check) {
+        this.card8_check = card8_check;
+    }
+
+    public int getCard9_check() {
+        return card9_check;
+    }
+
+    public void setCard9_check(int card9_check) {
+        this.card9_check = card9_check;
     }
 
 

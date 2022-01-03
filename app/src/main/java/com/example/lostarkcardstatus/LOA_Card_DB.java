@@ -61,6 +61,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String CARDBOOK_COLUMN_CARD9 ="card9";      //카드10
     //all 도감 테이블 column
     private static final String CARDBOOK_COLUMN_OPTION = "option";   //옵션
+    private static final String CARDBOOK_COLUMN_CARD0_CHECK = "card0_check";
+    private static final String CARDBOOK_COLUMN_CARD1_CHECK = "card1_check";
+    private static final String CARDBOOK_COLUMN_CARD2_CHECK = "card2_check";
+    private static final String CARDBOOK_COLUMN_CARD3_CHECK = "card3_check";
+    private static final String CARDBOOK_COLUMN_CARD4_CHECK = "card4_check";
+    private static final String CARDBOOK_COLUMN_CARD5_CHECK = "card5_check";
+    private static final String CARDBOOK_COLUMN_CARD6_CHECK = "card6_check";
+    private static final String CARDBOOK_COLUMN_CARD7_CHECK = "card7_check";
+    private static final String CARDBOOK_COLUMN_CARD8_CHECK = "card8_check";
+    private static final String CARDBOOK_COLUMN_CARD9_CHECK = "card9_check";
 
 
     //악추피 테이블
@@ -490,6 +500,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 String card8 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8));
                 String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
                 String option = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_OPTION));
+                int card0_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0_CHECK));
+                int card1_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1_CHECK));
+                int card2_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2_CHECK));
+                int card3_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3_CHECK));
+                int card4_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4_CHECK));
+                int card5_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5_CHECK));
+                int card6_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6_CHECK));
+                int card7_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7_CHECK));
+                int card8_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8_CHECK));
+                int card9_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9_CHECK));
 
                 Cardbook_All cardbook_info = new Cardbook_All();
                 cardbook_info.setId(id);
@@ -506,6 +526,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard8(card8);
                 cardbook_info.setCard9(card9);
                 cardbook_info.setOption(option);
+                cardbook_info.setCard0_check(card0_check);
+                cardbook_info.setCard1_check(card1_check);
+                cardbook_info.setCard2_check(card2_check);
+                cardbook_info.setCard3_check(card3_check);
+                cardbook_info.setCard4_check(card4_check);
+                cardbook_info.setCard5_check(card5_check);
+                cardbook_info.setCard6_check(card6_check);
+                cardbook_info.setCard7_check(card7_check);
+                cardbook_info.setCard8_check(card8_check);
+                cardbook_info.setCard9_check(card9_check);
                 getInfo.add((cardbook_info));
             }
         }

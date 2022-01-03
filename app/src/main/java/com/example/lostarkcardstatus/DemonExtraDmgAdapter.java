@@ -45,6 +45,16 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         holder.imgDEDCard7.setImageResource(R.drawable.card_legend_dereonaman);
         holder.imgDEDCard8.setImageResource(R.drawable.card_legend_kamaine);
         holder.imgDEDCard9.setImageResource(R.drawable.card_legend_aman);
+        //없는 카드 안 보이게
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard2(),holder.imgDEDCard2);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard3(),holder.imgDEDCard3);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard4(),holder.imgDEDCard4);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard5(),holder.imgDEDCard5);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard6(),holder.imgDEDCard6);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard7(),holder.imgDEDCard7);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard8(),holder.imgDEDCard8);
+        imgVisibility(demonExtraDmgInfoArrayList.get(position).getCard9(),holder.imgDEDCard9);
+
         //
         holder.txtDEDCardName0.setText(demonExtraDmgInfoArrayList.get(position).getCard0());
         holder.txtDEDCardName1.setText(demonExtraDmgInfoArrayList.get(position).getCard1());
@@ -137,6 +147,15 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     //액티비티에서 호출되는 함수. 현재 어댑터에 새로운 아이템을 전달받아 추가하는 목적
     public void addItem(DemonExtraDmgInfo DED){
         demonExtraDmgInfoArrayList.add(DED);
+    }
+
+
+    //도감에 없는 카드는 안보이게
+    private void imgVisibility(String card, ImageView imageView){
+        if(card.isEmpty())
+            imageView.setVisibility(View.INVISIBLE);
+        else
+            imageView.setVisibility(View.VISIBLE);
     }
 
 }

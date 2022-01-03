@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         cardbook_all = cardDBHelper.getCardBookInfo_All();
         cardSetInfo = cardDBHelper.getCardSetInfo();
 
+
+
         //카드 세트로 이동.
         TextView txtBtnCardSet = (TextView) findViewById(R.id.txtBtnCardSet);
         txtBtnCardSet.setOnClickListener(new View.OnClickListener() {

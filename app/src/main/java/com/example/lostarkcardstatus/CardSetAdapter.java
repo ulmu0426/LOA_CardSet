@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHolder>{
@@ -45,6 +43,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         holder.imgCardSet4.setImageResource(R.drawable.card_legend_bahuntur);
         holder.imgCardSet5.setImageResource(R.drawable.card_legend_silian);
         holder.imgCardSet6.setImageResource(R.drawable.card_legend_wei);
+        //없는 카드 안 보이게
+        imgVisibility(cardSetInfo.get(position).getCard2(),holder.imgCardSet2);
+        imgVisibility(cardSetInfo.get(position).getCard3(),holder.imgCardSet3);
+        imgVisibility(cardSetInfo.get(position).getCard4(),holder.imgCardSet4);
+        imgVisibility(cardSetInfo.get(position).getCard5(),holder.imgCardSet5);
+        imgVisibility(cardSetInfo.get(position).getCard6(),holder.imgCardSet6);
+
         //텍스트 구현
         holder.txtCardSet_Cardname0.setText(cardSetInfo.get(position).getCard0());
         holder.txtCardSet_Cardname1.setText(cardSetInfo.get(position).getCard1());
@@ -104,6 +109,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     //액티비티에서 호출되는 함수. 현재 어댑터에 새로운 아이템을 전달받아 추가하는 목적
     public void addItem(CardSetInfo cb){
         cardSetInfo.add(cb);
+    }
+
+    //도감에 없는 카드는 안보이게
+    private void imgVisibility(String card, ImageView imageView){
+        if(card.isEmpty())
+            imageView.setVisibility(View.INVISIBLE);
+        else
+            imageView.setVisibility(View.VISIBLE);
     }
 
 
