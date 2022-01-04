@@ -165,6 +165,15 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         //카드 id 값으로 카드를 파악하고 해당 카드의 수량 조절.
         updateColumInfo.execSQL("UPDATE " + tableName + " SET " + number + " = " + input + " WHERE id = " + cardId);
     }
+
+    //UPDATE 카드 도감 획득 유무 수정
+    public void UpdateInfoCardBookCard(String tableName, String columnName, int cardCheck, int cardBookId){
+        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
+        updateColumInfo.execSQL("UPDATE " + tableName + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
+    }
+
+
     //UPDATE 카드 각성도 수정
     public void UpdateInfoCardAwake(String tableName, String number, int input, int cardId){
         SQLiteDatabase updateColumInfo = getWritableDatabase();
