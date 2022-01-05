@@ -2,35 +2,34 @@ package com.example.lostarkcardstatus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.ViewHolder> {
 
-    private ArrayList<Cardbook> cardbookAgility;        //신속도감
-    private ArrayList<Cardbook> cardbookSpeciality;     //특화도감
-    private ArrayList<Cardbook> cardbookCritical;       //치명도감
     private ArrayList<Cardbook_All> cardbook_all;
     private Context context;
     private LOA_Card_DB cardDbHelper;
+    public int haveCritical;
+    public int haveSpeciality;
+    public int haveAgility;
+    private final String CRITICAL = "치명";
+    private final String AGILITY = "신속";
+    private final String SPECIALITY = "특화";
 
     public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all, Context context) {
-        //this.cardbookAgility = cardbookAgility;
-        //this.cardbookSpeciality = cardbookSpeciality;
-        //this.cardbookCritical = cardbookCritical;
         this.cardbook_all = cardbook_all;
         this.context = context;
         cardDbHelper = new LOA_Card_DB(context);
@@ -75,16 +74,17 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         imgDefaultColor(holder.imgCardBook7, filter, cardbook_all.get(position).getCard7_check());
         imgDefaultColor(holder.imgCardBook8, filter, cardbook_all.get(position).getCard8_check());
         imgDefaultColor(holder.imgCardBook9, filter, cardbook_all.get(position).getCard9_check());
-
-        //없는 카드는 안 보이게
-        imgVisibility(cardbook_all.get(position).getCard2(), holder.imgCardBook2, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard3(), holder.imgCardBook3, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard4(), holder.imgCardBook4, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard5(), holder.imgCardBook5, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard6(), holder.imgCardBook6, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard7(), holder.imgCardBook7, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard8(), holder.imgCardBook8, holder.txtCardbook_Cardname0);
-        imgVisibility(cardbook_all.get(position).getCard9(), holder.imgCardBook9, holder.txtCardbook_Cardname0);
+        //도감에 해당하지 않는 프레임 제거
+        imgVisibility(cardbook_all.get(position).getCard2(), holder.imgCardBook2, holder.txtCardbook_Cardname2);
+        imgVisibility(cardbook_all.get(position).getCard3(), holder.imgCardBook3, holder.txtCardbook_Cardname3);
+        imgVisibility(cardbook_all.get(position).getCard4(), holder.imgCardBook4, holder.txtCardbook_Cardname4);
+        imgVisibility(cardbook_all.get(position).getCard5(), holder.imgCardBook5, holder.txtCardbook_Cardname5);
+        imgVisibility(cardbook_all.get(position).getCard6(), holder.imgCardBook6, holder.txtCardbook_Cardname6);
+        imgVisibility(cardbook_all.get(position).getCard7(), holder.imgCardBook7, holder.txtCardbook_Cardname7);
+        imgVisibility(cardbook_all.get(position).getCard8(), holder.imgCardBook8, holder.txtCardbook_Cardname8);
+        imgVisibility(cardbook_all.get(position).getCard9(), holder.imgCardBook9, holder.txtCardbook_Cardname9);
+        //카드 모두 획득시 백그라운드 컬러 노란색으로
+        isCompleteCardBookBackgroundColor(cardbook_all.get(position), holder.cvCardbookBackground);
 
         //텍스트 구현
         holder.txtCardbook_Cardname0.setText(cardbook_all.get(position).getCard0());
@@ -104,6 +104,12 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.cardbook_name_and_cardlist);
                 int pos = positionGet;  //position 값을 넣기 위해 넣은 인수
+                //카드도감 이름, 옵션 연결
+                TextView txtCardBookName_incardbooknamexmlpage = dialog.findViewById(R.id.txtCardBookName_incardbooknamexmlpage);
+                TextView txtCardBookValue_incardbooknamexmlpage = dialog.findViewById(R.id.txtCardBookValue_incardbooknamexmlpage);
+                txtCardBookName_incardbooknamexmlpage.setText(cardbook_all.get(pos).getName());
+                txtCardBookValue_incardbooknamexmlpage.setText(cardbook_all.get(pos).getOption() + " + " + cardbook_all.get(pos).getValue());
+
                 ImageView imgCardBookName_CardImg0 = dialog.findViewById(R.id.imgCardBookName_CardImg0);
                 ImageView imgCardBookName_CardImg1 = dialog.findViewById(R.id.imgCardBookName_CardImg1);
                 ImageView imgCardBookName_CardImg2 = dialog.findViewById(R.id.imgCardBookName_CardImg2);
@@ -334,6 +340,28 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
             check = 1;
         }
         return check;
+    }
+
+    //수집 카드 합
+    public int haveCard(Cardbook_All cardbook_all) {
+        int sum = cardbook_all.getCard0_check() + cardbook_all.getCard1_check() + cardbook_all.getCard2_check() + cardbook_all.getCard3_check() + cardbook_all.getCard4_check()
+                + cardbook_all.getCard5_check() + cardbook_all.getCard6_check() + cardbook_all.getCard7_check() + cardbook_all.getCard8_check() + cardbook_all.getCard9_check();
+        return sum;
+    }
+
+    // DB에 도감을 완성시키면 도감의 배경을 노란색으로 칠해 획득유무를 추가로 알려줌.
+    private void isCompleteCardBookBackgroundColor(Cardbook_All cardbook_all, ConstraintLayout cv) {
+        if (haveCard(cardbook_all) == cardbook_all.getCompleteCardBook())
+            cv.setBackgroundColor(Color.parseColor("#D0FFE870"));
+        else
+            cv.setBackgroundColor(Color.parseColor("#FFFFFF"));
+    }
+    // DB에 도감을 완성 시킨 경우 true else false
+    public boolean isCompleteCardBook(Cardbook_All cardbook_all){
+        if (haveCard(cardbook_all) == cardbook_all.getCompleteCardBook())
+            return true;
+        else
+            return false;
     }
 
 }

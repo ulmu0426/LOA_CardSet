@@ -25,16 +25,8 @@ public class Cardbook_All {
     private int card7_check;
     private int card8_check;
     private int card9_check;
+    private int haveCard;
 
-    private int count;
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     public int getId() {
         return id;
@@ -228,5 +220,10 @@ public class Cardbook_All {
         this.card9_check = card9_check;
     }
 
-
+    public int getCompleteCardBook() {
+        return haveCard;
+    }
+    public void setCompleteCardBook(int haveCard) {
+        this.haveCard = haveCard;
+    }
 }
