@@ -10,29 +10,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
 
 public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.ViewHolder> {
+    private final String[] STAT = {"치명", "특화", "신속"};
+    private int[] haveStat;
+    private int[] haveStatCardBook;
+    private int[] haveStatCardBookCount;
+
+    public int[] getHaveStat() {
+        return haveStat;
+    }
+    public int[] getHaveStatCardBook() {
+        return haveStatCardBook;
+    }
+    public int[] getHaveStatCardBookCount() {
+        return haveStatCardBookCount;
+    }
 
     private ArrayList<Cardbook_All> cardbook_all;
     private Context context;
     private LOA_Card_DB cardDbHelper;
-    public int haveCritical;
-    public int haveSpeciality;
-    public int haveAgility;
-    private final String CRITICAL = "치명";
-    private final String AGILITY = "신속";
-    private final String SPECIALITY = "특화";
+    private CardBook_page cardBook_page;
 
-    public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all, Context context) {
+    public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all) {
+        this.cardbook_all = cardbook_all;
+    }
+
+    public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all, Context context, CardBook_page cardBook_page) {
         this.cardbook_all = cardbook_all;
         this.context = context;
         cardDbHelper = new LOA_Card_DB(context);
+        this.cardBook_page = cardBook_page;
+        haveStatUpdate(cardbook_all);
     }
 
     @NonNull
@@ -149,7 +166,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg0, filter, cardbook_all.get(pos).getCard0_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card0_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard0_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg1.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +179,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg1, filter, cardbook_all.get(pos).getCard1_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card1_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard1_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg2.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +192,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg2, filter, cardbook_all.get(pos).getCard2_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card2_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard2_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg3.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +205,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg3, filter, cardbook_all.get(pos).getCard3_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card3_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard3_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg4.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +218,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg4, filter, cardbook_all.get(pos).getCard4_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card4_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard4_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg5.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +231,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg5, filter, cardbook_all.get(pos).getCard5_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card5_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard5_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg6.setOnClickListener(new View.OnClickListener() {
@@ -209,7 +244,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg6, filter, cardbook_all.get(pos).getCard6_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card6_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard6_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg7.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +257,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg7, filter, cardbook_all.get(pos).getCard7_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card7_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard7_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg8.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +270,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg8, filter, cardbook_all.get(pos).getCard8_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card8_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard8_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 imgCardBookName_CardImg9.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +283,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                         int cardCheck = imgGrayScale(imgCardBookName_CardImg9, filter, cardbook_all.get(pos).getCard9_check());
                         cardDbHelper.UpdateInfoCardBookCard("cardbook_all", "card9_check", cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCard9_check(cardCheck);
-                        notifyItemChanged(pos);
+                        haveStatUpdate(cardbook_all);
+                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+                        ((MainActivity)MainActivity.mainContext).setCardBookStatInfo(haveStat);
+                        notifyDataSetChanged();
                     }
                 });
                 dialog.show();
@@ -279,6 +326,14 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         private TextView txtCardbook_Cardname8;
         private TextView txtCardbook_Cardname9;
         private ConstraintLayout cvCardbookBackground;
+
+        private TextView txtBtnCritical;
+        private TextView txtBtnAgility;
+        private TextView txtBtnSpeciality;
+        private TextView txtBtnNotAchievedSpecificityCritical;
+        private TextView txtBtnNotAchievedSpecificitySpeciality;
+        private TextView txtBtnNotAchievedSpecificityAgility;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -356,12 +411,29 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         else
             cv.setBackgroundColor(Color.parseColor("#FFFFFF"));
     }
+
     // DB에 도감을 완성 시킨 경우 true else false
-    public boolean isCompleteCardBook(Cardbook_All cardbook_all){
+    public boolean isCompleteCardBook(Cardbook_All cardbook_all) {
         if (haveCard(cardbook_all) == cardbook_all.getCompleteCardBook())
             return true;
         else
             return false;
     }
 
+    private void haveStatUpdate(ArrayList<Cardbook_All> cardbook_all) {
+        haveStat = new int[]{0, 0, 0};
+        haveStatCardBook = new int[]{0, 0, 0};
+        haveStatCardBookCount = new int[]{0, 0, 0};
+
+        for (int i = 0; i < haveStat.length; i++) {
+            for (int j = 0; j < cardbook_all.size(); j++) {
+                if (cardbook_all.get(j).getOption().equals(STAT[i]))
+                    haveStatCardBook[i]++;
+                if (cardbook_all.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardbook_all.get(j))) {
+                    haveStatCardBookCount[i]++;
+                    haveStat[i] += cardbook_all.get(j).getValue();
+                }
+            }
+        }
+    }
 }

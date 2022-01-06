@@ -15,23 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CardBook_page extends AppCompatActivity {
-    private static final String CRITICAL = "치명";
-    private static final String SPECIALITY = "특화";
-    private static final String AGILITY = "신속";
+    private static final String CRITICAL = "치명 + ";
+    private static final String SPECIALITY = "특화 + ";
+    private static final String AGILITY = "신속 + ";
+    private final String CRITICAL_BOOK_COMPLETE = "치명 도감 달성 개수 : ";
+    private final String AGILITY_BOOK_COMPLETE = " 도감 달성 개수 : ";
+    private final String SPECIALITY_BOOK_COMPLETE = "특화 도감 달성 개수 : ";
     private RecyclerView rv;
     private LOA_Card_DB dbHelper;
     private ArrayList<Cardbook_All> allCardBook;
-    private int critical;
-    private int agility;
-    private int speciality;
 
     private CheckBox checkboxCompleteCardbookInvisibility;
     private TextView txtBtnCritical;
     private TextView txtBtnAgility;
     private TextView txtBtnSpeciality;
+    private TextView txtBtnNotAchievedSpecificityCritical;
+    private TextView txtBtnNotAchievedSpecificitySpeciality;
+    private TextView txtBtnNotAchievedSpecificityAgility;
     private int criticalCardBookCount = 0;
     private int agilityCardBookCount = 0;
     private int specialityCardBookCount = 0;
+    private MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,56 +55,20 @@ public class CardBook_page extends AppCompatActivity {
         rv = findViewById(R.id.rvCardbookList);
         dbHelper = new LOA_Card_DB(this);
         allCardBook = dbHelper.getCardBookInfo_All();
-        CardBook_Adapter adapter = new CardBook_Adapter(allCardBook, this);
+        mainActivity = new MainActivity();
+        CardBook_Adapter adapter = new CardBook_Adapter(allCardBook, this, this);
 
         rv.setAdapter(adapter);
-
 
         txtBtnCritical = (TextView) findViewById(R.id.txtBtnCritical);
         txtBtnAgility = (TextView) findViewById(R.id.txtBtnAgility);
         txtBtnSpeciality = (TextView) findViewById(R.id.txtBtnSpeciality);
-        TextView txtBtnNotAchievedSpecificityCritical = (TextView)findViewById(R.id.txtBtnNotAchievedSpecificityCritical);
-        TextView txtBtnNotAchievedSpecificitySpeciality = (TextView)findViewById(R.id.txtBtnNotAchievedSpecificitySpeciality);
-        TextView txtBtnNotAchievedSpecificityAgility = (TextView)findViewById(R.id.txtBtnNotAchievedSpecificityAgility);
+        txtBtnNotAchievedSpecificityCritical = (TextView) findViewById(R.id.txtBtnNotAchievedSpecificityCritical);
+        txtBtnNotAchievedSpecificitySpeciality = (TextView) findViewById(R.id.txtBtnNotAchievedSpecificitySpeciality);
+        txtBtnNotAchievedSpecificityAgility = (TextView) findViewById(R.id.txtBtnNotAchievedSpecificityAgility);
 
-        int statCardBookCount = 0;
+        setStatAndStatBook(adapter.getHaveStat(),adapter.getHaveStatCardBookCount(),adapter.getHaveStatCardBook());
 
-        for(int i = 0; i < allCardBook.size(); i++){
-            if(allCardBook.get(i).getOption().equals(CRITICAL))
-                statCardBookCount++;
-            if(allCardBook.get(i).getOption().equals(CRITICAL) && adapter.isCompleteCardBook(allCardBook.get(i))){
-                criticalCardBookCount++;
-                critical += allCardBook.get(i).getValue();
-            }
-        }
-        txtBtnNotAchievedSpecificityCritical.setText("치명 도감 달성 개수 : " + criticalCardBookCount +"/"+statCardBookCount+"개");
-        statCardBookCount = 0;
-        for(int i = 0; i < allCardBook.size(); i++){
-            if(allCardBook.get(i).getOption().equals(AGILITY))
-                statCardBookCount++;
-            if(allCardBook.get(i).getOption().equals(AGILITY) && adapter.isCompleteCardBook(allCardBook.get(i))){
-                specialityCardBookCount++;
-                agility += allCardBook.get(i).getValue();
-            }
-        }
-        txtBtnNotAchievedSpecificitySpeciality.setText("특화 도감 달성 개수 : " + specialityCardBookCount +"/"+statCardBookCount+"개");
-        statCardBookCount = 0;
-        for(int i = 0; i < allCardBook.size(); i++){
-            if(allCardBook.get(i).getOption().equals(SPECIALITY))
-                statCardBookCount++;
-            if(allCardBook.get(i).getOption().equals(SPECIALITY) && adapter.isCompleteCardBook(allCardBook.get(i))){
-                agilityCardBookCount++;
-                speciality += allCardBook.get(i).getValue();
-            }
-        }
-        txtBtnNotAchievedSpecificityAgility.setText("신속 도감 달성 개수 : " + agilityCardBookCount +"/"+statCardBookCount+"개");
-        txtBtnCritical.setText("치명 + " + critical);
-        txtBtnSpeciality.setText("특화 + " + speciality);
-        txtBtnAgility.setText("신속 + " + agility);
-
-
-
-        adapter.notifyDataSetChanged();
 
         //2. 완성 도감 온 오프 기능
         checkboxCompleteCardbookInvisibility = (CheckBox) findViewById(R.id.checkboxCompleteCardbookInvisibility);
@@ -118,12 +86,13 @@ public class CardBook_page extends AppCompatActivity {
 
     }
 
-    private void getStatus(ArrayList<Cardbook_All> cardbook_all, CardBook_Adapter adapter, int status, String STAT){
-        for(int i = 0; i < cardbook_all.size(); i++){
-            if(cardbook_all.get(i).getOption().equals(STAT) && adapter.isCompleteCardBook(cardbook_all.get(i)))
-                status += cardbook_all.get(i).getValue();
-        }
+    public void setStatAndStatBook(int[] stat, int[] statBookComplete, int[] statBookAll) {
+        txtBtnCritical.setText(CRITICAL + stat[0]);
+        txtBtnSpeciality.setText(SPECIALITY + stat[1]);
+        txtBtnAgility.setText(AGILITY + stat[2]);
+        txtBtnNotAchievedSpecificityCritical.setText(CRITICAL_BOOK_COMPLETE + statBookComplete[0] + "/" + statBookAll[0] + "개");
+        txtBtnNotAchievedSpecificitySpeciality.setText(SPECIALITY_BOOK_COMPLETE + statBookComplete[1] + "/" + statBookAll[1] + "개");
+        txtBtnNotAchievedSpecificityAgility.setText(AGILITY_BOOK_COMPLETE + statBookComplete[2] + "/" + statBookAll[2] + "개");
     }
-
 
 }
