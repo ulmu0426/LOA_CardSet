@@ -32,11 +32,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String TABLE_CARD_UNCOMMON = "card_uncommon";
     private static final String TABLE_CARD_COMMON = "card_common";
     private static final String TABLE_CARD_SPECIAL = "card_special";
+
+    private static final String TABLE_CARD_LIST = "cardList";
+    private static final String CARD_COLUMN_GRADE = "grade";
+    private static final String CARD_COLUMN_ACQUISITION_INFO = "acquisition_info";
     //카드테이블이 공유하는 column
     private static final String CARD_COLUMN_ID = "id";            //테이블별 카드 번호
     private static final String CARD_COLUMN_NAME = "name";        //카드 이름
     private static final String CARD_COLUMN_NUMBER = "number";    //카드 보유 장수
     private static final String CARD_COLUMN_AWAKE = "awake";      //카드 각성도
+
 
 
     //도감 테이블 3개
@@ -85,6 +90,8 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String DED_COLUMN_DMG_P1 = "dmg_p1";
     private static final String DED_COLUMN_DMG_P2 = "dmg_p2";
 
+    private static final String DED_COLUMN_HAVE_AWAKE = "haveAwake";
+    private static final String DED_COLUMN_HAVE_CARD =  "haveCard";
 
     //카드 세트 column
     //도감테이블 column id~card6까지 동일
@@ -96,7 +103,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String CARDSET_SETBONUS4 = "set_bonus4";
     private static final String CARDSET_SETBONUS5 = "set_bonus5";
     private static final String CARDSET_HAVECARD = "haveCard";
-    private static final String CARDSET_HAVEAWAKE = "haveAwake";
 
 
     public LOA_Card_DB(@Nullable Context context) {
@@ -179,6 +185,37 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 각성도 조절.
         updateColumInfo.execSQL("UPDATE " + tableName + " SET " + number + " = " + input + " WHERE id = " + cardId);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<CardInfo> getCardInfo_All() {     //모든카드 목록 넣기
+        ArrayList<CardInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id DESC", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_NAME));
+                int count = cursor.getInt(cursor.getColumnIndex(CARD_COLUMN_NUMBER));
+                int awake = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_AWAKE)));
+                String acquisition_info = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_ACQUISITION_INFO));
+                String grade = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_GRADE));
+
+                CardInfo cardinfo = new CardInfo();
+                cardinfo.setId(id);
+                cardinfo.setName(name);
+                cardinfo.setCount(count);
+                cardinfo.setAwake(awake);
+                cardinfo.setAcquisition_info(acquisition_info);
+                cardinfo.setGrade(grade);
+                getInfo.add(cardinfo);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
     }
 
     //SELECT : 카드 가져오기(카드 이름, 보유 카드 개수, 카드 각성 수치)
@@ -586,6 +623,18 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 float dmg_p0 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P0));
                 float dmg_p1 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P1));
                 float dmg_p2 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P2));
+                int haveAwake = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_HAVE_AWAKE));
+                int haveCard = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_HAVE_CARD));
+                int card0_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD0_CHECK));
+                int card1_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD1_CHECK));
+                int card2_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD2_CHECK));
+                int card3_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD3_CHECK));
+                int card4_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD4_CHECK));
+                int card5_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD5_CHECK));
+                int card6_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD6_CHECK));
+                int card7_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD7_CHECK));
+                int card8_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD8_CHECK));
+                int card9_check = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9_CHECK));
 
 
                 DemonExtraDmgInfo demonExtraDmgInfo = new DemonExtraDmgInfo();
@@ -607,6 +656,18 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 demonExtraDmgInfo.setDmg_p0(dmg_p0);
                 demonExtraDmgInfo.setDmg_p1(dmg_p1);
                 demonExtraDmgInfo.setDmg_p2(dmg_p2);
+                demonExtraDmgInfo.setHaveAwake(haveAwake);
+                demonExtraDmgInfo.setCompleteDEDBook(haveCard);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
+                demonExtraDmgInfo.setCard0_check(card0_check);
                 getInfo.add((demonExtraDmgInfo));
             }
         }

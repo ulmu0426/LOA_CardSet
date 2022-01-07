@@ -6,6 +6,8 @@ public class CardInfo {
     private int count;                  //보유 카드 장수
     private int awake;                  //카드 각성도
     private String acquisition_info;    //카드 획득 정보
+    private String grade;               //카드 등급 정보
+
 
     public int getId() {
         return id;
@@ -44,8 +46,13 @@ public class CardInfo {
     }
 
     public void setAcquisition_info(String acquisition_info) {
-        if(acquisition_info == null)
-            return;
         this.acquisition_info = acquisition_info;
+    }
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

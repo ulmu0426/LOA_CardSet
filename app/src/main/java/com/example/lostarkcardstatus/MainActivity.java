@@ -21,14 +21,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private LOA_Card_DB cardDBHelper;
-    protected ArrayList<CardInfo> cardLegend;
-    protected ArrayList<CardInfo> cardEpic;
-    protected ArrayList<CardInfo> cardRare;
-    protected ArrayList<CardInfo> cardUncommon;
-    protected ArrayList<CardInfo> cardCommon;
-    protected ArrayList<CardInfo> cardSpecial;
+    protected ArrayList<CardInfo> cardInfo;
     protected ArrayList<Cardbook_All> cardbook_all;
     protected ArrayList<CardSetInfo> cardSetInfo;
+    protected ArrayList<DemonExtraDmgInfo> DEDInfo;
     private TextView txtCardBookStat_Critical;
     private TextView txtCardBookStat_Speciality;
     private TextView txtCardBookStat_Agility;
@@ -56,16 +52,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //카드 DB정보 ArrayList에 전달
-        cardLegend = cardDBHelper.getCardInfoL();
-        cardEpic = cardDBHelper.getCardInfoE();
-        cardRare = cardDBHelper.getCardInfoR();
-        cardUncommon = cardDBHelper.getCardInfoU();
-        cardCommon = cardDBHelper.getCardInfoC();
-        cardSpecial = cardDBHelper.getCardInfoS();
+        cardInfo = cardDBHelper.getCardInfo_All();
 
         //카드 도감 DB정보 ArrayList에 전달
         cardbook_all = cardDBHelper.getCardBookInfo_All();
         cardSetInfo = cardDBHelper.getCardSetInfo();
+
+        DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
 
         //치,특,신 값 출력
         int[] stat = {getStatInfo(cardbook_all,"치명"),getStatInfo(cardbook_all,"특화"),getStatInfo(cardbook_all,"신속")};
@@ -73,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         //악추피 값 출력
         //setDemonExtraDmgInfo();
+
 
 
 

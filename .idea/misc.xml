@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/card_set_detail.xml" value="0.2078804347826087" />
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/cardbook_name_and_cardlist.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/demon_extra_dmg_detail.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/demon_extra_dmg_page.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/draw_main.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/rv_cardbook.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/MH/Desktop/LostArk_CardBook_App/LOA_CardSet/app/src/main/res/layout/rv_demon_extra_dmg.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -23,7 +30,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

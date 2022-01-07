@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.io.InvalidObjectException;
 import java.util.ArrayList;
 
@@ -126,6 +128,27 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                 TextView txtCardBookValue_incardbooknamexmlpage = dialog.findViewById(R.id.txtCardBookValue_incardbooknamexmlpage);
                 txtCardBookName_incardbooknamexmlpage.setText(cardbook_all.get(pos).getName());
                 txtCardBookValue_incardbooknamexmlpage.setText(cardbook_all.get(pos).getOption() + " + " + cardbook_all.get(pos).getValue());
+                TextView txtCardBookName_CardName0 = dialog.findViewById(R.id.txtCardBookName_CardName0);
+                TextView txtCardBookName_CardName1 = dialog.findViewById(R.id.txtCardBookName_CardName1);
+                TextView txtCardBookName_CardName2 = dialog.findViewById(R.id.txtCardBookName_CardName2);
+                TextView txtCardBookName_CardName3 = dialog.findViewById(R.id.txtCardBookName_CardName3);
+                TextView txtCardBookName_CardName4 = dialog.findViewById(R.id.txtCardBookName_CardName4);
+                TextView txtCardBookName_CardName5 = dialog.findViewById(R.id.txtCardBookName_CardName5);
+                TextView txtCardBookName_CardName6 = dialog.findViewById(R.id.txtCardBookName_CardName6);
+                TextView txtCardBookName_CardName7 = dialog.findViewById(R.id.txtCardBookName_CardName7);
+                TextView txtCardBookName_CardName8 = dialog.findViewById(R.id.txtCardBookName_CardName8);
+                TextView txtCardBookName_CardName9 = dialog.findViewById(R.id.txtCardBookName_CardName9);
+                txtCardBookName_CardName0.setText(cardbook_all.get(pos).getCard0());
+                txtCardBookName_CardName1.setText(cardbook_all.get(pos).getCard1());
+                txtCardBookName_CardName2.setText(cardbook_all.get(pos).getCard2());
+                txtCardBookName_CardName3.setText(cardbook_all.get(pos).getCard3());
+                txtCardBookName_CardName4.setText(cardbook_all.get(pos).getCard4());
+                txtCardBookName_CardName5.setText(cardbook_all.get(pos).getCard5());
+                txtCardBookName_CardName6.setText(cardbook_all.get(pos).getCard6());
+                txtCardBookName_CardName7.setText(cardbook_all.get(pos).getCard7());
+                txtCardBookName_CardName8.setText(cardbook_all.get(pos).getCard8());
+                txtCardBookName_CardName9.setText(cardbook_all.get(pos).getCard9());
+
 
                 ImageView imgCardBookName_CardImg0 = dialog.findViewById(R.id.imgCardBookName_CardImg0);
                 ImageView imgCardBookName_CardImg1 = dialog.findViewById(R.id.imgCardBookName_CardImg1);
@@ -149,14 +172,14 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
                 imgDefaultColor(imgCardBookName_CardImg8, filter, cardbook_all.get(pos).getCard8_check());
                 imgDefaultColor(imgCardBookName_CardImg9, filter, cardbook_all.get(pos).getCard9_check());
                 //없는 카드는 안 보이게
-                imgVisibility(cardbook_all.get(pos).getCard2(), dialog.findViewById(R.id.imgCardBookName_CardImg2), dialog.findViewById(R.id.txtCardBookName_Cardname2));
-                imgVisibility(cardbook_all.get(pos).getCard3(), dialog.findViewById(R.id.imgCardBookName_CardImg3), dialog.findViewById(R.id.txtCardBookName_Cardname3));
-                imgVisibility(cardbook_all.get(pos).getCard4(), dialog.findViewById(R.id.imgCardBookName_CardImg4), dialog.findViewById(R.id.txtCardBookName_Cardname4));
-                imgVisibility(cardbook_all.get(pos).getCard5(), dialog.findViewById(R.id.imgCardBookName_CardImg5), dialog.findViewById(R.id.txtCardBookName_Cardname5));
-                imgVisibility(cardbook_all.get(pos).getCard6(), dialog.findViewById(R.id.imgCardBookName_CardImg6), dialog.findViewById(R.id.txtCardBookName_Cardname6));
-                imgVisibility(cardbook_all.get(pos).getCard7(), dialog.findViewById(R.id.imgCardBookName_CardImg7), dialog.findViewById(R.id.txtCardBookName_Cardname7));
-                imgVisibility(cardbook_all.get(pos).getCard8(), dialog.findViewById(R.id.imgCardBookName_CardImg8), dialog.findViewById(R.id.txtCardBookName_Cardname8));
-                imgVisibility(cardbook_all.get(pos).getCard9(), dialog.findViewById(R.id.imgCardBookName_CardImg9), dialog.findViewById(R.id.txtCardBookName_Cardname9));
+                imgVisibility(cardbook_all.get(pos).getCard2(), dialog.findViewById(R.id.imgCardBookName_CardImg2), dialog.findViewById(R.id.txtCardBookName_CardName2));
+                imgVisibility(cardbook_all.get(pos).getCard3(), dialog.findViewById(R.id.imgCardBookName_CardImg3), dialog.findViewById(R.id.txtCardBookName_CardName3));
+                imgVisibility(cardbook_all.get(pos).getCard4(), dialog.findViewById(R.id.imgCardBookName_CardImg4), dialog.findViewById(R.id.txtCardBookName_CardName4));
+                imgVisibility(cardbook_all.get(pos).getCard5(), dialog.findViewById(R.id.imgCardBookName_CardImg5), dialog.findViewById(R.id.txtCardBookName_CardName5));
+                imgVisibility(cardbook_all.get(pos).getCard6(), dialog.findViewById(R.id.imgCardBookName_CardImg6), dialog.findViewById(R.id.txtCardBookName_CardName6));
+                imgVisibility(cardbook_all.get(pos).getCard7(), dialog.findViewById(R.id.imgCardBookName_CardImg7), dialog.findViewById(R.id.txtCardBookName_CardName7));
+                imgVisibility(cardbook_all.get(pos).getCard8(), dialog.findViewById(R.id.imgCardBookName_CardImg8), dialog.findViewById(R.id.txtCardBookName_CardName8));
+                imgVisibility(cardbook_all.get(pos).getCard9(), dialog.findViewById(R.id.imgCardBookName_CardImg9), dialog.findViewById(R.id.txtCardBookName_CardName9));
 
                 //컬러필터 흑백
                 imgCardBookName_CardImg0.setOnClickListener(new View.OnClickListener() {
@@ -327,17 +350,10 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         private TextView txtCardbook_Cardname9;
         private ConstraintLayout cvCardbookBackground;
 
-        private TextView txtBtnCritical;
-        private TextView txtBtnAgility;
-        private TextView txtBtnSpeciality;
-        private TextView txtBtnNotAchievedSpecificityCritical;
-        private TextView txtBtnNotAchievedSpecificitySpeciality;
-        private TextView txtBtnNotAchievedSpecificityAgility;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cvCardbookBackground = itemView.findViewById(R.id.cvCardbookBackground);
+            cvCardbookBackground = itemView.findViewById(R.id.cvCardBookBackground);
             txtCardbookName = itemView.findViewById(R.id.txtCardbookName);
             txtCardbookValue = itemView.findViewById(R.id.txtCardbookValue);
             imgCardBook0 = itemView.findViewById(R.id.imgCardBook0);

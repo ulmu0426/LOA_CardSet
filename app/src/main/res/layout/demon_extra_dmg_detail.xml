@@ -5,23 +5,23 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txtCardBookName_incardbooknamexmlpage"
+        android:id="@+id/txtDEDCardBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:text="카드 도감 이름"
+        android:layout_marginTop="10dp"
+        android:text="악추피 도감 이름"
         android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtCardBookValue_incardbooknamexmlpage"
+        android:id="@+id/txtDED_AwakeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"
-        android:text="특성 + 0"
+        android:text="각성합계 : 0"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,13 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCardBookValue_incardbooknamexmlpage">
+        app:layout_constraintTop_toBottomOf="@+id/txtDED_AwakeValue">
 
         <TableLayout
-            android:id="@+id/tablelayoutCardSetDetail"
+            android:id="@+id/tablelayoutDEDDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="*">
@@ -43,7 +44,7 @@
             <TableRow>
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg0"
+                    android:id="@+id/imgDED_Detail_Card0"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +54,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg1"
+                    android:id="@+id/imgDED_Detail_Card1"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +64,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg2"
+                    android:id="@+id/imgDED_Detail_Card2"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +74,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg3"
+                    android:id="@+id/imgDED_Detail_Card3"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +84,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg4"
+                    android:id="@+id/imgDED_Detail_Card4"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -100,35 +101,35 @@
                 android:layout_marginTop="5dp">
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName0"
+                    android:id="@+id/txtDED_Detail_Card0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName1"
+                    android:id="@+id/txtDED_Detail_Card1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName2"
+                    android:id="@+id/txtDED_Detail_Card2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName3"
+                    android:id="@+id/txtDED_Detail_Card3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName4"
+                    android:id="@+id/txtDED_Detail_Card4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
@@ -138,7 +139,7 @@
             <TableRow android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg5"
+                    android:id="@+id/imgDED_Detail_Card5"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -148,7 +149,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg6"
+                    android:id="@+id/imgDED_Detail_Card6"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -158,7 +159,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg7"
+                    android:id="@+id/imgDED_Detail_Card7"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -168,7 +169,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg8"
+                    android:id="@+id/imgDED_Detail_Card8"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +179,7 @@
                     app:srcCompat="@drawable/aman" />
 
                 <ImageView
-                    android:id="@+id/imgCardBookName_CardImg9"
+                    android:id="@+id/imgDED_Detail_Card9"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -191,35 +192,35 @@
             <TableRow android:layout_marginTop="5dp">
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName5"
+                    android:id="@+id/txtDED_Detail_Card5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName6"
+                    android:id="@+id/txtDED_Detail_Card6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName7"
+                    android:id="@+id/txtDED_Detail_Card7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName8"
+                    android:id="@+id/txtDED_Detail_Card8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtCardBookName_CardName9"
+                    android:id="@+id/txtDED_Detail_Card9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"

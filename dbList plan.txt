@@ -32,7 +32,8 @@ dmg_percent1 ~ dmg_percent3 real : 각성 합 단계별 추가 데미지 0.00
 
 작업 진행단계
 
-CardBook_Adapter의 Dialog에서 변경된 사항들도 바로 적용될 수 있게 해야함.
+코드 개선 할것. MainActivity의 Arraylist들을 protected로 선언 후 Adapter Class에서 ((MainActivity)MainActivity.mainContext).변수명
+을 사용해 넣으면 모든 클레스 및 엑티비티에서 같은 ArrayList를 사용하기 때문에 성능이 개선 될 것.
 
 ----
 데이터베이스 진입

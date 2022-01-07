@@ -1,14 +1,19 @@
 package com.example.lostarkcardstatus;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class DemonExtraDmg_page extends AppCompatActivity {
     private RecyclerView rv;
-    private LOA_Card_DB dbHelper;
+    private ArrayList<DemonExtraDmgInfo> DEDInfo;
+    private LOA_Card_DB DbHelper;
+    private TextView txtDemonExtraDmg_DemonExtraPage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,11 +26,17 @@ public class DemonExtraDmg_page extends AppCompatActivity {
          * */
 
         rv = findViewById(R.id.rvDemonExtraDmg);
-        dbHelper = new LOA_Card_DB(this);
-        ArrayList<DemonExtraDmgInfo> demonExtraDmgInfoArrayList = dbHelper.getDemonExtraDmgInfo();
-        DemonExtraDmgAdapter adapter = new DemonExtraDmgAdapter(demonExtraDmgInfoArrayList, this);
+        DbHelper = new LOA_Card_DB(this);
+        DEDInfo = DbHelper.getDemonExtraDmgInfo();
+        DemonExtraDmgAdapter adapter = new DemonExtraDmgAdapter(this, this);
 
         rv.setAdapter(adapter);
 
+
+
+    }
+    public void setDED(float value, int DEDCount, int DEDBook){
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
+        txtDemonExtraDmg_DemonExtraPage.setText("악마 추가 피해 + "+ df.format(value) + "%");
     }
 }
