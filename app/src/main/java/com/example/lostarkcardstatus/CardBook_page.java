@@ -32,10 +32,6 @@ public class CardBook_page extends AppCompatActivity {
     private TextView txtBtnNotAchievedSpecificityCritical;
     private TextView txtBtnNotAchievedSpecificitySpeciality;
     private TextView txtBtnNotAchievedSpecificityAgility;
-    private int criticalCardBookCount = 0;
-    private int agilityCardBookCount = 0;
-    private int specialityCardBookCount = 0;
-    private MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +49,7 @@ public class CardBook_page extends AppCompatActivity {
 
         //1. 카드 도감 목록 불러오기
         rv = findViewById(R.id.rvCardbookList);
-        dbHelper = new LOA_Card_DB(this);
-        allCardBook = dbHelper.getCardBookInfo_All();
-        mainActivity = new MainActivity();
-        CardBook_Adapter adapter = new CardBook_Adapter(allCardBook, this, this);
+        CardBook_Adapter adapter = new CardBook_Adapter(this, this);
 
         rv.setAdapter(adapter);
 

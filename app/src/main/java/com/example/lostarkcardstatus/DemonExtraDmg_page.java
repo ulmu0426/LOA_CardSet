@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class DemonExtraDmg_page extends AppCompatActivity {
     private RecyclerView rv;
-    private ArrayList<DemonExtraDmgInfo> DEDInfo;
-    private LOA_Card_DB DbHelper;
     private TextView txtDemonExtraDmg_DemonExtraPage;
 
     @Override
@@ -24,19 +22,18 @@ public class DemonExtraDmg_page extends AppCompatActivity {
          *  1. 악추피 도감 목록 불러오기
          *  2. 악추피 완성 도감 숨기기 기능(풀각만 숨김)
          * */
-
+        txtDemonExtraDmg_DemonExtraPage = (TextView) findViewById(R.id.txtDemonExtraDmg_DemonExtraPage);
         rv = findViewById(R.id.rvDemonExtraDmg);
-        DbHelper = new LOA_Card_DB(this);
-        DEDInfo = DbHelper.getDemonExtraDmgInfo();
         DemonExtraDmgAdapter adapter = new DemonExtraDmgAdapter(this, this);
-
         rv.setAdapter(adapter);
 
-
+        //DEDAdapter에서 값 정리를 다 하면 활성화 시킬것
+        //setDED(adapter.getHaveDED());
 
     }
-    public void setDED(float value, int DEDCount, int DEDBook){
+
+    public void setDED(float value) {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
-        txtDemonExtraDmg_DemonExtraPage.setText("악마 추가 피해 + "+ df.format(value) + "%");
+        txtDemonExtraDmg_DemonExtraPage.setText("악마 추가 피해 + " + df.format(value) + "%");
     }
 }

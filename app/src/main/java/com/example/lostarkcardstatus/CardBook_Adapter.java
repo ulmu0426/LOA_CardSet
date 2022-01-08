@@ -46,8 +46,8 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         this.cardbook_all = cardbook_all;
     }
 
-    public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all, Context context, CardBook_page cardBook_page) {
-        this.cardbook_all = cardbook_all;
+    public CardBook_Adapter(Context context, CardBook_page cardBook_page) {
+        this.cardbook_all = ((MainActivity) MainActivity.mainContext).cardbook_all;
         this.context = context;
         cardDbHelper = new LOA_Card_DB(context);
         this.cardBook_page = cardBook_page;
