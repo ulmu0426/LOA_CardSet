@@ -61,13 +61,11 @@ public class MainActivity extends AppCompatActivity {
         DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
 
         //치,특,신 값 출력
-        int[] stat = {getStatInfo(cardbook_all,"치명"),getStatInfo(cardbook_all,"특화"),getStatInfo(cardbook_all,"신속")};
+        int[] stat = {getStatInfo(cardbook_all, "치명"), getStatInfo(cardbook_all, "특화"), getStatInfo(cardbook_all, "신속")};
         setCardBookStatInfo(stat);
 
         //악추피 값 출력
         //setDemonExtraDmgInfo();
-
-
 
 
         //카드 세트로 이동.
@@ -147,13 +145,17 @@ public class MainActivity extends AppCompatActivity {
         }
         return a;
     }
-    public void setCardBookStatInfo(int[] stat){
-        txtCardBookStat_Critical.setText(stat[0]+"");
-        txtCardBookStat_Speciality.setText(stat[1]+"");
-        txtCardBookStat_Agility.setText(stat[2]+"");
+
+    public void setCardBookStatInfo(int[] stat) {
+        txtCardBookStat_Critical.setText(stat[0] + "");
+        txtCardBookStat_Speciality.setText(stat[1] + "");
+        txtCardBookStat_Agility.setText(stat[2] + "");
     }
-    public void setDemonExtraDmgInfo(float value){
+
+    public void setDemonExtraDmgInfo(float value) {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
-        txtDemonExtraDmg.setText(df.format(value)+"%");
+        txtDemonExtraDmg.setText(df.format(value) + "%");
     }
+
+
 }

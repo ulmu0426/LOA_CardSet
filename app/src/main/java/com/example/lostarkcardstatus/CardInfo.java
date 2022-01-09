@@ -16,6 +16,7 @@ public class CardInfo {
     private int awake;                  //카드 각성도
     private String acquisition_info;    //카드 획득처 정보
     private String grade;               //카드 등급 정보
+    private int getCard = 0;                  //카드 획득 유무(기본 0)
 
 
     public int getId() {
@@ -66,11 +67,13 @@ public class CardInfo {
         this.grade = grade;
     }
 
-    //카드 획득 유무. 각성도가 있거나 보유카드가 1장 이상일 경우 1 아니면 0 리턴
-    public int isHaveCard() {
-        if (this.count > 0 || this.awake > 0)
-            return 1;
-        else
-            return 0;
+    public int getGetCard() {
+        return getCard;
     }
+
+    public void setGetCard(int getCard) {
+        this.getCard = getCard;
+    }
+
+
 }
