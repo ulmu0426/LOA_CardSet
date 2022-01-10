@@ -35,6 +35,17 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private final String DED_COLUMN_NAME_CARD8_CHECK = "checkCard8";
     private final String DED_COLUMN_NAME_CARD9_CHECK = "checkCard9";
 
+    private final String DED_COLUMN_NAME_CARD0_AWAKE = "awakeCard0";
+    private final String DED_COLUMN_NAME_CARD1_AWAKE = "awakeCard1";
+    private final String DED_COLUMN_NAME_CARD2_AWAKE = "awakeCard2";
+    private final String DED_COLUMN_NAME_CARD3_AWAKE = "awakeCard3";
+    private final String DED_COLUMN_NAME_CARD4_AWAKE = "awakeCard4";
+    private final String DED_COLUMN_NAME_CARD5_AWAKE = "awakeCard5";
+    private final String DED_COLUMN_NAME_CARD6_AWAKE = "awakeCard6";
+    private final String DED_COLUMN_NAME_CARD7_AWAKE = "awakeCard7";
+    private final String DED_COLUMN_NAME_CARD8_AWAKE = "awakeCard8";
+    private final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
+
     private float haveDED;
 
     public float getHaveDED() {
@@ -48,7 +59,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         this.DED_page = demonExtraDmg_page;
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         haveDEDUpdate(DEDInfo);
-        haveDEDCardCheckUpdate(DEDInfo,cardInfo);
+        haveDEDCardCheckUpdate(DEDInfo, cardInfo);
     }
 
     @NonNull
@@ -202,10 +213,12 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View view) {
                         int cardCheck = imgGrayScale(imgDED_Detail_Card0, filter, DEDInfo.get(pos).getCheckCard0());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, cardCheck, DEDInfo.get(pos).getId());
-                        DEDInfo.get(pos).setCheckCard0(cardCheck);
-                        haveDEDUpdate(DEDInfo);
-                        DED_page.setDED(haveDED);
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        DEDInfo.get(pos).setCheckCard0(cardCheck);                                                          //cardX수집 유무 업데이트(현재 list)
+                        haveDEDUpdate(DEDInfo);                                                                             //악추피 값 갱신
+                        DED_page.setDED(haveDED);                                                                           //악추피 페이지 값 갱신한 것 세팅
+                        ((MainActivity) MainActivity.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
+                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
                     }
@@ -315,29 +328,24 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return check;
     }
 
-    //수집 카드 합
-    public int haveCard(DemonExtraDmgInfo DEDInfo) {
-        int sum = DEDInfo.getCheckCard0() + DEDInfo.getCheckCard1() + DEDInfo.getCheckCard2() + DEDInfo.getCheckCard3() + DEDInfo.getCheckCard4()
-                + DEDInfo.getCheckCard5() + DEDInfo.getCheckCard6() + DEDInfo.getCheckCard7() + DEDInfo.getCheckCard8() + DEDInfo.getCheckCard9();
-        return sum;
-    }
 
-    // 악추피 도감작을 완성시키면 도감의 배경을 노란색으로 칠해 획득유무를 추가로 알려줌.
+    // 악추피 도감작을 완성시키면 각성도에 따라 도감의 배경을 각 단계별로 흰색->민트색->초록색->노란색으로 바꿈
     private void isCompleteCardBookBackgroundColor(DemonExtraDmgInfo DEDInfo, ConstraintLayout cv) {
-        if (haveCard(DEDInfo) == DEDInfo.getCompleteDEDBook() && DEDInfo.getHaveAwake() == DEDInfo.getAwake_sum2())
-            cv.setBackgroundColor(Color.parseColor("#D0FFE870"));   //노랑
-        else if (haveCard(DEDInfo) == DEDInfo.getCompleteDEDBook() && (DEDInfo.getHaveAwake() >= DEDInfo.getAwake_sum1() && DEDInfo.getHaveAwake() < DEDInfo.getAwake_sum2()))
-            cv.setBackgroundColor(Color.parseColor("#CCFFFB"));     //초록
-        else if (haveCard(DEDInfo) == DEDInfo.getCompleteDEDBook() && (DEDInfo.getHaveAwake() >= DEDInfo.getAwake_sum0() && DEDInfo.getHaveAwake() < DEDInfo.getAwake_sum1()))
-            cv.setBackgroundColor(Color.parseColor("#CFFFCC"));     //민트
-        else if (haveCard(DEDInfo) == DEDInfo.getCompleteDEDBook() && DEDInfo.getHaveAwake() < DEDInfo.getAwake_sum0())
-            cv.setBackgroundColor(Color.parseColor("#FFFFFF"));     //흰색
+        if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook() && DEDInfo.getHaveAwake() == DEDInfo.getAwake_sum2())
+            cv.setBackgroundColor(Color.parseColor("#D0FFE870"));   //노랑 - 전부수집+풀각성
+        else if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook() && (DEDInfo.getHaveAwake() >= DEDInfo.getAwake_sum1() && DEDInfo.getHaveAwake() < DEDInfo.getAwake_sum2()))
+            cv.setBackgroundColor(Color.parseColor("#CCFFFB"));     //초록 - 전부수집+올4각성 이상
+        else if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook() && (DEDInfo.getHaveAwake() >= DEDInfo.getAwake_sum0() && DEDInfo.getHaveAwake() < DEDInfo.getAwake_sum1()))
+            cv.setBackgroundColor(Color.parseColor("#CFFFCC"));     //민트 - 전부수집+올2각성 이상
+        else if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook() && DEDInfo.getHaveAwake() < DEDInfo.getAwake_sum0())
+            cv.setBackgroundColor(Color.parseColor("#C5BEFF"));     //연보라 - 전부수집
+
 
     }
 
     // DB에 도감을 완성 시킨 경우 true else false
     public boolean isCompleteCardBook(DemonExtraDmgInfo DEDInfo) {
-        if (haveCard(DEDInfo) == DEDInfo.getCompleteDEDBook())
+        if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook())
             return true;
         else
             return false;
@@ -347,36 +355,55 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private void haveDEDCardCheckUpdate(ArrayList<DemonExtraDmgInfo> DEDInfo, ArrayList<CardInfo> cardInfo) {
         for (int i = 0; i < DEDInfo.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {
-                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard0())) {
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
                     DEDInfo.get(i).setCheckCard0(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, DEDInfo.get(i).getCheckCard0(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard1())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());  //카드 획득유무 업데이트
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard1())) {
                     DEDInfo.get(i).setCheckCard1(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_CHECK, DEDInfo.get(i).getCheckCard1(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard2())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard2())) {
                     DEDInfo.get(i).setCheckCard2(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, DEDInfo.get(i).getCheckCard2(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard3())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard3())) {
                     DEDInfo.get(i).setCheckCard3(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, DEDInfo.get(i).getCheckCard3(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard4())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard4())) {
                     DEDInfo.get(i).setCheckCard4(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, DEDInfo.get(i).getCheckCard4(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard5())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard5())) {
                     DEDInfo.get(i).setCheckCard5(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, DEDInfo.get(i).getCheckCard5(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard6())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard6())) {
                     DEDInfo.get(i).setCheckCard6(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, DEDInfo.get(i).getCheckCard6(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard7())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard7())) {
                     DEDInfo.get(i).setCheckCard7(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, DEDInfo.get(i).getCheckCard7(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard8())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard8())) {
                     DEDInfo.get(i).setCheckCard8(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, DEDInfo.get(i).getCheckCard8(), DEDInfo.get(i).getId());
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard9())) {
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard9())) {
                     DEDInfo.get(i).setCheckCard9(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, DEDInfo.get(i).getCheckCard9(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, cardInfo.get(i).getGetCard(), DEDInfo.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, cardInfo.get(i).getAwake(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
                 }
             }
         }
@@ -387,13 +414,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private void haveDEDUpdate(ArrayList<DemonExtraDmgInfo> DEDInfo) {
         this.haveDED = 0;
         for (int i = 0; i < DEDInfo.size(); i++) {
-            if (haveCard(DEDInfo.get(i)) == DEDInfo.get(i).getCompleteDEDBook() && DEDInfo.get(i).getHaveAwake() == DEDInfo.get(i).getAwake_sum2()) {
+            if (DEDInfo.get(i).getHaveCard() == DEDInfo.get(i).getCompleteDEDBook() && DEDInfo.get(i).getHaveAwake() == DEDInfo.get(i).getAwake_sum2()) {
                 haveDED += DEDInfo.get(i).getDmg_p2() + DEDInfo.get(i).getDmg_p1() + DEDInfo.get(i).getDmg_p0();
-            } else if (haveCard(DEDInfo.get(i)) == DEDInfo.get(i).getCompleteDEDBook() && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwake_sum1() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwake_sum2())) {
+            } else if (DEDInfo.get(i).getHaveCard() == DEDInfo.get(i).getCompleteDEDBook() && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwake_sum1() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwake_sum2())) {
                 haveDED += DEDInfo.get(i).getDmg_p1() + DEDInfo.get(i).getDmg_p0();
-            } else if (haveCard(DEDInfo.get(i)) == DEDInfo.get(i).getCompleteDEDBook() && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwake_sum0() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwake_sum1())) {
+            } else if (DEDInfo.get(i).getHaveCard() == DEDInfo.get(i).getCompleteDEDBook() && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwake_sum0() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwake_sum1())) {
                 haveDED += DEDInfo.get(i).getDmg_p0();
             }
         }
     }
+
 }

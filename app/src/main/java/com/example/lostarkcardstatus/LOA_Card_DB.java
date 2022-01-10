@@ -98,6 +98,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String DED_COLUMN_CHECKCARD7 = "checkCard7";            //카드8 획득 여부
     private static final String DED_COLUMN_CHECKCARD8 = "checkCard8";            //카드9 획득 여부
     private static final String DED_COLUMN_CHECKCARD9 = "checkCard9";            //카드10 획득 여부
+    private static final String DED_COLUMN_NAME_CARD0_AWAKE = "awakeCard0";
+    private static final String DED_COLUMN_NAME_CARD1_AWAKE = "awakeCard1";
+    private static final String DED_COLUMN_NAME_CARD2_AWAKE = "awakeCard2";
+    private static final String DED_COLUMN_NAME_CARD3_AWAKE = "awakeCard3";
+    private static final String DED_COLUMN_NAME_CARD4_AWAKE = "awakeCard4";
+    private static final String DED_COLUMN_NAME_CARD5_AWAKE = "awakeCard5";
+    private static final String DED_COLUMN_NAME_CARD6_AWAKE = "awakeCard6";
+    private static final String DED_COLUMN_NAME_CARD7_AWAKE = "awakeCard7";
+    private static final String DED_COLUMN_NAME_CARD8_AWAKE = "awakeCard8";
+    private static final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
 
     //카드 세트 column
     private static final String TABLE_CARDSET = "cardSet";                      //카드세트 테이블 명
@@ -198,7 +208,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     public void UpdateInfoCardCheck(String columnName, int input, String cardName) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 name 값으로 카드를 파악하고 해당 카드의 수량 조절.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET " + columnName + " = " + input + " WHERE name = '" + cardName + "';");
+        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET " + columnName + " = " + input + " WHERE name = '" + cardName + "'");
     }
 
     //UPDATE 카드 도감 획득 유무 수정
@@ -208,7 +218,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         updateColumInfo.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
 
-    //UPDATE 악추피 획득 유무 수정
+    //UPDATE 악추피 checkCardX획득 유무 수정
     public void UpdateInfoDEDCard(String columnName, int cardCheck, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
@@ -273,7 +283,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 String card9 = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD9));
                 String option = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_OPTION));
                 int cardListSum = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CARD_LIST_SUM));
-                int haveCard = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_HAVECARD));
                 int checkCard0 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD0));
                 int checkCard1 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD1));
                 int checkCard2 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD2));
@@ -301,7 +310,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardbook_info.setCard9(card9);
                 cardbook_info.setOption(option);
                 cardbook_info.setCompleteCardBook(cardListSum);
-                cardbook_info.setHaveCard(haveCard);
                 cardbook_info.setCheckCard0(checkCard0);
                 cardbook_info.setCheckCard1(checkCard1);
                 cardbook_info.setCheckCard2(checkCard2);
@@ -351,7 +359,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 float dmg_p2 = cursor.getFloat(cursor.getColumnIndex(DED_COLUMN_DMG_P2));
                 int haveAwake = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_HAVE_AWAKE));
                 int cardListSum = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CARD_LIST_SUM));
-                int haveCard = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_HAVECARD));
                 int checkCard0 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CHECKCARD0));
                 int checkCard1 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CHECKCARD1));
                 int checkCard2 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CHECKCARD2));
@@ -362,6 +369,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 int checkCard7 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CHECKCARD7));
                 int checkCard8 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CHECKCARD8));
                 int checkCard9 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_CHECKCARD9));
+                int awakeCard0 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD0_AWAKE));
+                int awakeCard1 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD1_AWAKE));
+                int awakeCard2 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD2_AWAKE));
+                int awakeCard3 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD3_AWAKE));
+                int awakeCard4 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD4_AWAKE));
+                int awakeCard5 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD5_AWAKE));
+                int awakeCard6 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD6_AWAKE));
+                int awakeCard7 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD7_AWAKE));
+                int awakeCard8 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD8_AWAKE));
+                int awakeCard9 = cursor.getInt(cursor.getColumnIndex(DED_COLUMN_NAME_CARD9_AWAKE));
 
 
                 DemonExtraDmgInfo demonExtraDmgInfo = new DemonExtraDmgInfo();
@@ -385,7 +402,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 demonExtraDmgInfo.setDmg_p2(dmg_p2);
                 demonExtraDmgInfo.setHaveAwake(haveAwake);
                 demonExtraDmgInfo.setCompleteDEDBook(cardListSum);
-                demonExtraDmgInfo.setHaveCard(haveCard);
                 demonExtraDmgInfo.setCheckCard0(checkCard0);
                 demonExtraDmgInfo.setCheckCard1(checkCard1);
                 demonExtraDmgInfo.setCheckCard2(checkCard2);
@@ -396,6 +412,16 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 demonExtraDmgInfo.setCheckCard7(checkCard7);
                 demonExtraDmgInfo.setCheckCard8(checkCard8);
                 demonExtraDmgInfo.setCheckCard9(checkCard9);
+                demonExtraDmgInfo.setAwakeCard0(awakeCard0);
+                demonExtraDmgInfo.setAwakeCard1(awakeCard1);
+                demonExtraDmgInfo.setAwakeCard2(awakeCard2);
+                demonExtraDmgInfo.setAwakeCard3(awakeCard3);
+                demonExtraDmgInfo.setAwakeCard4(awakeCard4);
+                demonExtraDmgInfo.setAwakeCard5(awakeCard5);
+                demonExtraDmgInfo.setAwakeCard6(awakeCard6);
+                demonExtraDmgInfo.setAwakeCard7(awakeCard7);
+                demonExtraDmgInfo.setAwakeCard8(awakeCard8);
+                demonExtraDmgInfo.setAwakeCard9(awakeCard9);
                 getInfo.add((demonExtraDmgInfo));
             }
         }

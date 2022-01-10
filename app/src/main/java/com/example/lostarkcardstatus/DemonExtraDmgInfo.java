@@ -32,6 +32,16 @@ public class DemonExtraDmgInfo {
     private int checkCard7;
     private int checkCard8;
     private int checkCard9;
+    private int awakeCard0;
+    private int awakeCard1;
+    private int awakeCard2;
+    private int awakeCard3;
+    private int awakeCard4;
+    private int awakeCard5;
+    private int awakeCard6;
+    private int awakeCard7;
+    private int awakeCard8;
+    private int awakeCard9;
 
     public int getId() {
         return id;
@@ -177,16 +187,16 @@ public class DemonExtraDmgInfo {
         this.dmg_p2 = dmg_p2;
     }
 
-    public float getDmgSum(int awakeInfo){
+    public float getDmgSum(int awakeInfo) {
         float result = 0;
-        if(awakeInfo < getAwake_sum0())     //각성합이 최소 각성 미만일시
+        if (awakeInfo < getAwake_sum0())     //각성합이 최소 각성 미만일시
             result = 0;
-        else if(getAwake_sum0() <= awakeInfo && awakeInfo < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
+        else if (getAwake_sum0() <= awakeInfo && awakeInfo < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
             result = getDmg_p0();
-        else if(getAwake_sum1() <= awakeInfo && awakeInfo < getAwake_sum2())    //각성합이 두번째 각성 조건 달성시
-            result = getDmg_p0()+getDmg_p1();
-        else if(getAwake_sum2() <= awakeInfo)                                   //각성합이 최대 조건 달성시
-            result = getDmg_p0()+getDmg_p1()+getDmg_p2();
+        else if (getAwake_sum1() <= awakeInfo && awakeInfo < getAwake_sum2())    //각성합이 두번째 각성 조건 달성시
+            result = getDmg_p0() + getDmg_p1();
+        else if (getAwake_sum2() <= awakeInfo)                                   //각성합이 최대 조건 달성시
+            result = getDmg_p0() + getDmg_p1() + getDmg_p2();
 
         return result;
     }
@@ -208,11 +218,7 @@ public class DemonExtraDmgInfo {
     }
 
     public int getHaveCard() {
-        return haveCard;
-    }
-
-    public void setHaveCard(int haveCard) {
-        this.haveCard = haveCard;
+        return haveCard = checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6 + checkCard7 + checkCard8 + checkCard9;
     }
 
     public int getCheckCard0() {
@@ -293,5 +299,85 @@ public class DemonExtraDmgInfo {
 
     public void setCheckCard9(int checkCard9) {
         this.checkCard9 = checkCard9;
+    }
+
+    public int getAwakeCard0() {
+        return awakeCard0;
+    }
+
+    public void setAwakeCard0(int awakeCard0) {
+        this.awakeCard0 = awakeCard0;
+    }
+
+    public int getAwakeCard1() {
+        return awakeCard1;
+    }
+
+    public void setAwakeCard1(int awakeCard1) {
+        this.awakeCard1 = awakeCard1;
+    }
+
+    public int getAwakeCard2() {
+        return awakeCard2;
+    }
+
+    public void setAwakeCard2(int awakeCard2) {
+        this.awakeCard2 = awakeCard2;
+    }
+
+    public int getAwakeCard3() {
+        return awakeCard3;
+    }
+
+    public void setAwakeCard3(int awakeCard3) {
+        this.awakeCard3 = awakeCard3;
+    }
+
+    public int getAwakeCard4() {
+        return awakeCard4;
+    }
+
+    public void setAwakeCard4(int awakeCard4) {
+        this.awakeCard4 = awakeCard4;
+    }
+
+    public int getAwakeCard5() {
+        return awakeCard5;
+    }
+
+    public void setAwakeCard5(int awakeCard5) {
+        this.awakeCard5 = awakeCard5;
+    }
+
+    public int getAwakeCard6() {
+        return awakeCard6;
+    }
+
+    public void setAwakeCard6(int awakeCard6) {
+        this.awakeCard6 = awakeCard6;
+    }
+
+    public int getAwakeCard7() {
+        return awakeCard7;
+    }
+
+    public void setAwakeCard7(int awakeCard7) {
+        this.awakeCard7 = awakeCard7;
+    }
+
+    public int getAwakeCard8() {
+        return awakeCard8;
+    }
+
+    public void setAwakeCard8(int awakeCard8) {
+        this.awakeCard8 = awakeCard8;
+    }
+
+    public int getAwakeCard9() {
+        return awakeCard9;
+    }
+
+    public void setAwakeCard9(int awakeCard9) {
+        this.awakeCard9 = awakeCard9;
     }
 }

@@ -150,11 +150,7 @@ public class Cardbook_All {
     }
 
     public int getHaveCard() {
-        return haveCard;
-    }
-
-    public void setHaveCard(int haveCard) {
-        this.haveCard = haveCard;
+        return haveCard = checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6 + checkCard7 + checkCard8 + checkCard9;
     }
 
     public int getCheckCard0() {

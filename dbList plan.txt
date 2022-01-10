@@ -32,8 +32,9 @@ dmg_percent1 ~ dmg_percent3 real : 각성 합 단계별 추가 데미지 0.00
 
 작업 진행단계
 
-코드 개선 할것. MainActivity의 Arraylist들을 protected로 선언 후 Adapter Class에서 ((MainActivity)MainActivity.mainContext).변수명
-을 사용해 넣으면 모든 클래스 및 엑티비티에서 같은 ArrayList를 사용하기 때문에 성능이 개선 될 것.
+cardbook_all의 haveCard 항목도 포함되도록
+    //수집 카드 합 ( 개선 필요) -> cardbook_Adapter
+    public int haveCard(Cardbook_All cardbook_all) {
 
 ----
 데이터베이스 진입
@@ -61,4 +62,5 @@ delete from 테이블명 where 조건식(id = 3(아이디가 3인것) or id < 5(
 
 (데이터 수정)
 update 테이블명 set 컬럼명1 = 수정값, ... where 조건식;
+UPDATE cardList SET check = 1 WHERE name = 니아
 

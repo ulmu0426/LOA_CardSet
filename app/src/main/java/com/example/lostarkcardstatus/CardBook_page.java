@@ -60,9 +60,6 @@ public class CardBook_page extends AppCompatActivity {
         txtBtnNotAchievedSpecificitySpeciality = (TextView) findViewById(R.id.txtBtnNotAchievedSpecificitySpeciality);
         txtBtnNotAchievedSpecificityAgility = (TextView) findViewById(R.id.txtBtnNotAchievedSpecificityAgility);
 
-        setStatAndStatBook(adapter.getHaveStat(),adapter.getHaveStatCardBookCount(),adapter.getHaveStatCardBook());
-
-
         //2. 완성 도감 온 오프 기능
         checkboxCompleteCardbookInvisibility = (CheckBox) findViewById(R.id.checkboxCompleteCardbookInvisibility);
         checkboxCompleteCardbookInvisibility.setOnClickListener(new View.OnClickListener() {
