@@ -52,7 +52,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String CARDBOOK_COLUMN_CARD9 = "card9";                //카드10
     private static final String CARDBOOK_COLUMN_OPTION = "option";              //치명,특화,신속
     private static final String CARDBOOK_COLUMN_CARD_LIST_SUM = "cardListSum";  //도감 활성화를 위해 필요한 카드 수
-    private static final String CARDBOOK_COLUMN_HAVECARD = "haveCard";          //도감 활성화를 위해 수집한 카드 수
     private static final String CARDBOOK_COLUMN_CHECKCARD0 = "checkCard0";           //카드1 획득 여부
     private static final String CARDBOOK_COLUMN_CHECKCARD1 = "checkCard1";           //카드2 획득 여부
     private static final String CARDBOOK_COLUMN_CHECKCARD2 = "checkCard2";           //카드3 획득 여부
@@ -87,7 +86,6 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String DED_COLUMN_DMG_P2 = "dmg_p2";               //각성합계 3단계 데미지 보너스
     private static final String DED_COLUMN_HAVE_AWAKE = "haveAwake";        //악추피 도감의 '현재' 각성 합계
     private static final String DED_COLUMN_CARD_LIST_SUM = "cardListSum";   //악추피 도감 '활성화'를 위해 필요한 카드 수
-    private static final String DED_COLUMN_HAVECARD = "haveCard";           //악추피 도감 '활성화'를 위해 수집한 카드 수
     private static final String DED_COLUMN_CHECKCARD0 = "checkCard0";            //카드1 획득 여부
     private static final String DED_COLUMN_CHECKCARD1 = "checkCard1";            //카드2 획득 여부
     private static final String DED_COLUMN_CHECKCARD2 = "checkCard2";            //카드3 획득 여부
@@ -190,21 +188,21 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     }
 
 
-    //UPDATE 카드 수량 수정
+    //UPDATE 카드리스트 카드 수량 수정
     public void UpdateInfoCardNum(String columnName, int input, int cardId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 수량 조절.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET " + columnName + " = " + input + " WHERE id = " + cardId);
     }
 
-    //UPDATE 카드 각성도 수정
+    //UPDATE 카드리스트 카드 각성도 수정
     public void UpdateInfoCardAwake(String tableName, String columnName, int input, int cardId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 각성도 조절.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET " + columnName + " = " + input + " WHERE id = " + cardId);
     }
 
-    //UPDATE 카드 획득 유무 수정(카드이름이 같은 경우)
+    //UPDATE 카드리스트 카드 획득 유무 수정(카드이름이 같은 경우)
     public void UpdateInfoCardCheck(String columnName, int input, String cardName) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 name 값으로 카드를 파악하고 해당 카드의 수량 조절.

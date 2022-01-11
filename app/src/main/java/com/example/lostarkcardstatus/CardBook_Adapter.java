@@ -492,49 +492,49 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         }
     }
 
-    //최초 1회 생성시 실행되는 메소드
+    //최초 1회 생성시 실행되는 메소드 : cardList 정보를 cardbook_all과 연동
     private void haveCardToCardBookUpdate() {
         for (int i = 0; i < cardbook_all.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
                     cardbook_all.get(i).setCheckCard0(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD0_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());  //카드 획득유무 업데이트
+                    cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD0_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());  //카드 획득유무 업데이트
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard1())) {
                     cardbook_all.get(i).setCheckCard1(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD1_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD1_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard2())) {
                     cardbook_all.get(i).setCheckCard2(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD2_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD2_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard3())) {
                     cardbook_all.get(i).setCheckCard3(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD3_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD3_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard4())) {
                     cardbook_all.get(i).setCheckCard4(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD4_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD4_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard5())) {
                     cardbook_all.get(i).setCheckCard5(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD5_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD5_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard6())) {
                     cardbook_all.get(i).setCheckCard6(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD6_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD6_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard7())) {
                     cardbook_all.get(i).setCheckCard7(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD7_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD7_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard8())) {
                     cardbook_all.get(i).setCheckCard8(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD8_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD8_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard9())) {
                     cardbook_all.get(i).setCheckCard9(cardInfo.get(j).getGetCard());
-                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD9_CHECK, cardInfo.get(i).getGetCard(), cardbook_all.get(i).getId());
+                    cardDbHelper.UpdateInfoDEDCard(CARD_BOOK_COLUMN_NAME_CARD9_CHECK, cardInfo.get(j).getGetCard(), cardbook_all.get(i).getId());
                 }
             }
         }

@@ -1,5 +1,7 @@
 package com.example.lostarkcardstatus;
 
+import java.text.DecimalFormat;
+
 public class DemonExtraDmgInfo {
     private int id;
     private String name;
@@ -189,20 +191,18 @@ public class DemonExtraDmgInfo {
 
     public float getDmgSum(int awakeInfo) {
         float result = 0;
-        if (awakeInfo < getAwake_sum0())     //각성합이 최소 각성 미만일시
-            result = 0;
-        else if (getAwake_sum0() <= awakeInfo && awakeInfo < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
+        if (getAwake_sum0() <= awakeInfo && awakeInfo < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
             result = getDmg_p0();
         else if (getAwake_sum1() <= awakeInfo && awakeInfo < getAwake_sum2())    //각성합이 두번째 각성 조건 달성시
             result = getDmg_p0() + getDmg_p1();
-        else if (getAwake_sum2() <= awakeInfo)                                   //각성합이 최대 조건 달성시
+        else if (getAwake_sum2() == awakeInfo)                                   //각성합이 최대 조건 달성시
             result = getDmg_p0() + getDmg_p1() + getDmg_p2();
 
         return result;
     }
 
     public int getHaveAwake() {
-        return haveAwake;
+        return haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6 + awakeCard7 + awakeCard8 + awakeCard9;
     }
 
     public void setHaveAwake(int haveAwake) {

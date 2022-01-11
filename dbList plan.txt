@@ -32,9 +32,7 @@ dmg_percent1 ~ dmg_percent3 real : 각성 합 단계별 추가 데미지 0.00
 
 작업 진행단계
 
-cardbook_all의 haveCard 항목도 포함되도록
-    //수집 카드 합 ( 개선 필요) -> cardbook_Adapter
-    public int haveCard(Cardbook_All cardbook_all) {
+사용하지 않는 DB대거 정리 및 코드 수정. Cardbook_all DB의 획득 여부가 수정되면 cardList DB도 함께 수정되며 앱 내 arraylist에도 동시 적용되게 함.
 
 ----
 데이터베이스 진입
