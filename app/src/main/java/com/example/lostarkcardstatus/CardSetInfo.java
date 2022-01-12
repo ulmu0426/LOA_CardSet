@@ -16,8 +16,22 @@ public class CardSetInfo {
     private String set_bonus3;
     private String set_bonus4;
     private String set_bonus5;
-    private int haveCard;
+    private int haveCard;   //세트 활성화에 필요한 최소 카드 수
     private int haveAwake;
+    private int checkCard0;
+    private int checkCard1;
+    private int checkCard2;
+    private int checkCard3;
+    private int checkCard4;
+    private int checkCard5;
+    private int checkCard6;
+    private int awakeCard0;
+    private int awakeCard1;
+    private int awakeCard2;
+    private int awakeCard3;
+    private int awakeCard4;
+    private int awakeCard5;
+    private int awakeCard6;
 
     public int getId() {
         return id;
@@ -153,5 +167,117 @@ public class CardSetInfo {
 
     public void setHaveAwake(int haveAwake) {
         this.haveAwake = haveAwake;
+    }
+
+    public int getCheckCard0() {
+        return checkCard0;
+    }
+
+    public void setCheckCard0(int checkCard0) {
+        this.checkCard0 = checkCard0;
+    }
+
+    public int getCheckCard1() {
+        return checkCard1;
+    }
+
+    public void setCheckCard1(int checkCard1) {
+        this.checkCard1 = checkCard1;
+    }
+
+    public int getCheckCard2() {
+        return checkCard2;
+    }
+
+    public void setCheckCard2(int checkCard2) {
+        this.checkCard2 = checkCard2;
+    }
+
+    public int getCheckCard3() {
+        return checkCard3;
+    }
+
+    public void setCheckCard3(int checkCard3) {
+        this.checkCard3 = checkCard3;
+    }
+
+    public int getCheckCard4() {
+        return checkCard4;
+    }
+
+    public void setCheckCard4(int checkCard4) {
+        this.checkCard4 = checkCard4;
+    }
+
+    public int getCheckCard5() {
+        return checkCard5;
+    }
+
+    public void setCheckCard5(int checkCard5) {
+        this.checkCard5 = checkCard5;
+    }
+
+    public int getCheckCard6() {
+        return checkCard6;
+    }
+
+    public void setCheckCard6(int checkCard6) {
+        this.checkCard6 = checkCard6;
+    }
+
+    public int getAwakeCard0() {
+        return awakeCard0;
+    }
+
+    public void setAwakeCard0(int awakeCard0) {
+        this.awakeCard0 = awakeCard0;
+    }
+
+    public int getAwakeCard1() {
+        return awakeCard1;
+    }
+
+    public void setAwakeCard1(int awakeCard1) {
+        this.awakeCard1 = awakeCard1;
+    }
+
+    public int getAwakeCard2() {
+        return awakeCard2;
+    }
+
+    public void setAwakeCard2(int awakeCard2) {
+        this.awakeCard2 = awakeCard2;
+    }
+
+    public int getAwakeCard3() {
+        return awakeCard3;
+    }
+
+    public void setAwakeCard3(int awakeCard3) {
+        this.awakeCard3 = awakeCard3;
+    }
+
+    public int getAwakeCard4() {
+        return awakeCard4;
+    }
+
+    public void setAwakeCard4(int awakeCard4) {
+        this.awakeCard4 = awakeCard4;
+    }
+
+    public int getAwakeCard5() {
+        return awakeCard5;
+    }
+
+    public void setAwakeCard5(int awakeCard5) {
+        this.awakeCard5 = awakeCard5;
+    }
+
+    public int getAwakeCard6() {
+        return awakeCard6;
+    }
+
+    public void setAwakeCard6(int awakeCard6) {
+        this.awakeCard6 = awakeCard6;
     }
 }

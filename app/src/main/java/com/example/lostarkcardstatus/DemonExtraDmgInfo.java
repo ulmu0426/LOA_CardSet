@@ -190,6 +190,7 @@ public class DemonExtraDmgInfo {
     }
 
     public float getDmgSum(int awakeInfo) {
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         float result = 0;
         if (getAwake_sum0() <= awakeInfo && awakeInfo < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
             result = getDmg_p0();
@@ -197,7 +198,7 @@ public class DemonExtraDmgInfo {
             result = getDmg_p0() + getDmg_p1();
         else if (getAwake_sum2() == awakeInfo)                                   //각성합이 최대 조건 달성시
             result = getDmg_p0() + getDmg_p1() + getDmg_p2();
-
+        result = Float.parseFloat(df.format(result));
         return result;
     }
 

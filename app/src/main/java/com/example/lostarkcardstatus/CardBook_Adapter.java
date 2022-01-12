@@ -8,6 +8,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +87,6 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
-
         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
 
         holder.txtCardbookName.setText(cardbook_all.get(position).getName());
@@ -539,7 +539,6 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
             }
         }
     }
-
 
     //cardList 갱신을 위한 메소드
     private int getIndex(ArrayList<CardInfo> cardInfo, String name) {

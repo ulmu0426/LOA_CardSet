@@ -1,5 +1,6 @@
 package com.example.lostarkcardstatus;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -59,6 +63,28 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         holder.txtCardSet_Cardname5.setText(cardSetInfo.get(position).getCard5());
         holder.txtCardSet_Cardname6.setText(cardSetInfo.get(position).getCard6());
 
+        holder.txtCardSetOption0.setText(cardSetInfo.get(position).getSet_bonus0());
+        holder.txtCardSetOption1.setText(cardSetInfo.get(position).getSet_bonus1());
+        holder.txtCardSetOption2.setText(cardSetInfo.get(position).getSet_bonus2());
+        holder.txtCardSetOption3.setText(cardSetInfo.get(position).getSet_bonus3());
+        holder.txtCardSetOption4.setText(cardSetInfo.get(position).getSet_bonus4());
+        holder.txtCardSetOption5.setText(cardSetInfo.get(position).getSet_bonus5());
+        //옵션 빈칸 지우기
+        optionVisibility(cardSetInfo.get(position).getSet_bonus2(), holder.txtCardSetOption2);
+        optionVisibility(cardSetInfo.get(position).getSet_bonus3(), holder.txtCardSetOption3);
+        optionVisibility(cardSetInfo.get(position).getSet_bonus4(), holder.txtCardSetOption4);
+        optionVisibility(cardSetInfo.get(position).getSet_bonus5(), holder.txtCardSetOption5);
+
+        holder.cvCardSetBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+
+
+                dialog.show();
+            }
+        });
+
     }
 
     @Override
@@ -67,6 +93,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ConstraintLayout cvCardSetBackground;
         private TextView txtCardSetName;
         private TextView txtCardSetAwake;
         private ImageView imgCardSet0;
@@ -83,9 +110,16 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         private TextView txtCardSet_Cardname4;
         private TextView txtCardSet_Cardname5;
         private TextView txtCardSet_Cardname6;
+        private TextView txtCardSetOption0;
+        private TextView txtCardSetOption1;
+        private TextView txtCardSetOption2;
+        private TextView txtCardSetOption3;
+        private TextView txtCardSetOption4;
+        private TextView txtCardSetOption5;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cvCardSetBackground = itemView.findViewById(R.id.cvCardSetBackground);
             txtCardSetName = itemView.findViewById(R.id.txtCardSetName);
             txtCardSetAwake = itemView.findViewById(R.id.txtCardSetAwake);
             imgCardSet0 = itemView.findViewById(R.id.imgCardSet0);
@@ -102,13 +136,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             txtCardSet_Cardname4 = itemView.findViewById(R.id.txtCardSet_Cardname4);
             txtCardSet_Cardname5 = itemView.findViewById(R.id.txtCardSet_Cardname5);
             txtCardSet_Cardname6 = itemView.findViewById(R.id.txtCardSet_Cardname6);
+            txtCardSetOption0 = itemView.findViewById(R.id.txtCardSetOption0);
+            txtCardSetOption1 = itemView.findViewById(R.id.txtCardSetOption1);
+            txtCardSetOption2 = itemView.findViewById(R.id.txtCardSetOption2);
+            txtCardSetOption3 = itemView.findViewById(R.id.txtCardSetOption3);
+            txtCardSetOption4 = itemView.findViewById(R.id.txtCardSetOption4);
+            txtCardSetOption5 = itemView.findViewById(R.id.txtCardSetOption5);
 
         }
-    }
-
-    //액티비티에서 호출되는 함수. 현재 어댑터에 새로운 아이템을 전달받아 추가하는 목적
-    public void addItem(CardSetInfo cb){
-        cardSetInfo.add(cb);
     }
 
     //도감에 없는 카드는 안보이게
@@ -117,6 +152,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             imageView.setVisibility(View.INVISIBLE);
         else
             imageView.setVisibility(View.VISIBLE);
+    }
+    //도감에 없는 옵션은 안보이게 지움
+    private void optionVisibility(String option, TextView tv){
+        if(option.isEmpty())
+            tv.setVisibility(View.GONE);
+        else
+            tv.setVisibility(View.VISIBLE);
     }
 
 

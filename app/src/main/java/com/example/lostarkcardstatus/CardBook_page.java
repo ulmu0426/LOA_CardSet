@@ -62,16 +62,6 @@ public class CardBook_page extends AppCompatActivity {
 
         //2. 완성 도감 온 오프 기능
         checkboxCompleteCardbookInvisibility = (CheckBox) findViewById(R.id.checkboxCompleteCardbookInvisibility);
-        checkboxCompleteCardbookInvisibility.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkboxCompleteCardbookInvisibility.isChecked()) {   //체크되어있으면 완성도감 안보이게
-
-                } else {                                                   //미체크시 완성도감 보이게
-
-                }
-            }
-        });
 
 
     }
