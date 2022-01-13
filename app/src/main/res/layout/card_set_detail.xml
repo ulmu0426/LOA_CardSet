@@ -1,467 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvCardSetBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="#404040"
-        android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="49dp"
-            android:layout_height="49dp"
-            app:srcCompat="@drawable/abc_vector_test" />
+    <TextView
+        android:id="@+id/txtCardSetName_Detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="남겨진 바람의 절벽"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
+    <TextView
+        android:id="@+id/txtCardSetAwake_Detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="각성 합계 : 00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtCardSetName_Detail"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtMenuBtnCardSet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="카드 세트"
-            android:textColor="#E8E8E8"
-            android:textSize="25dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
-        <TextView
-            android:id="@+id/txtMenuBtnCardBook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="카드 도감 특성"
-            android:textColor="#E8E8E8"
-            android:textSize="25dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
-        <TextView
-            android:id="@+id/txtMenuBtnDemonExtraDmg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="악마 추가 피해"
-            android:textColor="#E8E8E8"
-            android:textSize="25dp" />
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TableLayout
+        android:id="@+id/tablelayoutCardSetDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:id="@+id/idTopMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="#AE000000"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/conlayoutCardSetName"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="20dp"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCardSetAwake_Detail">
+
+        <TableRow>
 
             <ImageView
-                android:id="@+id/imgBtnMenu"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:padding="10dp"
-                app:srcCompat="@drawable/fix01menu" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_centerInParent="true"
-                android:text="카드 세트"
-                android:gravity="center"
-                android:textColor="#E3E3E3"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/conlayoutCardSetName"
-            android:layout_width="0dp"
-            android:layout_height="400dp"
-            app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lineBetweenCardSetNameToCardForce"
-            android:background="#D8D3E1FF">
-            <TextView
-                android:id="@+id/txtCardSetName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/tablelayoutCardSetDetail"
-                android:text="남겨진 바람의 절벽"
-                android:textSize="30dp"
-                android:layout_marginTop="15dp"/>
-            <TableLayout
-                android:id="@+id/tablelayoutCardSetDetail"
+                android:id="@+id/imgCardSetDetail0"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/txtCardSetName"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:stretchColumns="0,1,2,3,4">
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_legend_aman" />
 
-                <TableRow>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
+            <ImageView
+                android:id="@+id/imgCardSetDetail1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_rare_seria" />
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/card_legend_aman" />
+            <ImageView
+                android:id="@+id/imgCardSetDetail2"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_uncommon_executor_solas" />
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar1"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on"
-                            tools:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <ImageView
+                android:id="@+id/imgCardSetDetail3"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_legend_kingsilian" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
+            <ImageView
+                android:id="@+id/imgCardSetDetail4"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_legend_kamaine" />
+        </TableRow>
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/card_rare_seria" />
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar2"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+        <TableRow android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/txtCardSetName0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
+            <TextView
+                android:id="@+id/txtCardSetName1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/card_uncommon_executor_solas" />
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar3"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <TextView
+                android:id="@+id/txtCardSetName2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
+            <TextView
+                android:id="@+id/txtCardSetName3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/card_legend_kingsilian" />
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar4"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <TextView
+                android:id="@+id/txtCardSetName4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
+        </TableRow>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
+        <TableRow android:layout_marginTop="5dp">
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card5"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/card_legend_kamaine" />
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar5"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </TableRow>
-                <TableRow android:layout_marginTop="5dp">
-                    <TextView
-                        android:id="@+id/txtExtraCard1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"/>
-                </TableRow>
-                <TableRow android:layout_marginTop="10dp">
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center" />
 
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card6"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/card_legend_dereonaman" />
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar6"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card7"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/aman"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:visibility="invisible"/>
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar7"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:visibility="invisible"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card8"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/aman"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:visibility="invisible"/>
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar8"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:visibility="invisible"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center" />
+        </TableRow>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card9"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/aman"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:visibility="invisible"
-                            app:layout_constraintLeft_toLeftOf="parent"/>
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar9"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:visibility="invisible"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="110dp">
-                        <ImageView
-                            android:id="@+id/imgCardSet_Card10"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/aman"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:visibility="invisible"/>
-                        <ImageView
-                            android:id="@+id/imgCardSet_CardStar10"
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:visibility="invisible"
-                            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+        <TableRow android:layout_marginTop="10dp">
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </TableRow>
-                <TableRow android:layout_marginTop="5dp">
-                    <TextView
-                        android:id="@+id/txtExtraCard6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard7"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"
-                        android:visibility="invisible"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard8"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"
-                        android:visibility="invisible"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard9"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"
-                        android:visibility="invisible"/>
-                    <TextView
-                        android:id="@+id/txtExtraCard10"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="+00장"
-                        android:textAlignment="center"
-                        android:visibility="invisible"/>
-                </TableRow>
+            <ImageView
+                android:id="@+id/imgCardSetDetail5"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_legend_dereonaman" />
 
-            </TableLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <View
-            android:id="@+id/lineBetweenCardSetNameToCardForce"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/conlayoutCardSetName"/>
+            <ImageView
+                android:id="@+id/imgCardSetDetail6"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/card_legend_bahuntur" />
+        </TableRow>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineBetweenCardSetNameToCardForce"
-            app:layout_constraintVertical_bias="0.0"
-            android:text="asdf\n\nasdf\n\na345df\n\nad345345f\n\nasdf345asdfasf"
-            android:textSize="20dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+        <TableRow android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/txtCardSetName5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtCardSetName6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카드 이름"
+                android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtHaveAwakeHaveCard6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="각성 : 0\n보유 : 00"
+                android:textAlignment="center"
+                android:visibility="visible" />
+        </TableRow>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -236,6 +236,12 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
+    //UPDATE 악추피 checkCardX획득 유무 수정
+    public void UpdateInfoCardSetCard(String columnName, int cardCheck, int cardBookId) {
+        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
+        updateColumInfo.execSQL("UPDATE " + TABLE_CARDSET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
+    }
 
 
     @SuppressLint("Range")

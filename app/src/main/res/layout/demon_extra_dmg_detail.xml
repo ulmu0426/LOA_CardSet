@@ -138,69 +138,37 @@
 
             <TableRow>
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake0"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake1"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake2"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake3"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake4"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
             </TableRow>
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum0"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-            </TableRow>
 
             <TableRow android:layout_marginTop="30dp">
 
@@ -295,66 +263,34 @@
 
             <TableRow>
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake5"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake6"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake7"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake8"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwake9"
+                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0"
-                    android:textAlignment="center" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/txtDED_Detail_CardNum9"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="보유 : 0"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
             </TableRow>
         </TableLayout>

@@ -57,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
         //악추피 DB 정보 ArrayList 전달
         DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
 
-        //cardList Table 정보를 cardbook_all,DEDInfo ArrayList와 DB에 연동
-        cardBookUpdate();
-        haveDEDCardCheckUpdate();
-        DEDDBErrorFix();   //악추피 에러픽스
+        //cardList Table 정보를 cardbook_all,DEDInfo,cardSetInfo ArrayList와 DB에 연동
+        cardBookUpdate();           //카드 도감 DB
+        haveDEDCardCheckUpdate();   //악추피 DB
+        haveCardSetCheckUpdate();   //카드세트 DB
 
+        DEDDBErrorFix();   //악추피 에러픽스 : 비정상적 종료시 악추피 도감에서 악추피도감에 존재하지 않는 카드의 checkCardX의 check가 0에서 1로 바뀌는 오류 수정
 
         //치,특,신 값 출력
         int[] stat = {getStatInfo("치명"), getStatInfo("특화"), getStatInfo("신속")};
@@ -320,6 +321,71 @@ public class MainActivity extends AppCompatActivity {
             cardDBHelper.UpdateInfoDEDCard("haveCard", DEDInfo.get(i).getHaveCard(), DEDInfo.get(i).getId());
             cardDBHelper.UpdateInfoDEDCard("haveAwake", DEDInfo.get(i).getHaveAwake(), DEDInfo.get(i).getId());
         }
+    }
+
+    private final String CARDSET_COLUMN_NAME_CARD0_CHECK = "checkCard0";
+    private final String CARDSET_COLUMN_NAME_CARD1_CHECK = "checkCard1";
+    private final String CARDSET_COLUMN_NAME_CARD2_CHECK = "checkCard2";
+    private final String CARDSET_COLUMN_NAME_CARD3_CHECK = "checkCard3";
+    private final String CARDSET_COLUMN_NAME_CARD4_CHECK = "checkCard4";
+    private final String CARDSET_COLUMN_NAME_CARD5_CHECK = "checkCard5";
+    private final String CARDSET_COLUMN_NAME_CARD6_CHECK = "checkCard6";
+
+    private final String CARDSET_COLUMN_NAME_CARD0_AWAKE = "awakeCard0";
+    private final String CARDSET_COLUMN_NAME_CARD1_AWAKE = "awakeCard1";
+    private final String CARDSET_COLUMN_NAME_CARD2_AWAKE = "awakeCard2";
+    private final String CARDSET_COLUMN_NAME_CARD3_AWAKE = "awakeCard3";
+    private final String CARDSET_COLUMN_NAME_CARD4_AWAKE = "awakeCard4";
+    private final String CARDSET_COLUMN_NAME_CARD5_AWAKE = "awakeCard5";
+    private final String CARDSET_COLUMN_NAME_CARD6_AWAKE = "awakeCard6";
+
+    //최초 실행되는 메소드 : cardList 정보를 CardSet에 연동
+    private void haveCardSetCheckUpdate() {
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            for (int j = 0; j < cardInfo.size(); j++) {
+                if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
+                    //카드 이름이 같으면
+                    cardSetInfo.get(i).setCheckCard0(cardInfo.get(j).getGetCard());
+                    cardSetInfo.get(i).setAwakeCard0(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardSetInfo.get(i).getCheckCard0(), cardSetInfo.get(i).getId());  //카드 획득유무 업데이트
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_AWAKE, cardSetInfo.get(i).getAwakeCard0(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard1())) {
+                    DEDInfo.get(i).setCheckCard1(cardInfo.get(j).getGetCard());
+                    DEDInfo.get(i).setAwakeCard1(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardSetInfo.get(i).getCheckCard1(), cardSetInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_AWAKE, cardSetInfo.get(i).getAwakeCard1(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard2())) {
+                    DEDInfo.get(i).setCheckCard2(cardInfo.get(j).getGetCard());
+                    DEDInfo.get(i).setAwakeCard2(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardSetInfo.get(i).getCheckCard2(), cardSetInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_AWAKE, cardSetInfo.get(i).getAwakeCard2(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard3())) {
+                    DEDInfo.get(i).setCheckCard3(cardInfo.get(j).getGetCard());
+                    DEDInfo.get(i).setAwakeCard3(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardSetInfo.get(i).getCheckCard3(), cardSetInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_AWAKE, cardSetInfo.get(i).getAwakeCard3(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard4())) {
+                    DEDInfo.get(i).setCheckCard4(cardInfo.get(j).getGetCard());
+                    DEDInfo.get(i).setAwakeCard4(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardSetInfo.get(i).getCheckCard4(), cardSetInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_AWAKE, cardSetInfo.get(i).getAwakeCard4(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard5())) {
+                    DEDInfo.get(i).setCheckCard5(cardInfo.get(j).getGetCard());
+                    DEDInfo.get(i).setAwakeCard5(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardSetInfo.get(i).getCheckCard5(), cardSetInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_AWAKE, cardSetInfo.get(i).getAwakeCard5(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard6())) {
+                    DEDInfo.get(i).setCheckCard6(cardInfo.get(j).getGetCard());
+                    DEDInfo.get(i).setAwakeCard6(cardInfo.get(j).getAwake());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardSetInfo.get(i).getCheckCard6(), cardSetInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_AWAKE, cardSetInfo.get(i).getAwakeCard6(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
+                }
+            }
+            cardDBHelper.UpdateInfoCardSetCard("haveCard", cardSetInfo.get(i).getHaveCard(), cardSetInfo.get(i).getId());
+            cardDBHelper.UpdateInfoCardSetCard("haveAwake", cardSetInfo.get(i).getHaveAwake(), cardSetInfo.get(i).getId());
+
+        }
+
     }
 
     private void DEDDBErrorFix() {

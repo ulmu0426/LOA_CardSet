@@ -166,7 +166,7 @@ public class CardSetInfo {
     }
 
     public void setHaveAwake(int haveAwake) {
-        this.haveAwake = haveAwake;
+        this.haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6;
     }
 
     public int getCheckCard0() {
