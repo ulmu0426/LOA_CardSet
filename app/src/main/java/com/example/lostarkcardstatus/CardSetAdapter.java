@@ -4,11 +4,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -25,6 +31,16 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private LOA_Card_DB cardDbHelper;
     private final String CARDSET_AWAKE = "각성 : ";
     private final String CARDSET_CARD_NUM = "보유 : ";
+    private final String CARDSET_COLUMN_NAME_CARD0_CHECK = "checkCard0";
+    private final String CARDSET_COLUMN_NAME_CARD1_CHECK = "checkCard1";
+    private final String CARDSET_COLUMN_NAME_CARD2_CHECK = "checkCard2";
+    private final String CARDSET_COLUMN_NAME_CARD3_CHECK = "checkCard3";
+    private final String CARDSET_COLUMN_NAME_CARD4_CHECK = "checkCard4";
+    private final String CARDSET_COLUMN_NAME_CARD5_CHECK = "checkCard5";
+    private final String CARDSET_COLUMN_NAME_CARD6_CHECK = "checkCard6";
+
+    private String preText;
+    private int num;
 
     public CardSetAdapter(ArrayList<CardSetInfo> cardSetInfo, Context context) {
         this.cardSetInfo = ((MainActivity) MainActivity.mainContext).cardSetInfo;
@@ -143,8 +159,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 TextView txtHaveAwakeHaveCard5 = dialog.findViewById(R.id.txtHaveAwakeHaveCard5);
                 TextView txtHaveAwakeHaveCard6 = dialog.findViewById(R.id.txtHaveAwakeHaveCard6);
 
+                imgVisibility(cardSetInfo.get(pos).getCard2(), imgCardSetDetail2, txtCardSetName2, txtHaveAwakeHaveCard2);
+                imgVisibility(cardSetInfo.get(pos).getCard3(), imgCardSetDetail3, txtCardSetName3, txtHaveAwakeHaveCard3);
+                imgVisibility(cardSetInfo.get(pos).getCard4(), imgCardSetDetail4, txtCardSetName4, txtHaveAwakeHaveCard4);
+                imgVisibility(cardSetInfo.get(pos).getCard5(), imgCardSetDetail5, txtCardSetName5, txtHaveAwakeHaveCard5);
+                imgVisibility(cardSetInfo.get(pos).getCard6(), imgCardSetDetail6, txtCardSetName6, txtHaveAwakeHaveCard6);
+
                 txtCardSetName_Detail.setText(cardSetInfo.get(pos).getName());
-                txtCardSetAwake_Detail.setText(cardSetInfo.get(pos).getHaveAwake());
+                txtCardSetAwake_Detail.setText("카드수집 각성 합 : " + cardSetInfo.get(pos).getHaveAwake() + "각성");
 
                 txtCardSetName0.setText(cardSetInfo.get(pos).getCard0());
                 txtCardSetName1.setText(cardSetInfo.get(pos).getCard1());
@@ -154,53 +176,188 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtCardSetName5.setText(cardSetInfo.get(pos).getCard5());
                 txtCardSetName6.setText(cardSetInfo.get(pos).getCard6());
 
-                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard0() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getHaveCard());
-                txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard1() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getHaveCard());
-                txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard2() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getHaveCard());
-                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard3() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getHaveCard());
-                txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getHaveCard());
-                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getHaveCard());
-                txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardSetInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getHaveCard());
+                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard0() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getCount());
+                txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard1() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getCount());
+                txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard2() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getCount());
+                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard3() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getCount());
+                txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getCount());
+                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount());
+                txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getCount());
 
-                imgCardSetDetail0.setOnClickListener(new View.OnClickListener() {
+                Dialog dialogAwakeNHaveCard = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                dialogAwakeNHaveCard.setContentView(R.layout.awake_havecard_change);
+                EditText etxtAwake = dialogAwakeNHaveCard.findViewById(R.id.etxtAwake);
+                EditText etxtNum = dialogAwakeNHaveCard.findViewById(R.id.etxtNum);
+                Button btnCancer = dialogAwakeNHaveCard.findViewById(R.id.btnCancer);
+                Button btnOK = dialogAwakeNHaveCard.findViewById(R.id.btnOK);
+
+
+                txtHaveAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard0() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getCount() + "");
+
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(rangeSet(etxtAwake.getText().toString()+""));
+                                etxtAwake.setText(rangeSet(etxtNum.getText().toString()+""));
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard0(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard0() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+                    }
+                });
+                txtHaveAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                     }
                 });
+                txtHaveAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                txtHaveAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                txtHaveAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                txtHaveAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                txtHaveAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                imgCardSetDetail0.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail0, filter, cardSetInfo.get(pos).getCheckCard0());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard0(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
+                    }
+                });
                 imgCardSetDetail1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail1, filter, cardSetInfo.get(pos).getCheckCard1());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard1(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
 
                     }
                 });
                 imgCardSetDetail2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail2, filter, cardSetInfo.get(pos).getCheckCard2());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard2(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
 
                     }
                 });
                 imgCardSetDetail3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail3, filter, cardSetInfo.get(pos).getCheckCard3());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
 
                     }
                 });
                 imgCardSetDetail4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail4, filter, cardSetInfo.get(pos).getCheckCard4());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
 
                     }
                 });
                 imgCardSetDetail5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail5, filter, cardSetInfo.get(pos).getCheckCard5());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
 
                     }
                 });
                 imgCardSetDetail6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int cardCheck = imgGrayScale(imgCardSetDetail6, filter, cardSetInfo.get(pos).getCheckCard6());              //카드 획득 유무 0 미획득, 1획득
+                        cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
+                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
+                        cardSetInfo.get(pos).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        updateCardSetPage();
+
+                        notifyDataSetChanged();
 
                     }
                 });
@@ -211,6 +368,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         });
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -287,6 +445,19 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             tv.setVisibility(View.VISIBLE);
     }
 
+    //카드 이미지, 이름, 각성도 및 보유 카드 안보이게
+    private void imgVisibility(String card, ImageView imgCard, TextView txtCardName, TextView txtAwakeHave) {
+        if (card.isEmpty()) {
+            imgCard.setVisibility(View.INVISIBLE);
+            txtCardName.setVisibility(View.INVISIBLE);
+            txtAwakeHave.setVisibility(View.INVISIBLE);
+        } else {
+            imgCard.setVisibility(View.VISIBLE);
+            txtCardName.setVisibility(View.VISIBLE);
+            txtAwakeHave.setVisibility(View.VISIBLE);
+        }
+    }
+
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
         if (check == 1)
@@ -318,4 +489,27 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         }
         return index;
     }
+
+    private int rangeSet(String input) {
+        int result = 0;
+        if (input.isEmpty())
+            result = 0;
+
+        if (Integer.parseInt(input) > 5) {
+            result = 5;
+        } else if (Integer.parseInt(input) < 0) {
+            result = 0;
+        }else {
+            result = Integer.parseInt(input);
+        }
+
+        return result;
+
+    }
+
+
+    private void updateCardSetPage() {
+
+    }
+
 }
