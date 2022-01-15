@@ -2,6 +2,8 @@ package com.example.lostarkcardstatus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.text.Editable;
@@ -110,6 +112,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         optionVisibility(cardSetInfo.get(position).getSet_bonus4(), holder.txtCardSetOption4);
         optionVisibility(cardSetInfo.get(position).getSet_bonus5(), holder.txtCardSetOption5);
 
+
+        holder.imgFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         holder.cvCardSetBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,8 +219,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                etxtAwake.setText(rangeSet(etxtAwake.getText().toString()+""));
-                                etxtAwake.setText(rangeSet(etxtNum.getText().toString()+""));
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -230,37 +240,211 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard1() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getCount() + "");
 
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD1_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard1(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard1() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
                     }
                 });
                 txtHaveAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard2() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getCount() + "");
 
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD2_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard2(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard2() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
                     }
                 });
                 txtHaveAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard3() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getCount() + "");
 
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD3_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard3(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard3() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
                     }
                 });
                 txtHaveAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard4() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getCount() + "");
 
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD4_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard4(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
                     }
                 });
                 txtHaveAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard0() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount() + "");
 
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD5_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard5(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
                     }
                 });
                 txtHaveAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        etxtAwake.setText(cardSetInfo.get(pos).getAwakeCard6() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getCount() + "");
 
+                        dialogAwakeNHaveCard.show();
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
+
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                etxtAwake.setText(awakeRangeSet(etxtAwake.getText().toString()) + "");
+                                etxtNum.setText(numRangeSet(etxtNum.getText().toString()) + "");
+                                cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD6_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), cardSetInfo.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardSetInfo.get(pos).setAwakeCard6(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
+                                cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getCount());
+                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+
+                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                                notifyDataSetChanged();
+                                dialogAwakeNHaveCard.cancel();
+                            }
+                        });
                     }
                 });
 
@@ -377,6 +561,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout cvCardSetBackground;
+        private ImageView imgFavorites;
         private TextView txtCardSetName;
         private TextView txtCardSetAwake;
         private ImageView imgCardSet0;
@@ -403,6 +588,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cvCardSetBackground = itemView.findViewById(R.id.cvCardSetBackground);
+            imgFavorites = itemView.findViewById(R.id.imgFavorites);
             txtCardSetName = itemView.findViewById(R.id.txtCardSetName);
             txtCardSetAwake = itemView.findViewById(R.id.txtCardSetAwake);
             imgCardSet0 = itemView.findViewById(R.id.imgCardSet0);
@@ -490,7 +676,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         return index;
     }
 
-    private int rangeSet(String input) {
+    private int awakeRangeSet(String input) {
         int result = 0;
         if (input.isEmpty())
             result = 0;
@@ -499,13 +685,31 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             result = 5;
         } else if (Integer.parseInt(input) < 0) {
             result = 0;
-        }else {
+        } else {
+            result = Integer.parseInt(input);
+        }
+        return result;
+
+    }
+
+    //카드 각성도에 따라 최대 보유 카드 수량이 달라짐. 다음에 수정 할것.
+    private int numRangeSet(String input) {
+        int result = 0;
+        if (input.isEmpty())
+            result = 0;
+
+        if (Integer.parseInt(input) > 15) {
+            result = 15;
+        } else if (Integer.parseInt(input) < 0) {
+            result = 0;
+        } else {
             result = Integer.parseInt(input);
         }
 
         return result;
 
     }
+
 
 
     private void updateCardSetPage() {

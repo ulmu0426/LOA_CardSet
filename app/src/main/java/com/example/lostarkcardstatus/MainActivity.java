@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtCardBookStat_Critical;
     private TextView txtCardBookStat_Speciality;
     private TextView txtCardBookStat_Agility;
+    private ImageView imgCardSet1;
+    private ImageView imgCardSet2;
+    private ImageView imgCardSet3;
+    private TextView txtCardSet1;
+    private TextView txtCardSet2;
+    private TextView txtCardSet3;
 
     private TextView txtDemonExtraDmg;
     public static Context mainContext;
@@ -33,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.draw_main);
         mainContext = this;
+
+        //카드 세트 이미지 ( 큐? 스택? 뭘쓰지)
+        imgCardSet1 = (ImageView)findViewById(R.id.imgCardSet1);
+        imgCardSet2 = (ImageView)findViewById(R.id.imgCardSet2);
+        imgCardSet3 = (ImageView)findViewById(R.id.imgCardSet3);
+        txtCardSet1 = (TextView)findViewById(R.id.txtCardSet1);
+        txtCardSet2 = (TextView)findViewById(R.id.txtCardSet2);
+        txtCardSet3 = (TextView)findViewById(R.id.txtCardSet3);
 
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);
