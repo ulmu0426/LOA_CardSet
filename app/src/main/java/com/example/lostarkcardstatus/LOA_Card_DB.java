@@ -140,6 +140,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String CARDSET_COLUMN_CARD4_AWAKE = "awakeCard4";                 //카드5 각성도
     private static final String CARDSET_COLUMN_CARD5_AWAKE = "awakeCard5";                 //카드6 각성도
     private static final String CARDSET_COLUMN_CARD6_AWAKE = "awakeCard6";                 //카드7 각성도
+    private static final String CARDSET_COLUMN_FAVORITE = "favorite";
 
 
     public LOA_Card_DB(@Nullable Context context) {
@@ -490,6 +491,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 int awakeCard4 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD4_AWAKE));
                 int awakeCard5 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD5_AWAKE));
                 int awakeCard6 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD6_AWAKE));
+                String favorite =  cursor.getString(cursor.getColumnIndex(CARDSET_COLUMN_FAVORITE));
 
 
                 CardSetInfo cardSetInfo = new CardSetInfo();
@@ -524,6 +526,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 cardSetInfo.setAwakeCard4(awakeCard4);
                 cardSetInfo.setAwakeCard5(awakeCard5);
                 cardSetInfo.setAwakeCard6(awakeCard6);
+                cardSetInfo.setFavorite(favorite);
                 getInfo.add((cardSetInfo));
             }
         }

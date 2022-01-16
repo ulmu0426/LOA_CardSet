@@ -1,6 +1,7 @@
 package com.example.lostarkcardstatus;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtCardBookStat_Critical;
     private TextView txtCardBookStat_Speciality;
     private TextView txtCardBookStat_Agility;
-    private ImageView imgCardSet1;
-    private ImageView imgCardSet2;
-    private ImageView imgCardSet3;
-    private TextView txtCardSet1;
-    private TextView txtCardSet2;
-    private TextView txtCardSet3;
+
+    private MainAdapter mainAdapter;
+    private RecyclerView rv;
+
 
     private TextView txtDemonExtraDmg;
     public static Context mainContext;
@@ -40,14 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.draw_main);
         mainContext = this;
-
-        //카드 세트 이미지 ( 큐? 스택? 뭘쓰지)
-        imgCardSet1 = (ImageView)findViewById(R.id.imgCardSet1);
-        imgCardSet2 = (ImageView)findViewById(R.id.imgCardSet2);
-        imgCardSet3 = (ImageView)findViewById(R.id.imgCardSet3);
-        txtCardSet1 = (TextView)findViewById(R.id.txtCardSet1);
-        txtCardSet2 = (TextView)findViewById(R.id.txtCardSet2);
-        txtCardSet3 = (TextView)findViewById(R.id.txtCardSet3);
 
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);
@@ -71,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
         //악추피 DB 정보 ArrayList 전달
         DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
+
+        rv = (RecyclerView)findViewById(R.id.rvCardSet);
+        mainAdapter = new MainAdapter(mainContext);
+        rv.setAdapter(mainAdapter);
 
         //cardList Table 정보를 cardbook_all,DEDInfo,cardSetInfo ArrayList와 DB에 연동
         cardBookUpdate();           //카드 도감 DB
@@ -99,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout llFavoriteCarSet = (LinearLayout)findViewById(R.id.llFavoriteCarSet);
         //카드 세트 디테일 페이지로 바로 이동.(imgCardSet1-3 클릭시)
-        ImageView imgCardSet1 = (ImageView) findViewById(R.id.imgCardSet1);
-        imgCardSet1.setOnClickListener(new View.OnClickListener() {
+        llFavoriteCarSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CardSet_Detail.class);
@@ -154,6 +150,9 @@ public class MainActivity extends AppCompatActivity {
             finish.cancel();
         }
     }
+
+    //카드 세트 (즐겨찾기 3개)정보 입력
+
 
     //카드 도감 (치명, 특화, 신속) 값 입력
     private int getStatInfo(String STAT) {

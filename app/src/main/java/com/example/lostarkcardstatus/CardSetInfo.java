@@ -32,6 +32,7 @@ public class CardSetInfo {
     private int awakeCard4;
     private int awakeCard5;
     private int awakeCard6;
+    private String favorite;
 
     public int getId() {
         return id;
@@ -279,5 +280,13 @@ public class CardSetInfo {
 
     public void setAwakeCard6(int awakeCard6) {
         this.awakeCard6 = awakeCard6;
+    }
+
+    public String getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(String favorite) {
+        this.favorite = favorite;
     }
 }
