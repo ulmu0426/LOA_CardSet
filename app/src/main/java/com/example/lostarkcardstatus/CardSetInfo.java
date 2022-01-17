@@ -1,5 +1,7 @@
 package com.example.lostarkcardstatus;
 
+import java.util.Arrays;
+
 public class CardSetInfo {
     private int id;
     private String name;
@@ -163,11 +165,12 @@ public class CardSetInfo {
     }
 
     public int getHaveAwake() {
-        return haveAwake;
+        return haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6;
     }
 
     public void setHaveAwake(int haveAwake) {
-        this.haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6;
+
+        this.haveAwake = haveAwake;
     }
 
     public int getCheckCard0() {

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private LOA_Card_DB cardDBHelper;
     protected ArrayList<CardInfo> cardInfo;
+    protected ArrayList<FavoriteList> favoriteList;
     protected ArrayList<Cardbook_All> cardbook_all;
     protected ArrayList<CardSetInfo> cardSetInfo;
     protected ArrayList<DemonExtraDmgInfo> DEDInfo;
@@ -91,16 +91,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CardSet_page.class);
-                startActivity(intent);
-            }
-        });
-
-        LinearLayout llFavoriteCarSet = (LinearLayout)findViewById(R.id.llFavoriteCarSet);
-        //카드 세트 디테일 페이지로 바로 이동.(imgCardSet1-3 클릭시)
-        llFavoriteCarSet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CardSet_Detail.class);
                 startActivity(intent);
             }
         });

@@ -4,6 +4,15 @@ public class FavoriteList {
     private String name;
     private int awake;
 
+    public FavoriteList(String name, int haveAwake) {
+        this.name = name;
+        this.awake = haveAwake;
+    }
+
+    public FavoriteList() {
+
+    }
+
     public String getName() {
         return name;
     }

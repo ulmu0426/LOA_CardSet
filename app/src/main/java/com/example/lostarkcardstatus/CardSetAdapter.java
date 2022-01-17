@@ -65,6 +65,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
+
         holder.txtCardSetName.setText(cardSetInfo.get(position).getName());
         holder.txtCardSetAwake.setText("카드수집 각성합 : " + cardSetInfo.get(position).getHaveAwake() + "각성");
         //이미지뷰 구현할것
@@ -112,20 +113,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         optionVisibility(cardSetInfo.get(position).getSet_bonus4(), holder.txtCardSetOption4);
         optionVisibility(cardSetInfo.get(position).getSet_bonus5(), holder.txtCardSetOption5);
 
-
-        holder.imgFavorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         holder.cvCardSetBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = positionGet;
                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.card_set_detail);
+
+                ImageView imgFavoriteCardSet = dialog.findViewById(R.id.imgFavoriteCardSet);
                 TextView txtCardSetName_Detail = dialog.findViewById(R.id.txtCardSetName_Detail);
                 TextView txtCardSetAwake_Detail = dialog.findViewById(R.id.txtCardSetAwake_Detail);
 
@@ -561,7 +556,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout cvCardSetBackground;
-        private ImageView imgFavorites;
         private TextView txtCardSetName;
         private TextView txtCardSetAwake;
         private ImageView imgCardSet0;
@@ -588,7 +582,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cvCardSetBackground = itemView.findViewById(R.id.cvCardSetBackground);
-            imgFavorites = itemView.findViewById(R.id.imgFavorites);
             txtCardSetName = itemView.findViewById(R.id.txtCardSetName);
             txtCardSetAwake = itemView.findViewById(R.id.txtCardSetAwake);
             imgCardSet0 = itemView.findViewById(R.id.imgCardSet0);
