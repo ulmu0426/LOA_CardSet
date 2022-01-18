@@ -164,8 +164,20 @@ public class CardSetInfo {
         this.haveCard = haveCard;
     }
 
-    public int getHaveAwake() {
-        return haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6;
+    public int getHaveAwake() { //카드세트 효과 발동을 위한 각성도 합
+        int min = 6;
+        int check = checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6;
+        int[] awakeArray = {awakeCard0, awakeCard1, awakeCard2, awakeCard3, awakeCard4, awakeCard5, awakeCard6};
+        if (getHaveCard() < check) {
+            for (int i = 0; i < awakeArray.length; i++) {
+                if (awakeArray[i] < min)
+                    min = awakeArray[i];
+            }
+            haveAwake = (awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6) - min;
+        } else
+            haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6;
+
+        return haveAwake;
     }
 
     public void setHaveAwake(int haveAwake) {

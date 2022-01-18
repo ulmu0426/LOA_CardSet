@@ -25,8 +25,7 @@ public class CardSet_page extends AppCompatActivity {
 
         rv = findViewById(R.id.rvCardSet);
         dbHelper = new LOA_Card_DB(this);
-        ArrayList<CardSetInfo> cardSetInfo = dbHelper.getCardSetInfo();
-        CardSetAdapter adapter = new CardSetAdapter(cardSetInfo, this);
+        CardSetAdapter adapter = new CardSetAdapter(this);
 
         rv.setAdapter(adapter);
 

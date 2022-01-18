@@ -41,10 +41,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private final String CARDSET_COLUMN_NAME_CARD5_CHECK = "checkCard5";
     private final String CARDSET_COLUMN_NAME_CARD6_CHECK = "checkCard6";
 
-    private String preText;
-    private int num;
 
-    public CardSetAdapter(ArrayList<CardSetInfo> cardSetInfo, Context context) {
+    public CardSetAdapter(Context context) {
         this.cardSetInfo = ((MainActivity) MainActivity.mainContext).cardSetInfo;
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
@@ -67,7 +65,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
         holder.txtCardSetName.setText(cardSetInfo.get(position).getName());
-        holder.txtCardSetAwake.setText("카드수집 각성합 : " + cardSetInfo.get(position).getHaveAwake() + "각성");
+        holder.txtCardSetAwake.setText("카드세트(6세트) 각성합 : " + cardSetInfo.get(position).getHaveAwake() + "각성");
         //이미지뷰 구현할것
         holder.imgCardSet0.setImageResource(R.drawable.card_legend_kadan);
         holder.imgCardSet1.setImageResource(R.drawable.card_legend_ninab);
@@ -120,7 +118,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.card_set_detail);
 
-                ImageView imgFavoriteCardSet = dialog.findViewById(R.id.imgFavoriteCardSet);
+                ImageView imgFavorites = dialog.findViewById(R.id.imgFavorites);
                 TextView txtCardSetName_Detail = dialog.findViewById(R.id.txtCardSetName_Detail);
                 TextView txtCardSetAwake_Detail = dialog.findViewById(R.id.txtCardSetAwake_Detail);
 
@@ -131,6 +129,28 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 ImageView imgCardSetDetail4 = dialog.findViewById(R.id.imgCardSetDetail4);
                 ImageView imgCardSetDetail5 = dialog.findViewById(R.id.imgCardSetDetail5);
                 ImageView imgCardSetDetail6 = dialog.findViewById(R.id.imgCardSetDetail6);
+
+                imgFavorites.setImageResource(R.drawable.gold_star);
+                setFavoriteImg(imgFavorites, pos, filter);
+                imgFavorites.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FavoriteList favoriteList = new FavoriteList();
+                        favoriteList.setName(cardSetInfo.get(pos).getName());
+                        favoriteList.setAwake(cardSetInfo.get(pos).getHaveAwake());
+
+                        if (imgFavorites.getColorFilter() == null) {
+                            ((MainActivity) MainActivity.mainContext).favoriteList.remove(favoriteList);
+                            imgFavorites.setColorFilter(filter);
+                        } else if (imgFavorites.getColorFilter() == filter) {
+                            ((MainActivity) MainActivity.mainContext).favoriteList.add(favoriteList);
+                            imgFavorites.setColorFilter(null);
+                        }
+
+                        notifyDataSetChanged();
+                    }
+                });
+
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
                 imgDefaultColor(imgCardSetDetail0, filter, cardSetInfo.get(pos).getCheckCard0());
                 imgDefaultColor(imgCardSetDetail1, filter, cardSetInfo.get(pos).getCheckCard1());
@@ -703,6 +723,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     }
 
+    private void setFavoriteImg(ImageView iv, int position, ColorMatrixColorFilter filter) {
+        iv.setImageResource(R.drawable.gold_star);
+        if (!cardSetInfo.get(position).getFavorite().isEmpty()) {
+            iv.setColorFilter(null);
+        } else
+            iv.setColorFilter(filter);
+    }
 
 
     private void updateCardSetPage() {

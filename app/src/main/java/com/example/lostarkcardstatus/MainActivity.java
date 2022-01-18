@@ -64,10 +64,6 @@ public class MainActivity extends AppCompatActivity {
         //악추피 DB 정보 ArrayList 전달
         DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
 
-        rv = (RecyclerView)findViewById(R.id.rvCardSet);
-        mainAdapter = new MainAdapter(mainContext);
-        rv.setAdapter(mainAdapter);
-
         //cardList Table 정보를 cardbook_all,DEDInfo,cardSetInfo ArrayList와 DB에 연동
         cardBookUpdate();           //카드 도감 DB
         haveDEDCardCheckUpdate();   //악추피 DB
@@ -81,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         //악추피 값 출력
         float DEDValue = getDEDValueInfo();
         setDemonExtraDmgInfo(DEDValue);
+
+        setFavoriteList();
+
+        rv = (RecyclerView) findViewById(R.id.rvCardSet);
+        mainAdapter = new MainAdapter(mainContext);
+        rv.setAdapter(mainAdapter);
 
         test();
 
@@ -429,14 +431,43 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //즐겨찾기 리스트 추가
+    public void setFavoriteList() {
+        favoriteList = new ArrayList<FavoriteList>();
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (!cardSetInfo.get(i).getFavorite().isEmpty()) {
+                FavoriteList favorite = new FavoriteList();
+                favorite.setName(cardSetInfo.get(i).getFavorite());
+                favorite.setAwake(cardSetInfo.get(i).getHaveAwake());
+                favoriteList.add(favorite);
+            }
+        }
+    }
 
     private void test() {
+        int x = 6;
         for (int i = 0; i < cardSetInfo.size(); i++) {
             if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
-                Toast.makeText(this, "셋옵 5번 : " + cardSetInfo.get(i).getSet_bonus5(), Toast.LENGTH_LONG).show();
+                x = cardSetInfo.get(i).getCheckCard0() + cardSetInfo.get(i).getCheckCard1() + cardSetInfo.get(i).getCheckCard2() + cardSetInfo.get(i).getCheckCard3() + cardSetInfo.get(i).getCheckCard4() + cardSetInfo.get(i).getCheckCard5() + cardSetInfo.get(i).getCheckCard6();
+                if(x > cardSetInfo.get(i).getCheckCard0())
+                    x =cardSetInfo.get(i).getCheckCard0();
+                if(x > cardSetInfo.get(i).getCheckCard1())
+                    x =cardSetInfo.get(i).getCheckCard1();
+                if(x > cardSetInfo.get(i).getCheckCard2())
+                    x =cardSetInfo.get(i).getCheckCard2();
+                if(x > cardSetInfo.get(i).getCheckCard3())
+                    x =cardSetInfo.get(i).getCheckCard3();
+                if(x > cardSetInfo.get(i).getCheckCard4())
+                    x =cardSetInfo.get(i).getCheckCard4();
+                if(x > cardSetInfo.get(i).getCheckCard5())
+                    x =cardSetInfo.get(i).getCheckCard5();
+                if(x > cardSetInfo.get(i).getCheckCard6())
+                    x =cardSetInfo.get(i).getCheckCard6();
+
                 break;
             }
         }
+        Toast.makeText(this, "작은 수 : " + x, Toast.LENGTH_LONG).show();
     }
 
 }

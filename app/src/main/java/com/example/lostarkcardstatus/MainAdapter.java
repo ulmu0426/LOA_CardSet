@@ -14,14 +14,15 @@ import java.util.ArrayList;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    private ArrayList<CardSetInfo> cardSetInfo;
-    private Context context;
+    public Context context;
     private ArrayList<FavoriteList> favoriteList;
+    private ArrayList<CardSetInfo> favorite;
 
     public MainAdapter(Context context) {
-        this.cardSetInfo = ((MainActivity) MainActivity.mainContext).cardSetInfo;
         this.context = context;
-        favoriteList = setFavoriteList();
+        favorite = ((MainActivity) MainActivity.mainContext).cardSetInfo;
+        favoriteList = ((MainActivity) MainActivity.mainContext).favoriteList;
+
     }
 
 
@@ -59,38 +60,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
     }
 
-    //즐겨찾기 리스트 추가
-    private ArrayList<FavoriteList> setFavoriteList() {
-        FavoriteList favorite = new FavoriteList();
-        favoriteList = new ArrayList<FavoriteList>();
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (!cardSetInfo.get(i).getFavorite().isEmpty()) {
-                favorite.setName(cardSetInfo.get(i).getFavorite());
-                favorite.setAwake(cardSetInfo.get(i).getHaveAwake() - awakeException(cardSetInfo.get(i)));
-                favoriteList.add(favorite);
-            }
-        }
-        return favoriteList;
+    private String setFavoriteSet(int position){
+        String str ="";
+        if(favorite.get(position).getFavorite().isEmpty())
+            str = favorite.get(position).getFavorite();
+        return str;
     }
 
-    //카드 세트의 수가 세트 발동 조건인 6장보다 많을때, 가장 작은 각성도를 가진 값 찾기.
-    private int awakeException(CardSetInfo cardSetInfo) {
-        int min = 0;
-        int haveCardOver = cardSetInfo.getCheckCard0() + cardSetInfo.getCheckCard1() + cardSetInfo.getCheckCard2()
-                + cardSetInfo.getCheckCard3() + cardSetInfo.getCheckCard4() + cardSetInfo.getCheckCard5() + cardSetInfo.getCheckCard6();
-        int awake[] = {cardSetInfo.getAwakeCard0(), cardSetInfo.getAwakeCard1(), cardSetInfo.getAwakeCard2()
-                , cardSetInfo.getAwakeCard3(), cardSetInfo.getAwakeCard4(), cardSetInfo.getAwakeCard5(), cardSetInfo.getAwakeCard6()};
-        if (cardSetInfo.getHaveCard() > haveCardOver) {
-            min = awake[0];
-            for (int i = 0; i < awake.length; i++) {
-                if (min < awake[i]) {
-                    min = awake[i];
-                }
-            }
-        } else {
-            min = 0;
-        }
-
-        return min;
-    }
 }
