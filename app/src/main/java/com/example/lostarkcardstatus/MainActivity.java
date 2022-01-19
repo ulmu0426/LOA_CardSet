@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private LOA_Card_DB cardDBHelper;
     protected ArrayList<CardInfo> cardInfo;
-    protected ArrayList<FavoriteList> favoriteList;
+    protected ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
     protected ArrayList<Cardbook_All> cardbook_all;
     protected ArrayList<CardSetInfo> cardSetInfo;
     protected ArrayList<DemonExtraDmgInfo> DEDInfo;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtCardBookStat_Speciality;
     private TextView txtCardBookStat_Agility;
 
-    private MainAdapter mainAdapter;
+    protected MainAdapter mainAdapter;
     private RecyclerView rv;
 
 
@@ -64,10 +64,13 @@ public class MainActivity extends AppCompatActivity {
         //악추피 DB 정보 ArrayList 전달
         DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
 
+        favoriteCardSetInfo = cardDBHelper.getFavoriteCardSetInfo();
+
         //cardList Table 정보를 cardbook_all,DEDInfo,cardSetInfo ArrayList와 DB에 연동
         cardBookUpdate();           //카드 도감 DB
         haveDEDCardCheckUpdate();   //악추피 DB
         haveCardSetCheckUpdate();   //카드세트 DB
+        favoriteUpdate();           //카드세트 즐겨찾기 DB 업데이트
 
         DEDDBErrorFix();   //악추피 에러픽스 : 비정상적 종료시 악추피 도감에서 악추피도감에 존재하지 않는 카드의 checkCardX의 check가 0에서 1로 바뀌는 오류 수정
 
@@ -77,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
         //악추피 값 출력
         float DEDValue = getDEDValueInfo();
         setDemonExtraDmgInfo(DEDValue);
-
-        setFavoriteList();
 
         rv = (RecyclerView) findViewById(R.id.rvCardSet);
         mainAdapter = new MainAdapter(mainContext);
@@ -143,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //카드 세트 (즐겨찾기 3개)정보 입력
-
 
     //카드 도감 (치명, 특화, 신속) 값 입력
     private int getStatInfo(String STAT) {
@@ -196,6 +195,23 @@ public class MainActivity extends AppCompatActivity {
     private final String CARD_BOOK_COLUMN_NAME_CARD7_CHECK = "checkCard7";
     private final String CARD_BOOK_COLUMN_NAME_CARD8_CHECK = "checkCard8";
     private final String CARD_BOOK_COLUMN_NAME_CARD9_CHECK = "checkCard9";
+
+    //최초 실행되는 메소드
+    private void favoriteUpdate(){
+        for(int i = 0; i <cardSetInfo.size();i++){
+            if(cardSetInfo.get(i).getFavorite().isEmpty())
+                continue;
+            else {
+                FavoriteCardSetInfo favoriteCardSetInfo = new FavoriteCardSetInfo();
+                //arrayList에 추가
+                favoriteCardSetInfo.setName(cardSetInfo.get(i).getFavorite());
+                favoriteCardSetInfo.setAwake(cardSetInfo.get(i).getHaveAwake());
+                this.favoriteCardSetInfo.add(favoriteCardSetInfo);
+                //DB에 추가(동일한 이름의 카드세트가 없다면)
+                cardDBHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.getName(), favoriteCardSetInfo.getAwake());
+            }
+        }
+    }
 
     //최초 실행되는 메소드 : cardList 정보를 cardbook_all과 연동
     private void cardBookUpdate() {
@@ -431,18 +447,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //즐겨찾기 리스트 추가
-    public void setFavoriteList() {
-        favoriteList = new ArrayList<FavoriteList>();
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (!cardSetInfo.get(i).getFavorite().isEmpty()) {
-                FavoriteList favorite = new FavoriteList();
-                favorite.setName(cardSetInfo.get(i).getFavorite());
-                favorite.setAwake(cardSetInfo.get(i).getHaveAwake());
-                favoriteList.add(favorite);
-            }
-        }
-    }
+
 
     private void test() {
         int x = 6;

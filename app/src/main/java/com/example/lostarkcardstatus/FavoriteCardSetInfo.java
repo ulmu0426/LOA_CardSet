@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class FavoriteList {
+public class FavoriteCardSetInfo {
     private String name;
     private int awake;
 

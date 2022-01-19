@@ -142,6 +142,11 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String CARDSET_COLUMN_CARD6_AWAKE = "awakeCard6";                 //카드7 각성도
     private static final String CARDSET_COLUMN_FAVORITE = "favorite";
 
+    //즐겨찾기 목록
+    private static final String FAVORITE_CARD_SET_TABLE_NAME = "favoriteCardSet";
+    private static final String FAVORITE_CARD_SET_COLUMN_NAME = "name";
+    private static final String FAVORITE_CARD_SET_COLUMN_AWAKE = "awake";
+
 
     public LOA_Card_DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -244,6 +249,12 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         updateColumInfo.execSQL("UPDATE " + TABLE_CARDSET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
 
+    //카드세트 삽입
+    public void UpdateInfoFavoriteList(String favoriteCardSetName, int favoriteCardSetAwake) {
+        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
+        updateColumInfo.execSQL("Insert INTO " + FAVORITE_CARD_SET_TABLE_NAME + " VALUES( '" + favoriteCardSetName + "', " + favoriteCardSetAwake+")");
+    }
 
     @SuppressLint("Range")
     public ArrayList<CardInfo> getCardInfo_All() {     //모든카드 리스트 가져오기
@@ -536,5 +547,27 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
 
     }
 
+    @SuppressLint("Range")
+    public ArrayList<FavoriteCardSetInfo> getFavoriteCardSetInfo() {     //모든카드 리스트 가져오기
+        ArrayList<FavoriteCardSetInfo> getInfo = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + FAVORITE_CARD_SET_TABLE_NAME + " ORDER BY name DESC", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex(FAVORITE_CARD_SET_COLUMN_NAME));
+                int awake = cursor.getInt((cursor.getColumnIndex(FAVORITE_CARD_SET_COLUMN_AWAKE)));
+
+                FavoriteCardSetInfo cardInfo = new FavoriteCardSetInfo();
+                cardInfo.setName(name);
+                cardInfo.setAwake(awake);
+                getInfo.add(cardInfo);
+            }
+        }
+        cursor.close();
+
+        return getInfo;
+    }
 
 }

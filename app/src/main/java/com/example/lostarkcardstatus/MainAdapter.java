@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public Context context;
-    private ArrayList<FavoriteList> favoriteList;
-    private ArrayList<CardSetInfo> favorite;
+    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
+    private ArrayList<CardSetInfo> cardSetInfo;
 
     public MainAdapter(Context context) {
         this.context = context;
-        favorite = ((MainActivity) MainActivity.mainContext).cardSetInfo;
-        favoriteList = ((MainActivity) MainActivity.mainContext).favoriteList;
+        cardSetInfo = ((MainActivity) MainActivity.mainContext).cardSetInfo;
+        favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
 
     }
 
@@ -37,14 +37,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imgFavoriteCardSet.setImageResource(R.drawable.card_legend_kadan);
-        holder.txtFavoriteCardSetName.setText(favoriteList.get(position).getName());
-        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : "+ favoriteList.get(position).getAwake());
-
+        holder.txtFavoriteCardSetName.setText(favoriteCardSetInfo.get(position).getName());
+        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + favoriteCardSetInfo.get(position).getAwake());
     }
 
     @Override
     public int getItemCount() {
-        return favoriteList.size();
+        return favoriteCardSetInfo.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,11 +59,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
     }
 
-    private String setFavoriteSet(int position){
-        String str ="";
-        if(favorite.get(position).getFavorite().isEmpty())
-            str = favorite.get(position).getFavorite();
-        return str;
+    public void addItem() {
+
     }
+
 
 }

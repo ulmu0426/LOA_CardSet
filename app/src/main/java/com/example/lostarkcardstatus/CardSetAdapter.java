@@ -31,6 +31,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private ArrayList<CardInfo> cardInfo;
     private Context context;
     private LOA_Card_DB cardDbHelper;
+    private MainAdapter mainAdapter;
     private final String CARDSET_AWAKE = "각성 : ";
     private final String CARDSET_CARD_NUM = "보유 : ";
     private final String CARDSET_COLUMN_NAME_CARD0_CHECK = "checkCard0";
@@ -46,6 +47,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         this.cardSetInfo = ((MainActivity) MainActivity.mainContext).cardSetInfo;
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
+        this.mainAdapter = ((MainActivity) MainActivity.mainContext).mainAdapter;
         cardDbHelper = new LOA_Card_DB(context);
     }
 
@@ -135,17 +137,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgFavorites.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FavoriteList favoriteList = new FavoriteList();
-                        favoriteList.setName(cardSetInfo.get(pos).getName());
-                        favoriteList.setAwake(cardSetInfo.get(pos).getHaveAwake());
 
-                        if (imgFavorites.getColorFilter() == null) {
-                            ((MainActivity) MainActivity.mainContext).favoriteList.remove(favoriteList);
-                            imgFavorites.setColorFilter(filter);
-                        } else if (imgFavorites.getColorFilter() == filter) {
-                            ((MainActivity) MainActivity.mainContext).favoriteList.add(favoriteList);
-                            imgFavorites.setColorFilter(null);
-                        }
 
                         notifyDataSetChanged();
                     }
