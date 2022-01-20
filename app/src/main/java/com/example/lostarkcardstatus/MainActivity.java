@@ -196,22 +196,21 @@ public class MainActivity extends AppCompatActivity {
     private final String CARD_BOOK_COLUMN_NAME_CARD8_CHECK = "checkCard8";
     private final String CARD_BOOK_COLUMN_NAME_CARD9_CHECK = "checkCard9";
 
-    //최초 실행되는 메소드
-    private void favoriteUpdate(){
-        for(int i = 0; i <cardSetInfo.size();i++){
-            if(cardSetInfo.get(i).getFavorite().isEmpty())
-                continue;
-            else {
-                FavoriteCardSetInfo favoriteCardSetInfo = new FavoriteCardSetInfo();
-                //arrayList에 추가
-                favoriteCardSetInfo.setName(cardSetInfo.get(i).getFavorite());
-                favoriteCardSetInfo.setAwake(cardSetInfo.get(i).getHaveAwake());
-                this.favoriteCardSetInfo.add(favoriteCardSetInfo);
-                //DB에 추가(동일한 이름의 카드세트가 없다면)
-                cardDBHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.getName(), favoriteCardSetInfo.getAwake());
+    //최초 실행되는 메소드 : cardSet 정보에서 즐겨찾기 기능 DB와 연동
+    private void favoriteUpdate() {
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            for (int j = 0; j < favoriteCardSetInfo.size(); j++) {
+                if (cardSetInfo.get(i).getFavorite().equals(favoriteCardSetInfo.get(j).getName())) {
+                    //각성도 정보 및 즐겨찾기 활성화 여부 업데이트
+                    favoriteCardSetInfo.get(j).setActivation(1); //즐겨찾기 활성화
+                    favoriteCardSetInfo.get(j).setAwake(cardSetInfo.get(i).getHaveAwake());
+                    cardDBHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.get(j).getAwake(), favoriteCardSetInfo.get(j).getActivation(), favoriteCardSetInfo.get(j).getName());
+                }
+
             }
         }
     }
+
 
     //최초 실행되는 메소드 : cardList 정보를 cardbook_all과 연동
     private void cardBookUpdate() {
@@ -448,26 +447,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void test() {
         int x = 6;
         for (int i = 0; i < cardSetInfo.size(); i++) {
             if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
                 x = cardSetInfo.get(i).getCheckCard0() + cardSetInfo.get(i).getCheckCard1() + cardSetInfo.get(i).getCheckCard2() + cardSetInfo.get(i).getCheckCard3() + cardSetInfo.get(i).getCheckCard4() + cardSetInfo.get(i).getCheckCard5() + cardSetInfo.get(i).getCheckCard6();
-                if(x > cardSetInfo.get(i).getCheckCard0())
-                    x =cardSetInfo.get(i).getCheckCard0();
-                if(x > cardSetInfo.get(i).getCheckCard1())
-                    x =cardSetInfo.get(i).getCheckCard1();
-                if(x > cardSetInfo.get(i).getCheckCard2())
-                    x =cardSetInfo.get(i).getCheckCard2();
-                if(x > cardSetInfo.get(i).getCheckCard3())
-                    x =cardSetInfo.get(i).getCheckCard3();
-                if(x > cardSetInfo.get(i).getCheckCard4())
-                    x =cardSetInfo.get(i).getCheckCard4();
-                if(x > cardSetInfo.get(i).getCheckCard5())
-                    x =cardSetInfo.get(i).getCheckCard5();
-                if(x > cardSetInfo.get(i).getCheckCard6())
-                    x =cardSetInfo.get(i).getCheckCard6();
+                if (x > cardSetInfo.get(i).getCheckCard0())
+                    x = cardSetInfo.get(i).getCheckCard0();
+                if (x > cardSetInfo.get(i).getCheckCard1())
+                    x = cardSetInfo.get(i).getCheckCard1();
+                if (x > cardSetInfo.get(i).getCheckCard2())
+                    x = cardSetInfo.get(i).getCheckCard2();
+                if (x > cardSetInfo.get(i).getCheckCard3())
+                    x = cardSetInfo.get(i).getCheckCard3();
+                if (x > cardSetInfo.get(i).getCheckCard4())
+                    x = cardSetInfo.get(i).getCheckCard4();
+                if (x > cardSetInfo.get(i).getCheckCard5())
+                    x = cardSetInfo.get(i).getCheckCard5();
+                if (x > cardSetInfo.get(i).getCheckCard6())
+                    x = cardSetInfo.get(i).getCheckCard6();
 
                 break;
             }

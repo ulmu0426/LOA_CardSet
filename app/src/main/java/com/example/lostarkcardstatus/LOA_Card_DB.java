@@ -242,18 +242,25 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
-    //UPDATE 악추피 checkCardX획득 유무 수정
+
+    //UPDATE 카드세트 checkCardX획득 유무 수정
     public void UpdateInfoCardSetCard(String columnName, int cardCheck, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARDSET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
-
-    //카드세트 삽입
-    public void UpdateInfoFavoriteList(String favoriteCardSetName, int favoriteCardSetAwake) {
+    //UPDATE 카드세트 즐겨찾기 등록 유무 수정
+    public void UpdateInfoCardSetCard(String favoriteName, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("Insert INTO " + FAVORITE_CARD_SET_TABLE_NAME + " VALUES( '" + favoriteCardSetName + "', " + favoriteCardSetAwake+")");
+        updateColumInfo.execSQL("UPDATE " + TABLE_CARDSET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
+    }
+
+    //카드세트 삽입
+    public void UpdateInfoFavoriteList(int setAwake, int setActivation, String whereName) {
+        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
+        updateColumInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + ", activation = " + setActivation + " WHERE name = '" + whereName+"'");
     }
 
     @SuppressLint("Range")
@@ -502,7 +509,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 int awakeCard4 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD4_AWAKE));
                 int awakeCard5 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD5_AWAKE));
                 int awakeCard6 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD6_AWAKE));
-                String favorite =  cursor.getString(cursor.getColumnIndex(CARDSET_COLUMN_FAVORITE));
+                String favorite = cursor.getString(cursor.getColumnIndex(CARDSET_COLUMN_FAVORITE));
 
 
                 CardSetInfo cardSetInfo = new CardSetInfo();
@@ -558,10 +565,12 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
             while (cursor.moveToNext()) {
                 String name = cursor.getString(cursor.getColumnIndex(FAVORITE_CARD_SET_COLUMN_NAME));
                 int awake = cursor.getInt((cursor.getColumnIndex(FAVORITE_CARD_SET_COLUMN_AWAKE)));
+                int activation = cursor.getInt((cursor.getColumnIndex(FAVORITE_CARD_SET_COLUMN_AWAKE)));
 
                 FavoriteCardSetInfo cardInfo = new FavoriteCardSetInfo();
                 cardInfo.setName(name);
                 cardInfo.setAwake(awake);
+                cardInfo.setActivation(activation);
                 getInfo.add(cardInfo);
             }
         }

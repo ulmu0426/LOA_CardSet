@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,13 +17,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public Context context;
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
-    private ArrayList<CardSetInfo> cardSetInfo;
+    protected ArrayList<FavoriteCardSetInfo> activationFavoriteCardSet;
 
     public MainAdapter(Context context) {
         this.context = context;
-        cardSetInfo = ((MainActivity) MainActivity.mainContext).cardSetInfo;
         favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
-
+        activationFavoriteCardSet = new ArrayList<FavoriteCardSetInfo>();
+        updateActivationFavoriteCardSet();
     }
 
 
@@ -37,30 +38,49 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imgFavoriteCardSet.setImageResource(R.drawable.card_legend_kadan);
-        holder.txtFavoriteCardSetName.setText(favoriteCardSetInfo.get(position).getName());
-        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + favoriteCardSetInfo.get(position).getAwake());
+        holder.txtFavoriteCardSetName.setText(activationFavoriteCardSet.get(position).getName());
+        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + activationFavoriteCardSet.get(position).getAwake());
+
     }
 
     @Override
     public int getItemCount() {
-        return favoriteCardSetInfo.size();
+        int count = 0;
+        for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
+            if (favoriteCardSetInfo.get(i).getActivation() == 1)
+                count++;
+        }
+        return count;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ConstraintLayout cvFavoriteCardSet;
         private ImageView imgFavoriteCardSet;
         private TextView txtFavoriteCardSetName;
         private TextView txtFavoriteCardSetAwake;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cvFavoriteCardSet = itemView.findViewById(R.id.cvFavoriteCardSet);
             imgFavoriteCardSet = itemView.findViewById(R.id.imgFavoriteCardSet);
             txtFavoriteCardSetName = itemView.findViewById(R.id.txtFavoriteCardSetName);
             txtFavoriteCardSetAwake = itemView.findViewById(R.id.txtFavoriteCardSetAwake);
         }
     }
 
-    public void addItem() {
+    public void updateActivationFavoriteCardSet() {
+        for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
+            if (favoriteCardSetInfo.get(i).getActivation() == 1) {
+                FavoriteCardSetInfo favorite = new FavoriteCardSetInfo();
+                favorite = favoriteCardSetInfo.get(i);
+                activationFavoriteCardSet.add(favorite);
+            }
+        }
+    }
 
+    public void addItem(FavoriteCardSetInfo item){
+        activationFavoriteCardSet.add(0, item);
+        notifyItemInserted(0);
     }
 
 

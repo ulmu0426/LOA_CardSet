@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHolder> {
     private ArrayList<CardSetInfo> cardSetInfo;
     private ArrayList<CardInfo> cardInfo;
+    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
     private Context context;
     private LOA_Card_DB cardDbHelper;
     private MainAdapter mainAdapter;
@@ -48,6 +49,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
         this.mainAdapter = ((MainActivity) MainActivity.mainContext).mainAdapter;
+        this.favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
         cardDbHelper = new LOA_Card_DB(context);
     }
 
@@ -134,11 +136,44 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                 imgFavorites.setImageResource(R.drawable.gold_star);
                 setFavoriteImg(imgFavorites, pos, filter);
+                /*
+
+                    //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
+                    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
+                        if (iv.getColorFilter() != filter) {
+                            iv.setColorFilter(filter);
+                            check = 0;
+                        } else {
+                            iv.setColorFilter(null);
+                            check = 1;
+                        }
+                        return check;
+                    }
+                 */
+
                 imgFavorites.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int check = imgGrayScale(imgFavorites, filter);
 
-
+                        if (check == 0 ) {//즐찾이 아니게 되면
+                            for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
+                                if (favoriteCardSetInfo.get(i).getName().equals(cardSetInfo.get(pos).getName())) {
+                                    cardSetInfo.get(i).setFavorite("");
+                                    cardDbHelper.UpdateInfoFavoriteList(cardSetInfo.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    cardDbHelper.UpdateInfoCardSetCard("", cardSetInfo.get(pos).getId());
+                                }
+                            }
+                        }else {         //즐찾이 되면
+                            for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
+                                if (favoriteCardSetInfo.get(i).getName().equals(cardSetInfo.get(pos).getName())) {
+                                    cardSetInfo.get(i).setFavorite(favoriteCardSetInfo.get(i).getName());
+                                    cardDbHelper.UpdateInfoFavoriteList(cardSetInfo.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), cardSetInfo.get(pos).getId());
+                                    mainAdapter.addItem(favoriteCardSetInfo.get(i));
+                                }
+                            }
+                        }
                         notifyDataSetChanged();
                     }
                 });
@@ -659,6 +694,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
+        if (iv.getColorFilter() != filter) {
+            iv.setColorFilter(filter);
+            check = 0;
+        } else {
+            iv.setColorFilter(null);
+            check = 1;
+        }
+        return check;
+    }
+    //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
+    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter) {
+        int check = 0;
         if (iv.getColorFilter() != filter) {
             iv.setColorFilter(filter);
             check = 0;

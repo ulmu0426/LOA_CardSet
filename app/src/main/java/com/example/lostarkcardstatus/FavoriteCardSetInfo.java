@@ -3,6 +3,7 @@ package com.example.lostarkcardstatus;
 public class FavoriteCardSetInfo {
     private String name;
     private int awake;
+    private int activation;
 
     public String getName() {
         return name;
@@ -18,5 +19,13 @@ public class FavoriteCardSetInfo {
 
     public void setAwake(int awake) {
         this.awake = awake;
+    }
+
+    public int getActivation() {
+        return activation;
+    }
+
+    public void setActivation(int activation) {
+        this.activation = activation;
     }
 }
