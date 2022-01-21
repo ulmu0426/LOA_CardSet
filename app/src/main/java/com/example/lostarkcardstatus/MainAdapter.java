@@ -37,20 +37,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        FavoriteCardSetInfo item = activationFavoriteCardSet.get(position);
+
         holder.imgFavoriteCardSet.setImageResource(R.drawable.card_legend_kadan);
-        holder.txtFavoriteCardSetName.setText(activationFavoriteCardSet.get(position).getName());
-        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + activationFavoriteCardSet.get(position).getAwake());
+        holder.txtFavoriteCardSetName.setText(item.getName());
+        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + item.getAwake());
 
     }
 
     @Override
     public int getItemCount() {
-        int count = 0;
-        for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
-            if (favoriteCardSetInfo.get(i).getActivation() == 1)
-                count++;
-        }
-        return count;
+        return activationFavoriteCardSet.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -78,9 +75,20 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
     }
 
-    public void addItem(FavoriteCardSetInfo item){
+    public void addItem(FavoriteCardSetInfo item) {
         activationFavoriteCardSet.add(0, item);
         notifyItemInserted(0);
+    }
+
+    public void removeItem(FavoriteCardSetInfo item) {
+        int position = 0;
+        for (int i = 0; i < activationFavoriteCardSet.size(); i++) {
+            if (activationFavoriteCardSet.get(i).getName().equals(item.getName())) {
+                activationFavoriteCardSet.remove(i);
+                position = i;
+            }
+        }
+        notifyItemRemoved(position);
     }
 
 

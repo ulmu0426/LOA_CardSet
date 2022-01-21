@@ -136,44 +136,36 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                 imgFavorites.setImageResource(R.drawable.gold_star);
                 setFavoriteImg(imgFavorites, pos, filter);
-                /*
-
-                    //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
-                    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
-                        if (iv.getColorFilter() != filter) {
-                            iv.setColorFilter(filter);
-                            check = 0;
-                        } else {
-                            iv.setColorFilter(null);
-                            check = 1;
-                        }
-                        return check;
-                    }
-                 */
 
                 imgFavorites.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         int check = imgGrayScale(imgFavorites, filter);
 
-                        if (check == 0 ) {//즐찾이 아니게 되면
+                        if (check == 0) {//즐찾이 아니게 되면
                             for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
                                 if (favoriteCardSetInfo.get(i).getName().equals(cardSetInfo.get(pos).getName())) {
-                                    cardSetInfo.get(i).setFavorite("");
+                                    cardSetInfo.get(pos).setFavorite("");
+                                    favoriteCardSetInfo.get(i).setActivation(check);
                                     cardDbHelper.UpdateInfoFavoriteList(cardSetInfo.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard("", cardSetInfo.get(pos).getId());
+                                    mainAdapter.removeItem(favoriteCardSetInfo.get(i));
+                                    Toast.makeText(context, "카드 수량 증가? : " + mainAdapter.getItemCount(), Toast.LENGTH_LONG).show();
                                 }
                             }
-                        }else {         //즐찾이 되면
+                        } else {         //즐찾이 되면
                             for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
                                 if (favoriteCardSetInfo.get(i).getName().equals(cardSetInfo.get(pos).getName())) {
-                                    cardSetInfo.get(i).setFavorite(favoriteCardSetInfo.get(i).getName());
+                                    cardSetInfo.get(pos).setFavorite(favoriteCardSetInfo.get(i).getName());
+                                    favoriteCardSetInfo.get(i).setActivation(check);
                                     cardDbHelper.UpdateInfoFavoriteList(cardSetInfo.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), cardSetInfo.get(pos).getId());
                                     mainAdapter.addItem(favoriteCardSetInfo.get(i));
+                                    Toast.makeText(context, "카드 수량 증가? : " + mainAdapter.getItemCount(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
+
                         notifyDataSetChanged();
                     }
                 });
@@ -703,6 +695,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         }
         return check;
     }
+
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter) {
         int check = 0;

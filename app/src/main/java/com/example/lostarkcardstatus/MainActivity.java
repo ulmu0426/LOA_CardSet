@@ -449,9 +449,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void test() {
         int x = 6;
+        x = favoriteCardSetInfo.size();
         for (int i = 0; i < cardSetInfo.size(); i++) {
             if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
-                x = cardSetInfo.get(i).getCheckCard0() + cardSetInfo.get(i).getCheckCard1() + cardSetInfo.get(i).getCheckCard2() + cardSetInfo.get(i).getCheckCard3() + cardSetInfo.get(i).getCheckCard4() + cardSetInfo.get(i).getCheckCard5() + cardSetInfo.get(i).getCheckCard6();
                 if (x > cardSetInfo.get(i).getCheckCard0())
                     x = cardSetInfo.get(i).getCheckCard0();
                 if (x > cardSetInfo.get(i).getCheckCard1())
@@ -470,7 +470,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
-        Toast.makeText(this, "작은 수 : " + x, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "현재 favorite 수 : " + x, Toast.LENGTH_LONG).show();
     }
 
 }
