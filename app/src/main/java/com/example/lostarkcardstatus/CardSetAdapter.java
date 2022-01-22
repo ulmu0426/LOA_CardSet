@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private final String CARDSET_COLUMN_NAME_CARD4_CHECK = "checkCard4";
     private final String CARDSET_COLUMN_NAME_CARD5_CHECK = "checkCard5";
     private final String CARDSET_COLUMN_NAME_CARD6_CHECK = "checkCard6";
+    private final String CARD_SET_AWAKE_SUM = "각성 합계 : ";
 
 
     public CardSetAdapter(Context context) {
@@ -69,7 +71,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
         holder.txtCardSetName.setText(cardSetInfo.get(position).getName());
-        holder.txtCardSetAwake.setText("카드세트(6세트) 각성합 : " + cardSetInfo.get(position).getHaveAwake() + "각성");
+        holder.txtCardSetAwake.setText("각성 합계 : " + cardSetInfo.get(position).getHaveAwake());
         //이미지뷰 구현할것
         holder.imgCardSet0.setImageResource(R.drawable.card_legend_kadan);
         holder.imgCardSet1.setImageResource(R.drawable.card_legend_ninab);
@@ -121,6 +123,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 int pos = positionGet;
                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.card_set_detail);
+
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
 
                 ImageView imgFavorites = dialog.findViewById(R.id.imgFavorites);
                 TextView txtCardSetName_Detail = dialog.findViewById(R.id.txtCardSetName_Detail);
@@ -210,7 +217,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgVisibility(cardSetInfo.get(pos).getCard6(), imgCardSetDetail6, txtCardSetName6, txtHaveAwakeHaveCard6);
 
                 txtCardSetName_Detail.setText(cardSetInfo.get(pos).getName());
-                txtCardSetAwake_Detail.setText("카드수집 각성 합 : " + cardSetInfo.get(pos).getHaveAwake() + "각성");
+                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake() + "각성");
 
                 txtCardSetName0.setText(cardSetInfo.get(pos).getCard0());
                 txtCardSetName1.setText(cardSetInfo.get(pos).getCard1());
@@ -262,7 +269,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard0() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -297,7 +304,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard1() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -332,7 +339,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard2() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -367,7 +374,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard3() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -402,7 +409,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -437,7 +444,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -472,7 +479,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
                                 txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + cardSetInfo.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getCount());
-                                txtCardSetAwake_Detail.setText("현재 각성 합계 : " + cardSetInfo.get(pos).getHaveAwake());
+                                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + cardSetInfo.get(pos).getHaveAwake());
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();

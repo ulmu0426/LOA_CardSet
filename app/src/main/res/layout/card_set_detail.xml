@@ -30,18 +30,18 @@
         android:id="@+id/txtCardSetAwake_Detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="각성 합계 : 00"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtCardSetName_Detail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCardSetName_Detail"/>
 
     <TableLayout
         android:id="@+id/tablelayoutCardSetDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

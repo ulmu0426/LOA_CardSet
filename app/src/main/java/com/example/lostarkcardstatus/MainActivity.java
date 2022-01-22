@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainAdapter(mainContext);
         rv.setAdapter(mainAdapter);
 
-        test();
+        //test();
 
 
         //카드 세트로 이동.

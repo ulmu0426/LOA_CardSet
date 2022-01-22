@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,8 +53,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private final String DED_COLUMN_NAME_CARD8_AWAKE = "awakeCard8";
     private final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
 
-    private final String DED_DIALOG_CARD_AWAKE = "각성도";
-    private final String DED_DIALOG_CARD_NUM = "보유 카드";
+    private final String DED_DIALOG_CARD_AWAKE = "각성 : ";
+    private final String DED_DIALOG_CARD_NUM = "보유 : ";
 
     private float haveDED;
     private int completeDED;
@@ -162,6 +163,10 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             public void onClick(View view) {
                 Dialog dialogDEDDetail = new Dialog(context);
                 dialogDEDDetail.setContentView(R.layout.demon_extra_dmg_detail);
+                WindowManager.LayoutParams params = dialogDEDDetail.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialogDEDDetail.getWindow().setAttributes((WindowManager.LayoutParams) params);
                 int pos = positionGet;
 
                 TextView txtDEDCardBookName = dialogDEDDetail.findViewById(R.id.txtDEDCardBookName);
@@ -908,6 +913,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     public void haveDEDUpdate() {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         haveDED = 0;
+        completeDED = 0;
         for (int i = 0; i < DEDInfo.size(); i++) {
             if (isCompleteDED(DEDInfo.get(i))) {
                 haveDED += DEDInfo.get(i).getDmgSum(DEDInfo.get(i).getHaveAwake());

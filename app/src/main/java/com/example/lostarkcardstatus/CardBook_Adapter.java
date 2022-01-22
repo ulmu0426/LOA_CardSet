@@ -8,6 +8,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -141,6 +142,12 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
             public void onClick(View v) {
                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.cardbook_name_and_cardlist);
+
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
                 int pos = positionGet;  //position 값을 넣기 위해 넣은 인수
                 //카드도감 이름, 옵션 연결
                 TextView txtCardBookName_incardbooknamexmlpage = dialog.findViewById(R.id.txtCardBookName_incardbooknamexmlpage);
