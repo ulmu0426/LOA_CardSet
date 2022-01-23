@@ -91,5 +91,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         notifyItemRemoved(position);
     }
 
+    public void setAwake(String awakeSetName, int changeAwake){
+        for(int i =0;i<activationFavoriteCardSet.size();i++){
+            if(activationFavoriteCardSet.get(i).getName().equals(awakeSetName)){
+                activationFavoriteCardSet.get(i).setAwake(changeAwake);
+                notifyDataSetChanged();
+            }
+        }
+    }
+
 
 }
