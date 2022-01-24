@@ -69,6 +69,7 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
         this.context = context;
         cardDbHelper = new LOA_Card_DB(context);
         this.cardBook_page = cardBook_page;
+        ((MainActivity) MainActivity.mainContext).cardBookUpdate();
         haveStatUpdate(cardbook_all);   //haveCardToCardBookUpdate()로 얻은 정보를 바탕으로 최초 값 획득
 
     }

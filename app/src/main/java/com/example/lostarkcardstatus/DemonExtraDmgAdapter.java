@@ -73,9 +73,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         this.context = context;
         cardDbHelper = new LOA_Card_DB(context);
         this.DED_page = demonExtraDmg_page;
+        ((MainActivity) MainActivity.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();
-        DED_page.setDED(haveDED);
-        DED_page.setDEDBook(completeDED, getItemCount());
     }
 
     private void pixUpdate() {

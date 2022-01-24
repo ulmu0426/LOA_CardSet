@@ -53,6 +53,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         this.mainAdapter = ((MainActivity) MainActivity.mainContext).mainAdapter;
         this.favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
         cardDbHelper = new LOA_Card_DB(context);
+        ((MainActivity) MainActivity.mainContext).haveCardSetCheckUpdate();
     }
 
     @NonNull

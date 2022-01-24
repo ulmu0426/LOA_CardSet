@@ -1,12 +1,14 @@
 package com.example.lostarkcardstatus;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtCardBookStat_Critical;
     private TextView txtCardBookStat_Speciality;
     private TextView txtCardBookStat_Agility;
+    private DrawerLayout drawerLayout_Main;
 
     protected MainAdapter mainAdapter;
     private RecyclerView rv;
 
+    private ImageView imgBtnMenu_Main;
 
     private TextView txtDemonExtraDmg;
     public static Context mainContext;
@@ -87,6 +91,18 @@ public class MainActivity extends AppCompatActivity {
 
         //test();
 
+        imgBtnMenu_Main = (ImageView) findViewById(R.id.imgBtnMenu_Main);
+        drawerLayout_Main = (DrawerLayout)findViewById(R.id.drawerLayout_Main);
+        imgBtnMenu_Main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!drawerLayout_Main.isDrawerOpen(Gravity.LEFT)){
+                    drawerLayout_Main.openDrawer(Gravity.LEFT);
+                }else {
+                    drawerLayout_Main.closeDrawer(Gravity.LEFT);
+                }
+            }
+        });
 
         //카드 세트로 이동.
         TextView txtBtnCardSet = (TextView) findViewById(R.id.txtBtnCardSet);
@@ -132,6 +148,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(drawerLayout_Main.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout_Main.closeDrawer(Gravity.LEFT);
+            return;
+        }
+
         if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
             backKeyPressedTime = System.currentTimeMillis();
             finish = Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_LONG);
@@ -143,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
             finish.cancel();
         }
     }
-
 
     //카드 도감 (치명, 특화, 신속) 값 입력
     private int getStatInfo(String STAT) {
@@ -213,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //최초 실행되는 메소드 : cardList 정보를 cardbook_all과 연동
-    private void cardBookUpdate() {
+    public void cardBookUpdate() {
         for (int i = 0; i < cardbook_all.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {
                 if (cardInfo.get(j).getName().equals(cardbook_all.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
@@ -283,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
     private final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
 
     //최초 실행되는 메소드 : cardList 정보를 DEDInfo에 연동
-    private void haveDEDCardCheckUpdate() {
+    public void haveDEDCardCheckUpdate() {
         for (int i = 0; i < DEDInfo.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {
                 if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
@@ -361,7 +381,8 @@ public class MainActivity extends AppCompatActivity {
     private final String CARDSET_COLUMN_NAME_CARD6_AWAKE = "awakeCard6";
 
     //최초 실행되는 메소드 : cardList 정보를 CardSet에 연동
-    private void haveCardSetCheckUpdate() {
+    //cardSetPage에 들어갈때도 한번씩 실행됨.
+    public void haveCardSetCheckUpdate() {
         for (int i = 0; i < cardSetInfo.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {
                 if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
