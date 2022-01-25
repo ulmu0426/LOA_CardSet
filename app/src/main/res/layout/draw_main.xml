@@ -85,7 +85,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
                         tools:listitem="@layout/rv_favorite_cardset">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -293,11 +292,11 @@
                 android:background="@color/black" />
 
             <TextView
-                android:id="@+id/txtMenuBtnCardSet"
+                android:id="@+id/txtBtnCardList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="카드 세트"
+                android:text="보유 카드 수정"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
 
@@ -306,28 +305,6 @@
                 android:layout_height="1dp"
                 android:background="@color/black" />
 
-            <TextView
-                android:id="@+id/txtMenuBtnCardBook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="카드 도감 특성"
-                android:textColor="#E8E8E8"
-                android:textSize="25dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/txtMenuBtnDemonExtraDmg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="악마 추가 피해"
-                android:textColor="#E8E8E8"
-                android:textSize="25dp" />
 
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

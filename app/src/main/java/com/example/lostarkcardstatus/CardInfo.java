@@ -18,7 +18,6 @@ public class CardInfo {
     private String grade;               //카드 등급 정보
     private int getCard = 0;                  //카드 획득 유무(기본 0)
 
-
     public int getId() {
         return id;
     }

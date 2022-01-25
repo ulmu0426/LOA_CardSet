@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView imgBtnMenu_Main;
 
+    private TextView txtBtnCardList;
+
     private TextView txtDemonExtraDmg;
     public static Context mainContext;
 
@@ -101,6 +103,15 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     drawerLayout_Main.closeDrawer(Gravity.LEFT);
                 }
+            }
+        });
+
+        txtBtnCardList = (TextView)findViewById(R.id.txtBtnCardList);
+        txtBtnCardList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SettingCard.class);
+                startActivity(intent);
             }
         });
 
