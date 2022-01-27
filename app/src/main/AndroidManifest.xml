@@ -21,8 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CardSet_page"></activity>
-        <activity android:name=".CardBook_page"></activity>
+        <activity android:name=".cardBookPage"></activity>
         <activity android:name=".DemonExtraDmg_page"></activity>
+        <activity android:name=".SettingCard"></activity>
     </application>
 
 </manifest>

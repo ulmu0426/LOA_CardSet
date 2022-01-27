@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -16,7 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class LOA_Card_DB extends SQLiteOpenHelper {
+public class LOA_CardDB extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
     private static final int DATABASE_VERSION = 1;
@@ -108,7 +107,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
 
     //카드 세트 column
-    private static final String TABLE_CARDSET = "cardSet";                      //카드세트 테이블 명
+    private static final String TABLE_CARD_SET = "cardSet";                      //카드세트 테이블 명
     private static final String CARDSET_COLUMN_ID = "id";                       //테이블별 카드 번호
     private static final String CARDSET_COLUMN_NAME = "name";                   //카드도감 이름
     private static final String CARDSET_COLUMN_CARD0 = "card0";                 //카드1
@@ -148,7 +147,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     private static final String FAVORITE_CARD_SET_COLUMN_AWAKE = "awake";
 
 
-    public LOA_Card_DB(@Nullable Context context) {
+    public LOA_CardDB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if (android.os.Build.VERSION.SDK_INT >= 17) {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
@@ -247,13 +246,13 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     public void UpdateInfoCardSetCard(String columnName, int cardCheck, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARDSET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
+        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
     //UPDATE 카드세트 즐겨찾기 등록 유무 수정
     public void UpdateInfoCardSetCard(String favoriteName, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARDSET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
+        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
     }
 
     //카드세트 삽입
@@ -297,8 +296,8 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<Cardbook_All> getCardBookInfo_All() {       //카드도감 전체 항목 가져오기
-        ArrayList<Cardbook_All> getInfo = new ArrayList<>();
+    public ArrayList<CardbookInfo> getCardBookInfo_All() {       //카드도감 전체 항목 가져오기
+        ArrayList<CardbookInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id DESC", null);
@@ -331,7 +330,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
                 int checkCard8 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD8));
                 int checkCard9 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD9));
 
-                Cardbook_All cardbook_info = new Cardbook_All();
+                CardbookInfo cardbook_info = new CardbookInfo();
                 cardbook_info.setId(id);
                 cardbook_info.setName(name);
                 cardbook_info.setValue(value);
@@ -474,7 +473,7 @@ public class LOA_Card_DB extends SQLiteOpenHelper {
         ArrayList<CardSetInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDSET + " ORDER BY id DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id DESC", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {

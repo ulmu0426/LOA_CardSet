@@ -7,24 +7,26 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/imgCard"
+        android:id="@+id/imgJustCard"
         android:layout_width="70dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/txtCardName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_uncommon_lubenstain_del_arco" />
 
     <TextView
         android:id="@+id/txtCardName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
         android:text="루벤 스타인 델 아르코"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/txtCardAwakeAndHave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCard" />
+        app:layout_constraintTop_toBottomOf="@+id/imgJustCard" />
 
     <TextView
         android:id="@+id/txtCardAwakeAndHave"

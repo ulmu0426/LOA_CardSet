@@ -9,21 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.io.InvalidObjectException;
 import java.util.ArrayList;
 
-public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.ViewHolder> {
+public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHolder> {
     private final String[] STAT = {"치명", "특화", "신속"};
     private int[] haveStat;
     private int[] haveStatCardBook;
@@ -53,21 +48,21 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
     private final String CARD_BOOK_COLUMN_NAME_CARD8_CHECK = "checkCard8";
     private final String CARD_BOOK_COLUMN_NAME_CARD9_CHECK = "checkCard9";
 
-    private ArrayList<Cardbook_All> cardbook_all;
+    private ArrayList<CardbookInfo> cardbook_all;
     private ArrayList<CardInfo> cardInfo;
     private Context context;
-    private LOA_Card_DB cardDbHelper;
-    private CardBook_page cardBook_page;
+    private LOA_CardDB cardDbHelper;
+    private cardBookPage cardBook_page;
 
-    public CardBook_Adapter(ArrayList<Cardbook_All> cardbook_all) {
+    public CardBookAdapter(ArrayList<CardbookInfo> cardbook_all) {
         this.cardbook_all = cardbook_all;
     }
 
-    public CardBook_Adapter(Context context, CardBook_page cardBook_page) {
+    public CardBookAdapter(Context context, cardBookPage cardBook_page) {
         this.cardbook_all = ((MainActivity) MainActivity.mainContext).cardbook_all;
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
-        cardDbHelper = new LOA_Card_DB(context);
+        cardDbHelper = new LOA_CardDB(context);
         this.cardBook_page = cardBook_page;
         ((MainActivity) MainActivity.mainContext).cardBookUpdate();
         haveStatUpdate(cardbook_all);   //haveCardToCardBookUpdate()로 얻은 정보를 바탕으로 최초 값 획득
@@ -76,14 +71,14 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
 
     @NonNull
     @Override
-    public CardBook_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CardBookAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_cardbook, parent, false);
 
         return new ViewHolder(holder);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardBook_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardBookAdapter.ViewHolder holder, int position) {
         int positionGet = position;
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
@@ -465,7 +460,7 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
     }
 
     // DB에 도감을 완성시키면 도감의 배경을 노란색으로 칠해 획득유무를 추가로 알려줌.
-    private void isCompleteCardBookBackgroundColor(Cardbook_All cardbook_all, ConstraintLayout cv) {
+    private void isCompleteCardBookBackgroundColor(CardbookInfo cardbook_all, ConstraintLayout cv) {
         if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
             cv.setBackgroundColor(Color.parseColor("#D0FFE870"));
         else
@@ -474,7 +469,7 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
 
 
     // DB에 도감을 완성 시킨 경우 true else false
-    public boolean isCompleteCardBook(Cardbook_All cardbook_all) {
+    public boolean isCompleteCardBook(CardbookInfo cardbook_all) {
         if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
             return true;
         else
@@ -482,7 +477,7 @@ public class CardBook_Adapter extends RecyclerView.Adapter<CardBook_Adapter.View
     }
 
     //스텟, 도감 달성 개수 업데이트 메소드
-    private void haveStatUpdate(ArrayList<Cardbook_All> cardbook_all) {
+    private void haveStatUpdate(ArrayList<CardbookInfo> cardbook_all) {
         haveStat = new int[]{0, 0, 0};
         haveStatCardBook = new int[]{0, 0, 0};
         haveStatCardBookCount = new int[]{0, 0, 0};

@@ -1,20 +1,15 @@
 package com.example.lostarkcardstatus;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CardBook_page extends AppCompatActivity {
+public class cardBookPage extends AppCompatActivity {
     private static final String CRITICAL = "치명 + ";
     private static final String SPECIALITY = "특화 + ";
     private static final String AGILITY = "신속 + ";
@@ -22,8 +17,8 @@ public class CardBook_page extends AppCompatActivity {
     private final String AGILITY_BOOK_COMPLETE = " 도감 달성 개수 : ";
     private final String SPECIALITY_BOOK_COMPLETE = "특화 도감 달성 개수 : ";
     private RecyclerView rv;
-    private LOA_Card_DB dbHelper;
-    private ArrayList<Cardbook_All> allCardBook;
+    private LOA_CardDB dbHelper;
+    private ArrayList<CardbookInfo> allCardBook;
 
     private CheckBox checkboxCompleteCardbookInvisibility;
     private TextView txtBtnCritical;
@@ -49,7 +44,7 @@ public class CardBook_page extends AppCompatActivity {
 
         //1. 카드 도감 목록 불러오기
         rv = findViewById(R.id.rvCardbookList);
-        CardBook_Adapter adapter = new CardBook_Adapter(this, this);
+        CardBookAdapter adapter = new CardBookAdapter(this, this);
 
         rv.setAdapter(adapter);
 

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,10 +19,10 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private LOA_Card_DB cardDBHelper;
+    private LOA_CardDB cardDBHelper;
     protected ArrayList<CardInfo> cardInfo;
     protected ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
-    protected ArrayList<Cardbook_All> cardbook_all;
+    protected ArrayList<CardbookInfo> cardbook_all;
     protected ArrayList<CardSetInfo> cardSetInfo;
     protected ArrayList<DemonExtraDmgInfo> DEDInfo;
     private TextView txtCardBookStat_Critical;
@@ -94,24 +93,25 @@ public class MainActivity extends AppCompatActivity {
         //test();
 
         imgBtnMenu_Main = (ImageView) findViewById(R.id.imgBtnMenu_Main);
-        drawerLayout_Main = (DrawerLayout)findViewById(R.id.drawerLayout_Main);
+        drawerLayout_Main = (DrawerLayout) findViewById(R.id.drawerLayout_Main);
         imgBtnMenu_Main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!drawerLayout_Main.isDrawerOpen(Gravity.LEFT)){
+                if (!drawerLayout_Main.isDrawerOpen(Gravity.LEFT)) {
                     drawerLayout_Main.openDrawer(Gravity.LEFT);
-                }else {
+                } else {
                     drawerLayout_Main.closeDrawer(Gravity.LEFT);
                 }
             }
         });
 
-        txtBtnCardList = (TextView)findViewById(R.id.txtBtnCardList);
+        txtBtnCardList = (TextView) findViewById(R.id.txtBtnCardList);
         txtBtnCardList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SettingCard.class);
                 startActivity(intent);
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }
         });
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         txtBtnCardBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CardBook_page.class);
+                Intent intent = new Intent(getApplicationContext(), cardBookPage.class);
                 startActivity(intent);
             }
         });
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     //DB정보 App에 입력
     private void setInit() throws IOException {
-        cardDBHelper = new LOA_Card_DB(this);
+        cardDBHelper = new LOA_CardDB(this);
         cardDBHelper.createDataBase();
 
     }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout_Main.isDrawerOpen(Gravity.LEFT)){
+        if (drawerLayout_Main.isDrawerOpen(Gravity.LEFT)) {
             drawerLayout_Main.closeDrawer(Gravity.LEFT);
             return;
         }
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     //카드 도감 (치명, 특화, 신속) 값 입력
     private int getStatInfo(String STAT) {
         int a = 0;
-        CardBook_Adapter cardBookAdapter = new CardBook_Adapter(cardbook_all);
+        CardBookAdapter cardBookAdapter = new CardBookAdapter(cardbook_all);
         for (int i = 0; i < cardbook_all.size(); i++) {
             if (cardbook_all.get(i).getOption().equals(STAT) && cardBookAdapter.isCompleteCardBook(cardbook_all.get(i))) {
                 a += cardbook_all.get(i).getValue();

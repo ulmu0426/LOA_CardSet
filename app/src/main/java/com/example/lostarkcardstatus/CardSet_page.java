@@ -5,12 +5,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 public class CardSet_page extends AppCompatActivity {
 
     private RecyclerView rv;
-    private LOA_Card_DB dbHelper;
+    private LOA_CardDB dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,7 +22,7 @@ public class CardSet_page extends AppCompatActivity {
          * */
 
         rv = findViewById(R.id.rvCardSet);
-        dbHelper = new LOA_Card_DB(this);
+        dbHelper = new LOA_CardDB(this);
         CardSetAdapter adapter = new CardSetAdapter(this);
 
         rv.setAdapter(adapter);

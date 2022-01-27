@@ -145,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="1dp"
                             android:layout_marginTop="1dp"
-                            android:background="#FFC2DF"
+                            android:background="#E8AB83"
                             android:text="치명"
                             android:textAlignment="center"
                             android:textSize="20dp" />
@@ -155,7 +155,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="1dp"
                             android:layout_marginTop="1dp"
-                            android:background="#FFC2DF"
+                            android:background="#E8AB83"
                             android:text="특화"
                             android:textAlignment="center"
                             android:textSize="20dp" />
@@ -165,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
                             android:layout_marginRight="1dp"
-                            android:background="#FFC2DF"
+                            android:background="#E8AB83"
                             android:text="신속"
                             android:textAlignment="center"
                             android:textSize="20dp" />

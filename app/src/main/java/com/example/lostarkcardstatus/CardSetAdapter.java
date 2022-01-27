@@ -2,12 +2,8 @@ package com.example.lostarkcardstatus;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +11,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -32,7 +25,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private ArrayList<CardInfo> cardInfo;
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
     private Context context;
-    private LOA_Card_DB cardDbHelper;
+    private LOA_CardDB cardDbHelper;
     private MainAdapter mainAdapter;
     private final String CARDSET_AWAKE = "각성 : ";
     private final String CARDSET_CARD_NUM = "보유 : ";
@@ -52,7 +45,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         this.context = context;
         this.mainAdapter = ((MainActivity) MainActivity.mainContext).mainAdapter;
         this.favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
-        cardDbHelper = new LOA_Card_DB(context);
+        cardDbHelper = new LOA_CardDB(context);
         ((MainActivity) MainActivity.mainContext).haveCardSetCheckUpdate();
     }
 

@@ -2,12 +2,10 @@ package com.example.lostarkcardstatus;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -29,7 +27,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private Context context;
     private DemonExtraDmg_page DED_page;
     private ArrayList<CardInfo> cardInfo;
-    private LOA_Card_DB cardDbHelper;
+    private LOA_CardDB cardDbHelper;
 
     private final String DED_COLUMN_NAME_CARD0_CHECK = "checkCard0";
     private final String DED_COLUMN_NAME_CARD1_CHECK = "checkCard1";
@@ -71,7 +69,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         this.DEDInfo = ((MainActivity) MainActivity.mainContext).DEDInfo;
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
-        cardDbHelper = new LOA_Card_DB(context);
+        cardDbHelper = new LOA_CardDB(context);
         this.DED_page = demonExtraDmg_page;
         ((MainActivity) MainActivity.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();

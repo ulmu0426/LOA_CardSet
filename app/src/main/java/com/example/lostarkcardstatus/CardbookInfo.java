@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class Cardbook_All {
+public class CardbookInfo {
     private int id;
     private String name;
     private int value;
