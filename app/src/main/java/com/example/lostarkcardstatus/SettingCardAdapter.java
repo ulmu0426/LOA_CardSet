@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -91,13 +92,15 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 EditText etxtJustCardAwake = dialogJustCard.findViewById(R.id.etxtJustCardAwake); // 각성도
                 EditText etxtJustCardHave = dialogJustCard.findViewById(R.id.etxtJustCardHave);   // 보유카드
                 TextView txtJustCardAcquisition_info = dialogJustCard.findViewById(R.id.txtJustCardAcquisition_info);   //획득 카드 유무
+                Button btnCancer_JustCard = dialogJustCard.findViewById(R.id.btnCancer_JustCard);
+                Button btnOK_JustCard = dialogJustCard.findViewById(R.id.btnOK_JustCard);
 
                 txtJustCardName.setText(useCardList.get(pos).getName());
                 imgJustCard.setImageResource(R.drawable.card_legend_kamaine);
                 defaultColorFilter(imgJustCard, pos, filter);
-                etxtJustCardAwake.setText(useCardList.get(pos).getAwake()+"");
-                etxtJustCardHave.setText(useCardList.get(pos).getCount()+"");
-                txtJustCardAcquisition_info.setText(useCardList.get(pos).getAcquisition_info()+"");
+                etxtJustCardAwake.setText(useCardList.get(pos).getAwake() + "");
+                etxtJustCardHave.setText(useCardList.get(pos).getCount() + "");
+                txtJustCardAcquisition_info.setText(useCardList.get(pos).getAcquisition_info() + "");
 
                 imgJustCard.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -110,10 +113,35 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     }
                 });
 
+                btnCancer_JustCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogJustCard.cancel();
+                    }
+                });
+
+                btnOK_JustCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int awake = awakeRangeSet(etxtJustCardAwake.getText().toString());
+                        int number = numRangeSet(etxtJustCardHave.getText().toString());
+                        etxtJustCardAwake.setText(awake + "");
+                        etxtJustCardHave.setText(number + "");
+                        useCardList.get(pos).setAwake(awake);
+                        useCardList.get(pos).setCount(number);
+                        cardInfo.get(matchIndex(useCardList.get(pos).getId())).setAwake(awake);
+                        cardInfo.get(matchIndex(useCardList.get(pos).getId())).setCount(number);
+                        cardDBHelper.UpdateInfoCardAwake("awake", awake, useCardList.get(pos).getId());
+                        cardDBHelper.UpdateInfoCardNum("number", number, useCardList.get(pos).getId());
+
+                        Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                        notifyDataSetChanged();
+                        dialogJustCard.cancel();
+                    }
+                });
 
                 dialogJustCard.show();
             }
-
         });
     }
 
@@ -127,8 +155,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         private ImageView imgJustCard;
         private TextView txtCardName;
         private TextView txtCardAwakeAndHave;
-        private EditText etxtJustCardAwake;
-        private EditText etxtJustCardHave;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -136,14 +162,10 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             imgJustCard = itemView.findViewById(R.id.imgJustCard);
             txtCardName = itemView.findViewById(R.id.txtCardName);
             txtCardAwakeAndHave = itemView.findViewById(R.id.txtCardAwakeAndHave);
-            etxtJustCardAwake = itemView.findViewById(R.id.etxtJustCardAwake);
-            etxtJustCardHave = itemView.findViewById(R.id.etxtJustCardHave);
         }
     }
 
     private void settingCardList() {
-        int L, E, R, U, C, S;
-        L = E = R = U = C = S = 0;
         cardLegend = new ArrayList<CardInfo>();
         cardEpic = new ArrayList<CardInfo>();
         cardRare = new ArrayList<CardInfo>();
@@ -154,7 +176,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
             if (cardInfo.get(i).getGrade().equals(LEGEND)) {
-                ci.setId(L);
+                ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
                 ci.setAwake(cardInfo.get(i).getAwake());
@@ -162,9 +184,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade("");
                 cardLegend.add(ci);
-                L++;
             } else if (cardInfo.get(i).getGrade().equals(EPIC)) {
-                ci.setId(E);
+                ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
                 ci.setAwake(cardInfo.get(i).getAwake());
@@ -172,9 +193,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade("");
                 cardEpic.add(ci);
-                E++;
             } else if (cardInfo.get(i).getGrade().equals(RARE)) {
-                ci.setId(R);
+                ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
                 ci.setAwake(cardInfo.get(i).getAwake());
@@ -182,9 +202,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade("");
                 cardRare.add(ci);
-                R++;
             } else if (cardInfo.get(i).getGrade().equals(UNCOMMON)) {
-                ci.setId(U);
+                ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
                 ci.setAwake(cardInfo.get(i).getAwake());
@@ -192,9 +211,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade("");
                 cardUncommon.add(ci);
-                U++;
             } else if (cardInfo.get(i).getGrade().equals(COMMON)) {
-                ci.setId(C);
+                ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
                 ci.setAwake(cardInfo.get(i).getAwake());
@@ -202,9 +220,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade("");
                 cardCommon.add(ci);
-                C++;
             } else if (cardInfo.get(i).getGrade().equals(SPECIAL)) {
-                ci.setId(S);
+                ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
                 ci.setAwake(cardInfo.get(i).getAwake());
@@ -212,7 +229,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade("");
                 cardSpecial.add(ci);
-                S++;
             } else {
                 continue;
             }
@@ -269,4 +285,47 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         }
     }
 
+    private int awakeRangeSet(String input) {
+        int result = 0;
+        if (input.isEmpty())
+            result = 0;
+
+        if (Integer.parseInt(input) > 5) {
+            result = 5;
+        } else if (Integer.parseInt(input) < 0) {
+            result = 0;
+        } else {
+            result = Integer.parseInt(input);
+        }
+        return result;
+
+    }
+
+    //카드 각성도에 따라 최대 보유 카드 수량이 달라짐. 다음에 수정 할것.
+    private int numRangeSet(String input) {
+        int result = 0;
+        if (input.isEmpty())
+            result = 0;
+
+        if (Integer.parseInt(input) > 15) {
+            result = 15;
+        } else if (Integer.parseInt(input) < 0) {
+            result = 0;
+        } else {
+            result = Integer.parseInt(input);
+        }
+
+        return result;
+    }
+
+    private int matchIndex(int id){
+        int index = 0;
+        for(int i = 0; i < cardInfo.size();i++){
+            if(cardInfo.get(i).getId() == id){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 }

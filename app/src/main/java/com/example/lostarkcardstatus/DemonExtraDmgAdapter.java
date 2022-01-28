@@ -275,6 +275,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     public void onClick(View v) {
                         etxtAwake.setText(DEDInfo.get(pos).getAwakeCard0() + "");
                         etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getCount() + "");
+
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -285,12 +286,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard0(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard0(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard0.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard0() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -320,12 +323,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard1(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard1(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard1.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard1() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -354,12 +359,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard2(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard2(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard2.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard2() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -388,12 +395,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard3(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard3(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard3.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard3() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -422,12 +431,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard4(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard4(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard4.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard4() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -456,12 +467,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard5(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard5(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard5.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard5() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -490,12 +503,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard6(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard6(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard6.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard6() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -524,12 +539,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard7());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard7(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard7());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard7(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard7.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard7() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -558,12 +575,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard8());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard8(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard8());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard8(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard8.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard8() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -592,12 +611,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, Integer.parseInt(String.valueOf(etxtAwake.getText())), DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", Integer.parseInt(String.valueOf(etxtNum.getText())), DEDInfo.get(pos).getCard9());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", Integer.parseInt(String.valueOf(etxtAwake.getText())), cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard9(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setAwake(Integer.parseInt(String.valueOf(etxtAwake.getText())));
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setCount(Integer.parseInt(String.valueOf(etxtNum.getText())));
+                                int awake = awakeRangeSet(etxtAwake.getText().toString());
+                                int number = numRangeSet(etxtNum.getText().toString());
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardCheck("number", number, DEDInfo.get(pos).getCard9());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(pos).setAwakeCard9(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard9.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard9() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getCount());
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
 
@@ -932,6 +953,40 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             }
         }
         return index;
+    }
+
+    private int awakeRangeSet(String input) {
+        int result = 0;
+        if (input.isEmpty())
+            result = 0;
+
+        if (Integer.parseInt(input) > 5) {
+            result = 5;
+        } else if (Integer.parseInt(input) < 0) {
+            result = 0;
+        } else {
+            result = Integer.parseInt(input);
+        }
+        return result;
+
+    }
+
+    //카드 각성도에 따라 최대 보유 카드 수량이 달라짐. 다음에 수정 할것.
+    private int numRangeSet(String input) {
+        int result = 0;
+        if (input.isEmpty())
+            result = 0;
+
+        if (Integer.parseInt(input) > 15) {
+            result = 15;
+        } else if (Integer.parseInt(input) < 0) {
+            result = 0;
+        } else {
+            result = Integer.parseInt(input);
+        }
+
+        return result;
+
     }
 
 

@@ -166,7 +166,7 @@
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clbtn"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/txtJustCardAcquisition_info"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,12 +174,30 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:layout_width=""
-            android:layout_height=""/>
+            android:id="@+id/btnCancer_JustCard"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnOK_JustCard"/>
 
         <Button
-            android:layout_width=""
-            android:layout_height=""/>
+            android:id="@+id/btnOK_JustCard"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="확인"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnCancer_JustCard"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

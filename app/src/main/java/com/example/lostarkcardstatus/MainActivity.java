@@ -25,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected ArrayList<CardbookInfo> cardbook_all;
     protected ArrayList<CardSetInfo> cardSetInfo;
     protected ArrayList<DemonExtraDmgInfo> DEDInfo;
-    private TextView txtCardBookStat_Critical;
-    private TextView txtCardBookStat_Speciality;
-    private TextView txtCardBookStat_Agility;
     private DrawerLayout drawerLayout_Main;
 
     protected MainAdapter mainAdapter;
@@ -37,7 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txtBtnCardList;
 
+    //메인화면 값들
+    private TextView txtCardBookStat_Critical;
+    private TextView txtCardBookStat_Speciality;
+    private TextView txtCardBookStat_Agility;
     private TextView txtDemonExtraDmg;
+
     public static Context mainContext;
 
     @Override
