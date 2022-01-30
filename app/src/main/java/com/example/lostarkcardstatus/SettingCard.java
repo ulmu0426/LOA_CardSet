@@ -26,17 +26,17 @@ public class SettingCard extends AppCompatActivity {
     private String COMMON = "일반";
     private String SPECIAL = "스페셜";
 
-    private SettingCardAdapter settingCardAdapterL;
-    private SettingCardAdapter settingCardAdapterE;
-    private SettingCardAdapter settingCardAdapterR;
-    private SettingCardAdapter settingCardAdapterU;
-    private SettingCardAdapter settingCardAdapterC;
-    private SettingCardAdapter settingCardAdapterS;
+    private SettingCardAdapter2 settingCardAdapterL;
+    private SettingCardAdapter2 settingCardAdapterE;
+    private SettingCardAdapter2 settingCardAdapterR;
+    private SettingCardAdapter2 settingCardAdapterU;
+    private SettingCardAdapter2 settingCardAdapterC;
+    private SettingCardAdapter2 settingCardAdapterS;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cardlist_page);
+        setContentView(R.layout.cardlist_2);
 
         rvLegendList = findViewById(R.id.rvLegendList);
         rvEpicList = findViewById(R.id.rvEpicList);
@@ -45,22 +45,22 @@ public class SettingCard extends AppCompatActivity {
         rvCommonList = findViewById(R.id.rvCommonList);
         rvSpecialList = findViewById(R.id.rvSpecialList);
 
-        settingCardAdapterL = new SettingCardAdapter(this, LEGEND);
+        settingCardAdapterL = new SettingCardAdapter2(this, LEGEND);
         rvLegendList.setAdapter(settingCardAdapterL);
 
-        settingCardAdapterE = new SettingCardAdapter(this, EPIC);
+        settingCardAdapterE = new SettingCardAdapter2(this, EPIC);
         rvEpicList.setAdapter(settingCardAdapterE);
 
-        settingCardAdapterR = new SettingCardAdapter(this, RARE);
+        settingCardAdapterR = new SettingCardAdapter2(this, RARE);
         rvRareList.setAdapter(settingCardAdapterR);
 
-        settingCardAdapterU = new SettingCardAdapter(this, UNCOMMON);
+        settingCardAdapterU = new SettingCardAdapter2(this, UNCOMMON);
         rvUncommonList.setAdapter(settingCardAdapterU);
 
-        settingCardAdapterC = new SettingCardAdapter(this, COMMON);
+        settingCardAdapterC = new SettingCardAdapter2(this, COMMON);
         rvCommonList.setAdapter(settingCardAdapterC);
 
-        settingCardAdapterS = new SettingCardAdapter(this, SPECIAL);
+        settingCardAdapterS = new SettingCardAdapter2(this, SPECIAL);
         rvSpecialList.setAdapter(settingCardAdapterS);
 
 

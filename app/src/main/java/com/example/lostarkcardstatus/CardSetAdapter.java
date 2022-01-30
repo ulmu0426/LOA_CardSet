@@ -231,7 +231,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                 Dialog dialogAwakeNHaveCard = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogAwakeNHaveCard.setContentView(R.layout.awake_havecard_change);
-                EditText etxtAwake = dialogAwakeNHaveCard.findViewById(R.id.etxtAwake);
+                EditText etxtAwake = dialogAwakeNHaveCard.findViewById(R.id.eTxtAwake);
                 EditText etxtNum = dialogAwakeNHaveCard.findViewById(R.id.etxtNum);
                 Button btnCancer = dialogAwakeNHaveCard.findViewById(R.id.btnCancer);
                 Button btnOK = dialogAwakeNHaveCard.findViewById(R.id.btnOK);

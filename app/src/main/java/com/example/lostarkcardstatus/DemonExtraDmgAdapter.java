@@ -264,7 +264,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                 Dialog dialogChangeAwakeAndNum = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogChangeAwakeAndNum.setContentView(R.layout.awake_havecard_change);
-                EditText etxtAwake = dialogChangeAwakeAndNum.findViewById(R.id.etxtAwake);
+                EditText etxtAwake = dialogChangeAwakeAndNum.findViewById(R.id.eTxtAwake);
                 EditText etxtNum = dialogChangeAwakeAndNum.findViewById(R.id.etxtNum);
                 Button btnCancer = dialogChangeAwakeAndNum.findViewById(R.id.btnCancer);
                 Button btnOK = dialogChangeAwakeAndNum.findViewById(R.id.btnOK);

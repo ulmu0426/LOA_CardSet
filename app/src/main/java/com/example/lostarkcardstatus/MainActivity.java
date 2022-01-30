@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgBtnMenu_Main;
 
     private TextView txtBtnCardList;
+    private TextView txtBtnCardList2;
 
     //메인화면 값들
     private TextView txtCardBookStat_Critical;
