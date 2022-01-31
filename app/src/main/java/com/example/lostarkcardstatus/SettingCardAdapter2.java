@@ -1,24 +1,24 @@
 package com.example.lostarkcardstatus;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -76,65 +76,56 @@ public class SettingCardAdapter2 extends RecyclerView.Adapter<SettingCardAdapter
 
         holder.txtName.setText(useCardList.get(position).getName());
 
-        holder.eTxtAwake.setText(useCardList.get(position).getAwake() + "");
-        holder.eTxtHave.setText(useCardList.get(position).getCount() + "");
+        holder.txtAwake.setText(useCardList.get(position).getAwake() + "");
+        holder.txtHave.setText(useCardList.get(position).getCount() + "");
         holder.isGetCheckbox.setChecked(isChecked(useCardList.get(position).getGetCard()));
 
-        holder.eTxtHave.addTextChangedListener(new TextWatcher() {
+        holder.changeAwakeHave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                preAwake = s.toString();
-            }
+            public void onClick(View v) {
+                Dialog awakeHaveDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                awakeHaveDialog.setContentView(R.layout.awake_havecard_change);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals(preAwake)) return;
-                awakeValue = 0;
-                if (holder.eTxtAwake.isFocusable() && !s.toString().equals("")) {
-                    try {
-                        awakeValue = Integer.parseInt(holder.eTxtAwake.getText().toString());
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                        Log.v("test","ERROR on");
-                        return;
+                EditText etxtAwake = awakeHaveDialog.findViewById(R.id.eTxtAwake);
+                EditText etxtNum = awakeHaveDialog.findViewById(R.id.etxtNum);
+                Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
+                Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
+
+                etxtAwake.setText(holder.txtAwake.getText().toString());
+                etxtNum.setText(holder.txtHave.getText().toString());
+
+                btnCancer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        awakeHaveDialog.cancel();
                     }
-                }
-                if(awakeValue == 0){
-                    Log.v("test","ERROR on");
-                }
-                holder.eTxtAwake.setText(awakeValue + "");
-                cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setAwake(awakeValue);
-                useCardList.get(positionGet).setAwake(awakeValue);
-                cardDBHelper.UpdateInfoCardAwake("awake", awakeValue, useCardList.get(positionGet).getId());
-            }
+                });
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                btnOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int awake = awakeRangeSet(etxtAwake.getText().toString());
+                        int number = numRangeSet(etxtNum.getText().toString());
+                        etxtAwake.setText(awake + "");
+                        etxtNum.setText(number + "");
+                        //카드 arrayList update
+                        useCardList.get(positionGet).setAwake(awake);
+                        useCardList.get(positionGet).setCount(number);
+                        cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setAwake(awake);
+                        cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setCount(number);
+                        //카드 DB update
+                        cardDBHelper.UpdateInfoCardAwake(awake, useCardList.get(positionGet).getId());
+                        cardDBHelper.UpdateInfoCardNum(number, useCardList.get(positionGet).getId());
 
-            }
-        });
-        /*
-        holder.eTxtHave.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                preAwake[0] = s.toString();
-            }
+                        Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                        notifyDataSetChanged();
+                        awakeHaveDialog.cancel();
+                    }
+                });
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int haveValue = awakeRangeSet(holder.eTxtHave.getText().toString());
-                holder.eTxtHave.setText(haveValue + "");
-                cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setCount(haveValue);
-                useCardList.get(positionGet).setCount(haveValue);
-                cardDBHelper.UpdateInfoCardNum(haveValue, useCardList.get(positionGet).getId());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                awakeHaveDialog.show();
             }
         });
-        */
 
         holder.isGetCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,17 +149,19 @@ public class SettingCardAdapter2 extends RecyclerView.Adapter<SettingCardAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView img;
         private TextView txtName;
-        private TextView eTxtAwake;
-        private TextView eTxtHave;
+        private TextView txtAwake;
+        private TextView txtHave;
         private CheckBox isGetCheckbox;
+        private LinearLayout changeAwakeHave;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
             txtName = itemView.findViewById(R.id.txtName);
-            eTxtAwake = itemView.findViewById(R.id.eTxtAwake);
-            eTxtHave = itemView.findViewById(R.id.eTxtHave);
+            txtAwake = itemView.findViewById(R.id.txtAwake);
+            txtHave = itemView.findViewById(R.id.txtHave);
             isGetCheckbox = itemView.findViewById(R.id.isGetCheckbox);
+            changeAwakeHave = itemView.findViewById(R.id.changeAwakeHave);
         }
     }
 

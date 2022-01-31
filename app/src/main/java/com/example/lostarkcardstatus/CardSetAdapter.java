@@ -259,8 +259,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, awake, cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard0(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setCount(number);
@@ -299,8 +299,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD1_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard1(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setCount(number);
@@ -339,8 +339,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD2_CHECK, Integer.parseInt(String.valueOf(etxtAwake.getText())), cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard2(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setCount(number);
@@ -379,8 +379,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD3_CHECK, awake, cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard3(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setCount(number);
@@ -419,8 +419,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD4_CHECK, awake, cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard4(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setCount(number);
@@ -459,8 +459,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD5_CHECK, awake, cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard5(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setCount(number);
@@ -499,8 +499,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 etxtAwake.setText(awake + "");
                                 etxtNum.setText(number + "");
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD6_CHECK, awake, cardSetInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardCheck("number", number, cardSetInfo.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake("awake", awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(pos).setAwakeCard6(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setCount(number);
@@ -523,7 +523,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail0, filter, cardSetInfo.get(pos).getCheckCard0());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard0(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();
@@ -536,7 +536,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail1, filter, cardSetInfo.get(pos).getCheckCard1());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard1(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();
@@ -550,7 +550,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail2, filter, cardSetInfo.get(pos).getCheckCard2());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard2(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();
@@ -564,7 +564,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail3, filter, cardSetInfo.get(pos).getCheckCard3());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();
@@ -578,7 +578,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail4, filter, cardSetInfo.get(pos).getCheckCard4());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();
@@ -592,7 +592,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail5, filter, cardSetInfo.get(pos).getCheckCard5());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();
@@ -606,7 +606,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail6, filter, cardSetInfo.get(pos).getCheckCard6());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardCheck, cardSetInfo.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck("getCard", cardCheck, cardSetInfo.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardSetInfo.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(pos).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateCardSetPage();

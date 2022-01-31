@@ -131,7 +131,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         useCardList.get(pos).setCount(number);
                         cardInfo.get(matchIndex(useCardList.get(pos).getId())).setAwake(awake);
                         cardInfo.get(matchIndex(useCardList.get(pos).getId())).setCount(number);
-                        cardDBHelper.UpdateInfoCardAwake("awake", awake, useCardList.get(pos).getId());
+                        cardDBHelper.UpdateInfoCardAwake( awake, useCardList.get(pos).getId());
                         cardDBHelper.UpdateInfoCardNum(number, useCardList.get(pos).getId());
 
                         Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
@@ -278,7 +278,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             if (cardInfo.get(i).getName().equals(ci.getName())) {
                 if (ci.getGetCard() == check) {
                     cardInfo.get(i).setGetCard(check);
-                    cardDBHelper.UpdateInfoCardCheck("getCard", check, cardInfo.get(i).getName());
+                    cardDBHelper.UpdateInfoCardCheck( check, cardInfo.get(i).getName());
                     break;
                 }
             }

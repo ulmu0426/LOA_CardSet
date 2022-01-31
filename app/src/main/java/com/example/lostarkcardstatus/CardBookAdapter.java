@@ -36,7 +36,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         return haveStatCardBookCount;
     }
 
-    private static final String CARD_COLUMN_CHECK = "getCard";               //카드 획득 유무
     private final String CARD_BOOK_COLUMN_NAME_CARD0_CHECK = "checkCard0";
     private final String CARD_BOOK_COLUMN_NAME_CARD1_CHECK = "checkCard1";
     private final String CARD_BOOK_COLUMN_NAME_CARD2_CHECK = "checkCard2";
@@ -215,7 +214,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         //업데이트 된 정보 갱신
                         haveStatUpdate(cardbook_all);
                         //카드 db 갱신,카드리스트 갱신
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard0());
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard0());
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard0())).setGetCard(cardCheck);
                         //카드
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -231,7 +230,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD1_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard1(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard1());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard1());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard1())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -246,7 +245,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD2_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard2(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard2());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard2());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard2())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -261,7 +260,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD3_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard3(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard3());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard3());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard3())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -276,7 +275,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD4_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard4(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard4());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard4());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard4())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -291,7 +290,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD5_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard5(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard5());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard5());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard5())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -306,7 +305,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD6_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard6(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard6());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard6());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard6())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -321,7 +320,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD7_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard7(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard7());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard7());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard7())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -336,7 +335,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD8_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard8(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard8());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard8());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard8())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
@@ -351,7 +350,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD9_CHECK, cardCheck, cardbook_all.get(pos).getId());
                         cardbook_all.get(pos).setCheckCard9(cardCheck);
                         haveStatUpdate(cardbook_all);
-                        cardDbHelper.UpdateInfoCardCheck(CARD_COLUMN_CHECK, cardCheck, cardbook_all.get(pos).getCard9());    //카드 db 갱신
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, cardbook_all.get(pos).getCard9());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, cardbook_all.get(pos).getCard9())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainActivity) MainActivity.mainContext).setCardBookStatInfo(haveStat);
