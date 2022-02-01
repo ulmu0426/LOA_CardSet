@@ -130,12 +130,18 @@ public class SettingCardAdapter2 extends RecyclerView.Adapter<SettingCardAdapter
         holder.isGetCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean tf = !holder.isGetCheckbox.isChecked();
-                int check = isChecked(tf);
-                holder.isGetCheckbox.setChecked(tf);
-                useCardList.get(positionGet).setGetCard(check);
-                cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(check);
-                cardDBHelper.UpdateInfoCardCheck(check, useCardList.get(positionGet).getId());
+                boolean checked = holder.isGetCheckbox.isChecked();
+                holder.isGetCheckbox.setChecked(checked);
+                if (holder.isGetCheckbox.isChecked()) {
+                    useCardList.get(positionGet).setGetCard(1);
+                    cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(1);
+                    cardDBHelper.UpdateInfoCardCheck(1, useCardList.get(positionGet).getId());
+                } else {
+                    useCardList.get(positionGet).setGetCard(0);
+                    cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(0);
+                    cardDBHelper.UpdateInfoCardCheck(0, useCardList.get(positionGet).getId());
+                }
+
             }
         });
 
