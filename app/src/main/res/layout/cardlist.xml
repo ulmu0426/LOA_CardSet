@@ -47,6 +47,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imgSearchLegend"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvLegendList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvLegendList"
                 android:layout_width="match_parent"
@@ -59,7 +69,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardLegend"
-                tools:listitem="@layout/rv_cardlist2" />
+                tools:listitem="@layout/rv_cardlist" />
 
             <TextView
                 android:id="@+id/cardEpic"
@@ -85,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardEpic"
-                tools:listitem="@layout/rv_cardlist2" />
+                tools:listitem="@layout/rv_cardlist" />
 
             <TextView
                 android:id="@+id/cardRare"
@@ -111,7 +121,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardRare"
-                tools:listitem="@layout/rv_cardlist2" />
+                tools:listitem="@layout/rv_cardlist" />
 
             <TextView
                 android:id="@+id/cardUncommon"
@@ -137,7 +147,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardUncommon"
-                tools:listitem="@layout/rv_cardlist2" />
+                tools:listitem="@layout/rv_cardlist" />
 
             <TextView
                 android:id="@+id/cardCommon"
@@ -163,7 +173,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardCommon"
-                tools:listitem="@layout/rv_cardlist2" />
+                tools:listitem="@layout/rv_cardlist" />
 
             <TextView
                 android:id="@+id/cardSpecial"
@@ -189,7 +199,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardSpecial"
-                tools:listitem="@layout/rv_cardlist2" />
+                tools:listitem="@layout/rv_cardlist" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
