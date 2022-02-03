@@ -166,7 +166,7 @@ public class LOA_CardDB extends SQLiteOpenHelper {
             this.close();
             try {
                 copyDataBase();
-            } catch (IOException mIOExeption) {
+            } catch (IOException mIOException) {
                 throw new Error("ErrorCopyingDataBase");
             }
         }

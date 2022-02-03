@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,39 +22,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
     private ArrayList<CardInfo> cardInfo;
-    private ArrayList<CardInfo> cardLegend;
-    private ArrayList<CardInfo> cardEpic;
-    private ArrayList<CardInfo> cardRare;
-    private ArrayList<CardInfo> cardUncommon;
-    private ArrayList<CardInfo> cardCommon;
-    private ArrayList<CardInfo> cardSpecial;
     private Context context;
     private LOA_CardDB cardDBHelper;
     private ArrayList<CardInfo> useCardList;
+    private ArrayList<CardInfo> searchList;
 
-    private String LEGEND = "전설";
-    private String EPIC = "영웅";
-    private String RARE = "희귀";
-    private String UNCOMMON = "고급";
-    private String COMMON = "일반";
-    private String SPECIAL = "스페셜";
-
-    private String cardListGrade;
-
-    String preAwake;
-    int awakeValue;
-    String preHave;
-
-    public SettingCardAdapter(Context context, String grade) {      //그레이드에 따라 구현
+    public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
-        this.cardListGrade = grade;
+        this.useCardList = useCardList;
+        this.searchList = useCardList;
         cardDBHelper = new LOA_CardDB(context);
-        settingCardList();
-        whatCardList();
     }
 
     @NonNull
@@ -74,11 +57,11 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.img.setImageResource(R.drawable.card_legend_wei);
         defaultColorFilter(holder.img, position, filter);
 
-        holder.txtName.setText(useCardList.get(position).getName());
+        holder.txtName.setText(searchList.get(position).getName());
 
-        holder.txtAwake.setText(useCardList.get(position).getAwake() + "");
-        holder.txtHave.setText(useCardList.get(position).getCount() + "");
-        holder.isGetCheckbox.setChecked(isChecked(useCardList.get(position).getGetCard()));
+        holder.txtAwake.setText(searchList.get(position).getAwake() + "");
+        holder.txtHave.setText(searchList.get(position).getCount() + "");
+        holder.isGetCheckbox.setChecked(isChecked(searchList.get(position).getGetCard()));
 
         holder.changeAwakeHave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,11 +94,14 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         //카드 arrayList update
                         useCardList.get(positionGet).setAwake(awake);
                         useCardList.get(positionGet).setCount(number);
-                        cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setAwake(awake);
-                        cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setCount(number);
+                        searchList.get(positionGet).setAwake(awake);
+                        searchList.get(positionGet).setCount(number);
+
+                        cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setAwake(awake);
+                        cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setCount(number);
                         //카드 DB update
-                        cardDBHelper.UpdateInfoCardAwake(awake, useCardList.get(positionGet).getId());
-                        cardDBHelper.UpdateInfoCardNum(number, useCardList.get(positionGet).getId());
+                        cardDBHelper.UpdateInfoCardAwake(awake, searchList.get(positionGet).getId());
+                        cardDBHelper.UpdateInfoCardNum(number, searchList.get(positionGet).getId());
 
                         Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                         notifyDataSetChanged();
@@ -134,12 +120,14 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 holder.isGetCheckbox.setChecked(checked);
                 if (holder.isGetCheckbox.isChecked()) {
                     useCardList.get(positionGet).setGetCard(1);
+                    searchList.get(positionGet).setGetCard(1);
                     cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(1);
                     cardDBHelper.UpdateInfoCardCheck(1, useCardList.get(positionGet).getId());
                 } else {
                     useCardList.get(positionGet).setGetCard(0);
-                    cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(0);
-                    cardDBHelper.UpdateInfoCardCheck(0, useCardList.get(positionGet).getId());
+                    searchList.get(positionGet).setGetCard(0);
+                    cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setGetCard(0);
+                    cardDBHelper.UpdateInfoCardCheck(0, searchList.get(positionGet).getId());
                 }
 
             }
@@ -149,7 +137,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
     @Override
     public int getItemCount() {
-        return useCardList.size();
+        return searchList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -171,93 +159,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         }
     }
 
-
-    private void settingCardList() {
-        cardLegend = new ArrayList<CardInfo>();
-        cardEpic = new ArrayList<CardInfo>();
-        cardRare = new ArrayList<CardInfo>();
-        cardUncommon = new ArrayList<CardInfo>();
-        cardCommon = new ArrayList<CardInfo>();
-        cardSpecial = new ArrayList<CardInfo>();
-
-        for (int i = 0; i < cardInfo.size(); i++) {
-            CardInfo ci = new CardInfo();
-            if (cardInfo.get(i).getGrade().equals(LEGEND)) {
-                ci.setId(cardInfo.get(i).getId());
-                ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
-                ci.setAwake(cardInfo.get(i).getAwake());
-                ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
-                cardLegend.add(ci);
-            } else if (cardInfo.get(i).getGrade().equals(EPIC)) {
-                ci.setId(cardInfo.get(i).getId());
-                ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
-                ci.setAwake(cardInfo.get(i).getAwake());
-                ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
-                cardEpic.add(ci);
-            } else if (cardInfo.get(i).getGrade().equals(RARE)) {
-                ci.setId(cardInfo.get(i).getId());
-                ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
-                ci.setAwake(cardInfo.get(i).getAwake());
-                ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
-                cardRare.add(ci);
-            } else if (cardInfo.get(i).getGrade().equals(UNCOMMON)) {
-                ci.setId(cardInfo.get(i).getId());
-                ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
-                ci.setAwake(cardInfo.get(i).getAwake());
-                ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
-                cardUncommon.add(ci);
-            } else if (cardInfo.get(i).getGrade().equals(COMMON)) {
-                ci.setId(cardInfo.get(i).getId());
-                ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
-                ci.setAwake(cardInfo.get(i).getAwake());
-                ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
-                cardCommon.add(ci);
-            } else if (cardInfo.get(i).getGrade().equals(SPECIAL)) {
-                ci.setId(cardInfo.get(i).getId());
-                ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
-                ci.setAwake(cardInfo.get(i).getAwake());
-                ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
-                cardSpecial.add(ci);
-            } else {
-                continue;
-            }
-        }
-    }
-
-    private void whatCardList() {
-        useCardList = new ArrayList<CardInfo>();
-        if (cardListGrade.equals(LEGEND)) {
-            useCardList = cardLegend;
-        } else if (cardListGrade.equals(EPIC)) {
-            useCardList = cardEpic;
-        } else if (cardListGrade.equals(RARE)) {
-            useCardList = cardRare;
-        } else if (cardListGrade.equals(UNCOMMON)) {
-            useCardList = cardUncommon;
-        } else if (cardListGrade.equals(COMMON)) {
-            useCardList = cardCommon;
-        } else if (cardListGrade.equals(SPECIAL)) {
-            useCardList = cardSpecial;
-        }
-    }
 
     private void defaultColorFilter(ImageView iv, int position, ColorFilter filter) {
         if (useCardList.get(position).getGetCard() == 0) {
@@ -329,4 +230,34 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         }
         return index;
     }
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    searchList = useCardList;
+                } else {
+                    ArrayList<CardInfo> filteringList = new ArrayList<CardInfo>();
+                    for (int i = 0; i < useCardList.size(); i++) {
+                        if (useCardList.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteringList.add(useCardList.get(i));
+                        }
+                    }
+                    searchList = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = searchList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                searchList = (ArrayList<CardInfo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 }

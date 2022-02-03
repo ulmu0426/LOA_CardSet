@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/txtCardList"
@@ -14,20 +13,21 @@
         android:background="#99424242"
         android:text="카드 리스트"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="25dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/svCardAdapter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/svCardAdapter"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/svCardAdapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCardList"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtCardList">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,12 +36,22 @@
 
 
             <TextView
-                android:id="@+id/cardLegend"
+                android:id="@+id/txtCardLegend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:text="전설 카드"
                 android:textSize="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvLegendList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editSearchCardL"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/rvLegendList"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,16 +73,16 @@
                 android:layout_height="350dp"
                 android:background="#4DFDD835"
                 android:orientation="vertical"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/cardEpic"
+                app:layout_constraintBottom_toTopOf="@+id/txtCardEpic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardLegend"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardLegend"
+                tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
             <TextView
-                android:id="@+id/cardEpic"
+                android:id="@+id/txtCardEpic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
@@ -83,22 +93,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvLegendList" />
 
+            <EditText
+                android:id="@+id/editSearchCardE"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/rvEpicList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvLegendList" />
+
+            <ImageView
+                android:id="@+id/imgSearchEpic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvEpicList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvLegendList"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEpicList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="#265E35B1"
                 android:orientation="vertical"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/cardRare"
+                app:layout_constraintBottom_toTopOf="@+id/txtCardRare"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardEpic"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardEpic"
+                tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
             <TextView
-                android:id="@+id/cardRare"
+                android:id="@+id/txtCardRare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
@@ -109,22 +139,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvEpicList" />
 
+            <EditText
+                android:id="@+id/editSearchCardR"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/rvRareList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvEpicList" />
+
+            <ImageView
+                android:id="@+id/imgSearchRare"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvRareList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvEpicList"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRareList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="#331E88E5"
                 android:orientation="vertical"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/cardUncommon"
+                app:layout_constraintBottom_toTopOf="@+id/txtCardUncommon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardRare"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardRare"
+                tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
             <TextView
-                android:id="@+id/cardUncommon"
+                android:id="@+id/txtCardUncommon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
@@ -135,22 +185,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvRareList" />
 
+            <EditText
+                android:id="@+id/editSearchCardU"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/rvUncommonList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvRareList" />
+
+            <ImageView
+                android:id="@+id/imgSearchUncommon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvUncommonList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvRareList"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUncommonList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="#4D83FF00"
                 android:orientation="vertical"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/cardCommon"
+                app:layout_constraintBottom_toTopOf="@+id/txtCardCommon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardUncommon"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardUncommon"
+                tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
             <TextView
-                android:id="@+id/cardCommon"
+                android:id="@+id/txtCardCommon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
@@ -161,22 +231,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvUncommonList" />
 
+            <EditText
+                android:id="@+id/editSearchCardC"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/rvCommonList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvUncommonList" />
+
+            <ImageView
+                android:id="@+id/imgSearchCommon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvCommonList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvUncommonList"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCommonList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="#33BFBFBF"
                 android:orientation="vertical"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/cardSpecial"
+                app:layout_constraintBottom_toTopOf="@+id/txtCardSpecial"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardCommon"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardCommon"
+                tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
             <TextView
-                android:id="@+id/cardSpecial"
+                android:id="@+id/txtCardSpecial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
@@ -187,18 +277,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvCommonList" />
 
+            <EditText
+                android:id="@+id/editSearchCardS"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/rvSpecialList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvCommonList" />
+
+            <ImageView
+                android:id="@+id/imgSearchSpecial"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvSpecialList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvCommonList"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSpecialList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="#33FDB2FF"
                 android:orientation="vertical"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardSpecial"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardSpecial"
+                tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,18 +1,15 @@
 package com.example.lostarkcardstatus;
 
-import android.app.Dialog;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.collection.CircularArray;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -41,11 +38,31 @@ public class SettingCard extends AppCompatActivity {
     private SettingCardAdapter settingCardAdapterS;
 
 
-    private ArrayList<CardInfo> searchList;
-    private EditText editSearch;
+    private TextView txtCardLegend;
+    private EditText editSearchCardL;
     private ImageView imgSearchLegend;
-    private Button btnCancer;
-    private Button btnOk;
+
+    private TextView txtCardEpic;
+    private EditText editSearchCardE;
+    private ImageView imgSearchEpic;
+
+    private TextView txtCardRare;
+    private EditText editSearchCardR;
+    private ImageView imgSearchRare;
+
+    private TextView txtCardUncommon;
+    private EditText editSearchCardU;
+    private ImageView imgSearchUncommon;
+
+    private TextView txtCardCommon;
+    private EditText editSearchCardC;
+    private ImageView imgSearchCommon;
+
+    private TextView txtCardSpecial;
+    private EditText editSearchCardS;
+    private ImageView imgSearchSpecial;
+
+
     private ArrayList<CardInfo> cardLegend;
     private ArrayList<CardInfo> cardEpic;
     private ArrayList<CardInfo> cardRare;
@@ -69,86 +86,224 @@ public class SettingCard extends AppCompatActivity {
         rvCommonList = findViewById(R.id.rvCommonList);
         rvSpecialList = findViewById(R.id.rvSpecialList);
 
-        settingCardAdapterL = new SettingCardAdapter(this, LEGEND);
+        settingCardAdapterL = new SettingCardAdapter(this, cardLegend);
         rvLegendList.setAdapter(settingCardAdapterL);
 
-        Dialog dialogSearch = new Dialog(this, android.R.style.Theme_Material_Light_Dialog);
-        dialogSearch.setContentView(R.layout.dialog_search_card);
-        editSearch = dialogSearch.findViewById(R.id.editSearchCard);
-        btnCancer = dialogSearch.findViewById(R.id.btnCancer);
-        btnOk = dialogSearch.findViewById(R.id.btnOK);
+        txtCardLegend = (TextView) findViewById(R.id.txtCardLegend);
+        editSearchCardL = (EditText) findViewById(R.id.editSearchCardL);
+
+        editSearchCardL.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingCardAdapterL.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         imgSearchLegend = (ImageView) findViewById(R.id.imgSearchLegend);
         imgSearchLegend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogSearch.show();
-
-                btnCancer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogSearch.cancel();
-                    }
-                });
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editSearch.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable s) {
-                                String text = editSearch.getText().toString();
-                                search(text, cardLegend, settingCardAdapterL);
-                            }
-                        });
-                        dialogSearch.cancel();
-                    }
-                });
-
+                if (editSearchCardL.getVisibility() == View.INVISIBLE) {
+                    editSearchCardL.setVisibility(View.VISIBLE);
+                    txtCardLegend.setVisibility(View.INVISIBLE);
+                } else {
+                    editSearchCardL.setVisibility(View.INVISIBLE);
+                    txtCardLegend.setVisibility(View.VISIBLE);
+                }
             }
         });
 
-        settingCardAdapterE = new SettingCardAdapter(this, EPIC);
+        settingCardAdapterE = new SettingCardAdapter(this, cardEpic);
         rvEpicList.setAdapter(settingCardAdapterE);
 
-        settingCardAdapterR = new SettingCardAdapter(this, RARE);
-        rvRareList.setAdapter(settingCardAdapterR);
+        txtCardEpic = (TextView) findViewById(R.id.txtCardEpic);
+        editSearchCardE = (EditText) findViewById(R.id.editSearchCardE);
 
-        settingCardAdapterU = new SettingCardAdapter(this, UNCOMMON);
-        rvUncommonList.setAdapter(settingCardAdapterU);
+        editSearchCardE.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        settingCardAdapterC = new SettingCardAdapter(this, COMMON);
-        rvCommonList.setAdapter(settingCardAdapterC);
+            }
 
-        settingCardAdapterS = new SettingCardAdapter(this, SPECIAL);
-        rvSpecialList.setAdapter(settingCardAdapterS);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingCardAdapterE.getFilter().filter(s);
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
-    }
-
-    private void search(String searchText, ArrayList<CardInfo> lawList, SettingCardAdapter adapter) {
-        searchList = new ArrayList<CardInfo>();
-
-        if (searchText.length() == 0) {
-            searchList.addAll(lawList);
-        } else {
-            for (int i = 0; i < lawList.size(); i++) {
-                if (lawList.get(i).getName().toLowerCase().contains(searchText)) {
-                    searchList.add(lawList.get(i));
+        imgSearchEpic = (ImageView) findViewById(R.id.imgSearchEpic);
+        imgSearchEpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSearchCardE.getVisibility() == View.INVISIBLE) {
+                    editSearchCardE.setVisibility(View.VISIBLE);
+                    txtCardEpic.setVisibility(View.INVISIBLE);
+                } else {
+                    editSearchCardE.setVisibility(View.INVISIBLE);
+                    txtCardEpic.setVisibility(View.VISIBLE);
                 }
             }
-        }
-        adapter.notifyDataSetChanged();
+        });
+
+        settingCardAdapterR = new SettingCardAdapter(this, cardRare);
+        rvRareList.setAdapter(settingCardAdapterR);
+
+        txtCardRare = (TextView) findViewById(R.id.txtCardRare);
+        editSearchCardR = (EditText) findViewById(R.id.editSearchCardR);
+
+        editSearchCardR.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingCardAdapterR.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        imgSearchRare = (ImageView) findViewById(R.id.imgSearchRare);
+        imgSearchRare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSearchCardR.getVisibility() == View.INVISIBLE) {
+                    editSearchCardR.setVisibility(View.VISIBLE);
+                    txtCardRare.setVisibility(View.INVISIBLE);
+                } else {
+                    editSearchCardR.setVisibility(View.INVISIBLE);
+                    txtCardRare.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        settingCardAdapterU = new SettingCardAdapter(this, cardUncommon);
+        rvUncommonList.setAdapter(settingCardAdapterU);
+
+        txtCardUncommon = (TextView) findViewById(R.id.txtCardUncommon);
+        editSearchCardU = (EditText) findViewById(R.id.editSearchCardU);
+
+        editSearchCardU.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingCardAdapterU.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        imgSearchUncommon = (ImageView) findViewById(R.id.imgSearchUncommon);
+        imgSearchUncommon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSearchCardU.getVisibility() == View.INVISIBLE) {
+                    editSearchCardU.setVisibility(View.VISIBLE);
+                    txtCardUncommon.setVisibility(View.INVISIBLE);
+                } else {
+                    editSearchCardU.setVisibility(View.INVISIBLE);
+                    txtCardUncommon.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        settingCardAdapterC = new SettingCardAdapter(this, cardCommon);
+        rvCommonList.setAdapter(settingCardAdapterC);
+
+        txtCardCommon = (TextView) findViewById(R.id.txtCardCommon);
+        editSearchCardC = (EditText) findViewById(R.id.editSearchCardC);
+
+        editSearchCardC.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingCardAdapterC.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        imgSearchCommon = (ImageView) findViewById(R.id.imgSearchCommon);
+        imgSearchCommon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSearchCardC.getVisibility() == View.INVISIBLE) {
+                    editSearchCardC.setVisibility(View.VISIBLE);
+                    txtCardCommon.setVisibility(View.INVISIBLE);
+                } else {
+                    editSearchCardC.setVisibility(View.INVISIBLE);
+                    txtCardCommon.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        settingCardAdapterS = new SettingCardAdapter(this, cardSpecial);
+        rvSpecialList.setAdapter(settingCardAdapterS);
+
+        txtCardSpecial = (TextView) findViewById(R.id.txtCardSpecial);
+        editSearchCardS = (EditText) findViewById(R.id.editSearchCardS);
+
+        editSearchCardS.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                settingCardAdapterS.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        imgSearchSpecial = (ImageView) findViewById(R.id.imgSearchSpecial);
+        imgSearchSpecial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSearchCardS.getVisibility() == View.INVISIBLE) {
+                    editSearchCardS.setVisibility(View.VISIBLE);
+                    txtCardSpecial.setVisibility(View.INVISIBLE);
+                } else {
+                    editSearchCardS.setVisibility(View.INVISIBLE);
+                    txtCardSpecial.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
     }
+
 
     private void settingCardList() {
         cardLegend = new ArrayList<CardInfo>();
