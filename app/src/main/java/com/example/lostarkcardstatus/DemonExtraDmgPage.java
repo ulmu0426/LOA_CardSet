@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class DemonExtraDmg_page extends AppCompatActivity {
+public class DemonExtraDmgPage extends AppCompatActivity {
     private RecyclerView rv;
     private TextView txtDemonExtraDmg_DemonExtraPage;
     private TextView txtCompleteDED;

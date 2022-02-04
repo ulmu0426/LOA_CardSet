@@ -25,7 +25,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private ArrayList<CardInfo> cardInfo;
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
     private Context context;
-    private LOA_CardDB cardDbHelper;
+    private CardDBHelper cardDbHelper;
     private MainAdapter mainAdapter;
     private final String CARDSET_AWAKE = "각성 : ";
     private final String CARDSET_CARD_NUM = "보유 : ";
@@ -45,7 +45,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         this.context = context;
         this.mainAdapter = ((MainActivity) MainActivity.mainContext).mainAdapter;
         this.favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
-        cardDbHelper = new LOA_CardDB(context);
+        cardDbHelper = new CardDBHelper(context);
         ((MainActivity) MainActivity.mainContext).haveCardSetCheckUpdate();
     }
 

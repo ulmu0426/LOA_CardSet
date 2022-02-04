@@ -20,9 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CardSet_page"></activity>
-        <activity android:name=".cardBookPage"></activity>
-        <activity android:name=".DemonExtraDmg_page"></activity>
+        <activity android:name=".CardSetPage"></activity>
+        <activity android:name=".CardBookPage"></activity>
+        <activity android:name=".DemonExtraDmgPage"></activity>
         <activity android:name=".SettingCard"></activity>
     </application>
 

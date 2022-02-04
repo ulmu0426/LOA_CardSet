@@ -22,12 +22,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
     private ArrayList<CardInfo> cardInfo;
     private Context context;
-    private LOA_CardDB cardDBHelper;
+    private CardDBHelper cardDBHelper;
     private ArrayList<CardInfo> useCardList;
     private ArrayList<CardInfo> searchList;
 
@@ -36,7 +35,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         this.context = context;
         this.useCardList = useCardList;
         this.searchList = useCardList;
-        cardDBHelper = new LOA_CardDB(context);
+        cardDBHelper = new CardDBHelper(context);
     }
 
     @NonNull
@@ -116,8 +115,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.isGetCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean checked = holder.isGetCheckbox.isChecked();
-                holder.isGetCheckbox.setChecked(checked);
                 if (holder.isGetCheckbox.isChecked()) {
                     useCardList.get(positionGet).setGetCard(1);
                     searchList.get(positionGet).setGetCard(1);

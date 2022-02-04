@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class LOA_CardDB extends SQLiteOpenHelper {
+public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
     private static final int DATABASE_VERSION = 1;
@@ -147,7 +147,7 @@ public class LOA_CardDB extends SQLiteOpenHelper {
     private static final String FAVORITE_CARD_SET_COLUMN_AWAKE = "awake";
 
 
-    public LOA_CardDB(@Nullable Context context) {
+    public CardDBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if (android.os.Build.VERSION.SDK_INT >= 17) {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
@@ -304,8 +304,8 @@ public class LOA_CardDB extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<CardbookInfo> getCardBookInfo_All() {       //카드도감 전체 항목 가져오기
-        ArrayList<CardbookInfo> getInfo = new ArrayList<>();
+    public ArrayList<CardBookInfo> getCardBookInfo_All() {       //카드도감 전체 항목 가져오기
+        ArrayList<CardBookInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id DESC", null);
@@ -338,7 +338,7 @@ public class LOA_CardDB extends SQLiteOpenHelper {
                 int checkCard8 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD8));
                 int checkCard9 = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_CHECKCARD9));
 
-                CardbookInfo cardbook_info = new CardbookInfo();
+                CardBookInfo cardbook_info = new CardBookInfo();
                 cardbook_info.setId(id);
                 cardbook_info.setName(name);
                 cardbook_info.setValue(value);

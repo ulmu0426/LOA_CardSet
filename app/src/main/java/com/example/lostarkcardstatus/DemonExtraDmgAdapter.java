@@ -25,9 +25,9 @@ import java.util.ArrayList;
 public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdapter.ViewHolder> {
     private ArrayList<DemonExtraDmgInfo> DEDInfo;
     private Context context;
-    private DemonExtraDmg_page DED_page;
+    private DemonExtraDmgPage DED_page;
     private ArrayList<CardInfo> cardInfo;
-    private LOA_CardDB cardDbHelper;
+    private CardDBHelper cardDbHelper;
 
     private final String DED_COLUMN_NAME_CARD0_CHECK = "checkCard0";
     private final String DED_COLUMN_NAME_CARD1_CHECK = "checkCard1";
@@ -65,11 +65,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return haveDED;
     }
 
-    public DemonExtraDmgAdapter(Context context, DemonExtraDmg_page demonExtraDmg_page) {
+    public DemonExtraDmgAdapter(Context context, DemonExtraDmgPage demonExtraDmg_page) {
         this.DEDInfo = ((MainActivity) MainActivity.mainContext).DEDInfo;
         this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
         this.context = context;
-        cardDbHelper = new LOA_CardDB(context);
+        cardDbHelper = new CardDBHelper(context);
         this.DED_page = demonExtraDmg_page;
         ((MainActivity) MainActivity.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();
