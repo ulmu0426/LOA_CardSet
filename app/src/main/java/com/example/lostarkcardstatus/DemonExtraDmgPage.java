@@ -1,6 +1,8 @@
 package com.example.lostarkcardstatus;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,9 @@ public class DemonExtraDmgPage extends AppCompatActivity {
     private RecyclerView rv;
     private TextView txtDemonExtraDmg_DemonExtraPage;
     private TextView txtCompleteDED;
+    private CheckBox checkBoxInvisibilityDEDPage;
 
+    private CharSequence check;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +33,19 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         DemonExtraDmgAdapter adapter = new DemonExtraDmgAdapter(this, this);
         rv.setAdapter(adapter);
 
-        //DEDAdapter에서 값 정리를 다 하면 활성화 시킬것
-        //setDED(adapter.getHaveDED());
+        checkBoxInvisibilityDEDPage = (CheckBox) findViewById(R.id.checkBoxInvisibilityDEDPage);
+        checkBoxInvisibilityDEDPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkBoxInvisibilityDEDPage.isChecked()){
+                    check = "notNull";
+                }else {
+                    check = "";
+                }
+                adapter.getFilter().filter(check);
+            }
+        });
+
 
     }
 

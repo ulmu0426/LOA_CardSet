@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdapter.ViewHolder> {
     private ArrayList<DemonExtraDmgInfo> DEDInfo;
+    private ArrayList<DemonExtraDmgInfo> filterDED;
     private Context context;
     private DemonExtraDmgPage DED_page;
     private ArrayList<CardInfo> cardInfo;
@@ -66,12 +68,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public DemonExtraDmgAdapter(Context context, DemonExtraDmgPage demonExtraDmg_page) {
-        this.DEDInfo = ((MainActivity) MainActivity.mainContext).DEDInfo;
-        this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
+        this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
+        this.filterDED = ((MainPage) MainPage.mainContext).DEDInfo;
+        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.context = context;
         cardDbHelper = new CardDBHelper(context);
         this.DED_page = demonExtraDmg_page;
-        ((MainActivity) MainActivity.mainContext).haveDEDCardCheckUpdate();
+        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();
     }
 
@@ -95,8 +98,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
-        holder.txtCardbookName_DED.setText(DEDInfo.get(position).getName());
-        holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : +" + DEDInfo.get(position).getDmgSum(DEDInfo.get(position).getHaveAwake()) + "%");
+        holder.txtCardbookName_DED.setText(filterDED.get(position).getName());
+        holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : +" + filterDED.get(position).getDmgSum(filterDED.get(position).getHaveAwake()) + "%");
 
         //이미지뷰 구현할것
         holder.imgDEDCard0.setImageResource(R.drawable.card_legend_kadan);
@@ -111,48 +114,48 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         holder.imgDEDCard9.setImageResource(R.drawable.card_legend_aman);
 
         //카드 이름 텍스트
-        holder.txtDEDCardName0.setText(DEDInfo.get(position).getCard0());
-        holder.txtDEDCardName1.setText(DEDInfo.get(position).getCard1());
-        holder.txtDEDCardName2.setText(DEDInfo.get(position).getCard2());
-        holder.txtDEDCardName3.setText(DEDInfo.get(position).getCard3());
-        holder.txtDEDCardName4.setText(DEDInfo.get(position).getCard4());
-        holder.txtDEDCardName5.setText(DEDInfo.get(position).getCard5());
-        holder.txtDEDCardName6.setText(DEDInfo.get(position).getCard6());
-        holder.txtDEDCardName7.setText(DEDInfo.get(position).getCard7());
-        holder.txtDEDCardName8.setText(DEDInfo.get(position).getCard8());
-        holder.txtDEDCardName9.setText(DEDInfo.get(position).getCard9());
+        holder.txtDEDCardName0.setText(filterDED.get(position).getCard0());
+        holder.txtDEDCardName1.setText(filterDED.get(position).getCard1());
+        holder.txtDEDCardName2.setText(filterDED.get(position).getCard2());
+        holder.txtDEDCardName3.setText(filterDED.get(position).getCard3());
+        holder.txtDEDCardName4.setText(filterDED.get(position).getCard4());
+        holder.txtDEDCardName5.setText(filterDED.get(position).getCard5());
+        holder.txtDEDCardName6.setText(filterDED.get(position).getCard6());
+        holder.txtDEDCardName7.setText(filterDED.get(position).getCard7());
+        holder.txtDEDCardName8.setText(filterDED.get(position).getCard8());
+        holder.txtDEDCardName9.setText(filterDED.get(position).getCard9());
         //미 획득 카드는 흑백으로
-        imgDefaultColor(holder.imgDEDCard0, filter, DEDInfo.get(position).getCheckCard0());
-        imgDefaultColor(holder.imgDEDCard1, filter, DEDInfo.get(position).getCheckCard1());
-        imgDefaultColor(holder.imgDEDCard2, filter, DEDInfo.get(position).getCheckCard2());
-        imgDefaultColor(holder.imgDEDCard3, filter, DEDInfo.get(position).getCheckCard3());
-        imgDefaultColor(holder.imgDEDCard4, filter, DEDInfo.get(position).getCheckCard4());
-        imgDefaultColor(holder.imgDEDCard5, filter, DEDInfo.get(position).getCheckCard5());
-        imgDefaultColor(holder.imgDEDCard6, filter, DEDInfo.get(position).getCheckCard6());
-        imgDefaultColor(holder.imgDEDCard7, filter, DEDInfo.get(position).getCheckCard7());
-        imgDefaultColor(holder.imgDEDCard8, filter, DEDInfo.get(position).getCheckCard8());
-        imgDefaultColor(holder.imgDEDCard9, filter, DEDInfo.get(position).getCheckCard9());
+        imgDefaultColor(holder.imgDEDCard0, filter, filterDED.get(position).getCheckCard0());
+        imgDefaultColor(holder.imgDEDCard1, filter, filterDED.get(position).getCheckCard1());
+        imgDefaultColor(holder.imgDEDCard2, filter, filterDED.get(position).getCheckCard2());
+        imgDefaultColor(holder.imgDEDCard3, filter, filterDED.get(position).getCheckCard3());
+        imgDefaultColor(holder.imgDEDCard4, filter, filterDED.get(position).getCheckCard4());
+        imgDefaultColor(holder.imgDEDCard5, filter, filterDED.get(position).getCheckCard5());
+        imgDefaultColor(holder.imgDEDCard6, filter, filterDED.get(position).getCheckCard6());
+        imgDefaultColor(holder.imgDEDCard7, filter, filterDED.get(position).getCheckCard7());
+        imgDefaultColor(holder.imgDEDCard8, filter, filterDED.get(position).getCheckCard8());
+        imgDefaultColor(holder.imgDEDCard9, filter, filterDED.get(position).getCheckCard9());
 
         //없는 카드 안 보이게
-        imgVisibility(DEDInfo.get(position).getCard2(), holder.imgDEDCard2, holder.txtDEDCardName2);
-        imgVisibility(DEDInfo.get(position).getCard3(), holder.imgDEDCard3, holder.txtDEDCardName3);
-        imgVisibility(DEDInfo.get(position).getCard4(), holder.imgDEDCard4, holder.txtDEDCardName4);
-        imgVisibility(DEDInfo.get(position).getCard5(), holder.imgDEDCard5, holder.txtDEDCardName5);
-        imgVisibility(DEDInfo.get(position).getCard6(), holder.imgDEDCard6, holder.txtDEDCardName6);
-        imgVisibility(DEDInfo.get(position).getCard7(), holder.imgDEDCard7, holder.txtDEDCardName7);
-        imgVisibility(DEDInfo.get(position).getCard8(), holder.imgDEDCard8, holder.txtDEDCardName8);
-        imgVisibility(DEDInfo.get(position).getCard9(), holder.imgDEDCard9, holder.txtDEDCardName9);
+        imgVisibility(filterDED.get(position).getCard2(), holder.imgDEDCard2, holder.txtDEDCardName2);
+        imgVisibility(filterDED.get(position).getCard3(), holder.imgDEDCard3, holder.txtDEDCardName3);
+        imgVisibility(filterDED.get(position).getCard4(), holder.imgDEDCard4, holder.txtDEDCardName4);
+        imgVisibility(filterDED.get(position).getCard5(), holder.imgDEDCard5, holder.txtDEDCardName5);
+        imgVisibility(filterDED.get(position).getCard6(), holder.imgDEDCard6, holder.txtDEDCardName6);
+        imgVisibility(filterDED.get(position).getCard7(), holder.imgDEDCard7, holder.txtDEDCardName7);
+        imgVisibility(filterDED.get(position).getCard8(), holder.imgDEDCard8, holder.txtDEDCardName8);
+        imgVisibility(filterDED.get(position).getCard9(), holder.imgDEDCard9, holder.txtDEDCardName9);
         //수집효과 나열
-        holder.txtDED_cardCollection.setText(DEDInfo.get(position).getCompleteDEDBook() + "장 수집");
-        holder.txtDED_cardAwake0.setText(DEDInfo.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
-                + DEDInfo.get(position).getAwake_sum0() + ") : 악마 계열 피해량 증가 +" + DEDInfo.get(position).getDmg_p0() + "%");
-        holder.txtDED_cardAwake1.setText(DEDInfo.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
-                + DEDInfo.get(position).getAwake_sum1() + ") : 악마 계열 피해량 증가 +" + DEDInfo.get(position).getDmg_p1() + "%");
-        holder.txtDED_cardAwake2.setText(DEDInfo.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
-                + DEDInfo.get(position).getAwake_sum2() + ") : 악마 계열 피해량 증가 +" + DEDInfo.get(position).getDmg_p2() + "%");
+        holder.txtDED_cardCollection.setText(filterDED.get(position).getCompleteDEDBook() + "장 수집");
+        holder.txtDED_cardAwake0.setText(filterDED.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
+                + filterDED.get(position).getAwake_sum0() + ") : 악마 계열 피해량 증가 +" + filterDED.get(position).getDmg_p0() + "%");
+        holder.txtDED_cardAwake1.setText(filterDED.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
+                + filterDED.get(position).getAwake_sum1() + ") : 악마 계열 피해량 증가 +" + filterDED.get(position).getDmg_p1() + "%");
+        holder.txtDED_cardAwake2.setText(filterDED.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
+                + filterDED.get(position).getAwake_sum2() + ") : 악마 계열 피해량 증가 +" + filterDED.get(position).getDmg_p2() + "%");
 
         //카드 모두 획득 + 각성도에 따라 배경 색 변환 흰/보라/민트/연두/노랑 순으로(노랑은 완전수집+풀각성)
-        isCompleteCardBookBackgroundColor(DEDInfo.get(position), holder.cvDemonExtraDmgBackground);
+        isCompleteCardBookBackgroundColor(filterDED.get(position), holder.cvDemonExtraDmgBackground);
 
 
         holder.cvDemonExtraDmgBackground.setOnClickListener(new View.OnClickListener() {
@@ -168,8 +171,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                 TextView txtDEDCardBookName = dialogDEDDetail.findViewById(R.id.txtDEDCardBookName);
                 TextView txtDED_AwakeValue = dialogDEDDetail.findViewById(R.id.txtDED_AwakeValue);
-                txtDEDCardBookName.setText(DEDInfo.get(pos).getName());
-                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                txtDEDCardBookName.setText(filterDED.get(pos).getName());
+                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                 ImageView imgDED_Detail_Card0 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card0);
                 ImageView imgDED_Detail_Card1 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card1);
@@ -194,16 +197,16 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card8.setImageResource(R.drawable.card_legend_kamaine);
                 imgDED_Detail_Card9.setImageResource(R.drawable.card_legend_aman);
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
-                imgDefaultColor(imgDED_Detail_Card0, filter, DEDInfo.get(pos).getCheckCard0());
-                imgDefaultColor(imgDED_Detail_Card1, filter, DEDInfo.get(pos).getCheckCard1());
-                imgDefaultColor(imgDED_Detail_Card2, filter, DEDInfo.get(pos).getCheckCard2());
-                imgDefaultColor(imgDED_Detail_Card3, filter, DEDInfo.get(pos).getCheckCard3());
-                imgDefaultColor(imgDED_Detail_Card4, filter, DEDInfo.get(pos).getCheckCard4());
-                imgDefaultColor(imgDED_Detail_Card5, filter, DEDInfo.get(pos).getCheckCard5());
-                imgDefaultColor(imgDED_Detail_Card6, filter, DEDInfo.get(pos).getCheckCard6());
-                imgDefaultColor(imgDED_Detail_Card7, filter, DEDInfo.get(pos).getCheckCard7());
-                imgDefaultColor(imgDED_Detail_Card8, filter, DEDInfo.get(pos).getCheckCard8());
-                imgDefaultColor(imgDED_Detail_Card9, filter, DEDInfo.get(pos).getCheckCard9());
+                imgDefaultColor(imgDED_Detail_Card0, filter, filterDED.get(pos).getCheckCard0());
+                imgDefaultColor(imgDED_Detail_Card1, filter, filterDED.get(pos).getCheckCard1());
+                imgDefaultColor(imgDED_Detail_Card2, filter, filterDED.get(pos).getCheckCard2());
+                imgDefaultColor(imgDED_Detail_Card3, filter, filterDED.get(pos).getCheckCard3());
+                imgDefaultColor(imgDED_Detail_Card4, filter, filterDED.get(pos).getCheckCard4());
+                imgDefaultColor(imgDED_Detail_Card5, filter, filterDED.get(pos).getCheckCard5());
+                imgDefaultColor(imgDED_Detail_Card6, filter, filterDED.get(pos).getCheckCard6());
+                imgDefaultColor(imgDED_Detail_Card7, filter, filterDED.get(pos).getCheckCard7());
+                imgDefaultColor(imgDED_Detail_Card8, filter, filterDED.get(pos).getCheckCard8());
+                imgDefaultColor(imgDED_Detail_Card9, filter, filterDED.get(pos).getCheckCard9());
 
                 //텍스트 연결
                 //카드 이름
@@ -230,37 +233,37 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 TextView txtDED_Detail_CardAwakeHaveCard9 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard9);
 
                 //카드 이름 세팅
-                txtDED_Detail_Card0.setText(DEDInfo.get(pos).getCard0());
-                txtDED_Detail_Card1.setText(DEDInfo.get(pos).getCard1());
-                txtDED_Detail_Card2.setText(DEDInfo.get(pos).getCard2());
-                txtDED_Detail_Card3.setText(DEDInfo.get(pos).getCard3());
-                txtDED_Detail_Card4.setText(DEDInfo.get(pos).getCard4());
-                txtDED_Detail_Card5.setText(DEDInfo.get(pos).getCard5());
-                txtDED_Detail_Card6.setText(DEDInfo.get(pos).getCard6());
-                txtDED_Detail_Card7.setText(DEDInfo.get(pos).getCard7());
-                txtDED_Detail_Card8.setText(DEDInfo.get(pos).getCard8());
-                txtDED_Detail_Card9.setText(DEDInfo.get(pos).getCard9());
+                txtDED_Detail_Card0.setText(filterDED.get(pos).getCard0());
+                txtDED_Detail_Card1.setText(filterDED.get(pos).getCard1());
+                txtDED_Detail_Card2.setText(filterDED.get(pos).getCard2());
+                txtDED_Detail_Card3.setText(filterDED.get(pos).getCard3());
+                txtDED_Detail_Card4.setText(filterDED.get(pos).getCard4());
+                txtDED_Detail_Card5.setText(filterDED.get(pos).getCard5());
+                txtDED_Detail_Card6.setText(filterDED.get(pos).getCard6());
+                txtDED_Detail_Card7.setText(filterDED.get(pos).getCard7());
+                txtDED_Detail_Card8.setText(filterDED.get(pos).getCard8());
+                txtDED_Detail_Card9.setText(filterDED.get(pos).getCard9());
                 //카드 각성도 세팅
-                txtDED_Detail_CardAwakeHaveCard0.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard0() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getCount());
-                txtDED_Detail_CardAwakeHaveCard1.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard1() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getCount());
-                txtDED_Detail_CardAwakeHaveCard2.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard2() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getCount());
-                txtDED_Detail_CardAwakeHaveCard3.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard3() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getCount());
-                txtDED_Detail_CardAwakeHaveCard4.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard4() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getCount());
-                txtDED_Detail_CardAwakeHaveCard5.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard5() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getCount());
-                txtDED_Detail_CardAwakeHaveCard6.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard6() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getCount());
-                txtDED_Detail_CardAwakeHaveCard7.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard7() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getCount());
-                txtDED_Detail_CardAwakeHaveCard8.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard8() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getCount());
-                txtDED_Detail_CardAwakeHaveCard9.setText(DED_DIALOG_CARD_AWAKE + DEDInfo.get(pos).getAwakeCard9() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getCount());
+                txtDED_Detail_CardAwakeHaveCard0.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard0() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getCount());
+                txtDED_Detail_CardAwakeHaveCard1.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard1() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getCount());
+                txtDED_Detail_CardAwakeHaveCard2.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard2() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getCount());
+                txtDED_Detail_CardAwakeHaveCard3.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard3() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getCount());
+                txtDED_Detail_CardAwakeHaveCard4.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard4() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getCount());
+                txtDED_Detail_CardAwakeHaveCard5.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard5() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getCount());
+                txtDED_Detail_CardAwakeHaveCard6.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard6() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getCount());
+                txtDED_Detail_CardAwakeHaveCard7.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard7() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getCount());
+                txtDED_Detail_CardAwakeHaveCard8.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard8() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getCount());
+                txtDED_Detail_CardAwakeHaveCard9.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard9() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getCount());
 
                 //없는 카드 안 보이게 - 카드 이미지, 카드 이름, 카드 각성도, 카드 보유 수
-                imgVisibility(DEDInfo.get(pos).getCard2(), imgDED_Detail_Card2, txtDED_Detail_Card2, txtDED_Detail_CardAwakeHaveCard2);
-                imgVisibility(DEDInfo.get(pos).getCard3(), imgDED_Detail_Card3, txtDED_Detail_Card3, txtDED_Detail_CardAwakeHaveCard3);
-                imgVisibility(DEDInfo.get(pos).getCard4(), imgDED_Detail_Card4, txtDED_Detail_Card4, txtDED_Detail_CardAwakeHaveCard4);
-                imgVisibility(DEDInfo.get(pos).getCard5(), imgDED_Detail_Card5, txtDED_Detail_Card5, txtDED_Detail_CardAwakeHaveCard5);
-                imgVisibility(DEDInfo.get(pos).getCard6(), imgDED_Detail_Card6, txtDED_Detail_Card6, txtDED_Detail_CardAwakeHaveCard6);
-                imgVisibility(DEDInfo.get(pos).getCard7(), imgDED_Detail_Card7, txtDED_Detail_Card7, txtDED_Detail_CardAwakeHaveCard7);
-                imgVisibility(DEDInfo.get(pos).getCard8(), imgDED_Detail_Card8, txtDED_Detail_Card8, txtDED_Detail_CardAwakeHaveCard8);
-                imgVisibility(DEDInfo.get(pos).getCard9(), imgDED_Detail_Card9, txtDED_Detail_Card9, txtDED_Detail_CardAwakeHaveCard9);
+                imgVisibility(filterDED.get(pos).getCard2(), imgDED_Detail_Card2, txtDED_Detail_Card2, txtDED_Detail_CardAwakeHaveCard2);
+                imgVisibility(filterDED.get(pos).getCard3(), imgDED_Detail_Card3, txtDED_Detail_Card3, txtDED_Detail_CardAwakeHaveCard3);
+                imgVisibility(filterDED.get(pos).getCard4(), imgDED_Detail_Card4, txtDED_Detail_Card4, txtDED_Detail_CardAwakeHaveCard4);
+                imgVisibility(filterDED.get(pos).getCard5(), imgDED_Detail_Card5, txtDED_Detail_Card5, txtDED_Detail_CardAwakeHaveCard5);
+                imgVisibility(filterDED.get(pos).getCard6(), imgDED_Detail_Card6, txtDED_Detail_Card6, txtDED_Detail_CardAwakeHaveCard6);
+                imgVisibility(filterDED.get(pos).getCard7(), imgDED_Detail_Card7, txtDED_Detail_Card7, txtDED_Detail_CardAwakeHaveCard7);
+                imgVisibility(filterDED.get(pos).getCard8(), imgDED_Detail_Card8, txtDED_Detail_Card8, txtDED_Detail_CardAwakeHaveCard8);
+                imgVisibility(filterDED.get(pos).getCard9(), imgDED_Detail_Card9, txtDED_Detail_Card9, txtDED_Detail_CardAwakeHaveCard9);
 
                 Dialog dialogChangeAwakeAndNum = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogChangeAwakeAndNum.setContentView(R.layout.awake_havecard_change);
@@ -273,8 +276,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard0() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard0() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getCount() + "");
 
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -288,17 +291,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard0(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard0(awake);
+                                filterDED.get(pos).setAwakeCard0(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard0.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -310,8 +314,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard1() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard1() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
 
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -325,17 +329,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard1(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard1(awake);
+                                filterDED.get(pos).setAwakeCard1(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard1.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -347,8 +352,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard2() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard2() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -361,17 +366,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard2(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard2(awake);
+                                filterDED.get(pos).setAwakeCard2(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard2.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -383,8 +389,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard3() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard3() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -397,17 +403,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard3(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard3(awake);
+                                filterDED.get(pos).setAwakeCard3(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard3.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -419,8 +426,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard4() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard4() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -433,17 +440,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard4(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard4(awake);
+                                filterDED.get(pos).setAwakeCard4(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard4.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -455,8 +463,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard5() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard5() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -469,17 +477,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard5(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard5(awake);
+                                filterDED.get(pos).setAwakeCard5(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard5.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -491,8 +500,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard6() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard6() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -505,17 +514,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard6(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard6(awake);
+                                filterDED.get(pos).setAwakeCard6(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard6.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -527,8 +537,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard7() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard7() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -541,17 +551,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard7(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard7(awake);
+                                filterDED.get(pos).setAwakeCard7(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard7.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -563,8 +574,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard8() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard8() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -577,17 +588,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard8(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard8(awake);
+                                filterDED.get(pos).setAwakeCard8(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard8.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -599,8 +611,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(DEDInfo.get(pos).getAwakeCard9() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getCount() + "");
+                        etxtAwake.setText(filterDED.get(pos).getAwakeCard9() + "");
+                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getCount() + "");
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -613,17 +625,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                             public void onClick(View v) {
                                 int awake = awakeRangeSet(etxtAwake.getText().toString());
                                 int number = numRangeSet(etxtNum.getText().toString());
-                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, awake, DEDInfo.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).getId());    //카드 각성도 업데이트(cardListDB)
-                                DEDInfo.get(pos).setAwakeCard9(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setCount(number);
+                                cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
+                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getId());    //카드 각성도 업데이트(cardListDB)
+                                DEDInfo.get(getIndex(filterDED.get(pos))).setAwakeCard9(awake);
+                                filterDED.get(pos).setAwakeCard9(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).setAwake(awake);
+                                cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard9.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + DEDInfo.get(pos).getHaveAwake());
+                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
 
                                 updateDEDPage();
-                                isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                                 Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
@@ -636,13 +649,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card0, filter, DEDInfo.get(pos).getCheckCard0());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard0(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card0, filter, filterDED.get(pos).getCheckCard0());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard0(cardCheck);                                                        //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard0(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -651,13 +665,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card1, filter, DEDInfo.get(pos).getCheckCard1());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard1(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card1, filter, filterDED.get(pos).getCheckCard1());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard1(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard1(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -666,13 +681,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card2, filter, DEDInfo.get(pos).getCheckCard2());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard2(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card2, filter, filterDED.get(pos).getCheckCard2());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard2(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard2(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -681,13 +697,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card3, filter, DEDInfo.get(pos).getCheckCard3());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card3, filter, filterDED.get(pos).getCheckCard3());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard3(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -696,13 +713,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card4, filter, DEDInfo.get(pos).getCheckCard4());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card4, filter, filterDED.get(pos).getCheckCard4());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard4(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -711,13 +729,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card5, filter, DEDInfo.get(pos).getCheckCard5());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card5, filter, filterDED.get(pos).getCheckCard5());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard5(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -726,13 +745,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card6, filter, DEDInfo.get(pos).getCheckCard6());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card6, filter, filterDED.get(pos).getCheckCard6());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard6(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -741,13 +761,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card7, filter, DEDInfo.get(pos).getCheckCard7());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard7());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard7(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard7())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card7, filter, filterDED.get(pos).getCheckCard7());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard7());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard7(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard7(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -756,13 +777,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card8, filter, DEDInfo.get(pos).getCheckCard8());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard8());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard8(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard8())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card8, filter, filterDED.get(pos).getCheckCard8());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard8());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard8(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard8(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -771,13 +793,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card9, filter, DEDInfo.get(pos).getCheckCard9());
-                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, cardCheck, DEDInfo.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, DEDInfo.get(pos).getCard9());     //카드 수집 유무 업데이트(cardList DB)
-                        DEDInfo.get(pos).setCheckCard9(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
-                        cardInfo.get(getIndex(cardInfo, DEDInfo.get(pos).getCard9())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card9, filter, filterDED.get(pos).getCheckCard9());
+                        cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
+                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard9());     //카드 수집 유무 업데이트(cardList DB)
+                        DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard9(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
+                        filterDED.get(pos).setCheckCard9(cardCheck);
+                        cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
                         updateDEDPage();
-                        isCompleteCardBookBackgroundColor(DEDInfo.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                        isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
 
                         notifyDataSetChanged();
 
@@ -794,7 +817,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     @Override
     public int getItemCount() {
-        return DEDInfo.size();
+        return filterDED.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -926,6 +949,17 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             return false;
     }
 
+    private boolean isAllCompleteDED(DemonExtraDmgInfo DEDInfo) {
+        if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook()){
+            if(DEDInfo.getHaveAwake() == DEDInfo.getAwake_sum2())
+                return true;
+            else
+                return false;
+        }else{
+            return false;
+        }
+    }
+
 
     //악추피 값 합산.
     public void haveDEDUpdate() {
@@ -989,11 +1023,51 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     }
 
-
     private void updateDEDPage() {
         haveDEDUpdate();                                                                                     //악추피 값,완성도 갱신
         DED_page.setDED(haveDED);                                                                           //악추피 페이지 값 갱신한 것 세팅
         DED_page.setDEDBook(completeDED, getItemCount());                                                    //악추피 도감 완성도 갱신한 것 세팅
-        ((MainActivity) MainActivity.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
+        ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
     }
+
+    private int getIndex(DemonExtraDmgInfo demonExtraDmgInfo){
+        int index = 0;
+        for(int i =0 ;i<DEDInfo.size();i++){
+            if(DEDInfo.get(i).getId() == demonExtraDmgInfo.getId()) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filterDED = DEDInfo;
+                } else {
+                    ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
+                    for (int i = 0; i < DEDInfo.size(); i++) {
+                        if (!isAllCompleteDED(DEDInfo.get(i))) {
+                            filteringList.add(DEDInfo.get(i));
+                        }
+                    }
+                    filterDED = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filterDED;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filterDED = (ArrayList<DemonExtraDmgInfo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 }

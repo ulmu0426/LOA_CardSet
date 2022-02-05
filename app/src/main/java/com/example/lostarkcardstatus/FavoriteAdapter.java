@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     public Context context;
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
     protected ArrayList<FavoriteCardSetInfo> activationFavoriteCardSet;
 
-    public MainAdapter(Context context) {
+    public FavoriteAdapter(Context context) {
         this.context = context;
-        favoriteCardSetInfo = ((MainActivity) MainActivity.mainContext).favoriteCardSetInfo;
+        favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
         activationFavoriteCardSet = new ArrayList<FavoriteCardSetInfo>();
         updateActivationFavoriteCardSet();
     }

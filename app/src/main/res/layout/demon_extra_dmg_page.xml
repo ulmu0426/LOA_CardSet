@@ -161,7 +161,7 @@
                 android:textAlignment="center" />
 
             <CheckBox
-                android:id="@+id/checkboxCompleteDemonExtraEmgInvisibility"
+                android:id="@+id/checkBoxInvisibilityDEDPage"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:buttonTint="#676767"

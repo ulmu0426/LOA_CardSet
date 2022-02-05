@@ -31,7 +31,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private ArrayList<CardInfo> searchList;
 
     public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
-        this.cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
+        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.context = context;
         this.useCardList = useCardList;
         this.searchList = useCardList;

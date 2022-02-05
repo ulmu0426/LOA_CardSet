@@ -1,6 +1,8 @@
 package com.example.lostarkcardstatus;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +11,9 @@ public class CardSetPage extends AppCompatActivity {
 
     private RecyclerView rv;
     private CardDBHelper dbHelper;
+    private CheckBox checkBoxInvisibilityCardSetPage;
+
+    private CharSequence check;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,18 @@ public class CardSetPage extends AppCompatActivity {
 
         rv.setAdapter(adapter);
 
+        checkBoxInvisibilityCardSetPage = findViewById(R.id.checkBoxInvisibilityCardSetPage);
+        checkBoxInvisibilityCardSetPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkBoxInvisibilityCardSetPage.isChecked()){
+                    check = "notNull";
+                }else {
+                    check = "";
+                }
+                adapter.getFilter().filter(check);
+            }
+        });
 
     }
 }

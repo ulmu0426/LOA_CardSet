@@ -18,7 +18,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
     protected ArrayList<CardInfo> cardInfo;
     protected ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected ArrayList<DemonExtraDmgInfo> DEDInfo;
     private DrawerLayout drawerLayout_Main;
 
-    protected MainAdapter mainAdapter;
+    protected FavoriteAdapter favoriteAdapter;
     private RecyclerView rv;
 
     private ImageView imgBtnMenu_Main;
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         setDemonExtraDmgInfo(DEDValue);
 
         rv = (RecyclerView) findViewById(R.id.rvCardSet);
-        mainAdapter = new MainAdapter(mainContext);
-        rv.setAdapter(mainAdapter);
+        favoriteAdapter = new FavoriteAdapter(mainContext);
+        rv.setAdapter(favoriteAdapter);
 
         //test();
 

@@ -1,15 +1,12 @@
 package com.example.lostarkcardstatus;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 public class CardBookPage extends AppCompatActivity {
     private static final String CRITICAL = "치명 + ";
@@ -19,11 +16,9 @@ public class CardBookPage extends AppCompatActivity {
     private final String AGILITY_BOOK_COMPLETE = " 도감 달성 개수 : ";
     private final String SPECIALITY_BOOK_COMPLETE = "특화 도감 달성 개수 : ";
     private RecyclerView rv;
-    private CardDBHelper dbHelper;
-    private ArrayList<CardBookInfo> cardBookInfo;
     private CardBookAdapter adapter;
 
-    private CheckBox checkboxCompleteCardbookInvisibility;
+    private CheckBox checkBoxInvisibilityCardBookPage;
     private TextView txtBtnCritical;
     private TextView txtBtnAgility;
     private TextView txtBtnSpeciality;
@@ -49,7 +44,6 @@ public class CardBookPage extends AppCompatActivity {
         //1. 카드 도감 목록 불러오기
         rv = findViewById(R.id.rvCardbookList);
         adapter = new CardBookAdapter(this, this);
-        cardBookInfo = ((MainActivity) MainActivity.mainContext).cardBookInfo;
 
         rv.setAdapter(adapter);
 
@@ -61,11 +55,11 @@ public class CardBookPage extends AppCompatActivity {
         txtBtnNotAchievedSpecificityAgility = (TextView) findViewById(R.id.txtBtnNotAchievedSpecificityAgility);
 
         //2. 완성 도감 온 오프 기능
-        checkboxCompleteCardbookInvisibility = (CheckBox) findViewById(R.id.checkboxCompleteCardbookInvisibility);
-        checkboxCompleteCardbookInvisibility.setOnClickListener(new View.OnClickListener() {
+        checkBoxInvisibilityCardBookPage = (CheckBox) findViewById(R.id.checkboxCompleteCardbookInvisibility);
+        checkBoxInvisibilityCardBookPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkboxCompleteCardbookInvisibility.isChecked()){
+                if(checkBoxInvisibilityCardBookPage.isChecked()){
                     check = "notNull";
                 }else {
                     check = "";

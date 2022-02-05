@@ -12,7 +12,7 @@
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.LostArkCardStatus">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

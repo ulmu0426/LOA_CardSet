@@ -76,7 +76,7 @@ public class SettingCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardlist);
 
-        cardInfo = ((MainActivity) MainActivity.mainContext).cardInfo;
+        cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         settingCardList();
 
         rvLegendList = findViewById(R.id.rvLegendList);
