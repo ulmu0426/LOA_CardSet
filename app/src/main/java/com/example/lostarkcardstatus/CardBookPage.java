@@ -18,7 +18,7 @@ public class CardBookPage extends AppCompatActivity {
     private RecyclerView rv;
     private CardBookAdapter adapter;
 
-    private CheckBox checkBoxInvisibilityCardBookPage;
+    public CheckBox checkBoxInvisibilityCardBookPage;
     private TextView txtBtnCritical;
     private TextView txtBtnAgility;
     private TextView txtBtnSpeciality;

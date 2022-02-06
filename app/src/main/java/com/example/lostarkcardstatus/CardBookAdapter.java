@@ -223,6 +223,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         //카드
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -240,6 +241,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -256,6 +258,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard2())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -272,6 +275,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard3())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -288,6 +292,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard4())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -304,6 +309,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard5())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -320,6 +326,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard6())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -336,6 +343,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard7())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -352,6 +360,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard8())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
@@ -368,6 +377,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard9())).setGetCard(cardCheck);             //카드리스트 갱신
                         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
                         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
                         notifyDataSetChanged();
                     }
                 });
