@@ -1,8 +1,12 @@
 package com.example.lostarkcardstatus;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,10 +19,14 @@ public class CardSetPage extends AppCompatActivity {
 
     private CharSequence check;
 
+    private EditText editSearchCardSet;
+    private ImageView imgSearchCardSet;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.card_set_page);
+
         /* 카드 세트 페이지.
          *  작업 목록
          *  1. 카드 세트 목록 불러오기
@@ -36,14 +44,41 @@ public class CardSetPage extends AppCompatActivity {
         checkBoxInvisibilityCardSetPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBoxInvisibilityCardSetPage.isChecked()){
+                if (checkBoxInvisibilityCardSetPage.isChecked()) {
                     check = "notNull";
-                }else {
+                } else {
                     check = "";
                 }
-                adapter.getFilter().filter(check);
+                adapter.getCompleteFilter().filter(check);
+            }
+        });
+        editSearchCardSet = findViewById(R.id.editSearchCardSet);
+        editSearchCardSet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getSearchFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
 
+        imgSearchCardSet = (ImageView) findViewById(R.id.imgSearchCardSet);
+        imgSearchCardSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSearchCardSet.getVisibility() == View.GONE) {
+                    editSearchCardSet.setVisibility(View.VISIBLE);
+                } else {
+                    editSearchCardSet.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

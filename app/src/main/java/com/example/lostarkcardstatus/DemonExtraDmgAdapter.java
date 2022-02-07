@@ -109,7 +109,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         holder.imgDEDCard4.setImageResource(R.drawable.card_legend_bahuntur);
         holder.imgDEDCard5.setImageResource(R.drawable.card_legend_silian);
         holder.imgDEDCard6.setImageResource(R.drawable.card_legend_wei);
-        holder.imgDEDCard7.setImageResource(R.drawable.card_legend_dereonaman);
+        holder.imgDEDCard7.setImageResource(R.drawable.card_legend_dereon_aman);
         holder.imgDEDCard8.setImageResource(R.drawable.card_legend_kamaine);
         holder.imgDEDCard9.setImageResource(R.drawable.card_legend_aman);
 
@@ -145,6 +145,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         imgVisibility(filterDED.get(position).getCard7(), holder.imgDEDCard7, holder.txtDEDCardName7);
         imgVisibility(filterDED.get(position).getCard8(), holder.imgDEDCard8, holder.txtDEDCardName8);
         imgVisibility(filterDED.get(position).getCard9(), holder.imgDEDCard9, holder.txtDEDCardName9);
+
         //수집효과 나열
         holder.txtDED_cardCollection.setText(filterDED.get(position).getCompleteDEDBook() + "장 수집");
         holder.txtDED_cardAwake0.setText(filterDED.get(position).getCompleteDEDBook() + "장 수집(각성단계 합계"
@@ -156,7 +157,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
         //카드 모두 획득 + 각성도에 따라 배경 색 변환 흰/보라/민트/연두/노랑 순으로(노랑은 완전수집+풀각성)
         isCompleteCardBookBackgroundColor(filterDED.get(position), holder.cvDemonExtraDmgBackground);
-
 
         holder.cvDemonExtraDmgBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,7 +193,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card4.setImageResource(R.drawable.card_legend_bahuntur);
                 imgDED_Detail_Card5.setImageResource(R.drawable.card_legend_silian);
                 imgDED_Detail_Card6.setImageResource(R.drawable.card_legend_wei);
-                imgDED_Detail_Card7.setImageResource(R.drawable.card_legend_dereonaman);
+                imgDED_Detail_Card7.setImageResource(R.drawable.card_legend_dereon_aman);
                 imgDED_Detail_Card8.setImageResource(R.drawable.card_legend_kamaine);
                 imgDED_Detail_Card9.setImageResource(R.drawable.card_legend_aman);
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
@@ -1061,7 +1061,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return index;
     }
 
-    public Filter getFilter() {
+    public Filter getCompleteFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
@@ -1090,4 +1090,32 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         };
     }
 
+    public Filter getSearchFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filterDED = DEDInfo;
+                } else {
+                    ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
+                    for (int i = 0; i < DEDInfo.size(); i++) {
+                        if (DEDInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteringList.add(DEDInfo.get(i));
+                        }
+                    }
+                    filterDED = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filterDED;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filterDED = (ArrayList<DemonExtraDmgInfo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 }

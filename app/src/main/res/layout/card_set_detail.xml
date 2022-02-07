@@ -72,7 +72,7 @@
                 android:id="@+id/imgCardSetDetail3"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/card_legend_kingsilian" />
+                app:srcCompat="@drawable/card_legend_king_silian" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail4"
@@ -163,7 +163,7 @@
                 android:id="@+id/imgCardSetDetail5"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/card_legend_dereonaman" />
+                app:srcCompat="@drawable/card_legend_dereon_aman" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail6"

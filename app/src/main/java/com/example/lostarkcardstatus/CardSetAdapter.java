@@ -864,7 +864,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         }
     }
 
-    public Filter getFilter() {
+    public Filter getCompleteFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
@@ -891,7 +891,35 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 notifyDataSetChanged();
             }
         };
-
-
     }
+
+    public Filter getSearchFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filterCardSet = cardSetInfo;
+                } else {
+                    ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
+                    for (int i = 0; i < cardSetInfo.size(); i++) {
+                        if (cardSetInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteringList.add(cardSetInfo.get(i));
+                        }
+                    }
+                    filterCardSet = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filterCardSet;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filterCardSet = (ArrayList<CardSetInfo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 }

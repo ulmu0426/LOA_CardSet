@@ -80,7 +80,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardBookAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int positionGet = position;
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
@@ -97,7 +97,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         holder.imgCardBook4.setImageResource(R.drawable.card_legend_bahuntur);
         holder.imgCardBook5.setImageResource(R.drawable.card_legend_silian);
         holder.imgCardBook6.setImageResource(R.drawable.card_legend_wei);
-        holder.imgCardBook7.setImageResource(R.drawable.card_legend_dereonaman);
+        holder.imgCardBook7.setImageResource(R.drawable.card_legend_dereon_aman);
         holder.imgCardBook8.setImageResource(R.drawable.card_legend_kamaine);
         holder.imgCardBook9.setImageResource(R.drawable.card_legend_aman);
         //없는 카드는 흑백(기본), 획득한 카드는 컬러로
@@ -555,7 +555,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     }
 
 
-    public Filter getFilter() {
+    public Filter getCompleteFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
@@ -566,6 +566,34 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
                     for (int i = 0; i < cardBookInfo.size(); i++) {
                         if (!isCompleteCardBook(cardBookInfo.get(i))) {
+                            filteringList.add(cardBookInfo.get(i));
+                        }
+                    }
+                    filterCardBook = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filterCardBook;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filterCardBook = (ArrayList<CardBookInfo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+    public Filter getSearchFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filterCardBook = cardBookInfo;
+                } else {
+                    ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
+                    for (int i = 0; i < cardBookInfo.size(); i++) {
+                        if (cardBookInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteringList.add(cardBookInfo.get(i));
                         }
                     }

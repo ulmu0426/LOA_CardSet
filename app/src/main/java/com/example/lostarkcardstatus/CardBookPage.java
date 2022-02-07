@@ -1,8 +1,13 @@
 package com.example.lostarkcardstatus;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +30,10 @@ public class CardBookPage extends AppCompatActivity {
     private TextView txtBtnNotAchievedSpecificityCritical;
     private TextView txtBtnNotAchievedSpecificitySpeciality;
     private TextView txtBtnNotAchievedSpecificityAgility;
+
+    private ImageView imgSearchCardBook;
+    private EditText editSearchCardBook;
+    private TableLayout tableStats;
 
     private CharSequence check;
     @Override
@@ -64,7 +73,39 @@ public class CardBookPage extends AppCompatActivity {
                 }else {
                     check = "";
                 }
-                adapter.getFilter().filter(check);
+                adapter.getCompleteFilter().filter(check);
+            }
+        });
+
+        tableStats = findViewById(R.id.tableStats);
+        editSearchCardBook = findViewById(R.id.editSearchCardBook);
+        editSearchCardBook.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getSearchFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        imgSearchCardBook = (ImageView) findViewById(R.id.imgSearchCardBook);
+        imgSearchCardBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tableStats.getVisibility() == View.INVISIBLE) {
+                    tableStats.setVisibility(View.VISIBLE);
+                    editSearchCardBook.setVisibility(View.INVISIBLE);
+                } else {
+                    tableStats.setVisibility(View.INVISIBLE);
+                    editSearchCardBook.setVisibility(View.VISIBLE);
+                }
             }
         });
 

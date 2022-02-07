@@ -24,6 +24,8 @@
         <activity android:name=".CardBookPage"></activity>
         <activity android:name=".DemonExtraDmgPage"></activity>
         <activity android:name=".SettingCard"></activity>
+        <activity android:name=".Test"></activity>
+
     </application>
 
 </manifest>

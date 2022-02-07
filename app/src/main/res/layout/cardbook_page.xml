@@ -65,19 +65,21 @@
     //미획득 카드는 흑백으로
     //완성 도감 숨기기 기능
     //스크롤 바 구현
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:id="@+id/idTopMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:background="#AE000000"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/conlayoutCardBookStatus"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imgBtnMenu"
@@ -91,99 +93,139 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:text="카드 도감 특성"
                 android:gravity="center"
+                android:text="카드 도감 특성"
                 android:textColor="#E3E3E3"
                 android:textSize="25dp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgSearchCardBook"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
         </RelativeLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/conlayoutCardBookStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardbookStatusAndCardbookList"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardbookStatusAndCardbookList">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idTopMenu">
+
             <TableLayout
+                android:id="@+id/tableStats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="15dp"
                 android:stretchColumns="2"
-                android:layout_margin="15dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
                 <TableRow>
+
                     <TextView
                         android:id="@+id/txtBtnCritical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="치명 + 00"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="----------------------"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
+
                     <TextView
                         android:id="@+id/txtBtnNotAchievedSpecificityCritical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="치명 특성 미 달성 도감 개수 : 00개"
                         android:textAlignment="textEnd"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
                 </TableRow>
+
                 <TableRow android:layout_marginTop="10dp">
+
                     <TextView
                         android:id="@+id/txtBtnSpeciality"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="특화 + 00"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="----------------------"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
+
                     <TextView
                         android:id="@+id/txtBtnNotAchievedSpecificitySpeciality"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="특화 특성 미 달성 도감 개수 : 00개"
                         android:textAlignment="textEnd"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
                 </TableRow>
+
                 <TableRow android:layout_marginTop="10dp">
+
                     <TextView
                         android:id="@+id/txtBtnAgility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="신속 + 00"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="----------------------"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
+
                     <TextView
                         android:id="@+id/txtBtnNotAchievedSpecificityAgility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="신속 특성 미 달성 도감 개수 : 00개"
                         android:textAlignment="textEnd"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
                 </TableRow>
 
             </TableLayout>
+
+            <EditText
+                android:id="@+id/editSearchCardBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="50dp"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
             android:id="@+id/lineBetweenCardbookStatusAndCardbookList"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/conlayoutCardBookStatus"
-            app:layout_constraintBottom_toTopOf="@+id/rvCardbookList"/>
+            app:layout_constraintBottom_toTopOf="@+id/rvCardbookList"
+            app:layout_constraintTop_toBottomOf="@+id/conlayoutCardBookStatus" />
 
         //카드 도감 이름 추가 요망
 
@@ -192,13 +234,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            tools:listitem="@layout/rv_cardbook"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardbookStatusAndCardbookList" />
+            app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardbookStatusAndCardbookList"
+            tools:listitem="@layout/rv_cardbook" />
 
         <LinearLayout
             android:layout_width="wrap_content"

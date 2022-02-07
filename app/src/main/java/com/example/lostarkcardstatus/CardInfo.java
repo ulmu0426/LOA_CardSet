@@ -17,6 +17,7 @@ public class CardInfo {
     private String acquisition_info;    //카드 획득처 정보
     private String grade;               //카드 등급 정보
     private int getCard = 0;                  //카드 획득 유무(기본 0)
+    private String imgResource;     //카드 리소스 경로
 
     public int getId() {
         return id;
@@ -74,5 +75,11 @@ public class CardInfo {
         this.getCard = getCard;
     }
 
+    public String getImgResource() {
+        return imgResource;
+    }
 
+    public void setImgResource(String imgResource) {
+        this.imgResource = imgResource;
+    }
 }
