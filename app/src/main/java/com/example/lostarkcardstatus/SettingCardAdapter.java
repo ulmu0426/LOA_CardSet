@@ -1,6 +1,8 @@
 package com.example.lostarkcardstatus;
 
 
+import static com.example.lostarkcardstatus.MainPage.mainContext;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.ColorFilter;
@@ -31,7 +33,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private ArrayList<CardInfo> searchList;
 
     public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
-        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+        this.cardInfo = ((MainPage) mainContext).cardInfo;
         this.context = context;
         this.useCardList = useCardList;
         this.searchList = useCardList;
@@ -53,7 +55,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
-        holder.img.setImageResource(R.drawable.card_legend_wei);
+
+        holder.img.setImageResource(getCardImg(searchList.get(position).getName()));
         defaultColorFilter(holder.img, position, filter);
 
         holder.txtName.setText(searchList.get(position).getName());
@@ -103,6 +106,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         cardDBHelper.UpdateInfoCardNum(number, searchList.get(positionGet).getId());
 
                         Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
+                        holder.txtAwake.setText(awake + "");
+                        holder.txtHave.setText(number + "");
                         notifyDataSetChanged();
                         awakeHaveDialog.cancel();
                     }
@@ -120,11 +125,17 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     searchList.get(positionGet).setGetCard(1);
                     cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(1);
                     cardDBHelper.UpdateInfoCardCheck(1, useCardList.get(positionGet).getId());
+                    defaultColorFilter(holder.img, positionGet, filter);
+                    ((MainPage) MainPage.mainContext).cardBookUpdate();
+                    ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                 } else {
                     useCardList.get(positionGet).setGetCard(0);
                     searchList.get(positionGet).setGetCard(0);
                     cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setGetCard(0);
                     cardDBHelper.UpdateInfoCardCheck(0, searchList.get(positionGet).getId());
+                    defaultColorFilter(holder.img, positionGet, filter);
+                    ((MainPage) MainPage.mainContext).cardBookUpdate();
+                    ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                 }
 
             }
@@ -257,4 +268,16 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         };
     }
 
+    private int getCardImg(String cardName) {
+        String name = "";
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardName)) {
+                name = cardInfo.get(i).getPath();
+                break;
+            }
+        }
+        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+
+        return imageResource;
+    }
 }

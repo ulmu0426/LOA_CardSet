@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.PrimitiveIterator;
 
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
@@ -34,7 +34,8 @@ public class CardDBHelper extends SQLiteOpenHelper {
     private static final String CARD_COLUMN_ACQUISITION_INFO = "acquisition_info";  //카드 획득처 정보
     private static final String CARD_COLUMN_GRADE = "grade";                        //카드 등급
     private static final String CARD_COLUMN_CHECK = "getCard";                        //카드 획득 유무
-    private static final String CARD_COLUMN_IMGRESOURCE = "imgResource";
+    private static final String CARD_COLUMN_IMGPATH = "path";
+
 
     //카드 도감 테이블 column
     private static final String TABLE_CARDBOOK_ALL = "cardbook_all";            //카드 도감테이블 명
@@ -169,6 +170,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
             try {
                 copyDataBase();
             } catch (IOException mIOException) {
+                Log.v("test", "Error발생");
                 throw new Error("ErrorCopyingDataBase");
             }
         }
@@ -288,7 +290,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 String acquisition_info = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_ACQUISITION_INFO));
                 String grade = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_GRADE));
                 int getCard = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_CHECK)));
-                String imgResource = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_IMGRESOURCE));
+                String imgPath = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_IMGPATH));
 
                 CardInfo cardinfo = new CardInfo();
                 cardinfo.setId(id);
@@ -298,7 +300,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 cardinfo.setAcquisition_info(acquisition_info);
                 cardinfo.setGrade(grade);
                 cardinfo.setGetCard(getCard);
-                cardinfo.setImgResource(imgResource);
+                cardinfo.setPath(imgPath);
                 getInfo.add(cardinfo);
             }
         }

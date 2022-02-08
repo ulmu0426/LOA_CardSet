@@ -494,30 +494,4 @@ public class MainPage extends AppCompatActivity {
     }
 
 
-    private void test() {
-        int x = 6;
-        x = favoriteCardSetInfo.size();
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
-                if (x > cardSetInfo.get(i).getCheckCard0())
-                    x = cardSetInfo.get(i).getCheckCard0();
-                if (x > cardSetInfo.get(i).getCheckCard1())
-                    x = cardSetInfo.get(i).getCheckCard1();
-                if (x > cardSetInfo.get(i).getCheckCard2())
-                    x = cardSetInfo.get(i).getCheckCard2();
-                if (x > cardSetInfo.get(i).getCheckCard3())
-                    x = cardSetInfo.get(i).getCheckCard3();
-                if (x > cardSetInfo.get(i).getCheckCard4())
-                    x = cardSetInfo.get(i).getCheckCard4();
-                if (x > cardSetInfo.get(i).getCheckCard5())
-                    x = cardSetInfo.get(i).getCheckCard5();
-                if (x > cardSetInfo.get(i).getCheckCard6())
-                    x = cardSetInfo.get(i).getCheckCard6();
-
-                break;
-            }
-        }
-        Toast.makeText(this, "현재 favorite 수 : " + x, Toast.LENGTH_LONG).show();
-    }
-
 }

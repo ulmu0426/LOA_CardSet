@@ -70,13 +70,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         holder.txtCardSetName.setText(filterCardSet.get(position).getName());
         holder.txtCardSetAwake.setText("각성 합계 : " + filterCardSet.get(position).getHaveAwake());
         //이미지뷰 구현할것
-        holder.imgCardSet0.setImageResource(R.drawable.card_legend_kadan);
-        holder.imgCardSet1.setImageResource(R.drawable.card_legend_ninab);
-        holder.imgCardSet2.setImageResource(R.drawable.card_legend_shandi);
-        holder.imgCardSet3.setImageResource(R.drawable.card_legend_azena_inanna);
-        holder.imgCardSet4.setImageResource(R.drawable.card_legend_bahuntur);
-        holder.imgCardSet5.setImageResource(R.drawable.card_legend_silian);
-        holder.imgCardSet6.setImageResource(R.drawable.card_legend_wei);
+        holder.imgCardSet0.setImageResource(getCardImg(filterCardSet.get(position).getCard0()));
+        holder.imgCardSet1.setImageResource(getCardImg(filterCardSet.get(position).getCard1()));
+        holder.imgCardSet2.setImageResource(getCardImg(filterCardSet.get(position).getCard2()));
+        holder.imgCardSet3.setImageResource(getCardImg(filterCardSet.get(position).getCard3()));
+        holder.imgCardSet4.setImageResource(getCardImg(filterCardSet.get(position).getCard4()));
+        holder.imgCardSet5.setImageResource(getCardImg(filterCardSet.get(position).getCard5()));
+        holder.imgCardSet6.setImageResource(getCardImg(filterCardSet.get(position).getCard6()));
 
         imgDefaultColor(holder.imgCardSet0, filter, filterCardSet.get(position).getCheckCard0());
         imgDefaultColor(holder.imgCardSet1, filter, filterCardSet.get(position).getCheckCard1());
@@ -141,40 +141,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgFavorites.setImageResource(R.drawable.gold_star);
                 setFavoriteImg(imgFavorites, pos, filter);
 
-                imgFavorites.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int check = imgGrayScale(imgFavorites, filter);
-
-                        if (check == 0) {//즐찾이 아니게 되면
-                            for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
-                                if (favoriteCardSetInfo.get(i).getName().equals(filterCardSet.get(pos).getName())) {
-                                    cardSetInfo.get(getIndex(filterCardSet.get(pos))).setFavorite("");
-                                    filterCardSet.get(pos).setFavorite("");
-                                    favoriteCardSetInfo.get(i).setActivation(check);
-                                    cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
-                                    cardDbHelper.UpdateInfoCardSetCard("", filterCardSet.get(pos).getId());
-                                    favoriteAdapter.removeItem(favoriteCardSetInfo.get(i));
-                                    Toast.makeText(context, "카드 수량 증가? : " + favoriteAdapter.getItemCount(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        } else {         //즐찾이 되면
-                            for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
-                                if (favoriteCardSetInfo.get(i).getName().equals(filterCardSet.get(pos).getName())) {
-                                    cardSetInfo.get(getIndex(filterCardSet.get(pos))).setFavorite(favoriteCardSetInfo.get(i).getName());
-                                    filterCardSet.get(pos).setFavorite(favoriteCardSetInfo.get(i).getName());
-                                    favoriteCardSetInfo.get(i).setActivation(check);
-                                    cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
-                                    cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
-                                    favoriteAdapter.addItem(favoriteCardSetInfo.get(i));
-                                    Toast.makeText(context, "카드 수량 증가? : " + favoriteAdapter.getItemCount(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }
-
-                        notifyDataSetChanged();
-                    }
-                });
 
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
                 imgDefaultColor(imgCardSetDetail0, filter, filterCardSet.get(pos).getCheckCard0());
@@ -185,13 +151,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgDefaultColor(imgCardSetDetail5, filter, filterCardSet.get(pos).getCheckCard5());
                 imgDefaultColor(imgCardSetDetail6, filter, filterCardSet.get(pos).getCheckCard6());
 
-                imgCardSetDetail0.setImageResource(R.drawable.card_legend_kadan);
-                imgCardSetDetail1.setImageResource(R.drawable.card_legend_ninab);
-                imgCardSetDetail2.setImageResource(R.drawable.card_legend_shandi);
-                imgCardSetDetail3.setImageResource(R.drawable.card_legend_azena_inanna);
-                imgCardSetDetail4.setImageResource(R.drawable.card_legend_bahuntur);
-                imgCardSetDetail5.setImageResource(R.drawable.card_legend_silian);
-                imgCardSetDetail6.setImageResource(R.drawable.card_legend_wei);
+                imgCardSetDetail0.setImageResource(getCardImg(filterCardSet.get(pos).getCard0()));
+                imgCardSetDetail1.setImageResource(getCardImg(filterCardSet.get(pos).getCard1()));
+                imgCardSetDetail2.setImageResource(getCardImg(filterCardSet.get(pos).getCard2()));
+                imgCardSetDetail3.setImageResource(getCardImg(filterCardSet.get(pos).getCard3()));
+                imgCardSetDetail4.setImageResource(getCardImg(filterCardSet.get(pos).getCard4()));
+                imgCardSetDetail5.setImageResource(getCardImg(filterCardSet.get(pos).getCard5()));
+                imgCardSetDetail6.setImageResource(getCardImg(filterCardSet.get(pos).getCard6()));
 
                 TextView txtCardSetName0 = dialog.findViewById(R.id.txtCardSetName0);
                 TextView txtCardSetName1 = dialog.findViewById(R.id.txtCardSetName1);
@@ -233,6 +199,41 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
                 txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getCount());
                 txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
+
+                imgFavorites.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int check = imgGrayScale(imgFavorites, filter);
+
+                        if (check == 0) {//즐찾이 아니게 되면
+                            for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
+                                if (favoriteCardSetInfo.get(i).getName().equals(filterCardSet.get(pos).getName())) {
+                                    cardSetInfo.get(getIndex(filterCardSet.get(pos))).setFavorite("");
+                                    filterCardSet.get(pos).setFavorite("");
+                                    favoriteCardSetInfo.get(i).setActivation(check);
+                                    cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    cardDbHelper.UpdateInfoCardSetCard("", filterCardSet.get(pos).getId());
+                                    favoriteAdapter.removeItem(favoriteCardSetInfo.get(i));
+                                    Toast.makeText(context, "카드 수량 증가? : " + favoriteAdapter.getItemCount(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        } else {         //즐찾이 되면
+                            for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
+                                if (favoriteCardSetInfo.get(i).getName().equals(filterCardSet.get(pos).getName())) {
+                                    cardSetInfo.get(getIndex(filterCardSet.get(pos))).setFavorite(favoriteCardSetInfo.get(i).getName());
+                                    filterCardSet.get(pos).setFavorite(favoriteCardSetInfo.get(i).getName());
+                                    favoriteCardSetInfo.get(i).setActivation(check);
+                                    cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
+                                    favoriteAdapter.addItem(favoriteCardSetInfo.get(i));
+                                    Toast.makeText(context, "카드 수량 증가? : " + favoriteAdapter.getItemCount(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+
+                        notifyDataSetChanged();
+                    }
+                });
 
                 Dialog dialogAwakeNHaveCard = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogAwakeNHaveCard.setContentView(R.layout.awake_havecard_change);
@@ -788,10 +789,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         }
         return index;
     }
-    private int getIndex(CardSetInfo filterCardSet){
+
+    private int getIndex(CardSetInfo filterCardSet) {
         int index = 0;
-        for(int i = 0; i<cardSetInfo.size();i++){
-            if(cardSetInfo.get(i).getId() == filterCardSet.getId()){
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getId() == filterCardSet.getId()) {
                 index = i;
                 break;
             }
@@ -854,12 +856,12 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private boolean isAllCompleteDED(CardSetInfo cardSetInfo) {
         int checkAll = cardSetInfo.getCheckCard0() + cardSetInfo.getCheckCard1() + cardSetInfo.getCheckCard2()
                 + cardSetInfo.getCheckCard3() + cardSetInfo.getCheckCard4() + cardSetInfo.getCheckCard5() + cardSetInfo.getCheckCard6();
-        if (cardSetInfo.getHaveCard() == checkAll){ //카드 세트 수집 완료시.
-            if(cardSetInfo.getHaveAwake() == (cardSetInfo.getHaveCard()*5)) //수집한 카드의 각성도합이 최대값일시
+        if (cardSetInfo.getHaveCard() == checkAll) { //카드 세트 수집 완료시.
+            if (cardSetInfo.getHaveAwake() == (cardSetInfo.getHaveCard() * 5)) //수집한 카드의 각성도합이 최대값일시
                 return true;
             else
                 return false;
-        }else {
+        } else {
             return false;
         }
     }
@@ -922,4 +924,16 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         };
     }
 
+    private int getCardImg(String cardName) {
+        String name = "";
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardName)) {
+                name = cardInfo.get(i).getPath();
+                break;
+            }
+        }
+        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+
+        return imageResource;
+    }
 }

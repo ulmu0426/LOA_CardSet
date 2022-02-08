@@ -81,4 +81,5 @@ public class CardSetPage extends AppCompatActivity {
             }
         });
     }
+
 }
