@@ -26,14 +26,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
+
+    private static final String[] STAT = {"치명", "특화", "신속"};
     private ArrayList<CardInfo> cardInfo;
     private Context context;
     private CardDBHelper cardDBHelper;
     private ArrayList<CardInfo> useCardList;
     private ArrayList<CardInfo> searchList;
+    private ArrayList<CardBookInfo> cardBookInfo;
 
     public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
         this.cardInfo = ((MainPage) mainContext).cardInfo;
+        this.cardBookInfo = ((MainPage) mainContext).cardBookInfo;
         this.context = context;
         this.useCardList = useCardList;
         this.searchList = useCardList;
@@ -128,14 +132,17 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     defaultColorFilter(holder.img, positionGet, filter);
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                    haveStatUpdate(cardBookInfo);
                 } else {
                     useCardList.get(positionGet).setGetCard(0);
                     searchList.get(positionGet).setGetCard(0);
                     cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setGetCard(0);
                     cardDBHelper.UpdateInfoCardCheck(0, searchList.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
+
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                    haveStatUpdate(cardBookInfo);
                 }
 
             }
@@ -280,4 +287,28 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
         return imageResource;
     }
+
+
+    //스텟, 도감 달성 개수 업데이트 메소드
+    private void haveStatUpdate(ArrayList<CardBookInfo> cardbook_all) {
+        int[] haveStat = new int[]{0, 0, 0};
+
+        for (int i = 0; i < haveStat.length; i++) {
+            for (int j = 0; j < cardbook_all.size(); j++) {
+                if (cardbook_all.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardbook_all.get(j))) {
+                    haveStat[i] += cardbook_all.get(j).getValue();
+                }
+            }
+        }
+        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+    }
+
+    // DB에 도감을 완성 시킨 경우 true else false
+    public boolean isCompleteCardBook(CardBookInfo cardbook_all) {
+        if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
+            return true;
+        else
+            return false;
+    }
+
 }

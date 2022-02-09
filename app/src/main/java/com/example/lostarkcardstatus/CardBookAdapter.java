@@ -185,6 +185,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                 ImageView imgCardBookName_CardImg7 = dialog.findViewById(R.id.imgCardBookName_CardImg7);
                 ImageView imgCardBookName_CardImg8 = dialog.findViewById(R.id.imgCardBookName_CardImg8);
                 ImageView imgCardBookName_CardImg9 = dialog.findViewById(R.id.imgCardBookName_CardImg9);
+
                 imgCardBookName_CardImg0.setImageResource(getCardImg(filterCardBook.get(pos).getCard0()));
                 imgCardBookName_CardImg1.setImageResource(getCardImg(filterCardBook.get(pos).getCard1()));
                 imgCardBookName_CardImg2.setImageResource(getCardImg(filterCardBook.get(pos).getCard2()));
@@ -231,11 +232,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         //카드 db 갱신,카드리스트 갱신
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard0());
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard0())).setGetCard(cardCheck);
-                        //카드
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+                        //업데이트 및 갱신
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -250,10 +248,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard1());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard1())).setGetCard(cardCheck);
                         //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -267,10 +262,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard2(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard2());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard2())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -284,10 +277,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard3(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard3());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard3())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -301,10 +292,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard4(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard4());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard4())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -318,10 +307,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard5(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard5());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard5())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -335,10 +322,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard6(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard6());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard6())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -352,10 +337,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard7(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard7());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard7())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -369,10 +352,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard8(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard8());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard8())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -386,10 +367,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         filterCardBook.get(pos).setCheckCard9(cardCheck);
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardBook.get(pos).getCard9());    //카드 db 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard9())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-                        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        haveStatUpdate(cardBookInfo);
+
+                        updateCardBookAndMain();
                         notifyDataSetChanged();
                     }
                 });
@@ -552,21 +531,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         return index;
     }
 
-    public void invisibleCompleteCardBook(boolean tf) {
-        filterCardBook.clear();
-        if (tf) {
-            for (int i = 0; i < cardBookInfo.size(); i++) {
-                if (!isCompleteCardBook(cardBookInfo.get(i))) {
-                    filterCardBook.add(cardBookInfo.get(i));
-                }
-            }
-        } else {
-            filterCardBook.addAll(cardBookInfo);
-        }
-        notifyDataSetChanged();
-    }
-
-
     public Filter getCompleteFilter() {
         return new Filter() {
             @Override
@@ -636,5 +600,12 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
 
         return imageResource;
+    }
+
+    private void updateCardBookAndMain(){
+        ((MainPage) MainPage.mainContext).cardBookUpdate();
+        haveStatUpdate(cardBookInfo);
+        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+        cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
     }
 }

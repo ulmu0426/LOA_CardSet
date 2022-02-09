@@ -16,12 +16,16 @@ import java.util.ArrayList;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     public Context context;
+    private ArrayList<CardInfo> cardInfo;
+    private ArrayList<CardSetInfo> cardSetInfo;
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
     protected ArrayList<FavoriteCardSetInfo> activationFavoriteCardSet;
 
     public FavoriteAdapter(Context context) {
         this.context = context;
         favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
+        cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+        cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
         activationFavoriteCardSet = new ArrayList<FavoriteCardSetInfo>();
         updateActivationFavoriteCardSet();
     }
@@ -39,7 +43,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FavoriteCardSetInfo item = activationFavoriteCardSet.get(position);
 
-        holder.imgFavoriteCardSet.setImageResource(R.drawable.card_legend_kadan);
+        String cardSetName = cardSetMainImg(item.getName());
+
+        holder.imgFavoriteCardSet.setImageResource(getCardImg(cardSetName));
         holder.txtFavoriteCardSetName.setText(item.getName());
         holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + item.getAwake());
 
@@ -100,5 +106,28 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
     }
 
+    private int getCardImg(String cardName) {
+        String name = "";
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardName)) {
+                name = cardInfo.get(i).getPath();
+                break;
+            }
+        }
+        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+
+        return imageResource;
+    }
+
+    private String cardSetMainImg(String cardSetName) {
+        String mainImgName = "";
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getName().equals(cardSetName)) {
+                mainImgName = cardSetInfo.get(i).getCard0();
+                break;
+            }
+        }
+        return mainImgName;
+    }
 
 }
