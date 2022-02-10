@@ -83,6 +83,19 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 etxtAwake.setText(holder.txtAwake.getText().toString());
                 etxtNum.setText(holder.txtHave.getText().toString());
 
+                etxtAwake.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtAwake.selectAll();
+                    }
+                });
+                etxtNum.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtNum.selectAll();
+                    }
+                });
+
                 btnCancer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

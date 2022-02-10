@@ -279,7 +279,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -314,7 +314,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardBookInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -385,7 +385,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<DemonExtraDmgInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DEMON_EXTRA_DMG + " ORDER BY id DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DEMON_EXTRA_DMG + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -487,7 +487,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardSetInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -572,7 +572,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<FavoriteCardSetInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + FAVORITE_CARD_SET_TABLE_NAME + " ORDER BY name DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + FAVORITE_CARD_SET_TABLE_NAME + " ORDER BY name", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {

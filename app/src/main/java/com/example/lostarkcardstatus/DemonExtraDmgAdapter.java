@@ -273,6 +273,18 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 Button btnCancer = dialogChangeAwakeAndNum.findViewById(R.id.btnCancer);
                 Button btnOK = dialogChangeAwakeAndNum.findViewById(R.id.btnOK);
 
+                etxtAwake.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtAwake.selectAll();
+                    }
+                });
+                etxtNum.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtNum.selectAll();
+                    }
+                });
 
                 txtDED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -242,6 +242,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 Button btnCancer = dialogAwakeNHaveCard.findViewById(R.id.btnCancer);
                 Button btnOK = dialogAwakeNHaveCard.findViewById(R.id.btnOK);
 
+                etxtAwake.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtAwake.selectAll();
+                    }
+                });
+                etxtNum.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtNum.selectAll();
+                    }
+                });
 
                 txtHaveAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -817,9 +829,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     }
 
+    private int awakeToCardCount(int awake) {
+        int returnNum = 0;
+        for(int i = 0; i <awake;i++){
+            returnNum = i;
+        }
+        return returnNum;
+    }
+
     //카드 각성도에 따라 최대 보유 카드 수량이 달라짐. 다음에 수정 할것.
     private int numRangeSet(String input) {
         int result = 0;
+
         if (input.isEmpty())
             result = 0;
 
