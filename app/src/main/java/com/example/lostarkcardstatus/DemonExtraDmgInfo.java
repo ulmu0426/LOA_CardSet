@@ -2,7 +2,7 @@ package com.example.lostarkcardstatus;
 
 import java.text.DecimalFormat;
 
-public class DemonExtraDmgInfo {
+public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
     private int id;
     private String name;
     private String card0;
@@ -380,5 +380,10 @@ public class DemonExtraDmgInfo {
 
     public void setAwakeCard9(int awakeCard9) {
         this.awakeCard9 = awakeCard9;
+    }
+
+    @Override
+    public int compareTo(DemonExtraDmgInfo o) {
+        return this.getName().compareTo(o.getName());
     }
 }

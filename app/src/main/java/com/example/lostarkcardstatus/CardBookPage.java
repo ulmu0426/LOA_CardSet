@@ -3,15 +3,23 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CardBookPage extends AppCompatActivity {
     private static final String CRITICAL = "치명 + ";
@@ -36,6 +44,10 @@ public class CardBookPage extends AppCompatActivity {
     private TableLayout tableStats;
 
     private CharSequence check;
+
+    private ImageView imgBtnCardBookSortMenu;
+    private ArrayList<CardBookInfo> cardBookInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +61,7 @@ public class CardBookPage extends AppCompatActivity {
          *  5. 도감 검색 기능
          * */
 
+        cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
 
         //1. 카드 도감 목록 불러오기
         rv = findViewById(R.id.rvCardbookList);
@@ -68,9 +81,9 @@ public class CardBookPage extends AppCompatActivity {
         checkBoxInvisibilityCardBookPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBoxInvisibilityCardBookPage.isChecked()){
+                if (checkBoxInvisibilityCardBookPage.isChecked()) {
                     check = "notNull";
-                }else {
+                } else {
                     check = "";
                 }
                 adapter.getCompleteFilter().filter(check);
@@ -109,6 +122,51 @@ public class CardBookPage extends AppCompatActivity {
             }
         });
 
+        imgBtnCardBookSortMenu = findViewById(R.id.imgBtnCardBookSortMenu);
+        imgBtnCardBookSortMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(CardBookPage.this, imgBtnCardBookSortMenu);
+                MenuInflater menuInflater = popupMenu.getMenuInflater();
+                menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.defaultSort:
+                                if (cardBookInfo.get(0).getId() == 0) {
+                                    break;
+                                }
+
+                                Collections.sort(cardBookInfo, new Comparator<CardBookInfo>() {
+                                    @Override
+                                    public int compare(CardBookInfo o1, CardBookInfo o2) {
+                                        if (o1.getId() < o2.getId()) {
+                                            return -1;
+                                        } else
+                                            return 1;
+                                    }
+                                });
+                                adapter.sortCardBook(cardBookInfo);
+                                return true;
+                            case R.id.nameSort:
+                                if (cardBookInfo.get(0).getName() == "1절만 해") {
+                                    break;
+                                }
+
+                                Collections.sort(cardBookInfo);
+                                adapter.sortCardBook(cardBookInfo);
+
+                                return true;
+                        }
+
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+
+        });
 
     }
 

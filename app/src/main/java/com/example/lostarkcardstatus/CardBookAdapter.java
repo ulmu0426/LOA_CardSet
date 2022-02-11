@@ -589,6 +589,11 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         };
     }
 
+    public void sortCardBook(ArrayList<CardBookInfo> sortCardBook){
+        filterCardBook = sortCardBook;
+        notifyDataSetChanged();
+    }
+
     private int getCardImg(String cardName) {
         String name = "";
         for (int i = 0; i < cardInfo.size(); i++) {

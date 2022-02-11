@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -944,6 +945,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             }
         };
     }
+
+    public void sortCardSet(ArrayList<CardSetInfo> sortCardSetInfo){
+        filterCardSet = sortCardSetInfo;
+        notifyDataSetChanged();
+    }
+
+
 
     private int getCardImg(String cardName) {
         String name = "";

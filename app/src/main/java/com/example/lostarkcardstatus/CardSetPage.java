@@ -3,19 +3,30 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CardSetPage extends AppCompatActivity {
 
     private RecyclerView rv;
     private CardDBHelper dbHelper;
     private CheckBox checkBoxInvisibilityCardSetPage;
+
+    private ImageView imgBtnSortMenu;
+    private ArrayList<CardSetInfo> cardSetInfo;
 
     private CharSequence check;
 
@@ -33,6 +44,8 @@ public class CardSetPage extends AppCompatActivity {
          *  2. 카드 세트 클릭시 카드세트 세부 페이지로 이동
          *  3. 카드 세트 즐겨찾기 기능(메인페이지에 띄울 카드 세트 지정)
          * */
+
+        cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
 
         rv = findViewById(R.id.rvCardSet);
         dbHelper = new CardDBHelper(this);
@@ -80,6 +93,54 @@ public class CardSetPage extends AppCompatActivity {
                 }
             }
         });
+
+
+        imgBtnSortMenu = findViewById(R.id.imgBtnCardSetSortMenu);
+        imgBtnSortMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(CardSetPage.this, imgBtnSortMenu);
+                MenuInflater menuInflater = popupMenu.getMenuInflater();
+                menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.defaultSort:
+                                if (cardSetInfo.get(0).getId() == 0)
+                                    break;
+
+                                Collections.sort(cardSetInfo, new Comparator<CardSetInfo>() {
+                                    @Override
+                                    public int compare(CardSetInfo o1, CardSetInfo o2) {
+                                        if (o1.getId() < o2.getId()) {
+                                            return -1;
+                                        } else
+                                            return 1;
+                                    }
+                                });
+                                adapter.sortCardSet(cardSetInfo);
+                                return true;
+                            case R.id.nameSort:
+                                if (cardSetInfo.get(0).getName() == "가디언의 광기")
+                                    break;
+
+                                Collections.sort(cardSetInfo);
+                                Log.v("test",cardSetInfo.size()+"");
+                                adapter.sortCardSet(cardSetInfo);
+
+                                return true;
+                        }
+
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+
+        });
+
     }
+
 
 }

@@ -2,7 +2,8 @@ package com.example.lostarkcardstatus;
 
 import java.util.Arrays;
 
-public class CardSetInfo {
+public class CardSetInfo implements Comparable<CardSetInfo> {
+
     private int id;
     private String name;
     private String card0;
@@ -304,4 +305,11 @@ public class CardSetInfo {
     public void setFavorite(String favorite) {
         this.favorite = favorite;
     }
+
+    @Override
+    public int compareTo(CardSetInfo cardSetInfo) {
+        return this.getName().compareTo(cardSetInfo.getName());
+    }
+
 }
+

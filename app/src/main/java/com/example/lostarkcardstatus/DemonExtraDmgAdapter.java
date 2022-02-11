@@ -983,12 +983,12 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     private boolean isAllCompleteDED(DemonExtraDmgInfo DEDInfo) {
-        if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook()){
-            if(DEDInfo.getHaveAwake() == DEDInfo.getAwake_sum2())
+        if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook()) {
+            if (DEDInfo.getHaveAwake() == DEDInfo.getAwake_sum2())
                 return true;
             else
                 return false;
-        }else{
+        } else {
             return false;
         }
     }
@@ -1063,10 +1063,10 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
     }
 
-    private int getIndex(DemonExtraDmgInfo demonExtraDmgInfo){
+    private int getIndex(DemonExtraDmgInfo demonExtraDmgInfo) {
         int index = 0;
-        for(int i =0 ;i<DEDInfo.size();i++){
-            if(DEDInfo.get(i).getId() == demonExtraDmgInfo.getId()) {
+        for (int i = 0; i < DEDInfo.size(); i++) {
+            if (DEDInfo.get(i).getId() == demonExtraDmgInfo.getId()) {
                 index = i;
                 break;
             }
@@ -1130,6 +1130,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 notifyDataSetChanged();
             }
         };
+    }
+
+    public void sortDED(ArrayList<DemonExtraDmgInfo> sortDED) {
+        filterDED = sortDED;
+        notifyDataSetChanged();
     }
 
     private int getCardImg(String cardName) {

@@ -3,16 +3,22 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DemonExtraDmgPage extends AppCompatActivity {
     private RecyclerView rv;
@@ -24,6 +30,10 @@ public class DemonExtraDmgPage extends AppCompatActivity {
     private EditText editSearchDED;
 
     private CharSequence check;
+
+    private ImageView imgBtnDEDsortMenu;
+    private ArrayList<DemonExtraDmgInfo> DEDInfo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,8 @@ public class DemonExtraDmgPage extends AppCompatActivity {
          *  1. 악추피 도감 목록 불러오기
          *  2. 악추피 완성 도감 숨기기 기능(풀각만 숨김)
          * */
+        DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
+
         txtDED = (TextView) findViewById(R.id.txtDED);
         txtCompleteDED = (TextView) findViewById(R.id.txtCompleteDED);
         rv = findViewById(R.id.rvDemonExtraDmg);
@@ -86,6 +98,49 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         });
 
 
+        imgBtnDEDsortMenu = findViewById(R.id.imgBtnDEDsortMenu);
+        imgBtnDEDsortMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(DemonExtraDmgPage.this, imgBtnDEDsortMenu);
+                MenuInflater menuInflater = popupMenu.getMenuInflater();
+                menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.defaultSort:
+                                if (DEDInfo.get(0).getId() == 0)
+                                    break;
+
+                                Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
+                                    @Override
+                                    public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
+                                        if (o1.getId() < o2.getId()) {
+                                            return -1;
+                                        } else
+                                            return 1;
+                                    }
+                                });
+                                adapter.sortDED(DEDInfo);
+                                return true;
+                            case R.id.nameSort:
+                                if (DEDInfo.get(0).getName() == "거인 토토이크")
+                                    break;
+
+                                Collections.sort(DEDInfo);
+                                adapter.sortDED(DEDInfo);
+
+                                return true;
+                        }
+
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+
+        });
     }
 
     public void setDED(float value) {

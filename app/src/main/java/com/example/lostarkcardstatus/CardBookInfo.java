@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class CardBookInfo {
+public class CardBookInfo implements Comparable<CardBookInfo>{
     private int id;
     private String name;
     private int value;
@@ -231,5 +231,10 @@ public class CardBookInfo {
 
     public void setCheckCard9(int checkCard9) {
         this.checkCard9 = checkCard9;
+    }
+
+    @Override
+    public int compareTo(CardBookInfo o) {
+        return this.getName().compareTo(o.getName());
     }
 }
