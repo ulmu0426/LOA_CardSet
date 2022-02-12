@@ -25,6 +25,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
     private TextView txtDED;
     private TextView txtCompleteDED;
     private CheckBox checkBoxInvisibilityDEDPage;
+    private DemonExtraDmgAdapter adapter;
 
     private ImageView imgSearchDED;
     private EditText editSearchDED;
@@ -48,7 +49,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         txtDED = (TextView) findViewById(R.id.txtDED);
         txtCompleteDED = (TextView) findViewById(R.id.txtCompleteDED);
         rv = findViewById(R.id.rvDemonExtraDmg);
-        DemonExtraDmgAdapter adapter = new DemonExtraDmgAdapter(this, this);
+        adapter = new DemonExtraDmgAdapter(this, this);
         rv.setAdapter(adapter);
 
         checkBoxInvisibilityDEDPage = (CheckBox) findViewById(R.id.checkBoxInvisibilityDEDPage);
@@ -110,8 +111,10 @@ public class DemonExtraDmgPage extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                                if (DEDInfo.get(0).getId() == 0)
+                                if (DEDInfo.get(0).getId() == 0) {
                                     break;
+                                }
+                                DEDInfo = adapter.getFilterDED();
 
                                 Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
                                     @Override
@@ -125,8 +128,10 @@ public class DemonExtraDmgPage extends AppCompatActivity {
                                 adapter.sortDED(DEDInfo);
                                 return true;
                             case R.id.nameSort:
-                                if (DEDInfo.get(0).getName() == "거인 토토이크")
+                                if (DEDInfo.get(0).getName() == "거인 토토이크") {
                                     break;
+                                }
+                                DEDInfo = adapter.getFilterDED();
 
                                 Collections.sort(DEDInfo);
                                 adapter.sortDED(DEDInfo);

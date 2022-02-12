@@ -53,6 +53,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
     }
 
+    public ArrayList<CardSetInfo> getFilterCardSet() {
+        return this.filterCardSet;
+    }
+
     @NonNull
     @Override
     public CardSetAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -832,7 +836,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     private int awakeToCardCount(int awake) {
         int returnNum = 0;
-        for(int i = 0; i <awake;i++){
+        for (int i = 0; i < awake; i++) {
             returnNum = i;
         }
         return returnNum;
@@ -946,11 +950,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         };
     }
 
-    public void sortCardSet(ArrayList<CardSetInfo> sortCardSetInfo){
+    public void sortCardSet(ArrayList<CardSetInfo> sortCardSetInfo) {
         filterCardSet = sortCardSetInfo;
         notifyDataSetChanged();
     }
-
 
 
     private int getCardImg(String cardName) {

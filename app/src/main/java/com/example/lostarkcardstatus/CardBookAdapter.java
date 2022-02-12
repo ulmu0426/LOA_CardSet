@@ -55,6 +55,10 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     private CardDBHelper cardDbHelper;
     private CardBookPage cardBook_page;
 
+    public ArrayList<CardBookInfo> getFilterCardBook() {
+        return this.filterCardBook;
+    }
+
     public CardBookAdapter(ArrayList<CardBookInfo> cardbook_all) {
         this.cardBookInfo = cardbook_all;
     }
@@ -589,7 +593,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         };
     }
 
-    public void sortCardBook(ArrayList<CardBookInfo> sortCardBook){
+    public void sortCardBook(ArrayList<CardBookInfo> sortCardBook) {
         filterCardBook = sortCardBook;
         notifyDataSetChanged();
     }
@@ -607,7 +611,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         return imageResource;
     }
 
-    private void updateCardBookAndMain(){
+    private void updateCardBookAndMain() {
         ((MainPage) MainPage.mainContext).cardBookUpdate();
         haveStatUpdate(cardBookInfo);
         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);

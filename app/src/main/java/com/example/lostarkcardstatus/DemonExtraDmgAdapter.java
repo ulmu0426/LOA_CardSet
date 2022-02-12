@@ -78,11 +78,10 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         updateDEDPage();
     }
 
-    private void pixUpdate() {
-        updateDEDPage();
-        DED_page.setDED(haveDED);
-        DED_page.setDEDBook(completeDED, getItemCount());
+    public ArrayList<DemonExtraDmgInfo> getFilterDED() {
+        return this.filterDED;
     }
+
 
     @NonNull
     @Override

@@ -24,6 +24,7 @@ public class CardSetPage extends AppCompatActivity {
     private RecyclerView rv;
     private CardDBHelper dbHelper;
     private CheckBox checkBoxInvisibilityCardSetPage;
+    private CardSetAdapter adapter;
 
     private ImageView imgBtnSortMenu;
     private ArrayList<CardSetInfo> cardSetInfo;
@@ -49,7 +50,7 @@ public class CardSetPage extends AppCompatActivity {
 
         rv = findViewById(R.id.rvCardSet);
         dbHelper = new CardDBHelper(this);
-        CardSetAdapter adapter = new CardSetAdapter(this);
+        adapter = new CardSetAdapter(this);
 
         rv.setAdapter(adapter);
 
@@ -107,9 +108,10 @@ public class CardSetPage extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                                if (cardSetInfo.get(0).getId() == 0)
+                                if (cardSetInfo.get(0).getId() == 0) {
                                     break;
-
+                                }
+                                cardSetInfo = adapter.getFilterCardSet();
                                 Collections.sort(cardSetInfo, new Comparator<CardSetInfo>() {
                                     @Override
                                     public int compare(CardSetInfo o1, CardSetInfo o2) {
@@ -122,11 +124,12 @@ public class CardSetPage extends AppCompatActivity {
                                 adapter.sortCardSet(cardSetInfo);
                                 return true;
                             case R.id.nameSort:
-                                if (cardSetInfo.get(0).getName() == "가디언의 광기")
+                                if (cardSetInfo.get(0).getName() == "가디언의 광기") {
                                     break;
-
+                                }
+                                cardSetInfo = adapter.getFilterCardSet();
                                 Collections.sort(cardSetInfo);
-                                Log.v("test",cardSetInfo.size()+"");
+                                Log.v("test", cardSetInfo.size() + "");
                                 adapter.sortCardSet(cardSetInfo);
 
                                 return true;

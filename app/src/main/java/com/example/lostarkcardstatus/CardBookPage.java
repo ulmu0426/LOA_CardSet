@@ -137,7 +137,7 @@ public class CardBookPage extends AppCompatActivity {
                                 if (cardBookInfo.get(0).getId() == 0) {
                                     break;
                                 }
-
+                                cardBookInfo = adapter.getFilterCardBook();
                                 Collections.sort(cardBookInfo, new Comparator<CardBookInfo>() {
                                     @Override
                                     public int compare(CardBookInfo o1, CardBookInfo o2) {
@@ -153,7 +153,7 @@ public class CardBookPage extends AppCompatActivity {
                                 if (cardBookInfo.get(0).getName() == "1절만 해") {
                                     break;
                                 }
-
+                                cardBookInfo = adapter.getFilterCardBook();
                                 Collections.sort(cardBookInfo);
                                 adapter.sortCardBook(cardBookInfo);
 
