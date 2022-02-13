@@ -179,4 +179,7 @@ public class CardBookPage extends AppCompatActivity {
         txtBtnNotAchievedSpecificityAgility.setText(AGILITY_BOOK_COMPLETE + statBookComplete[2] + "/" + statBookAll[2] + "개");
     }
 
+    public boolean completeChecked(){
+        return checkBoxInvisibilityCardBookPage.isChecked();
+    }
 }

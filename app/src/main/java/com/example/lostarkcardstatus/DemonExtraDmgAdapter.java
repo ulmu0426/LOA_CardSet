@@ -27,7 +27,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private ArrayList<DemonExtraDmgInfo> DEDInfo;
     private ArrayList<DemonExtraDmgInfo> filterDED;
     private Context context;
-    private DemonExtraDmgPage DED_page;
+    private DemonExtraDmgPage DEDPage;
     private ArrayList<CardInfo> cardInfo;
     private CardDBHelper cardDbHelper;
 
@@ -58,6 +58,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     private float haveDED;
     private int completeDED;
+    private ArrayList<DemonExtraDmgInfo> baseFilteredDED;
 
     public DemonExtraDmgAdapter(ArrayList<DemonExtraDmgInfo> DEDInfo) {
         this.DEDInfo = DEDInfo;
@@ -67,13 +68,15 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return haveDED;
     }
 
-    public DemonExtraDmgAdapter(Context context, DemonExtraDmgPage demonExtraDmg_page) {
+    public DemonExtraDmgAdapter(Context context, DemonExtraDmgPage demonExtraDmgPage) {
         this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
         this.filterDED = ((MainPage) MainPage.mainContext).DEDInfo;
         this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.context = context;
         cardDbHelper = new CardDBHelper(context);
-        this.DED_page = demonExtraDmg_page;
+        this.DEDPage = demonExtraDmgPage;
+        baseFilteredDED = new ArrayList<DemonExtraDmgInfo>();
+        setFilteredDED();
         ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();
     }
@@ -1057,8 +1060,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     private void updateDEDPage() {
         haveDEDUpdate();                                                                                     //악추피 값,완성도 갱신
-        DED_page.setDED(haveDED);                                                                           //악추피 페이지 값 갱신한 것 세팅
-        DED_page.setDEDBook(completeDED, getItemCount());                                                    //악추피 도감 완성도 갱신한 것 세팅
+        DEDPage.setDED(haveDED);                                                                           //악추피 페이지 값 갱신한 것 세팅
+        DEDPage.setDEDBook(completeDED, getItemCount());                                                    //악추피 도감 완성도 갱신한 것 세팅
         ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
     }
 
@@ -1107,20 +1110,37 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    filterDED = DEDInfo;
-                } else {
-                    ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
-                    for (int i = 0; i < DEDInfo.size(); i++) {
-                        if (DEDInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteringList.add(DEDInfo.get(i));
+                if (DEDPage.completeChecked()) {
+                    if (charString.isEmpty()) {
+                        filterDED = baseFilteredDED;
+                    } else {
+                        ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
+                        for (int i = 0; i < baseFilteredDED.size(); i++) {
+                            if (baseFilteredDED.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteringList.add(baseFilteredDED.get(i));
+                            }
                         }
+                        filterDED = filteringList;
                     }
-                    filterDED = filteringList;
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = filterDED;
+                    return filterResults;
+                } else {
+                    if (charString.isEmpty()) {
+                        filterDED = DEDInfo;
+                    } else {
+                        ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
+                        for (int i = 0; i < DEDInfo.size(); i++) {
+                            if (DEDInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteringList.add(DEDInfo.get(i));
+                            }
+                        }
+                        filterDED = filteringList;
+                    }
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = filterDED;
+                    return filterResults;
                 }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterDED;
-                return filterResults;
             }
 
             @Override
@@ -1129,6 +1149,16 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 notifyDataSetChanged();
             }
         };
+    }
+
+    private void setFilteredDED() {
+        ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
+        for (int i = 0; i < DEDInfo.size(); i++) {
+            if (!isAllCompleteDED(DEDInfo.get(i))) {
+                filteringList.add(DEDInfo.get(i));
+            }
+        }
+        baseFilteredDED = filteringList;
     }
 
     public void sortDED(ArrayList<DemonExtraDmgInfo> sortDED) {

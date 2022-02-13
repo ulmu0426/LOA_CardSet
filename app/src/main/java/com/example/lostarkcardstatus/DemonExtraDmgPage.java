@@ -156,4 +156,8 @@ public class DemonExtraDmgPage extends AppCompatActivity {
     public void setDEDBook(int completeDED, int DEDBook) {
         txtCompleteDED.setText("완성 도감 개수 : " + completeDED + "/" + DEDBook + "개");
     }
+
+    public boolean completeChecked(){
+        return checkBoxInvisibilityDEDPage.isChecked();
+    }
 }

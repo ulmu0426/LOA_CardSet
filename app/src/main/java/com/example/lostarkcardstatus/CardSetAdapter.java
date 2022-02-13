@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private Context context;
     private CardDBHelper cardDbHelper;
     private FavoriteAdapter favoriteAdapter;
+    private CardSetPage cardSetPage;
+
     private final String CARDSET_AWAKE = "각성 : ";
     private final String CARDSET_CARD_NUM = "보유 : ";
     private final String CARDSET_COLUMN_NAME_CARD0_CHECK = "checkCard0";
@@ -41,16 +42,21 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private final String CARDSET_COLUMN_NAME_CARD6_CHECK = "checkCard6";
     private final String CARD_SET_AWAKE_SUM = "각성 합계 : ";
 
+    private ArrayList<CardSetInfo> baseFilteredCardSet;
 
-    public CardSetAdapter(Context context) {
+
+    public CardSetAdapter(Context context, CardSetPage cardSetPage) {
         this.cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
         this.filterCardSet = ((MainPage) MainPage.mainContext).cardSetInfo;
         this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.context = context;
+        this.cardSetPage = cardSetPage;
         this.favoriteAdapter = ((MainPage) MainPage.mainContext).favoriteAdapter;
         this.favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
         cardDbHelper = new CardDBHelper(context);
         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+        baseFilteredCardSet = new ArrayList<CardSetInfo>();
+        setFilteredCardSet();
     }
 
     public ArrayList<CardSetInfo> getFilterCardSet() {
@@ -460,7 +466,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 filterCardSet.get(pos).setAwakeCard4(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setCount(number);
-                                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard4() + "\n"
+                                txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard4() + "\n"
                                         + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
@@ -503,7 +509,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 filterCardSet.get(pos).setAwakeCard5(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setCount(number);
-                                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount());
+                                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard5(), awake, filterCardSet.get(pos).getCheckCard5());
@@ -545,7 +551,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 filterCardSet.get(pos).setAwakeCard6(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setCount(number);
-                                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard6() + "\n"
+                                txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard6() + "\n"
                                         + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
@@ -879,10 +885,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         }
     }
 
-    private boolean isAllCompleteDED(CardSetInfo cardSetInfo) {
+    private boolean isAllCompleteCardSet(CardSetInfo cardSetInfo) {
         int checkAll = cardSetInfo.getCheckCard0() + cardSetInfo.getCheckCard1() + cardSetInfo.getCheckCard2()
                 + cardSetInfo.getCheckCard3() + cardSetInfo.getCheckCard4() + cardSetInfo.getCheckCard5() + cardSetInfo.getCheckCard6();
-        if (cardSetInfo.getHaveCard() == checkAll) { //카드 세트 수집 완료시.
+        if (cardSetInfo.getHaveCard() <= checkAll) { //카드 세트 수집 완료시.
             if (cardSetInfo.getHaveAwake() == (cardSetInfo.getHaveCard() * 5)) //수집한 카드의 각성도합이 최대값일시
                 return true;
             else
@@ -902,7 +908,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 } else {
                     ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
                     for (int i = 0; i < cardSetInfo.size(); i++) {
-                        if (!isAllCompleteDED(cardSetInfo.get(i))) {
+                        if (!isAllCompleteCardSet(cardSetInfo.get(i))) {
                             filteringList.add(cardSetInfo.get(i));
                         }
                     }
@@ -926,20 +932,37 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    filterCardSet = cardSetInfo;
-                } else {
-                    ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
-                    for (int i = 0; i < cardSetInfo.size(); i++) {
-                        if (cardSetInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteringList.add(cardSetInfo.get(i));
+                if(cardSetPage.completeChecked()){
+                    if (charString.isEmpty()) {
+                        filterCardSet = baseFilteredCardSet;
+                    } else {
+                        ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
+                        for (int i = 0; i < baseFilteredCardSet.size(); i++) {
+                            if (baseFilteredCardSet.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteringList.add(baseFilteredCardSet.get(i));
+                            }
                         }
+                        filterCardSet = filteringList;
                     }
-                    filterCardSet = filteringList;
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = filterCardSet;
+                    return filterResults;
+                }else {
+                    if (charString.isEmpty()) {
+                        filterCardSet = cardSetInfo;
+                    } else {
+                        ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
+                        for (int i = 0; i < cardSetInfo.size(); i++) {
+                            if (cardSetInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteringList.add(cardSetInfo.get(i));
+                            }
+                        }
+                        filterCardSet = filteringList;
+                    }
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = filterCardSet;
+                    return filterResults;
                 }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterCardSet;
-                return filterResults;
             }
 
             @Override
@@ -948,6 +971,16 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 notifyDataSetChanged();
             }
         };
+    }
+
+    private void setFilteredCardSet() {
+        ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (!isAllCompleteCardSet(cardSetInfo.get(i))) {
+                filteringList.add(cardSetInfo.get(i));
+            }
+        }
+        baseFilteredCardSet = filteringList;
     }
 
     public void sortCardSet(ArrayList<CardSetInfo> sortCardSetInfo) {

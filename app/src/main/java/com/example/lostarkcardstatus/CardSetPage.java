@@ -50,7 +50,7 @@ public class CardSetPage extends AppCompatActivity {
 
         rv = findViewById(R.id.rvCardSet);
         dbHelper = new CardDBHelper(this);
-        adapter = new CardSetAdapter(this);
+        adapter = new CardSetAdapter(this, this);
 
         rv.setAdapter(adapter);
 
@@ -145,5 +145,7 @@ public class CardSetPage extends AppCompatActivity {
 
     }
 
-
+    public boolean completeChecked(){
+        return checkBoxInvisibilityCardSetPage.isChecked();
+    }
 }

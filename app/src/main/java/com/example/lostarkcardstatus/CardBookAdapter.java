@@ -55,6 +55,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     private CardDBHelper cardDbHelper;
     private CardBookPage cardBook_page;
 
+    private ArrayList<CardBookInfo> baseFilteredCardBook;
+
     public ArrayList<CardBookInfo> getFilterCardBook() {
         return this.filterCardBook;
     }
@@ -72,8 +74,11 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         this.cardBook_page = cardBook_page;
         ((MainPage) MainPage.mainContext).cardBookUpdate();
         haveStatUpdate(cardBookInfo);   //haveCardToCardBookUpdate()로 얻은 정보를 바탕으로 최초 값 획득
+        this.baseFilteredCardBook = new ArrayList<CardBookInfo>();
+        setFilteredCardBook();
 
     }
+
 
     @NonNull
     @Override
@@ -414,7 +419,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         private TextView txtCardbook_Cardname9;
         private ConstraintLayout cvCardbookBackground;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cvCardbookBackground = itemView.findViewById(R.id.cvCardBookBackground);
@@ -443,10 +447,11 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
 
         }
+
     }
 
-
     //도감에 없는 카드는 안보이게
+
     private void imgVisibility(String card, ImageView imageView, TextView textView) {
         if (card.isEmpty()) {
             imageView.setVisibility(View.INVISIBLE);
@@ -456,16 +461,16 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
             textView.setVisibility(View.VISIBLE);
         }
     }
-
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
+
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
         if (check == 1)
             iv.setColorFilter(null);
         else
             iv.setColorFilter(filter);
     }
-
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
+
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
         if (iv.getColorFilter() != filter) {
             iv.setColorFilter(filter);
@@ -476,8 +481,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         }
         return check;
     }
-
     // DB에 도감을 완성시키면 도감의 배경을 노란색으로 칠해 획득유무를 추가로 알려줌.
+
     private void isCompleteCardBookBackgroundColor(CardBookInfo cardbook_all, ConstraintLayout cv) {
         if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
             cv.setBackgroundColor(Color.parseColor("#D0FFE870"));
@@ -485,16 +490,16 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
             cv.setBackgroundColor(Color.parseColor("#FFFFFF"));
     }
 
-
     // DB에 도감을 완성 시킨 경우 true else false
+
     public boolean isCompleteCardBook(CardBookInfo cardbook_all) {
         if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
             return true;
         else
             return false;
     }
-
     //스텟, 도감 달성 개수 업데이트 메소드
+
     private void haveStatUpdate(ArrayList<CardBookInfo> cardbook_all) {
         haveStat = new int[]{0, 0, 0};
         haveStatCardBook = new int[]{0, 0, 0};
@@ -511,8 +516,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
             }
         }
     }
-
     //cardList 갱신을 위한 메소드
+
     private int getIndex(ArrayList<CardInfo> cardInfo, String name) {
         int index = 0;
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -523,8 +528,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         }
         return index;
     }
-
     //cardBookInfo 갱신을 위한 메소드
+
     private int getIndex(int id) {
         int index = 0;
         for (int i = 0; i < cardBookInfo.size(); i++) {
@@ -534,7 +539,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         }
         return index;
     }
-
     public Filter getCompleteFilter() {
         return new Filter() {
             @Override
@@ -569,20 +573,37 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    filterCardBook = cardBookInfo;
-                } else {
-                    ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
-                    for (int i = 0; i < cardBookInfo.size(); i++) {
-                        if (cardBookInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteringList.add(cardBookInfo.get(i));
+                if (cardBook_page.completeChecked()) {
+                    if (charString.isEmpty()) {
+                        filterCardBook = baseFilteredCardBook;
+                    } else {
+                        ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
+                        for (int i = 0; i < baseFilteredCardBook.size(); i++) {
+                            if (baseFilteredCardBook.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteringList.add(baseFilteredCardBook.get(i));
+                            }
                         }
+                        filterCardBook = filteringList;
                     }
-                    filterCardBook = filteringList;
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = filterCardBook;
+                    return filterResults;
+                } else {
+                    if (charString.isEmpty()) {
+                        filterCardBook = cardBookInfo;
+                    } else {
+                        ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
+                        for (int i = 0; i < cardBookInfo.size(); i++) {
+                            if (cardBookInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteringList.add(cardBookInfo.get(i));
+                            }
+                        }
+                        filterCardBook = filteringList;
+                    }
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = filterCardBook;
+                    return filterResults;
                 }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterCardBook;
-                return filterResults;
             }
 
             @Override
@@ -591,6 +612,16 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                 notifyDataSetChanged();
             }
         };
+    }
+
+    private void setFilteredCardBook() {
+        ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
+        for (int i = 0; i < cardBookInfo.size(); i++) {
+            if (!isCompleteCardBook(cardBookInfo.get(i))) {
+                filteringList.add(cardBookInfo.get(i));
+            }
+        }
+        baseFilteredCardBook = filteringList;
     }
 
     public void sortCardBook(ArrayList<CardBookInfo> sortCardBook) {
