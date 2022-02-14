@@ -310,7 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="보유 카드 수정"
+                android:text="빠른 획득"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
 
