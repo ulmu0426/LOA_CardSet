@@ -23,6 +23,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
@@ -68,6 +70,69 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.txtAwake.setText(searchList.get(position).getAwake() + "");
         holder.txtHave.setText(searchList.get(position).getCount() + "");
         holder.isGetCheckbox.setChecked(isChecked(searchList.get(position).getGetCard()));
+
+        holder.txtName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                cardInfoDialog.setContentView(R.layout.just_card);
+
+                TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+                EditText etxtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                EditText etxtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+                TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                Button btnOk = cardInfoDialog.findViewById(R.id.btnOK);
+                Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer);
+
+                txtJustCardName.setText(searchList.get(positionGet).getName());
+                imgJustCard.setImageResource(getCardImg(searchList.get(positionGet).getName()));
+                etxtJustCardAwake.setText(searchList.get(positionGet).getAwake());
+                etxtJustCardHave.setText(searchList.get(positionGet).getCount());
+                txtJustCardAcquisition_info.setText(searchList.get(positionGet).getAcquisition_info());
+                etxtJustCardAwake.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtJustCardAwake.selectAll();
+                    }
+                });
+                etxtJustCardHave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        etxtJustCardHave.selectAll();
+                    }
+                });
+
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!etxtJustCardAwake.getText().toString().equals(searchList.get(positionGet).getAwake() + "")) {
+                            searchList.get(positionGet).setAwake(Integer.parseInt(etxtJustCardAwake.getText().toString()));
+                            cardDBHelper.UpdateInfoCardAwake(searchList.get(positionGet).getAwake(), searchList.get(positionGet).getId());
+                            ((MainPage) MainPage.mainContext).cardBookUpdate();
+                            ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                        }
+                        if (!etxtJustCardHave.getText().toString().equals(searchList.get(positionGet).getCount() + "")) {
+                            searchList.get(positionGet).setCount(Integer.parseInt(etxtJustCardHave.getText().toString()));
+                            cardDBHelper.UpdateInfoCardNum(searchList.get(positionGet).getCount(), searchList.get(positionGet).getId());
+                            ((MainPage) MainPage.mainContext).cardBookUpdate();
+                            ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                        }
+
+                        notifyDataSetChanged();
+                        cardInfoDialog.cancel();
+                    }
+                });
+                btnCancer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cardInfoDialog.cancel();
+                    }
+                });
+
+                cardInfoDialog.show();
+            }
+        });
 
         holder.changeAwakeHave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +190,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                         holder.txtAwake.setText(awake + "");
                         holder.txtHave.setText(number + "");
+                        ((MainPage) MainPage.mainContext).cardBookUpdate();
+                        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                         notifyDataSetChanged();
                         awakeHaveDialog.cancel();
                     }
