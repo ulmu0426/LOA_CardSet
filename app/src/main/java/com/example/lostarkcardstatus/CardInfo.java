@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class CardInfo {
+public class CardInfo implements Comparable<CardInfo>{
     /*
      * 카드 id 등급별 id 앞 번호
      * 전설 : 1
@@ -81,5 +81,10 @@ public class CardInfo {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @Override
+    public int compareTo(CardInfo cardInfo) {
+        return this.getName().compareTo(cardInfo.getName());
     }
 }

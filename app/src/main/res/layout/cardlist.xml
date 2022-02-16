@@ -35,6 +35,16 @@
             android:layout_height="match_parent">
 
 
+            <ImageView
+                android:id="@+id/imgSortLegend"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvLegendList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/fix01menu" />
+
             <TextView
                 android:id="@+id/txtCardLegend"
                 android:layout_width="wrap_content"
@@ -80,6 +90,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtCardLegend"
                 tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
+
+            <ImageView
+                android:id="@+id/imgSortEpic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvEpicList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvLegendList"
+                app:srcCompat="@drawable/fix01menu" />
 
             <TextView
                 android:id="@+id/txtCardEpic"
@@ -127,6 +147,16 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
+            <ImageView
+                android:id="@+id/imgSortRare"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvRareList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvEpicList"
+                app:srcCompat="@drawable/fix01menu" />
+
             <TextView
                 android:id="@+id/txtCardRare"
                 android:layout_width="wrap_content"
@@ -172,6 +202,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtCardRare"
                 tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
+
+            <ImageView
+                android:id="@+id/imgSortUncommon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvUncommonList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvRareList"
+                app:srcCompat="@drawable/fix01menu" />
 
             <TextView
                 android:id="@+id/txtCardUncommon"
@@ -219,6 +259,16 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
 
+            <ImageView
+                android:id="@+id/imgSortCommon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvCommonList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvUncommonList"
+                app:srcCompat="@drawable/fix01menu" />
+
             <TextView
                 android:id="@+id/txtCardCommon"
                 android:layout_width="wrap_content"
@@ -264,6 +314,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtCardCommon"
                 tools:itemCount="5"
                 tools:listitem="@layout/rv_cardlist" />
+
+            <ImageView
+                android:id="@+id/imgSortSpecial"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvSpecialList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvCommonList"
+                app:srcCompat="@drawable/fix01menu" />
 
             <TextView
                 android:id="@+id/txtCardSpecial"

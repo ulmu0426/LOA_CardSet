@@ -23,8 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
@@ -34,7 +32,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private Context context;
     private CardDBHelper cardDBHelper;
     private ArrayList<CardInfo> useCardList;
-    private ArrayList<CardInfo> searchList;
+    private ArrayList<CardInfo> filterCardInfo;
     private ArrayList<CardBookInfo> cardBookInfo;
 
     public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
@@ -42,10 +40,13 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         this.cardBookInfo = ((MainPage) mainContext).cardBookInfo;
         this.context = context;
         this.useCardList = useCardList;
-        this.searchList = useCardList;
+        this.filterCardInfo = useCardList;
         cardDBHelper = new CardDBHelper(context);
     }
 
+    public ArrayList<CardInfo> getFilterCardInfo() {
+        return this.filterCardInfo;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,14 +63,14 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
 
-        holder.img.setImageResource(getCardImg(searchList.get(position).getName()));
+        holder.img.setImageResource(getCardImg(filterCardInfo.get(position).getName()));
         defaultColorFilter(holder.img, position, filter);
 
-        holder.txtName.setText(searchList.get(position).getName());
+        holder.txtName.setText(filterCardInfo.get(position).getName());
 
-        holder.txtAwake.setText(searchList.get(position).getAwake() + "");
-        holder.txtHave.setText(searchList.get(position).getCount() + "");
-        holder.isGetCheckbox.setChecked(isChecked(searchList.get(position).getGetCard()));
+        holder.txtAwake.setText(filterCardInfo.get(position).getAwake() + "");
+        holder.txtHave.setText(filterCardInfo.get(position).getCount() + "");
+        holder.isGetCheckbox.setChecked(isChecked(filterCardInfo.get(position).getGetCard()));
 
         holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +86,11 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 Button btnOk = cardInfoDialog.findViewById(R.id.btnOK);
                 Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer);
 
-                txtJustCardName.setText(searchList.get(positionGet).getName());
-                imgJustCard.setImageResource(getCardImg(searchList.get(positionGet).getName()));
-                etxtJustCardAwake.setText(searchList.get(positionGet).getAwake());
-                etxtJustCardHave.setText(searchList.get(positionGet).getCount());
-                txtJustCardAcquisition_info.setText(searchList.get(positionGet).getAcquisition_info());
+                txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
+                imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
+                etxtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake());
+                etxtJustCardHave.setText(filterCardInfo.get(positionGet).getCount());
+                txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
                 etxtJustCardAwake.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -106,15 +107,15 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 btnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!etxtJustCardAwake.getText().toString().equals(searchList.get(positionGet).getAwake() + "")) {
-                            searchList.get(positionGet).setAwake(Integer.parseInt(etxtJustCardAwake.getText().toString()));
-                            cardDBHelper.UpdateInfoCardAwake(searchList.get(positionGet).getAwake(), searchList.get(positionGet).getId());
+                        if (!etxtJustCardAwake.getText().toString().equals(filterCardInfo.get(positionGet).getAwake() + "")) {
+                            filterCardInfo.get(positionGet).setAwake(Integer.parseInt(etxtJustCardAwake.getText().toString()));
+                            cardDBHelper.UpdateInfoCardAwake(filterCardInfo.get(positionGet).getAwake(), filterCardInfo.get(positionGet).getId());
                             ((MainPage) MainPage.mainContext).cardBookUpdate();
                             ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                         }
-                        if (!etxtJustCardHave.getText().toString().equals(searchList.get(positionGet).getCount() + "")) {
-                            searchList.get(positionGet).setCount(Integer.parseInt(etxtJustCardHave.getText().toString()));
-                            cardDBHelper.UpdateInfoCardNum(searchList.get(positionGet).getCount(), searchList.get(positionGet).getId());
+                        if (!etxtJustCardHave.getText().toString().equals(filterCardInfo.get(positionGet).getCount() + "")) {
+                            filterCardInfo.get(positionGet).setCount(Integer.parseInt(etxtJustCardHave.getText().toString()));
+                            cardDBHelper.UpdateInfoCardNum(filterCardInfo.get(positionGet).getCount(), filterCardInfo.get(positionGet).getId());
                             ((MainPage) MainPage.mainContext).cardBookUpdate();
                             ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                         }
@@ -178,14 +179,14 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         //카드 arrayList update
                         useCardList.get(positionGet).setAwake(awake);
                         useCardList.get(positionGet).setCount(number);
-                        searchList.get(positionGet).setAwake(awake);
-                        searchList.get(positionGet).setCount(number);
+                        filterCardInfo.get(positionGet).setAwake(awake);
+                        filterCardInfo.get(positionGet).setCount(number);
 
-                        cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setAwake(awake);
-                        cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setCount(number);
+                        cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
+                        cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setCount(number);
                         //카드 DB update
-                        cardDBHelper.UpdateInfoCardAwake(awake, searchList.get(positionGet).getId());
-                        cardDBHelper.UpdateInfoCardNum(number, searchList.get(positionGet).getId());
+                        cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
+                        cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());
 
                         Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                         holder.txtAwake.setText(awake + "");
@@ -206,7 +207,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             public void onClick(View v) {
                 if (holder.isGetCheckbox.isChecked()) {
                     useCardList.get(positionGet).setGetCard(1);
-                    searchList.get(positionGet).setGetCard(1);
+                    filterCardInfo.get(positionGet).setGetCard(1);
                     cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(1);
                     cardDBHelper.UpdateInfoCardCheck(1, useCardList.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
@@ -215,9 +216,9 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     haveStatUpdate(cardBookInfo);
                 } else {
                     useCardList.get(positionGet).setGetCard(0);
-                    searchList.get(positionGet).setGetCard(0);
-                    cardInfo.get(matchIndex(searchList.get(positionGet).getId())).setGetCard(0);
-                    cardDBHelper.UpdateInfoCardCheck(0, searchList.get(positionGet).getId());
+                    filterCardInfo.get(positionGet).setGetCard(0);
+                    cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(0);
+                    cardDBHelper.UpdateInfoCardCheck(0, filterCardInfo.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
@@ -232,7 +233,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
     @Override
     public int getItemCount() {
-        return searchList.size();
+        return filterCardInfo.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -332,7 +333,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString();
                 if (charString.isEmpty()) {
-                    searchList = useCardList;
+                    filterCardInfo = useCardList;
                 } else {
                     ArrayList<CardInfo> filteringList = new ArrayList<CardInfo>();
                     for (int i = 0; i < useCardList.size(); i++) {
@@ -340,16 +341,16 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                             filteringList.add(useCardList.get(i));
                         }
                     }
-                    searchList = filteringList;
+                    filterCardInfo = filteringList;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = searchList;
+                filterResults.values = filterCardInfo;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                searchList = (ArrayList<CardInfo>) results.values;
+                filterCardInfo = (ArrayList<CardInfo>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -368,6 +369,10 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         return imageResource;
     }
 
+    public void sortCardList(ArrayList<CardInfo> sortCardList) {
+        filterCardInfo = sortCardList;
+        notifyDataSetChanged();
+    }
 
     //스텟, 도감 달성 개수 업데이트 메소드
     private void haveStatUpdate(ArrayList<CardBookInfo> cardbook_all) {
