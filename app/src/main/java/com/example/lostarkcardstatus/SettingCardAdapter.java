@@ -8,9 +8,12 @@ import android.content.Context;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -47,6 +50,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     public ArrayList<CardInfo> getFilterCardInfo() {
         return this.filterCardInfo;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -78,18 +82,23 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 cardInfoDialog.setContentView(R.layout.just_card);
 
+                WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
                 TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
                 ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
                 EditText etxtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
                 EditText etxtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
                 TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
-                Button btnOk = cardInfoDialog.findViewById(R.id.btnOK);
-                Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer);
+                Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+                Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer_JustCard);
 
                 txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
                 imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
-                etxtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake());
-                etxtJustCardHave.setText(filterCardInfo.get(positionGet).getCount());
+                etxtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
+                etxtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
                 txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
                 etxtJustCardAwake.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,7 +112,24 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         etxtJustCardHave.selectAll();
                     }
                 });
-
+                etxtJustCardAwake.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId == EditorInfo.IME_ACTION_DONE){
+                            etxtJustCardAwake.clearFocus();
+                        }
+                        return false;
+                    }
+                });
+                etxtJustCardHave.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId == EditorInfo.IME_ACTION_DONE){
+                            etxtJustCardHave.clearFocus();
+                        }
+                        return false;
+                    }
+                });
                 btnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

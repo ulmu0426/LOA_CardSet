@@ -158,6 +158,13 @@ public class CardBookPage extends AppCompatActivity {
                                 adapter.sortCardBook(cardBookInfo);
 
                                 return true;
+                            case R.id.completenessSort:
+                                if (cardBookInfo.get(0).getName() == "") {
+                                    break;
+                                }
+                                cardBookInfo = adapter.getFilterCardBook();
+
+                                return true;
                         }
 
                         return false;
@@ -179,7 +186,29 @@ public class CardBookPage extends AppCompatActivity {
         txtBtnNotAchievedSpecificityAgility.setText(AGILITY_BOOK_COMPLETE + statBookComplete[2] + "/" + statBookAll[2] + "개");
     }
 
-    public boolean completeChecked(){
+    public boolean completeChecked() {
         return checkBoxInvisibilityCardBookPage.isChecked();
+    }
+
+
+    /*
+    완성1.
+    카드 1장 모자란거 2.
+    ~카드 n장 모자란거 3.
+    카드 하나도 없는거 4.
+     */
+    private void completenessSort() {
+        ArrayList<CardBookInfo> tempList = new ArrayList<CardBookInfo>();
+        CardBookInfo tempCardBookInfo = new CardBookInfo();
+        for (int i = 0; i < cardBookInfo.size(); i++) {
+            if(cardBookInfo.get(i).getCompleteCardBook() == cardBookInfo.get(i).getHaveCard()){ //다 모은 경우
+
+            }else if(cardBookInfo.get(i).getCompleteCardBook() > cardBookInfo.get(i).getHaveCard()){ //1장~최대9장모자란 경우
+
+            }else if(cardBookInfo.get(i).getHaveCard() == 0){   //한장도 없는 경우
+
+            }
+        }
+
     }
 }

@@ -4,15 +4,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/loading"
+        android:label="LOA 카드 매니저"
+        android:roundIcon="@drawable/loading"
         android:supportsRtl="true"
         android:largeHeap="true"
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.LostArkCardStatus">
         <activity
-            android:name=".MainPage"
+            android:name=".LoadingActivity"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +26,7 @@
         <activity android:name=".DemonExtraDmgPage"></activity>
         <activity android:name=".SettingCard"></activity>
         <activity android:name=".Test"></activity>
+        <activity android:name=".MainPage"></activity>
 
     </application>
 

@@ -4,10 +4,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -263,6 +265,25 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         etxtNum.selectAll();
+                    }
+                });
+
+                etxtAwake.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                            etxtAwake.clearFocus();
+                        }
+                        return false;
+                    }
+                });
+                etxtNum.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                            etxtNum.clearFocus();
+                        }
+                        return false;
                     }
                 });
 
@@ -932,7 +953,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString();
-                if(cardSetPage.completeChecked()){
+                if (cardSetPage.completeChecked()) {
                     if (charString.isEmpty()) {
                         filterCardSet = baseFilteredCardSet;
                     } else {
@@ -947,7 +968,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     FilterResults filterResults = new FilterResults();
                     filterResults.values = filterCardSet;
                     return filterResults;
-                }else {
+                } else {
                     if (charString.isEmpty()) {
                         filterCardSet = cardSetInfo;
                     } else {

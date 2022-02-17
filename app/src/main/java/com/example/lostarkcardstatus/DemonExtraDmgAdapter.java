@@ -5,10 +5,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -287,7 +289,24 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         etxtNum.selectAll();
                     }
                 });
-
+                etxtAwake.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId == EditorInfo.IME_ACTION_DONE){
+                            etxtAwake.clearFocus();
+                        }
+                        return false;
+                    }
+                });
+                etxtNum.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId == EditorInfo.IME_ACTION_DONE){
+                            etxtNum.clearFocus();
+                        }
+                        return false;
+                    }
+                });
                 txtDED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
