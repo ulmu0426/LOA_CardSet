@@ -54,30 +54,40 @@
                 android:id="@+id/imgCardSetDetail0"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_legend_aman" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail1"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_rare_seria" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail2"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_uncommon_executor_solas" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail3"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_legend_king_silian" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail4"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_legend_kamaine" />
         </TableRow>
 
@@ -163,12 +173,16 @@
                 android:id="@+id/imgCardSetDetail5"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_legend_dereon_aman" />
 
             <ImageView
                 android:id="@+id/imgCardSetDetail6"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
+                android:paddingVertical="2dp"
+                android:layout_marginHorizontal="8dp"
                 app:srcCompat="@drawable/card_legend_bahuntur" />
         </TableRow>
 

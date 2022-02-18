@@ -1,10 +1,13 @@
 package com.example.lostarkcardstatus;
 
+import static android.graphics.Color.parseColor;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -464,19 +467,25 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
 
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
-        if (check == 1)
+        if (check == 1) {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
-        else
+        }
+        else {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
+        }
     }
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
 
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
         if (iv.getColorFilter() != filter) {
             iv.setColorFilter(filter);
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             check = 0;
         } else {
             iv.setColorFilter(null);
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
             check = 1;
         }
         return check;
@@ -485,9 +494,9 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     private void isCompleteCardBookBackgroundColor(CardBookInfo cardbook_all, ConstraintLayout cv) {
         if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
-            cv.setBackgroundColor(Color.parseColor("#D0FFE870"));
+            cv.setBackgroundColor(parseColor("#D0FFE870"));
         else
-            cv.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            cv.setBackgroundColor(parseColor("#FFFFFF"));
     }
 
     // DB에 도감을 완성 시킨 경우 true else false

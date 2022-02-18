@@ -163,6 +163,8 @@ public class CardBookPage extends AppCompatActivity {
                                     break;
                                 }
                                 cardBookInfo = adapter.getFilterCardBook();
+                                cardBookInfo = completenessSort();
+                                adapter.sortCardBook(cardBookInfo);
 
                                 return true;
                         }
@@ -197,18 +199,73 @@ public class CardBookPage extends AppCompatActivity {
     ~카드 n장 모자란거 3.
     카드 하나도 없는거 4.
      */
-    private void completenessSort() {
+    private ArrayList<CardBookInfo> completenessSort() {
         ArrayList<CardBookInfo> tempList = new ArrayList<CardBookInfo>();
-        CardBookInfo tempCardBookInfo = new CardBookInfo();
+        CardBookInfo tempCardBookInfo;
         for (int i = 0; i < cardBookInfo.size(); i++) {
-            if(cardBookInfo.get(i).getCompleteCardBook() == cardBookInfo.get(i).getHaveCard()){ //다 모은 경우
-
-            }else if(cardBookInfo.get(i).getCompleteCardBook() > cardBookInfo.get(i).getHaveCard()){ //1장~최대9장모자란 경우
-
-            }else if(cardBookInfo.get(i).getHaveCard() == 0){   //한장도 없는 경우
-
+            if (cardBookInfo.get(i).getCompleteCardBook() == cardBookInfo.get(i).getHaveCard()) { //다 모은 경우
+                tempCardBookInfo = cardBookInfo.get(i);
+                tempList.add(tempCardBookInfo);
             }
         }
 
+        ArrayList<CardBookInfo> tempList1 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList2 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList3 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList4 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList5 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList6 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList7 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList8 = new ArrayList<CardBookInfo>();
+        ArrayList<CardBookInfo> tempList9 = new ArrayList<CardBookInfo>();
+        for (int i = 0; i < cardBookInfo.size(); i++) {
+            if (!(cardBookInfo.get(i).getSubComplete() == 0)) { //1장~최대9장모자란 경우
+                if (cardBookInfo.get(i).getSubComplete() == 1) {
+                    tempList1.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 2) {
+                    tempList2.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 3) {
+                    tempList3.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 4) {
+                    tempList4.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 5) {
+                    tempList5.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 6) {
+                    tempList6.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 7) {
+                    tempList7.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 8) {
+                    tempList8.add(cardBookInfo.get(i));
+                } else if (cardBookInfo.get(i).getSubComplete() == 9) {
+                    tempList9.add(cardBookInfo.get(i));
+                } else {
+                    continue;
+                }
+            }
+        }
+        tempList.addAll(tempList1);
+        tempList.addAll(tempList2);
+        tempList.addAll(tempList3);
+        tempList.addAll(tempList4);
+        tempList.addAll(tempList5);
+        tempList.addAll(tempList6);
+        tempList.addAll(tempList7);
+        tempList.addAll(tempList8);
+        tempList.addAll(tempList9);
+
+        for (int i = 0; i < cardBookInfo.size(); i++) {
+            if (cardBookInfo.get(i).getHaveCard() == 0 && (cardBookInfo.get(i).getCompleteCardBook() == 10)) {                 //한 장도 못 모은 경우
+                tempCardBookInfo = cardBookInfo.get(i);
+                tempList.add(tempCardBookInfo);
+            }
+        }
+
+        for (int i = 0; i < tempList.size(); i++) {
+            if (tempList.get(i).getName().equals("하늘을 비추는 사막")) {
+                Log.v("test", "haveCard" + tempList.get(i).getHaveCard() + ", completeCard : " + tempList.get(i).getCompleteCardBook());
+            }
+        }
+
+        return tempList;
     }
 }

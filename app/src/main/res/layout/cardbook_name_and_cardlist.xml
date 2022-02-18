@@ -48,51 +48,56 @@
                     android:id="@+id/imgCardBookName_CardImg0"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg1"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg2"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg3"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg4"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
             </TableRow>
@@ -143,51 +148,56 @@
                     android:id="@+id/imgCardBookName_CardImg5"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg6"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg7"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg8"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imgCardBookName_CardImg9"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginHorizontal="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/aman" />
+                    app:layout_constraintTop_toTopOf="parent"/>
             </TableRow>
 
             <TableRow android:layout_marginTop="5dp">

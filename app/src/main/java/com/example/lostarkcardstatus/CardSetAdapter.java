@@ -2,6 +2,7 @@ package com.example.lostarkcardstatus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.view.KeyEvent;
@@ -791,18 +792,24 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
-        if (check == 1)
+        if (check == 1) {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
-        else
+        }
+        else {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
+        }
     }
 
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
         if (iv.getColorFilter() != filter) {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
             check = 0;
         } else {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
             check = 1;
         }

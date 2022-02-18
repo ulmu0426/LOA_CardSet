@@ -48,70 +48,90 @@
                 <ImageView
                     android:id="@+id/imgDEDCard0"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard1"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard2"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard3"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard4"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard5"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard6"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard7"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard8"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgDEDCard9"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="1dp"
                     app:srcCompat="@drawable/card_legend_aman" />
             </TableRow>
 

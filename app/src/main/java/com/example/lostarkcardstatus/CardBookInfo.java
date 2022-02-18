@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class CardBookInfo implements Comparable<CardBookInfo>{
+public class CardBookInfo implements Comparable<CardBookInfo> {
     private int id;
     private String name;
     private int value;
@@ -231,6 +231,29 @@ public class CardBookInfo implements Comparable<CardBookInfo>{
 
     public void setCheckCard9(int checkCard9) {
         this.checkCard9 = checkCard9;
+    }
+
+    public int getSubComplete() {
+        if (getCompleteCardBook() - getHaveCard() == 1)
+            return 1;
+        else if(getCompleteCardBook() - getHaveCard() == 2)
+            return 2;
+        else if (getCompleteCardBook() - getHaveCard() == 3)
+            return 3;
+        else if (getCompleteCardBook() - getHaveCard() == 4)
+            return 4;
+        else if (getCompleteCardBook() - getHaveCard() == 5)
+            return 5;
+        else if (getCompleteCardBook() - getHaveCard() == 6)
+            return 6;
+        else if (getCompleteCardBook() - getHaveCard() == 7)
+            return 7;
+        else if (getCompleteCardBook() - getHaveCard() == 8)
+            return 8;
+        else if (getCompleteCardBook() - getHaveCard() == 9)
+            return 9;
+        else
+            return 0;
     }
 
     @Override

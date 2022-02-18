@@ -47,70 +47,80 @@
                 <ImageView
                     android:id="@+id/imgCardBook0"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook1"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook2"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook3"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook4"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook5"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook6"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook7"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook8"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     android:layout_marginRight="5dp"
                     app:srcCompat="@drawable/card_legend_aman" />
 
                 <ImageView
                     android:id="@+id/imgCardBook9"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="2dp"
                     app:srcCompat="@drawable/card_legend_aman" />
             </TableRow>
 

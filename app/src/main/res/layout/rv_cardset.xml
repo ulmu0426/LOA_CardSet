@@ -43,43 +43,51 @@
                 <ImageView
                     android:id="@+id/imgCardSet0"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
                     android:id="@+id/imgCardSet1"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
                     android:id="@+id/imgCardSet2"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
                     android:id="@+id/imgCardSet3"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
                     android:id="@+id/imgCardSet4"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
                     android:id="@+id/imgCardSet5"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
                 <ImageView
                     android:id="@+id/imgCardSet6"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="64dp"
+                    android:padding="2dp"
+                    android:layout_marginHorizontal="5dp"
                     app:srcCompat="@drawable/card_legend_aman"/>
             </TableRow>
             <TableRow
@@ -88,7 +96,6 @@
                     android:id="@+id/txtCardSet_Cardname0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:text="카드이름"
                     android:textAlignment="center"
                     android:textSize="10dp" />
@@ -96,7 +103,6 @@
                     android:id="@+id/txtCardSet_Cardname1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:text="카드이름"
                     android:textAlignment="center"
                     android:textSize="10dp" />
@@ -104,7 +110,6 @@
                     android:id="@+id/txtCardSet_Cardname2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:text="카드이름"
                     android:textAlignment="center"
                     android:textSize="10dp" />
@@ -112,7 +117,6 @@
                     android:id="@+id/txtCardSet_Cardname3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:text="카드이름"
                     android:textAlignment="center"
                     android:textSize="10dp" />
@@ -120,7 +124,6 @@
                     android:id="@+id/txtCardSet_Cardname4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:text="카드이름"
                     android:textAlignment="center"
                     android:textSize="10dp" />
@@ -128,7 +131,6 @@
                     android:id="@+id/txtCardSet_Cardname5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:text="카드이름"
                     android:textAlignment="center"
                     android:textSize="10dp" />

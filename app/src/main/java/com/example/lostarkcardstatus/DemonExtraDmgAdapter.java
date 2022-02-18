@@ -103,7 +103,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
         holder.txtCardbookName_DED.setText(filterDED.get(position).getName());
-        holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : +" + filterDED.get(position).getDmgSum(filterDED.get(position).getHaveAwake()) + "%");
+        holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(position).getDmgSum(filterDED.get(position).getHaveAwake()) + "%");
 
         //이미지뷰 구현할것
         holder.imgDEDCard0.setImageResource(getCardImg(filterDED.get(position).getCard0()));
@@ -962,18 +962,24 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     //획득 못한 카드는 흑백이 기본으로 보이도록
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
-        if (check == 1)
+        if (check == 1) {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
-        else
+        }
+        else {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
+        }
     }
 
     //클릭시 카드를 흑백으로 바꿈.(흑백이면 컬러로, 컬러면 흑백으로), 데이터베이스 카드 도감 획득 유무도 변경.(흑백은 0, 컬러는 1)
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
         if (iv.getColorFilter() != filter) {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
             check = 0;
         } else {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
             check = 1;
         }
