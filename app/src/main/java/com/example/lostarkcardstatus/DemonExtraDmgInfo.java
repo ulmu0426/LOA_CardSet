@@ -189,14 +189,17 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         this.dmg_p2 = dmg_p2;
     }
 
-    public float getDmgSum(int awakeInfo) {
+    public float getDmgSum() {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         float result = 0;
-        if (getAwake_sum0() <= awakeInfo && awakeInfo < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
+        if(!(getHaveCard() == getCompleteDEDBook())) {  //도감 미완성시 0 리턴
+            return 0;
+        }
+        if (getAwake_sum0() <= getHaveAwake() && getHaveAwake() < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
             result = getDmg_p0();
-        else if (getAwake_sum1() <= awakeInfo && awakeInfo < getAwake_sum2())    //각성합이 두번째 각성 조건 달성시
+        else if (getAwake_sum1() <= getHaveAwake() && getHaveAwake() < getAwake_sum2())    //각성합이 두번째 각성 조건 달성시
             result = getDmg_p0() + getDmg_p1();
-        else if (getAwake_sum2() == awakeInfo)                                   //각성합이 최대 조건 달성시
+        else if (getAwake_sum2() == getHaveAwake())                                   //각성합이 최대 조건 달성시
             result = getDmg_p0() + getDmg_p1() + getDmg_p2();
         result = Float.parseFloat(df.format(result));
         return result;

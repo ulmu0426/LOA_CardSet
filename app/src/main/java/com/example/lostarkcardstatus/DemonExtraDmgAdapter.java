@@ -103,7 +103,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
 
         holder.txtCardbookName_DED.setText(filterDED.get(position).getName());
-        holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(position).getDmgSum(filterDED.get(position).getHaveAwake()) + "%");
+        holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(position).getDmgSum() + "%");
 
         //이미지뷰 구현할것
         holder.imgDEDCard0.setImageResource(getCardImg(filterDED.get(position).getCard0()));
@@ -1028,7 +1028,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         completeDED = 0;
         for (int i = 0; i < DEDInfo.size(); i++) {
             if (isCompleteDED(DEDInfo.get(i))) {
-                haveDED += DEDInfo.get(i).getDmgSum(DEDInfo.get(i).getHaveAwake());
+                haveDED += DEDInfo.get(i).getDmgSum();
                 if (DEDInfo.get(i).getAwake_sum2() == DEDInfo.get(i).getHaveAwake()) {
                     completeDED++;
                 }

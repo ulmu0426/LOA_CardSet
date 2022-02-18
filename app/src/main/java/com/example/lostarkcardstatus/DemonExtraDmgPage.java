@@ -56,9 +56,9 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         checkBoxInvisibilityDEDPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBoxInvisibilityDEDPage.isChecked()){
+                if (checkBoxInvisibilityDEDPage.isChecked()) {
                     check = "notNull";
-                }else {
+                } else {
                     check = "";
                 }
                 adapter.getCompleteFilter().filter(check);
@@ -137,6 +137,15 @@ public class DemonExtraDmgPage extends AppCompatActivity {
                                 adapter.sortDED(DEDInfo);
 
                                 return true;
+                            case R.id.completenessSort:
+                                if (DEDInfo.get(0).getName() == "") {
+                                    break;
+                                }
+                                DEDInfo = adapter.getFilterDED();
+                                DEDInfo = sortByCompletenessDED();
+                                adapter.sortDED(DEDInfo);
+
+                                return true;
                         }
 
                         return false;
@@ -157,7 +166,66 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         txtCompleteDED.setText("완성 도감 개수 : " + completeDED + "/" + DEDBook + "개");
     }
 
-    public boolean completeChecked(){
+    public boolean completeChecked() {
         return checkBoxInvisibilityDEDPage.isChecked();
     }
+
+
+
+    /*
+    1. 수집, 각성도 풀
+    2. 수집, 각성도 낮음
+    3. 수집.
+    4. 수집 낮음
+    5. 수집 안됨.
+     */
+
+    private ArrayList<DemonExtraDmgInfo> sortByCompletenessDED() {
+        ArrayList<DemonExtraDmgInfo> tempListDED = new ArrayList<DemonExtraDmgInfo>();
+        DemonExtraDmgInfo tempDED;
+
+        for (int i = 0; i < DEDInfo.size(); i++) {    //각성도 풀, 수집 완료
+            if ((DEDInfo.get(i).getHaveAwake()) == (DEDInfo.get(i).getCompleteDEDBook() * 5) && DEDInfo.get(i).getCompleteDEDBook() == DEDInfo.get(i).getHaveCard()) {
+                tempDED = DEDInfo.get(i);
+                tempListDED.add(tempDED);
+            }
+        }
+
+        Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
+                if ((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake() < (o2.getCompleteDEDBook() * 5) - o2.getHaveAwake()) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+
+        for (int i = 0; i < DEDInfo.size(); i++) {    //각성도 순 정렬된 DEDInfo 에서 수집완료, 풀각대비 각성도 높은 순서로
+            if (DEDInfo.get(i).getCompleteDEDBook() == DEDInfo.get(i).getHaveCard() && !((DEDInfo.get(i).getHaveAwake()) == (DEDInfo.get(i).getCompleteDEDBook() * 5))) {
+                tempDED = DEDInfo.get(i);
+                tempListDED.add(tempDED);
+            }
+        }
+
+        Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
+                if ((o1.getCompleteDEDBook() - o1.getHaveCard()) < (o2.getCompleteDEDBook() - o2.getHaveCard())) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+
+        for (int i = 0; i < DEDInfo.size(); i++) {    //수집완료 순 정렬된 DEDInfo 에서 수집완료순
+            if (!(DEDInfo.get(i).getCompleteDEDBook() == DEDInfo.get(i).getHaveCard()) && (DEDInfo.get(i).getDmgSum() == 0)) {
+                tempDED = DEDInfo.get(i);
+                tempListDED.add(tempDED);
+            }
+        }
+
+        return tempListDED;
+    }
+
 }

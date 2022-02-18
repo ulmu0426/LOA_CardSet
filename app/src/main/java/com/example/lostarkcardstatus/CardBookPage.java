@@ -163,7 +163,7 @@ public class CardBookPage extends AppCompatActivity {
                                     break;
                                 }
                                 cardBookInfo = adapter.getFilterCardBook();
-                                cardBookInfo = completenessSort();
+                                cardBookInfo = sortByCompletenessCardBook();
                                 adapter.sortCardBook(cardBookInfo);
 
                                 return true;
@@ -199,7 +199,7 @@ public class CardBookPage extends AppCompatActivity {
     ~카드 n장 모자란거 3.
     카드 하나도 없는거 4.
      */
-    private ArrayList<CardBookInfo> completenessSort() {
+    private ArrayList<CardBookInfo> sortByCompletenessCardBook() {
         ArrayList<CardBookInfo> tempList = new ArrayList<CardBookInfo>();
         CardBookInfo tempCardBookInfo;
         for (int i = 0; i < cardBookInfo.size(); i++) {
