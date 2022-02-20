@@ -5,6 +5,7 @@ import static com.example.lostarkcardstatus.MainPage.mainContext;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -237,6 +238,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     cardInfo.get(matchIndex(useCardList.get(positionGet).getId())).setGetCard(1);
                     cardDBHelper.UpdateInfoCardCheck(1, useCardList.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
+                    holder.img.setBackgroundColor(Color.parseColor("#FFB300"));
+
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                     haveStatUpdate(cardBookInfo);
@@ -246,6 +249,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(0);
                     cardDBHelper.UpdateInfoCardCheck(0, filterCardInfo.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
+                    holder.img.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
@@ -285,8 +289,11 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private void defaultColorFilter(ImageView iv, int position, ColorFilter filter) {
         if (useCardList.get(position).getGetCard() == 0) {
             iv.setColorFilter(filter);
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
         } else {
             iv.setColorFilter(null);
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
         }
     }
 
