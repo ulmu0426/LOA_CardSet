@@ -3,7 +3,6 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,10 +42,11 @@ public class CardBookPage extends AppCompatActivity {
     private EditText editSearchCardBook;
     private TableLayout tableStats;
 
-    private CharSequence check;
-
     private ImageView imgBtnCardBookSortMenu;
-    private ArrayList<CardBookInfo> cardBookInfo;
+
+    private boolean checkDefault = true;
+    private boolean checkName;
+    private boolean checkCompleteness;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,9 @@ public class CardBookPage extends AppCompatActivity {
          *  이루어질 작업 목록
          *  1. 카드 도감 목록 불러오기
          *  2. 완성 도감 온 오프 기능
-         *  3. 각 특성 클릭시 각 특성 스텟만 올려주는 도감 목록 으로 이동
-         *  4. 이름 순 정렬 기능
-         *  5. 도감 검색 기능
+         *  3. 이름 순 정렬 기능
+         *  4. 도감 검색 기능
          * */
-
-        cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
 
         //1. 카드 도감 목록 불러오기
         rv = findViewById(R.id.rvCardbookList);
@@ -81,15 +78,11 @@ public class CardBookPage extends AppCompatActivity {
         checkBoxInvisibilityCardBookPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkBoxInvisibilityCardBookPage.isChecked()) {
-                    check = "notNull";
-                } else {
-                    check = "";
-                }
-                adapter.getCompleteFilter().filter(check);
+                adapter.getCompleteFilter();
             }
         });
 
+        //3. 도감 검색 기능
         tableStats = findViewById(R.id.tableStats);
         editSearchCardBook = findViewById(R.id.editSearchCardBook);
         editSearchCardBook.addTextChangedListener(new TextWatcher() {
@@ -122,6 +115,7 @@ public class CardBookPage extends AppCompatActivity {
             }
         });
 
+        //4. 카드 정렬 기능. (기본, 이름, 완성도 순)
         imgBtnCardBookSortMenu = findViewById(R.id.imgBtnCardBookSortMenu);
         imgBtnCardBookSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,37 +128,27 @@ public class CardBookPage extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                                if (cardBookInfo.get(0).getId() == 0) {
-                                    break;
-                                }
-                                cardBookInfo = adapter.getFilterCardBook();
-                                Collections.sort(cardBookInfo, new Comparator<CardBookInfo>() {
-                                    @Override
-                                    public int compare(CardBookInfo o1, CardBookInfo o2) {
-                                        if (o1.getId() < o2.getId()) {
-                                            return -1;
-                                        } else
-                                            return 1;
-                                    }
-                                });
-                                adapter.sortCardBook(cardBookInfo);
-                                return true;
-                            case R.id.nameSort:
-                                if (cardBookInfo.get(0).getName() == "1절만 해") {
-                                    break;
-                                }
-                                cardBookInfo = adapter.getFilterCardBook();
-                                Collections.sort(cardBookInfo);
-                                adapter.sortCardBook(cardBookInfo);
+                                adapter.getDefaultSort();
 
+                                checkDefault = true;
+                                checkName= false;
+                                checkCompleteness = false;
                                 return true;
+
+                            case R.id.nameSort:
+                                adapter.getNameSort();
+
+                                checkDefault = false;
+                                checkName= true;
+                                checkCompleteness = false;
+                                return true;
+
                             case R.id.completenessSort:
-                                if (cardBookInfo.get(0).getName() == "") {
-                                    break;
-                                }
-                                cardBookInfo = adapter.getFilterCardBook();
-                                cardBookInfo = sortByCompletenessCardBook();
-                                adapter.sortCardBook(cardBookInfo);
+
+                                checkDefault = false;
+                                checkName= false;
+                                checkCompleteness = true;
+                                adapter.getCompletenessSort();
 
                                 return true;
                         }
@@ -192,80 +176,13 @@ public class CardBookPage extends AppCompatActivity {
         return checkBoxInvisibilityCardBookPage.isChecked();
     }
 
-
-    /*
-    완성1.
-    카드 1장 모자란거 2.
-    ~카드 n장 모자란거 3.
-    카드 하나도 없는거 4.
-     */
-    private ArrayList<CardBookInfo> sortByCompletenessCardBook() {
-        ArrayList<CardBookInfo> tempList = new ArrayList<CardBookInfo>();
-        CardBookInfo tempCardBookInfo;
-        for (int i = 0; i < cardBookInfo.size(); i++) {
-            if (cardBookInfo.get(i).getCompleteCardBook() == cardBookInfo.get(i).getHaveCard()) { //다 모은 경우
-                tempCardBookInfo = cardBookInfo.get(i);
-                tempList.add(tempCardBookInfo);
-            }
-        }
-
-        ArrayList<CardBookInfo> tempList1 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList2 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList3 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList4 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList5 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList6 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList7 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList8 = new ArrayList<CardBookInfo>();
-        ArrayList<CardBookInfo> tempList9 = new ArrayList<CardBookInfo>();
-        for (int i = 0; i < cardBookInfo.size(); i++) {
-            if (!(cardBookInfo.get(i).getSubComplete() == 0)) { //1장~최대9장모자란 경우
-                if (cardBookInfo.get(i).getSubComplete() == 1) {
-                    tempList1.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 2) {
-                    tempList2.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 3) {
-                    tempList3.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 4) {
-                    tempList4.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 5) {
-                    tempList5.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 6) {
-                    tempList6.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 7) {
-                    tempList7.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 8) {
-                    tempList8.add(cardBookInfo.get(i));
-                } else if (cardBookInfo.get(i).getSubComplete() == 9) {
-                    tempList9.add(cardBookInfo.get(i));
-                } else {
-                    continue;
-                }
-            }
-        }
-        tempList.addAll(tempList1);
-        tempList.addAll(tempList2);
-        tempList.addAll(tempList3);
-        tempList.addAll(tempList4);
-        tempList.addAll(tempList5);
-        tempList.addAll(tempList6);
-        tempList.addAll(tempList7);
-        tempList.addAll(tempList8);
-        tempList.addAll(tempList9);
-
-        for (int i = 0; i < cardBookInfo.size(); i++) {
-            if (cardBookInfo.get(i).getHaveCard() == 0 && (cardBookInfo.get(i).getCompleteCardBook() == 10)) {                 //한 장도 못 모은 경우
-                tempCardBookInfo = cardBookInfo.get(i);
-                tempList.add(tempCardBookInfo);
-            }
-        }
-
-        for (int i = 0; i < tempList.size(); i++) {
-            if (tempList.get(i).getName().equals("하늘을 비추는 사막")) {
-                Log.v("test", "haveCard" + tempList.get(i).getHaveCard() + ", completeCard : " + tempList.get(i).getCompleteCardBook());
-            }
-        }
-
-        return tempList;
+    public boolean checkDefault() {
+        return checkDefault;
+    }
+    public boolean checkName() {
+        return checkName;
+    }
+    public boolean checkCompleteness() {
+        return checkCompleteness;
     }
 }

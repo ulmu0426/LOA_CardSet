@@ -27,34 +27,5 @@ public class Test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.just_card);
 
-        cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            Log.v("test", "name : " + cardSetInfo.get(i).getName());
-        }
-
-        Collections.sort(cardSetInfo);
-
-        Log.v("test", "------------절취선-------------");
-
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            Log.v("test", "name : " + cardSetInfo.get(i).getName());
-        }
-
-        Log.v("test", "------------절취선-------------");
-
-        Collections.sort(cardSetInfo, new Comparator<CardSetInfo>() {
-            @Override
-            public int compare(CardSetInfo o1, CardSetInfo o2) {
-                if (o1.getId() < o2.getId()) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            Log.v("test", "name : " + cardSetInfo.get(i).getName());
-        }
-
     }
 }
