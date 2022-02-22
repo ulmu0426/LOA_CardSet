@@ -30,10 +30,11 @@ public class DemonExtraDmgPage extends AppCompatActivity {
     private ImageView imgSearchDED;
     private EditText editSearchDED;
 
-    private CharSequence check;
+    private ImageView imgBtnDEDSortMenu;
 
-    private ImageView imgBtnDEDsortMenu;
-    private ArrayList<DemonExtraDmgInfo> DEDInfo;
+    private boolean checkDefault = true;
+    private boolean checkName = false;
+    private boolean checkCompleteness = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,6 @@ public class DemonExtraDmgPage extends AppCompatActivity {
          *  1. 악추피 도감 목록 불러오기
          *  2. 악추피 완성 도감 숨기기 기능(풀각만 숨김)
          * */
-        DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
 
         txtDED = (TextView) findViewById(R.id.txtDED);
         txtCompleteDED = (TextView) findViewById(R.id.txtCompleteDED);
@@ -56,12 +56,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         checkBoxInvisibilityDEDPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkBoxInvisibilityDEDPage.isChecked()) {
-                    check = "notNull";
-                } else {
-                    check = "";
-                }
-                adapter.getCompleteFilter().filter(check);
+                adapter.getCompleteFilter();
             }
         });
 
@@ -99,11 +94,11 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         });
 
 
-        imgBtnDEDsortMenu = findViewById(R.id.imgBtnDEDsortMenu);
-        imgBtnDEDsortMenu.setOnClickListener(new View.OnClickListener() {
+        imgBtnDEDSortMenu = findViewById(R.id.imgBtnDEDsortMenu);
+        imgBtnDEDSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(DemonExtraDmgPage.this, imgBtnDEDsortMenu);
+                PopupMenu popupMenu = new PopupMenu(DemonExtraDmgPage.this, imgBtnDEDSortMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -111,39 +106,24 @@ public class DemonExtraDmgPage extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                                if (DEDInfo.get(0).getId() == 0) {
-                                    break;
-                                }
-                                DEDInfo = adapter.getFilterDED();
+                                adapter.getDefaultSort();
+                                checkDefault = true;
+                                checkName = false;
+                                checkCompleteness = false;
 
-                                Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
-                                    @Override
-                                    public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
-                                        if (o1.getId() < o2.getId()) {
-                                            return -1;
-                                        } else
-                                            return 1;
-                                    }
-                                });
-                                adapter.sortDED(DEDInfo);
                                 return true;
                             case R.id.nameSort:
-                                if (DEDInfo.get(0).getName() == "거인 토토이크") {
-                                    break;
-                                }
-                                DEDInfo = adapter.getFilterDED();
+                                adapter.getNameSort();
 
-                                Collections.sort(DEDInfo);
-                                adapter.sortDED(DEDInfo);
-
+                                checkDefault = false;
+                                checkName = true;
+                                checkCompleteness = false;
                                 return true;
                             case R.id.completenessSort:
-                                if (DEDInfo.get(0).getName() == "") {
-                                    break;
-                                }
-                                DEDInfo = adapter.getFilterDED();
-                                DEDInfo = sortByCompletenessDED();
-                                adapter.sortDED(DEDInfo);
+                                adapter.getCompletenessSort();
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = true;
 
                                 return true;
                         }
@@ -170,62 +150,15 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         return checkBoxInvisibilityDEDPage.isChecked();
     }
 
-
-
-    /*
-    1. 수집, 각성도 풀
-    2. 수집, 각성도 낮음
-    3. 수집.
-    4. 수집 낮음
-    5. 수집 안됨.
-     */
-
-    private ArrayList<DemonExtraDmgInfo> sortByCompletenessDED() {
-        ArrayList<DemonExtraDmgInfo> tempListDED = new ArrayList<DemonExtraDmgInfo>();
-        DemonExtraDmgInfo tempDED;
-
-        for (int i = 0; i < DEDInfo.size(); i++) {    //각성도 풀, 수집 완료
-            if ((DEDInfo.get(i).getHaveAwake()) == (DEDInfo.get(i).getCompleteDEDBook() * 5) && DEDInfo.get(i).getCompleteDEDBook() == DEDInfo.get(i).getHaveCard()) {
-                tempDED = DEDInfo.get(i);
-                tempListDED.add(tempDED);
-            }
-        }
-
-        Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
-            @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
-                if ((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake() < (o2.getCompleteDEDBook() * 5) - o2.getHaveAwake()) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-
-        for (int i = 0; i < DEDInfo.size(); i++) {    //각성도 순 정렬된 DEDInfo 에서 수집완료, 풀각대비 각성도 높은 순서로
-            if (DEDInfo.get(i).getCompleteDEDBook() == DEDInfo.get(i).getHaveCard() && !((DEDInfo.get(i).getHaveAwake()) == (DEDInfo.get(i).getCompleteDEDBook() * 5))) {
-                tempDED = DEDInfo.get(i);
-                tempListDED.add(tempDED);
-            }
-        }
-
-        Collections.sort(DEDInfo, new Comparator<DemonExtraDmgInfo>() {
-            @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
-                if ((o1.getCompleteDEDBook() - o1.getHaveCard()) < (o2.getCompleteDEDBook() - o2.getHaveCard())) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-
-        for (int i = 0; i < DEDInfo.size(); i++) {    //수집완료 순 정렬된 DEDInfo 에서 수집완료순
-            if (!(DEDInfo.get(i).getCompleteDEDBook() == DEDInfo.get(i).getHaveCard()) && (DEDInfo.get(i).getDmgSum() == 0)) {
-                tempDED = DEDInfo.get(i);
-                tempListDED.add(tempDED);
-            }
-        }
-
-        return tempListDED;
+    public boolean checkDefault() {
+        return checkDefault;
     }
 
+    public boolean checkName() {
+        return checkName;
+    }
+
+    public boolean checkCompleteness() {
+        return checkCompleteness;
+    }
 }

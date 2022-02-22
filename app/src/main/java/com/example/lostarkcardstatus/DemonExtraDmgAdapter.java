@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdapter.ViewHolder> {
     private ArrayList<DemonExtraDmgInfo> DEDInfo;
@@ -61,6 +63,9 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private float haveDED;
     private int completeDED;
     private ArrayList<DemonExtraDmgInfo> baseFilteredDED;
+    private ArrayList<DemonExtraDmgInfo> defaultSortList;
+    private ArrayList<DemonExtraDmgInfo> nameSortList;
+    private ArrayList<DemonExtraDmgInfo> completenessSortList;
 
     public DemonExtraDmgAdapter(ArrayList<DemonExtraDmgInfo> DEDInfo) {
         this.DEDInfo = DEDInfo;
@@ -79,14 +84,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         this.DEDPage = demonExtraDmgPage;
         baseFilteredDED = new ArrayList<DemonExtraDmgInfo>();
         setFilteredDED();
+        defaultSortList = new ArrayList<DemonExtraDmgInfo>();
+        nameSortList = new ArrayList<DemonExtraDmgInfo>();
+        completenessSortList = new ArrayList<DemonExtraDmgInfo>();
+        setSortList();
+
         ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();
     }
-
-    public ArrayList<DemonExtraDmgInfo> getFilterDED() {
-        return this.filterDED;
-    }
-
 
     @NonNull
     @Override
@@ -292,7 +297,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 etxtAwake.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if(actionId == EditorInfo.IME_ACTION_DONE){
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
                             etxtAwake.clearFocus();
                         }
                         return false;
@@ -301,7 +306,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 etxtNum.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if(actionId == EditorInfo.IME_ACTION_DONE){
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
                             etxtNum.clearFocus();
                         }
                         return false;
@@ -975,8 +980,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         if (check == 1) {
             iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
-        }
-        else {
+        } else {
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
         }
@@ -1111,33 +1115,22 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return index;
     }
 
-    public Filter getCompleteFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    filterDED = DEDInfo;
-                } else {
-                    ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
-                    for (int i = 0; i < DEDInfo.size(); i++) {
-                        if (!isAllCompleteDED(DEDInfo.get(i))) {
-                            filteringList.add(DEDInfo.get(i));
-                        }
-                    }
-                    filterDED = filteringList;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterDED;
-                return filterResults;
+    public void getCompleteFilter() {
+        if (DEDPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            if (DEDPage.checkDefault()) {
+                filterDED = defaultSortList;
             }
+            if (DEDPage.checkName()) {
+                filterDED = nameSortList;
+            }
+            if (DEDPage.checkCompleteness()) {
+                filterDED = completenessSortList;
+            }
+        }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                filterDED = (ArrayList<DemonExtraDmgInfo>) results.values;
-                notifyDataSetChanged();
-            }
-        };
+        notifyDataSetChanged();
     }
 
     public Filter getSearchFilter() {
@@ -1212,5 +1205,95 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
 
         return imageResource;
+    }
+
+    private void setSortList() {
+        defaultSortList.addAll(filterDED);  //기본 정렬
+
+        Collections.sort(filterDED);    //이름 순 정렬
+        nameSortList.addAll(filterDED);
+
+        //완성도 순 정렬
+
+        for (int i = 0; i < filterDED.size(); i++) {       //완성된 도감 추가
+            if (isAllCompleteDED(filterDED.get(i))) {
+                completenessSortList.add(filterDED.get(i));
+            }
+        }
+
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //필요 카드수가 가장 적은 순서대로 정렬
+                if (((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake()) < ((o2.getCompleteDEDBook() * 5) - o2.getHaveAwake())) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+
+        for (int i = 0; i < filterDED.size(); i++) {
+            if (isCompleteDED(filterDED.get(i)) && !isAllCompleteDED(filterDED.get(i))) {   //도감은 완성, 각성도 최대가 아닌 미완성 도감들 추가
+                completenessSortList.add(filterDED.get(i));
+            }
+        }
+
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //도감 완성이 안 된 경우
+                if (o1.getCompleteDEDBook() - o1.getHaveCard() < o2.getCompleteDEDBook() - o2.getHaveCard()) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+
+        for (int i = 0; i < filterDED.size(); i++) {    //도감완성이 안된 경우 추가.
+            if (!isCompleteDED(filterDED.get(i))) {
+                completenessSortList.add(filterDED.get(i));
+            }
+        }
+
+        filterDED = defaultSortList;
+    }
+
+    private void completePartRemove() {  //완성도감 지우기
+        ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
+        for (int i = 0; i < filterDED.size(); i++) {
+            if (!isAllCompleteDED(filterDED.get(i))) {
+                filteringList.add(filterDED.get(i));
+            }
+        }
+        filterDED = filteringList;
+    }
+
+    public void getDefaultSort() {
+        filterDED = defaultSortList;
+        if (DEDPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            filterDED = defaultSortList;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void getNameSort() {
+        filterDED = nameSortList;
+        if (DEDPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            filterDED = nameSortList;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void getCompletenessSort() {
+        filterDED = completenessSortList;
+        if (DEDPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            filterDED = completenessSortList;
+        }
+
+        notifyDataSetChanged();
     }
 }

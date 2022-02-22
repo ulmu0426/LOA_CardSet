@@ -23,6 +23,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHolder> {
     private ArrayList<CardSetInfo> cardSetInfo;
@@ -46,6 +48,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private final String CARD_SET_AWAKE_SUM = "각성 합계 : ";
 
     private ArrayList<CardSetInfo> baseFilteredCardSet;
+    private ArrayList<CardSetInfo> defaultSortList;
+    private ArrayList<CardSetInfo> nameSortList;
+    private ArrayList<CardSetInfo> completenessSortList;
 
 
     public CardSetAdapter(Context context, CardSetPage cardSetPage) {
@@ -60,7 +65,12 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
         baseFilteredCardSet = new ArrayList<CardSetInfo>();
         setFilteredCardSet();
+        defaultSortList = new ArrayList<CardSetInfo>();
+        nameSortList = new ArrayList<CardSetInfo>();
+        completenessSortList = new ArrayList<CardSetInfo>();
+        setSortList();
     }
+
 
     public ArrayList<CardSetInfo> getFilterCardSet() {
         return this.filterCardSet;
@@ -795,8 +805,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         if (check == 1) {
             iv.setBackgroundColor(Color.parseColor("#FFB300"));
             iv.setColorFilter(null);
-        }
-        else {
+        } else {
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
         }
@@ -916,7 +925,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private boolean isAllCompleteCardSet(CardSetInfo cardSetInfo) {
         int checkAll = cardSetInfo.getCheckCard0() + cardSetInfo.getCheckCard1() + cardSetInfo.getCheckCard2()
                 + cardSetInfo.getCheckCard3() + cardSetInfo.getCheckCard4() + cardSetInfo.getCheckCard5() + cardSetInfo.getCheckCard6();
-        if (cardSetInfo.getHaveCard() <= checkAll) { //카드 세트 수집 완료시.
+        if (cardSetInfo.getHaveCard() == checkAll) { //카드 세트 수집 완료시.
             if (cardSetInfo.getHaveAwake() == (cardSetInfo.getHaveCard() * 5)) //수집한 카드의 각성도합이 최대값일시
                 return true;
             else
@@ -926,33 +935,33 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         }
     }
 
-    public Filter getCompleteFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    filterCardSet = cardSetInfo;
-                } else {
-                    ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
-                    for (int i = 0; i < cardSetInfo.size(); i++) {
-                        if (!isAllCompleteCardSet(cardSetInfo.get(i))) {
-                            filteringList.add(cardSetInfo.get(i));
-                        }
-                    }
-                    filterCardSet = filteringList;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterCardSet;
-                return filterResults;
+    public void getCompleteFilter() {
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            if (cardSetPage.checkDefault()) {
+                filterCardSet = defaultSortList;
             }
+            if (cardSetPage.checkName()) {
+                filterCardSet = nameSortList;
+            }
+            if (cardSetPage.checkCompleteness()) {
+                filterCardSet = completenessSortList;
+            }
+        }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                filterCardSet = (ArrayList<CardSetInfo>) results.values;
-                notifyDataSetChanged();
+        notifyDataSetChanged();
+
+    }
+
+    private void completePartRemove() {
+        ArrayList<CardSetInfo> filteringList = new ArrayList<CardSetInfo>();
+        for (int i = 0; i < filterCardSet.size(); i++) {
+            if (!isAllCompleteCardSet(filterCardSet.get(i))) {
+                filteringList.add(filterCardSet.get(i));
             }
-        };
+        }
+        filterCardSet = filteringList;
     }
 
     public Filter getSearchFilter() {
@@ -1011,12 +1020,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         baseFilteredCardSet = filteringList;
     }
 
-    public void sortCardSet(ArrayList<CardSetInfo> sortCardSetInfo) {
-        filterCardSet = sortCardSetInfo;
-        notifyDataSetChanged();
-    }
-
-
     private int getCardImg(String cardName) {
         String name = "";
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -1028,5 +1031,79 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
 
         return imageResource;
+    }
+
+    private void setSortList() {
+        defaultSortList.addAll(filterCardSet);  //기본 정렬
+
+        Collections.sort(filterCardSet);    //이름순 정렬
+        nameSortList.addAll(filterCardSet);
+
+        for (int i = 0; i < filterCardSet.size(); i++) {    //완성 카드세트 추가
+            if (isAllCompleteCardSet(filterCardSet.get(i))) {
+                completenessSortList.add(filterCardSet.get(i));
+            }
+        }
+
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+            @Override
+            public int compare(CardSetInfo o1, CardSetInfo o2) {
+                if ((o1.getHaveCard() * 5) - o1.getHaveAwake() < (o2.getHaveCard() * 5) - o2.getHaveAwake()) {  //완성도가 높은 순서대로(각성도 기준) 정렬
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+        for (int i = 0; i < filterCardSet.size(); i++) {
+            if (!isAllCompleteCardSet(filterCardSet.get(i)) && filterCardSet.get(i).isCompleteCardBook()) { //풀각x,세트효과 가능
+                completenessSortList.add(filterCardSet.get(i));
+            }
+        }
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+            @Override
+            public int compare(CardSetInfo o1, CardSetInfo o2) {
+                if (o1.getHaveCard() - o1.sumCheckCards() < o2.getHaveCard() - o2.sumCheckCards()) {  //도감 완성도 순 정렬
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+        for (int i = 0; i < filterCardSet.size(); i++) {
+            if (!isAllCompleteCardSet(filterCardSet.get(i)) && !filterCardSet.get(i).isCompleteCardBook()) { //풀각x,세트효과 x 기준 가장 많이 모은 순서
+                completenessSortList.add(filterCardSet.get(i));
+            }
+        }
+        filterCardSet = defaultSortList;
+
+    }
+    public void getDefaultSort() {
+        filterCardSet = defaultSortList;
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            filterCardSet = defaultSortList;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void getNameSort() {
+        filterCardSet = nameSortList;
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            filterCardSet = nameSortList;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void getCompletenessSort() {
+        filterCardSet = completenessSortList;
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
+        } else {
+            filterCardSet = completenessSortList;
+        }
+
+        notifyDataSetChanged();
     }
 }

@@ -560,16 +560,16 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     //
     public void getCompleteFilter() {
-        if(cardBook_page.completeChecked()){
+        if (cardBook_page.completeChecked()) {
             completePartRemove();
-        }else {
-            if(cardBook_page.checkDefault()){
+        } else {
+            if (cardBook_page.checkDefault()) {
                 filterCardBook = defaultSortList;
             }
-            if(cardBook_page.checkName()){
+            if (cardBook_page.checkName()) {
                 filterCardBook = nameSortList;
             }
-            if(cardBook_page.checkCompleteness()){
+            if (cardBook_page.checkCompleteness()) {
                 filterCardBook = completenessSortList;
             }
         }
@@ -632,7 +632,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         baseFilteredCardBook = filteringList;
     }
 
-    private void completePartRemove(){  //완성도감 지우기
+    private void completePartRemove() {  //완성도감 지우기
         ArrayList<CardBookInfo> filteringList = new ArrayList<CardBookInfo>();
         for (int i = 0; i < filterCardBook.size(); i++) {
             if (!isCompleteCardBook(filterCardBook.get(i))) {
@@ -642,21 +642,21 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         filterCardBook = filteringList;
     }
 
-    public void getDefaultSort(){
+    public void getDefaultSort() {
         filterCardBook = defaultSortList;
         if (cardBook_page.completeChecked()) {
             completePartRemove();
-        }else {
+        } else {
             filterCardBook = defaultSortList;
         }
         notifyDataSetChanged();
     }
 
-    public void getNameSort(){
+    public void getNameSort() {
         filterCardBook = nameSortList;
-        if(cardBook_page.completeChecked()){
+        if (cardBook_page.completeChecked()) {
             completePartRemove();
-        }else {
+        } else {
             filterCardBook = nameSortList;
         }
         notifyDataSetChanged();
@@ -666,32 +666,9 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         filterCardBook = completenessSortList;
         if (cardBook_page.completeChecked()) {
             completePartRemove();
-            Collections.sort(filterCardBook, new Comparator<CardBookInfo>() {
-                @Override
-                public int compare(CardBookInfo o1, CardBookInfo o2) {
-                    if (o1.getSubComplete() < o2.getSubComplete()) {
-                        return -1;
-                    } else
-                        return 1;
-                }
-            });
-        }else {
+        } else {
             filterCardBook = completenessSortList;
-            Collections.sort(filterCardBook, new Comparator<CardBookInfo>() {
-                @Override
-                public int compare(CardBookInfo o1, CardBookInfo o2) {
-                    if (o1.getSubComplete() < o2.getSubComplete()) {
-                        return -1;
-                    } else
-                        return 1;
-                }
-            });
         }
-        notifyDataSetChanged();
-    }
-
-    public void sortCardBook(ArrayList<CardBookInfo> sortCardBook) {
-        filterCardBook = sortCardBook;
         notifyDataSetChanged();
     }
 
@@ -715,7 +692,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         cardBook_page.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
     }
 
-    private void setSortList(){
+    private void setSortList() {
         defaultSortList.addAll(filterCardBook); //기본 정렬 리스트
 
         Collections.sort(filterCardBook);   //이름순 정렬 리스트
@@ -732,6 +709,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
             }
         });
         completenessSortList.addAll(filterCardBook);
+
+        filterCardBook = defaultSortList;
     }
 
 }

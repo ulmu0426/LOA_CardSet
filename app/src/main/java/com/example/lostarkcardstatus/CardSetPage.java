@@ -27,12 +27,14 @@ public class CardSetPage extends AppCompatActivity {
     private CardSetAdapter adapter;
 
     private ImageView imgBtnSortMenu;
-    private ArrayList<CardSetInfo> cardSetInfo;
 
-    private CharSequence check;
 
     private EditText editSearchCardSet;
     private ImageView imgSearchCardSet;
+
+    private boolean checkDefault = true;
+    private boolean checkName = false;
+    private boolean checkCompleteness = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,6 @@ public class CardSetPage extends AppCompatActivity {
          *  3. 카드 세트 즐겨찾기 기능(메인페이지에 띄울 카드 세트 지정)
          * */
 
-        cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
-
         rv = findViewById(R.id.rvCardSet);
         dbHelper = new CardDBHelper(this);
         adapter = new CardSetAdapter(this, this);
@@ -58,12 +58,7 @@ public class CardSetPage extends AppCompatActivity {
         checkBoxInvisibilityCardSetPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkBoxInvisibilityCardSetPage.isChecked()) {
-                    check = "notNull";
-                } else {
-                    check = "";
-                }
-                adapter.getCompleteFilter().filter(check);
+                adapter.getCompleteFilter();
             }
         });
         editSearchCardSet = findViewById(R.id.editSearchCardSet);
@@ -108,29 +103,24 @@ public class CardSetPage extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                                if (cardSetInfo.get(0).getId() == 0) {
-                                    break;
-                                }
-                                cardSetInfo = adapter.getFilterCardSet();
-                                Collections.sort(cardSetInfo, new Comparator<CardSetInfo>() {
-                                    @Override
-                                    public int compare(CardSetInfo o1, CardSetInfo o2) {
-                                        if (o1.getId() < o2.getId()) {
-                                            return -1;
-                                        } else
-                                            return 1;
-                                    }
-                                });
-                                adapter.sortCardSet(cardSetInfo);
-                                return true;
+                            adapter.getDefaultSort();
+                            checkDefault = true;
+                            checkName = false;
+                            checkCompleteness = false;
+
+                            return true;
                             case R.id.nameSort:
-                                if (cardSetInfo.get(0).getName() == "가디언의 광기") {
-                                    break;
-                                }
-                                cardSetInfo = adapter.getFilterCardSet();
-                                Collections.sort(cardSetInfo);
-                                Log.v("test", cardSetInfo.size() + "");
-                                adapter.sortCardSet(cardSetInfo);
+                                adapter.getNameSort();
+
+                                checkDefault = false;
+                                checkName = true;
+                                checkCompleteness = false;
+                                return true;
+                            case R.id.completenessSort:
+                                adapter.getCompletenessSort();
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = true;
 
                                 return true;
                         }
@@ -147,5 +137,17 @@ public class CardSetPage extends AppCompatActivity {
 
     public boolean completeChecked(){
         return checkBoxInvisibilityCardSetPage.isChecked();
+    }
+
+    public boolean checkDefault() {
+        return checkDefault;
+    }
+
+    public boolean checkName() {
+        return checkName;
+    }
+
+    public boolean checkCompleteness() {
+        return checkCompleteness;
     }
 }
