@@ -3,7 +3,6 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +14,6 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class CardSetPage extends AppCompatActivity {
 
@@ -133,6 +129,16 @@ public class CardSetPage extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(editSearchCardSet.getVisibility() == View.VISIBLE){
+            editSearchCardSet.setVisibility(View.GONE);
+            return;
+        }
+
+        finish();
     }
 
     public boolean completeChecked(){

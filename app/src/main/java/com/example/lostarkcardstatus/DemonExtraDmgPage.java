@@ -137,6 +137,19 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if(editSearchDED.getVisibility() == View.VISIBLE){
+            editSearchDED.setVisibility(View.INVISIBLE);
+            txtDED.setVisibility(View.VISIBLE);
+            txtCompleteDED.setVisibility(View.VISIBLE);
+
+            return;
+        }
+
+        finish();
+    }
+
     public void setDED(float value) {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         txtDED.setText("악마 추가 피해 + " + df.format(value) + "%");

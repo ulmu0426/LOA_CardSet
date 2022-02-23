@@ -163,6 +163,18 @@ public class CardBookPage extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(editSearchCardBook.getVisibility() == View.VISIBLE){
+            editSearchCardBook.setVisibility(View.INVISIBLE);
+            tableStats.setVisibility(View.VISIBLE);
+
+            return;
+        }
+
+        finish();
+    }
+
     public void setStatAndStatBook(int[] stat, int[] statBookComplete, int[] statBookAll) {
         txtBtnCritical.setText(CRITICAL + stat[0]);
         txtBtnSpeciality.setText(SPECIALITY + stat[1]);

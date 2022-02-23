@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:autoSizeTextType="uniform"
         android:text="카드도감 이름"
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:autoSizeTextType="uniform"
         android:text="특성 : +00"
         android:textAlignment="center"
         app:layout_constraintRight_toRightOf="parent"
@@ -31,7 +33,8 @@
         android:id="@+id/llTableFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -44,176 +47,309 @@
 
             <TableRow>
 
-                <ImageView
-                    android:id="@+id/imgCardBook0"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBook1"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    <ImageView
+                        android:id="@+id/imgCardBook0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgCardBook2"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBook3"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    <ImageView
+                        android:id="@+id/imgCardBook1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgCardBook4"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBook5"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    <ImageView
+                        android:id="@+id/imgCardBook2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgCardBook6"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBook7"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    <ImageView
+                        android:id="@+id/imgCardBook3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgCardBook8"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBook9"
+                    <ImageView
+                        android:id="@+id/imgCardBook4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="2dp"
-                    app:srcCompat="@drawable/card_legend_aman" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBook5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBook6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBook7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBook8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBook9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_rare_adrine" />
+                </LinearLayout>
             </TableRow>
 
             <TableRow>
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname0"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname2"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname4"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname6"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname8"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtCardbook_Cardname9"
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드이름"
-                    android:textAlignment="center"
-                    android:textSize="10dp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtCardbook_Cardname9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textSize="10dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
             </TableRow>
         </TableLayout>
 

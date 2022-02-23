@@ -54,6 +54,8 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="5dp"
         android:visibility="gone"
+        android:inputType="text"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toTopOf="@+id/rvCardSet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -34,7 +34,6 @@ public class MainPage extends AppCompatActivity {
     private ImageView imgBtnMenu_Main;
 
     private TextView txtBtnCardList;
-    private TextView txtBtnFastCompleteCardBook;
 
     //메인화면 값들
     private TextView txtCardBookStat_Critical;
@@ -53,7 +52,7 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.draw_main);
         mainContext = this;
 
-
+        /*
         test = findViewById(R.id.test);
 
         test.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +62,7 @@ public class MainPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+         */
 
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);

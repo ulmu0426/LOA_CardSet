@@ -305,34 +305,6 @@
                 android:layout_height="1dp"
                 android:background="@color/black" />
 
-            <TextView
-                android:id="@+id/txtBtnFastCompleteCardBook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="빠른 획득"
-                android:textColor="#E8E8E8"
-                android:textSize="25dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="테스트 페이지 : Just Card"
-                android:textColor="#E8E8E8"
-                android:textSize="25dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 

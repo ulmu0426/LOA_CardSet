@@ -3,6 +3,7 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -124,6 +125,12 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        editSearchCardL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSearchCardL.selectAll();
+            }
+        });
         imgSearchLegend = (ImageView) findViewById(R.id.imgSearchLegend);
         imgSearchLegend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +223,12 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        editSearchCardE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSearchCardE.selectAll();
+            }
+        });
         imgSearchEpic = (ImageView) findViewById(R.id.imgSearchEpic);
         imgSearchEpic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,6 +321,12 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        editSearchCardR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSearchCardR.selectAll();
+            }
+        });
         imgSearchRare = (ImageView) findViewById(R.id.imgSearchRare);
         imgSearchRare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -400,6 +419,12 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        editSearchCardU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSearchCardU.selectAll();
+            }
+        });
         imgSearchUncommon = (ImageView) findViewById(R.id.imgSearchUncommon);
         imgSearchUncommon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -492,6 +517,12 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        editSearchCardC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSearchCardC.selectAll();
+            }
+        });
         imgSearchCommon = (ImageView) findViewById(R.id.imgSearchCommon);
         imgSearchCommon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -584,6 +615,12 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        editSearchCardS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSearchCardS.selectAll();
+            }
+        });
         imgSearchSpecial = (ImageView) findViewById(R.id.imgSearchSpecial);
         imgSearchSpecial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -656,6 +693,41 @@ public class SettingCard extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(editSearchCardL.getVisibility() == View.VISIBLE){
+            editSearchCardL.setVisibility(View.INVISIBLE);
+            txtCardLegend.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(editSearchCardE.getVisibility() == View.VISIBLE){
+            editSearchCardE.setVisibility(View.INVISIBLE);
+            txtCardEpic.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(editSearchCardR.getVisibility() == View.VISIBLE){
+            editSearchCardR.setVisibility(View.INVISIBLE);
+            txtCardRare.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(editSearchCardU.getVisibility() == View.VISIBLE){
+            editSearchCardU.setVisibility(View.INVISIBLE);
+            txtCardUncommon.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(editSearchCardC.getVisibility() == View.VISIBLE){
+            editSearchCardC.setVisibility(View.INVISIBLE);
+            txtCardCommon.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(editSearchCardS.getVisibility() == View.VISIBLE){
+            editSearchCardS.setVisibility(View.INVISIBLE);
+            txtCardSpecial.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        finish();
+    }
 
     private void settingCardList() {
         cardLegend = new ArrayList<CardInfo>();

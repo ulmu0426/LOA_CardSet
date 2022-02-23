@@ -146,6 +146,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="50dp"
             android:visibility="invisible"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -11,6 +11,7 @@
         android:layout_marginTop="0dp"
         android:text="카드 도감 이름"
         android:textSize="20dp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,6 +23,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:text="특성 + 0"
+        android:textSize="15dp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="5dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -44,60 +47,87 @@
 
             <TableRow>
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg0"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg1"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto" />
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg2"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg3"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg4"
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
 
 
             </TableRow>
@@ -111,6 +141,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -118,6 +150,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -125,6 +159,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -132,6 +168,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -139,65 +177,93 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
             </TableRow>
 
             <TableRow android:layout_marginTop="30dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg5"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg6"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg7"
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg8"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
 
-                <ImageView
-                    android:id="@+id/imgCardBookName_CardImg9"
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginHorizontal="9dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookName_CardImg9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto"/>
+
+                </LinearLayout>
             </TableRow>
 
             <TableRow android:layout_marginTop="5dp">
@@ -207,6 +273,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -214,6 +282,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -221,6 +291,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -228,6 +300,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
 
                 <TextView
@@ -235,6 +309,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
+                    android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:textAlignment="center" />
             </TableRow>
 
