@@ -11,7 +11,7 @@
         android:layout_marginHorizontal="20dp"
         android:text="각성도"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/eTxtAwake"
+        app:layout_constraintBottom_toTopOf="@+id/numberPickerAwake"
         app:layout_constraintEnd_toStartOf="@+id/btnOK"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,45 +23,29 @@
         android:layout_marginHorizontal="20dp"
         android:text="보유 카드"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/etxtNum"
+        app:layout_constraintBottom_toTopOf="@+id/numberPickerHave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCancer"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/eTxtAwake"
+    <NumberPicker
+        android:id="@+id/numberPickerAwake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="2"
-        android:minWidth="48dp"
-        android:text="0"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:inputType="number"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:imeOptions="actionDone"
-        android:selectAllOnFocus="true"
+        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/btnOK"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtChangeAwake" />
-
-    <EditText
-        android:id="@+id/etxtNum"
+        app:layout_constraintTop_toBottomOf="@+id/txtChangeAwake"
+        />
+    <NumberPicker
+        android:id="@+id/numberPickerHave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="2"
-        android:minWidth="48dp"
-        android:text="0"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:inputType="number"
-        android:selectAllOnFocus="true"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCancer"
-        app:layout_constraintTop_toBottomOf="@+id/txtChangeNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/txtChangeNumber"
+        />
 
     <Button
         android:id="@+id/btnCancer"
@@ -74,7 +58,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnOK"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTxtAwake" />
+        app:layout_constraintTop_toBottomOf="@+id/numberPickerAwake" />
 
     <Button
         android:id="@+id/btnOK"
@@ -87,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCancer"
-        app:layout_constraintTop_toBottomOf="@+id/etxtNum" />
+        app:layout_constraintTop_toBottomOf="@+id/numberPickerHave" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

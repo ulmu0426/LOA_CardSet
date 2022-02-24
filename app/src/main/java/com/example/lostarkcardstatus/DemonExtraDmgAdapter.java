@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -277,46 +278,23 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                 Dialog dialogChangeAwakeAndNum = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogChangeAwakeAndNum.setContentView(R.layout.awake_havecard_change);
-                EditText etxtAwake = dialogChangeAwakeAndNum.findViewById(R.id.eTxtAwake);
-                EditText etxtNum = dialogChangeAwakeAndNum.findViewById(R.id.etxtNum);
+                NumberPicker numberPickerAwake = dialogChangeAwakeAndNum.findViewById(R.id.numberPickerAwake);
+                numberPickerAwake.setMinValue(0);
+                numberPickerAwake.setMaxValue(5);
+                numberPickerAwake.setWrapSelectorWheel(false);
+
+                NumberPicker numberPickerHave = dialogChangeAwakeAndNum.findViewById(R.id.numberPickerHave);
+                numberPickerHave.setMinValue(0);
+                numberPickerHave.setMaxValue(15);
+                numberPickerHave.setWrapSelectorWheel(false);
                 Button btnCancer = dialogChangeAwakeAndNum.findViewById(R.id.btnCancer);
                 Button btnOK = dialogChangeAwakeAndNum.findViewById(R.id.btnOK);
 
-                etxtAwake.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        etxtAwake.selectAll();
-                    }
-                });
-                etxtNum.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        etxtNum.selectAll();
-                    }
-                });
-                etxtAwake.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            etxtAwake.clearFocus();
-                        }
-                        return false;
-                    }
-                });
-                etxtNum.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            etxtNum.clearFocus();
-                        }
-                        return false;
-                    }
-                });
                 txtDED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard0() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard0());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getCount());
 
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -328,8 +306,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -354,8 +332,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard1() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard1());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getCount());
                         dialogChangeAwakeAndNum.show();
 
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -367,8 +345,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -393,8 +371,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard2() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard2());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -405,8 +383,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -431,8 +409,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard3() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard3());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -443,8 +421,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -469,8 +447,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard4() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard4());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -481,8 +459,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -507,8 +485,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard5() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard5());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -519,8 +497,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -545,8 +523,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard6() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard6());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -557,8 +535,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -583,8 +561,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard7() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard7());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -595,8 +573,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -621,8 +599,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard8() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard8());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -633,8 +611,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -659,8 +637,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_CardAwakeHaveCard9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterDED.get(pos).getAwakeCard9() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getCount() + "");
+                        numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard9());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -671,8 +649,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, awake, filterDED.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getId());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getId());    //카드 각성도 업데이트(cardListDB)

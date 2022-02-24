@@ -127,7 +127,7 @@ public class MainPage extends AppCompatActivity {
         txtBtnCardList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SettingCard.class);
+                Intent intent = new Intent(getApplicationContext(), testSettingCard.class);
                 startActivity(intent);
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }

@@ -83,6 +83,7 @@
                         android:id="@+id/rvCardSet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="#0C000000"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/rv_favorite_cardset">
@@ -296,7 +297,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="보유 카드 수정"
+                android:text="보유 카드"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
 

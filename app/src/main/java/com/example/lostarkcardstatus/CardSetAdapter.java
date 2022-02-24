@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -238,7 +239,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard("", filterCardSet.get(pos).getId());
                                     favoriteAdapter.removeItem(favoriteCardSetInfo.get(i));
-                                    Toast.makeText(context, "카드 수량 증가? : " + favoriteAdapter.getItemCount(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         } else {         //즐찾이 되면
@@ -250,7 +250,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
                                     favoriteAdapter.addItem(favoriteCardSetInfo.get(i));
-                                    Toast.makeText(context, "카드 수량 증가? : " + favoriteAdapter.getItemCount(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
@@ -261,50 +260,28 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                 Dialog dialogAwakeNHaveCard = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogAwakeNHaveCard.setContentView(R.layout.awake_havecard_change);
-                EditText etxtAwake = dialogAwakeNHaveCard.findViewById(R.id.eTxtAwake);
-                EditText etxtNum = dialogAwakeNHaveCard.findViewById(R.id.etxtNum);
+                NumberPicker numberPickerAwake = dialogAwakeNHaveCard.findViewById(R.id.numberPickerAwake);
+                numberPickerAwake.setMinValue(0);
+                numberPickerAwake.setMaxValue(5);
+                numberPickerAwake.setWrapSelectorWheel(false);
+
+                NumberPicker numberPickerHave = dialogAwakeNHaveCard.findViewById(R.id.numberPickerHave);
+                numberPickerHave.setMinValue(0);
+                numberPickerHave.setMaxValue(15);
+                numberPickerHave.setWrapSelectorWheel(false);
+
+
                 Button btnCancer = dialogAwakeNHaveCard.findViewById(R.id.btnCancer);
                 Button btnOK = dialogAwakeNHaveCard.findViewById(R.id.btnOK);
-
-                etxtAwake.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        etxtAwake.selectAll();
-                    }
-                });
-                etxtNum.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        etxtNum.selectAll();
-                    }
-                });
-
-                etxtAwake.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            etxtAwake.clearFocus();
-                        }
-                        return false;
-                    }
-                });
-                etxtNum.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            etxtNum.clearFocus();
-                        }
-                        return false;
-                    }
-                });
 
                 txtHaveAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard0() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard0());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount());
 
                         dialogAwakeNHaveCard.show();
+
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -315,10 +292,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
+
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, filterCardSet.get(pos).getCard0());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -334,7 +310,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }
@@ -344,8 +319,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard1() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard1());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getCount());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -358,10 +333,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD1_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, filterCardSet.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -377,7 +350,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }
@@ -387,8 +359,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard2() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard2());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getCount());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -401,10 +373,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD2_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, cardSetInfo.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -420,7 +390,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }
@@ -430,8 +399,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard3() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard3());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getCount());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -444,10 +413,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD3_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, filterCardSet.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -463,7 +430,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }
@@ -473,8 +439,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard4() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard4());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -487,10 +453,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD4_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, filterCardSet.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -506,7 +470,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }
@@ -516,8 +479,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard0() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard5());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getCount());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -530,10 +493,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD5_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, filterCardSet.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -548,7 +509,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }
@@ -558,8 +518,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtHaveAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        etxtAwake.setText(filterCardSet.get(pos).getAwakeCard6() + "");
-                        etxtNum.setText(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount() + "");
+                        numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard6());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -572,10 +532,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                int awake = awakeRangeSet(etxtAwake.getText().toString());
-                                int number = numRangeSet(etxtNum.getText().toString());
-                                etxtAwake.setText(awake + "");
-                                etxtNum.setText(number + "");
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
                                 cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD6_CHECK, awake, filterCardSet.get(pos).getId());   //DED cardAwake 업데이트(DED DB)
                                 cardDbHelper.UpdateInfoCardCheck(number, filterCardSet.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
                                 cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
@@ -591,7 +549,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
                             }

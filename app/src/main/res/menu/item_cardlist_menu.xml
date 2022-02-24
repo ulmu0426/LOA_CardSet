@@ -11,7 +11,7 @@
             android:title="이름 정렬" />
     </group>
     <item
-        android:id="@+id/invisibleList"
+        android:id="@+id/all_check"
         android:layout_gravity="center"
-        android:title="숨기기" />
+        android:title="카드 모두 획득하기" />
 </menu>

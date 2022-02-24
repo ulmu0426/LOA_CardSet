@@ -40,6 +40,9 @@
         <activity
             android:name=".MainPage"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".testSettingCard"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

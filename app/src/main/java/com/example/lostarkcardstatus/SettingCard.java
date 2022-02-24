@@ -3,7 +3,6 @@ package com.example.lostarkcardstatus;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -152,7 +151,7 @@ public class SettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(SettingCard.this, imgSortLegend);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                invisibleListL = popupMenu.getMenu().findItem(R.id.invisibleList);
+                invisibleListL = popupMenu.getMenu().findItem(R.id.all_check);
                 if (rvLegendList.getVisibility() == View.GONE) {
                     invisibleListL.setTitle("펼치기");
                 } else {
@@ -186,7 +185,7 @@ public class SettingCard extends AppCompatActivity {
                                 Collections.sort(cardLegend);
                                 settingCardAdapterL.sortCardList(cardLegend);
                                 return true;
-                            case R.id.invisibleList:
+                            case R.id.all_check:
                                 if (rvLegendList.getVisibility() == View.GONE) {
                                     rvLegendList.setVisibility(View.VISIBLE);
                                 } else {
@@ -250,7 +249,7 @@ public class SettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(SettingCard.this, imgSortEpic);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                invisibleListE = popupMenu.getMenu().findItem(R.id.invisibleList);
+                invisibleListE = popupMenu.getMenu().findItem(R.id.all_check);
                 if (rvEpicList.getVisibility() == View.GONE) {
                     invisibleListE.setTitle("펼치기");
                 } else {
@@ -284,7 +283,7 @@ public class SettingCard extends AppCompatActivity {
                                 Collections.sort(cardEpic);
                                 settingCardAdapterE.sortCardList(cardEpic);
                                 return true;
-                            case R.id.invisibleList:
+                            case R.id.all_check:
                                 if (rvEpicList.getVisibility() == View.GONE) {
                                     rvEpicList.setVisibility(View.VISIBLE);
                                 } else {
@@ -348,7 +347,7 @@ public class SettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(SettingCard.this, imgSortRare);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                invisibleListR = popupMenu.getMenu().findItem(R.id.invisibleList);
+                invisibleListR = popupMenu.getMenu().findItem(R.id.all_check);
                 if (rvRareList.getVisibility() == View.GONE) {
                     invisibleListR.setTitle("펼치기");
                 } else {
@@ -382,7 +381,7 @@ public class SettingCard extends AppCompatActivity {
                                 Collections.sort(cardRare);
                                 settingCardAdapterR.sortCardList(cardRare);
                                 return true;
-                            case R.id.invisibleList:
+                            case R.id.all_check:
                                 if (rvRareList.getVisibility() == View.GONE) {
                                     rvRareList.setVisibility(View.VISIBLE);
                                 } else {
@@ -446,7 +445,7 @@ public class SettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(SettingCard.this, imgSortRare);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                invisibleListU = popupMenu.getMenu().findItem(R.id.invisibleList);
+                invisibleListU = popupMenu.getMenu().findItem(R.id.all_check);
                 if (rvUncommonList.getVisibility() == View.GONE) {
                     invisibleListU.setTitle("펼치기");
                 } else {
@@ -480,7 +479,7 @@ public class SettingCard extends AppCompatActivity {
                                 Collections.sort(cardUncommon);
                                 settingCardAdapterU.sortCardList(cardUncommon);
                                 return true;
-                            case R.id.invisibleList:
+                            case R.id.all_check:
                                 if (rvUncommonList.getVisibility() == View.GONE) {
                                     rvUncommonList.setVisibility(View.VISIBLE);
                                 } else {
@@ -544,7 +543,7 @@ public class SettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(SettingCard.this, imgSortRare);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                invisibleListC = popupMenu.getMenu().findItem(R.id.invisibleList);
+                invisibleListC = popupMenu.getMenu().findItem(R.id.all_check);
                 if (rvCommonList.getVisibility() == View.GONE) {
                     invisibleListC.setTitle("펼치기");
                 } else {
@@ -578,7 +577,7 @@ public class SettingCard extends AppCompatActivity {
                                 Collections.sort(cardCommon);
                                 settingCardAdapterC.sortCardList(cardCommon);
                                 return true;
-                            case R.id.invisibleList:
+                            case R.id.all_check:
                                 if (rvCommonList.getVisibility() == View.GONE) {
                                     rvCommonList.setVisibility(View.VISIBLE);
                                 } else {
@@ -642,7 +641,7 @@ public class SettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(SettingCard.this, imgSortRare);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                invisibleListS = popupMenu.getMenu().findItem(R.id.invisibleList);
+                invisibleListS = popupMenu.getMenu().findItem(R.id.all_check);
                 if (rvSpecialList.getVisibility() == View.GONE) {
                     invisibleListS.setTitle("펼치기");
                 } else {
@@ -676,7 +675,7 @@ public class SettingCard extends AppCompatActivity {
                                 Collections.sort(cardSpecial);
                                 settingCardAdapterS.sortCardList(cardSpecial);
                                 return true;
-                            case R.id.invisibleList:
+                            case R.id.all_check:
                                 if (rvSpecialList.getVisibility() == View.GONE) {
                                     rvSpecialList.setVisibility(View.VISIBLE);
                                 } else {

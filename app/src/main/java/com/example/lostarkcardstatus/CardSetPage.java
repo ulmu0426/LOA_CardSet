@@ -99,12 +99,12 @@ public class CardSetPage extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                            adapter.getDefaultSort();
-                            checkDefault = true;
-                            checkName = false;
-                            checkCompleteness = false;
+                                adapter.getDefaultSort();
+                                checkDefault = true;
+                                checkName = false;
+                                checkCompleteness = false;
 
-                            return true;
+                                return true;
                             case R.id.nameSort:
                                 adapter.getNameSort();
 
@@ -133,7 +133,7 @@ public class CardSetPage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(editSearchCardSet.getVisibility() == View.VISIBLE){
+        if (editSearchCardSet.getVisibility() == View.VISIBLE) {
             editSearchCardSet.setVisibility(View.GONE);
             return;
         }
@@ -141,7 +141,7 @@ public class CardSetPage extends AppCompatActivity {
         finish();
     }
 
-    public boolean completeChecked(){
+    public boolean completeChecked() {
         return checkBoxInvisibilityCardSetPage.isChecked();
     }
 
