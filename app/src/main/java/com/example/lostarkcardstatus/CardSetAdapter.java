@@ -308,7 +308,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard0(), awake, filterCardSet.get(pos).getCheckCard0());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -348,7 +351,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard1(), awake, filterCardSet.get(pos).getCheckCard1());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -388,7 +394,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard2(), awake, filterCardSet.get(pos).getCheckCard2());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -428,7 +437,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard3(), awake, filterCardSet.get(pos).getCheckCard3());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -468,7 +480,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard4(), awake, filterCardSet.get(pos).getCheckCard4());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -507,7 +522,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard5(), awake, filterCardSet.get(pos).getCheckCard5());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -547,7 +565,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard6(), awake, filterCardSet.get(pos).getCheckCard6());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
+
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                                if (cardSetPage.completeChecked())
+                                    completePartRemove();
 
                                 notifyDataSetChanged();
                                 dialogAwakeNHaveCard.cancel();
@@ -565,7 +586,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard0(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard0(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
                     }
@@ -579,7 +603,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard1(cardCheck);      //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard1(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
 
@@ -594,7 +621,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard2(cardCheck);                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard2(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
 
@@ -609,7 +639,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard3(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
 
@@ -624,7 +657,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard4(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
 
@@ -639,7 +675,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard5(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
 
@@ -654,7 +693,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard6(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
+                        if (cardSetPage.completeChecked())
+                            completePartRemove();
 
                         notifyDataSetChanged();
 
@@ -816,49 +858,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             }
         }
         return index;
-    }
-
-    private int awakeRangeSet(String input) {
-        int result = 0;
-        if (input.isEmpty())
-            result = 0;
-
-        if (Integer.parseInt(input) > 5) {
-            result = 5;
-        } else if (Integer.parseInt(input) < 0) {
-            result = 0;
-        } else {
-            result = Integer.parseInt(input);
-        }
-        return result;
-
-    }
-
-    private int awakeToCardCount(int awake) {
-        int returnNum = 0;
-        for (int i = 0; i < awake; i++) {
-            returnNum = i;
-        }
-        return returnNum;
-    }
-
-    //카드 각성도에 따라 최대 보유 카드 수량이 달라짐. 다음에 수정 할것.
-    private int numRangeSet(String input) {
-        int result = 0;
-
-        if (input.isEmpty())
-            result = 0;
-
-        if (Integer.parseInt(input) > 15) {
-            result = 15;
-        } else if (Integer.parseInt(input) < 0) {
-            result = 0;
-        } else {
-            result = Integer.parseInt(input);
-        }
-
-        return result;
-
     }
 
     private void setFavoriteImg(ImageView iv, int position, ColorMatrixColorFilter filter) {
@@ -1033,6 +1032,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         filterCardSet = defaultSortList;
 
     }
+
     public void getDefaultSort() {
         filterCardSet = defaultSortList;
         if (cardSetPage.completeChecked()) {
