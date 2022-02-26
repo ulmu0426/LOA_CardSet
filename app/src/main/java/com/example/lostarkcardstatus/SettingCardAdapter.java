@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -36,7 +37,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
     private static final String[] STAT = {"치명", "특화", "신속"};
 
-    private float DEDDmg = 0;
+    private float DEDDmg;
     private ArrayList<CardInfo> cardInfo;
     private Context context;
     private CardDBHelper cardDBHelper;
@@ -67,13 +68,13 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         return new SettingCardAdapter.ViewHolder(holder);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int positionGet = position;
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
-
 
         holder.img.setImageResource(getCardImg(filterCardInfo.get(position).getName()));
         defaultColorFilter(holder.img, position, filter);
@@ -212,7 +213,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(1);
                     cardDBHelper.UpdateInfoCardCheck(1, filterCardInfo.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
-                    holder.img.setBackgroundColor(Color.parseColor("#FFB300"));
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
@@ -224,7 +224,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(0);
                     cardDBHelper.UpdateInfoCardCheck(0, filterCardInfo.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
-                    holder.img.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
@@ -243,6 +242,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ConstraintLayout clCardList;
         private ImageView img;
         private TextView txtName;
         private TextView txtAwakeAndHave;
@@ -250,10 +250,20 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            clCardList = itemView.findViewById(R.id.clCardList);
             img = itemView.findViewById(R.id.img);
             txtName = itemView.findViewById(R.id.txtName);
             txtAwakeAndHave = itemView.findViewById(R.id.txtAwakeAndHave);
             isGetCheckbox = itemView.findViewById(R.id.isGetCheckbox);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int positionGet = getAdapterPosition();
+
+                }
+            });
+
         }
     }
 
@@ -265,7 +275,23 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
         } else {
             iv.setColorFilter(null);
+            setCardBorder(iv, position);
+        }
+    }
+
+    private void setCardBorder(ImageView iv, int position) {
+        if (filterCardInfo.get(position).getGrade().equals("전설")) {
             iv.setBackgroundColor(Color.parseColor("#FFB300"));
+        } else if (filterCardInfo.get(position).getGrade().equals("영웅")) {
+            iv.setBackgroundColor(Color.parseColor("#5E35B1"));
+        } else if (filterCardInfo.get(position).getGrade().equals("희귀")) {
+            iv.setBackgroundColor(Color.parseColor("#1E88E5"));
+        } else if (filterCardInfo.get(position).getGrade().equals("고급")) {
+            iv.setBackgroundColor(Color.parseColor("#7CB342"));
+        } else if (filterCardInfo.get(position).getGrade().equals("일반")) {
+            iv.setBackgroundColor(Color.parseColor("#A1A1A1"));
+        } else if (filterCardInfo.get(position).getGrade().equals("스페셜")) {
+            iv.setBackgroundColor(Color.parseColor("#DF4F84"));
         }
     }
 
@@ -333,11 +359,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         return imageResource;
     }
 
-    public void sortCardList(ArrayList<CardInfo> sortCardList) {
-        filterCardInfo = sortCardList;
-        notifyDataSetChanged();
-    }
-
     //스텟, 도감 달성 개수 업데이트 메소드
     private void haveStatUpdate(ArrayList<CardBookInfo> cardbook_all) {
         int[] haveStat = new int[]{0, 0, 0};
@@ -358,7 +379,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         DEDDmg = 0;
         for (int i = 0; i < DEDInfo.size(); i++) {
             DEDDmg += DEDInfo.get(i).getDmgSum();
-            if(DEDInfo.get(i).getName().equals("고립된 영원의 섬")){
+            if (DEDInfo.get(i).getName().equals("고립된 영원의 섬")) {
                 Log.v("test", i + "고립된 영원의 섬 마리 획득 : " + DEDInfo.get(i).getCheckCard1());
                 Log.v("test", i + "고립된 영원의 섬 시그나투스 획득 : " + DEDInfo.get(i).getCheckCard0());
                 Log.v("test", i + "고립된 영원의 섬 마리 각성도 : " + DEDInfo.get(i).getAwakeCard1());

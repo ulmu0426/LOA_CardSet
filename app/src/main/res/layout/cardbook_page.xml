@@ -47,7 +47,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/conlayoutCardBookStatus"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardbookStatusAndCardbookList"
         app:layout_constraintLeft_toLeftOf="parent"

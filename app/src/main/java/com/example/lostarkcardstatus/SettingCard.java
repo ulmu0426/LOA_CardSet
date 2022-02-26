@@ -91,7 +91,7 @@ public class SettingCard extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardlist);
-
+/*
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         settingCardList();
 
@@ -101,6 +101,7 @@ public class SettingCard extends AppCompatActivity {
         rvUncommonList = findViewById(R.id.rvUncommonList);
         rvCommonList = findViewById(R.id.rvCommonList);
         rvSpecialList = findViewById(R.id.rvSpecialList);
+
 
         settingCardAdapterL = new SettingCardAdapter(this, cardLegend);
         rvLegendList.setAdapter(settingCardAdapterL);
@@ -796,5 +797,7 @@ public class SettingCard extends AppCompatActivity {
                 continue;
             }
         }
+
+ */
     }
 }

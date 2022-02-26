@@ -50,6 +50,7 @@ public class CardSetPage extends AppCompatActivity {
 
         rv.setAdapter(adapter);
 
+
         checkBoxInvisibilityCardSetPage = findViewById(R.id.checkBoxInvisibilityCardSetPage);
         checkBoxInvisibilityCardSetPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,7 @@ public class CardSetPage extends AppCompatActivity {
                 adapter.getCompleteFilter();
             }
         });
+
         editSearchCardSet = findViewById(R.id.editSearchCardSet);
         editSearchCardSet.addTextChangedListener(new TextWatcher() {
             @Override

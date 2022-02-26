@@ -25,7 +25,7 @@ public class CardBookPage extends AppCompatActivity {
     private static final String SPECIALITY = "특화 + ";
     private static final String AGILITY = "신속 + ";
     private final String CRITICAL_BOOK_COMPLETE = "치명 도감 달성 개수 : ";
-    private final String AGILITY_BOOK_COMPLETE = " 도감 달성 개수 : ";
+    private final String AGILITY_BOOK_COMPLETE = "신속 도감 달성 개수 : ";
     private final String SPECIALITY_BOOK_COMPLETE = "특화 도감 달성 개수 : ";
     private RecyclerView rv;
     private CardBookAdapter adapter;
@@ -45,8 +45,8 @@ public class CardBookPage extends AppCompatActivity {
     private ImageView imgBtnCardBookSortMenu;
 
     private boolean checkDefault = true;
-    private boolean checkName;
-    private boolean checkCompleteness;
+    private boolean checkName = false;
+    private boolean checkCompleteness = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,7 @@ public class CardBookPage extends AppCompatActivity {
                                 adapter.getDefaultSort();
 
                                 checkDefault = true;
-                                checkName= false;
+                                checkName = false;
                                 checkCompleteness = false;
                                 return true;
 
@@ -139,14 +139,14 @@ public class CardBookPage extends AppCompatActivity {
                                 adapter.getNameSort();
 
                                 checkDefault = false;
-                                checkName= true;
+                                checkName = true;
                                 checkCompleteness = false;
                                 return true;
 
                             case R.id.completenessSort:
 
                                 checkDefault = false;
-                                checkName= false;
+                                checkName = false;
                                 checkCompleteness = true;
                                 adapter.getCompletenessSort();
 
@@ -165,7 +165,7 @@ public class CardBookPage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(editSearchCardBook.getVisibility() == View.VISIBLE){
+        if (editSearchCardBook.getVisibility() == View.VISIBLE) {
             editSearchCardBook.setVisibility(View.INVISIBLE);
             tableStats.setVisibility(View.VISIBLE);
 
@@ -191,9 +191,11 @@ public class CardBookPage extends AppCompatActivity {
     public boolean checkDefault() {
         return checkDefault;
     }
+
     public boolean checkName() {
         return checkName;
     }
+
     public boolean checkCompleteness() {
         return checkCompleteness;
     }

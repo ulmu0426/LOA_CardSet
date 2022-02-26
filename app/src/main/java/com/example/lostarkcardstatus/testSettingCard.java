@@ -1,6 +1,7 @@
 package com.example.lostarkcardstatus;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -91,6 +92,7 @@ public class testSettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnU);
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
+                rvList.setBackgroundColor(Color.parseColor("#FFF6D1"));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -105,6 +107,7 @@ public class testSettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnU);
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
+                rvList.setBackgroundColor(Color.parseColor("#ECE2FF"));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -119,6 +122,7 @@ public class testSettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnU);
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
+                rvList.setBackgroundColor(Color.parseColor("#DDEFFF"));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -133,6 +137,7 @@ public class testSettingCard extends AppCompatActivity {
                 setBtnSettingBold(btnU);
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
+                rvList.setBackgroundColor(Color.parseColor("#DEFFBB"));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -147,6 +152,7 @@ public class testSettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnU);
                 setBtnSettingBold(btnC);
                 setBtnSettingNormal(btnS);
+                rvList.setBackgroundColor(Color.parseColor("#F4F4F4"));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -161,6 +167,7 @@ public class testSettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnU);
                 setBtnSettingNormal(btnC);
                 setBtnSettingBold(btnS);
+                rvList.setBackgroundColor(Color.parseColor("#FFDCE9"));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -221,7 +228,7 @@ public class testSettingCard extends AppCompatActivity {
                             case R.id.all_check:
                                 for (int i = 0; i < cardInfo.size(); i++) {
                                     cardInfo.get(i).setGetCard(1);
-                                    cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(),cardInfo.get(i).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
                                 }
                                 settingCardList();
                                 adapter.allCardCheck();
@@ -263,7 +270,7 @@ public class testSettingCard extends AppCompatActivity {
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
+                ci.setGrade(cardInfo.get(i).getGrade());
                 cardLegend.add(ci);
             } else if (cardInfo.get(i).getGrade().equals(EPIC)) {
                 ci.setId(cardInfo.get(i).getId());
@@ -272,7 +279,7 @@ public class testSettingCard extends AppCompatActivity {
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
+                ci.setGrade(cardInfo.get(i).getGrade());
                 cardEpic.add(ci);
             } else if (cardInfo.get(i).getGrade().equals(RARE)) {
                 ci.setId(cardInfo.get(i).getId());
@@ -281,7 +288,7 @@ public class testSettingCard extends AppCompatActivity {
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
+                ci.setGrade(cardInfo.get(i).getGrade());
                 cardRare.add(ci);
             } else if (cardInfo.get(i).getGrade().equals(UNCOMMON)) {
                 ci.setId(cardInfo.get(i).getId());
@@ -290,7 +297,7 @@ public class testSettingCard extends AppCompatActivity {
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
+                ci.setGrade(cardInfo.get(i).getGrade());
                 cardUncommon.add(ci);
             } else if (cardInfo.get(i).getGrade().equals(COMMON)) {
                 ci.setId(cardInfo.get(i).getId());
@@ -299,7 +306,7 @@ public class testSettingCard extends AppCompatActivity {
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
+                ci.setGrade(cardInfo.get(i).getGrade());
                 cardCommon.add(ci);
             } else if (cardInfo.get(i).getGrade().equals(SPECIAL)) {
                 ci.setId(cardInfo.get(i).getId());
@@ -308,7 +315,7 @@ public class testSettingCard extends AppCompatActivity {
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
-                ci.setGrade("");
+                ci.setGrade(cardInfo.get(i).getGrade());
                 cardSpecial.add(ci);
             } else {
                 continue;

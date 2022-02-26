@@ -1167,11 +1167,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         baseFilteredDED = filteringList;
     }
 
-    public void sortDED(ArrayList<DemonExtraDmgInfo> sortDED) {
-        filterDED = sortDED;
-        notifyDataSetChanged();
-    }
-
     private int getCardImg(String cardName) {
         String name = "";
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -1186,20 +1181,22 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     private void setSortList() {
-        defaultSortList.addAll(filterDED);  //기본 정렬
+        ArrayList<DemonExtraDmgInfo> tempDEDList = new ArrayList<DemonExtraDmgInfo>();
+        tempDEDList.addAll(DEDInfo);
+        defaultSortList.addAll(tempDEDList);  //기본 정렬
 
-        Collections.sort(filterDED);    //이름 순 정렬
-        nameSortList.addAll(filterDED);
+        Collections.sort(tempDEDList);    //이름 순 정렬
+        nameSortList.addAll(tempDEDList);
 
         //완성도 순 정렬
 
-        for (int i = 0; i < filterDED.size(); i++) {       //완성된 도감 추가
-            if (isAllCompleteDED(filterDED.get(i))) {
-                completenessSortList.add(filterDED.get(i));
+        for (int i = 0; i < tempDEDList.size(); i++) {       //완성된 도감 추가
+            if (isAllCompleteDED(tempDEDList.get(i))) {
+                completenessSortList.add(tempDEDList.get(i));
             }
         }
 
-        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //필요 카드수가 가장 적은 순서대로 정렬
                 if (((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake()) < ((o2.getCompleteDEDBook() * 5) - o2.getHaveAwake())) {
@@ -1209,13 +1206,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             }
         });
 
-        for (int i = 0; i < filterDED.size(); i++) {
-            if (isCompleteDED(filterDED.get(i)) && !isAllCompleteDED(filterDED.get(i))) {   //도감은 완성, 각성도 최대가 아닌 미완성 도감들 추가
-                completenessSortList.add(filterDED.get(i));
+        for (int i = 0; i < tempDEDList.size(); i++) {
+            if (isCompleteDED(tempDEDList.get(i)) && !isAllCompleteDED(tempDEDList.get(i))) {   //도감은 완성, 각성도 최대가 아닌 미완성 도감들 추가
+                completenessSortList.add(tempDEDList.get(i));
             }
         }
 
-        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //도감 완성이 안 된 경우
                 if (o1.getCompleteDEDBook() - o1.getHaveCard() < o2.getCompleteDEDBook() - o2.getHaveCard()) {
@@ -1225,9 +1222,9 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             }
         });
 
-        for (int i = 0; i < filterDED.size(); i++) {    //도감완성이 안된 경우 추가.
-            if (!isCompleteDED(filterDED.get(i))) {
-                completenessSortList.add(filterDED.get(i));
+        for (int i = 0; i < tempDEDList.size(); i++) {    //도감완성이 안된 경우 추가.
+            if (!isCompleteDED(tempDEDList.get(i))) {
+                completenessSortList.add(tempDEDList.get(i));
             }
         }
 

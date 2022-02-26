@@ -714,13 +714,15 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     }
 
     private void setSortList() {
-        defaultSortList.addAll(filterCardBook); //기본 정렬 리스트
+        ArrayList<CardBookInfo> tempBookList = new ArrayList<CardBookInfo>();
+        tempBookList.addAll(cardBookInfo);
+        defaultSortList.addAll(tempBookList); //기본 정렬 리스트
 
-        Collections.sort(filterCardBook);   //이름순 정렬 리스트
+        Collections.sort(tempBookList);   //이름순 정렬 리스트
 
-        nameSortList.addAll(filterCardBook);
+        nameSortList.addAll(tempBookList);
 
-        Collections.sort(filterCardBook, new Comparator<CardBookInfo>() {   //완성도 순 정렬 리스트
+        Collections.sort(tempBookList, new Comparator<CardBookInfo>() {   //완성도 순 정렬 리스트
             @Override
             public int compare(CardBookInfo o1, CardBookInfo o2) {
                 if (o1.getSubComplete() < o2.getSubComplete()) {
@@ -729,7 +731,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     return 1;
             }
         });
-        completenessSortList.addAll(filterCardBook);
+        completenessSortList.addAll(tempBookList);
 
         filterCardBook = defaultSortList;
     }

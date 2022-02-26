@@ -139,7 +139,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(editSearchDED.getVisibility() == View.VISIBLE){
+        if (editSearchDED.getVisibility() == View.VISIBLE) {
             editSearchDED.setVisibility(View.INVISIBLE);
             txtDED.setVisibility(View.VISIBLE);
             txtCompleteDED.setVisibility(View.VISIBLE);

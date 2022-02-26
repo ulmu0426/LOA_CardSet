@@ -21,23 +21,23 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/fix01menu"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:srcCompat="@drawable/fix01menu" />
 
         <TextView
             android:id="@+id/txtCardList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="5dp"
-            android:text="카드 리스트"
+            android:text="카드 목록"
             android:textAlignment="center"
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgSearch"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
-            android:background="#FFEDA0"
+            android:background="#FFF4C4"
             android:padding="5dp"
             android:text="전설"
             android:textAlignment="center"
@@ -122,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
-            android:background="#FFBAD3"
+            android:background="#FFCADD"
             android:padding="5dp"
             android:text="스페셜"
             android:textAlignment="center"
@@ -157,7 +157,10 @@
         android:id="@+id/rvList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#4DFDD835"
+        android:background="#FFDCE9"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:nestedScrollingEnabled="true"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -521,7 +524,7 @@
                 android:id="@+id/rvSpecialList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:background="#33FDB2FF"
+                android:background="#FED4FF"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"

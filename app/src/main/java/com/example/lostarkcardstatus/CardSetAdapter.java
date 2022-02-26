@@ -990,18 +990,21 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     private void setSortList() {
-        defaultSortList.addAll(filterCardSet);  //기본 정렬
+        ArrayList<CardSetInfo> tempSetList = new ArrayList<CardSetInfo>();
+        tempSetList.addAll(cardSetInfo);
 
-        Collections.sort(filterCardSet);    //이름순 정렬
-        nameSortList.addAll(filterCardSet);
+        defaultSortList.addAll(tempSetList);  //기본 정렬
 
-        for (int i = 0; i < filterCardSet.size(); i++) {    //완성 카드세트 추가
-            if (isAllCompleteCardSet(filterCardSet.get(i))) {
-                completenessSortList.add(filterCardSet.get(i));
+        Collections.sort(tempSetList);    //이름순 정렬
+        nameSortList.addAll(tempSetList);
+
+        for (int i = 0; i < tempSetList.size(); i++) {    //완성 카드세트 추가
+            if (isAllCompleteCardSet(tempSetList.get(i))) {
+                completenessSortList.add(tempSetList.get(i));
             }
         }
 
-        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+        Collections.sort(tempSetList, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
                 if ((o1.getHaveCard() * 5) - o1.getHaveAwake() < (o2.getHaveCard() * 5) - o2.getHaveAwake()) {  //완성도가 높은 순서대로(각성도 기준) 정렬
@@ -1010,12 +1013,12 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     return 1;
             }
         });
-        for (int i = 0; i < filterCardSet.size(); i++) {
-            if (!isAllCompleteCardSet(filterCardSet.get(i)) && filterCardSet.get(i).isCompleteCardBook()) { //풀각x,세트효과 가능
-                completenessSortList.add(filterCardSet.get(i));
+        for (int i = 0; i < tempSetList.size(); i++) {
+            if (!isAllCompleteCardSet(tempSetList.get(i)) && tempSetList.get(i).isCompleteCardBook()) { //풀각x,세트효과 가능
+                completenessSortList.add(tempSetList.get(i));
             }
         }
-        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+        Collections.sort(tempSetList, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
                 if (o1.getHaveCard() - o1.sumCheckCards() < o2.getHaveCard() - o2.sumCheckCards()) {  //도감 완성도 순 정렬
@@ -1024,9 +1027,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     return 1;
             }
         });
-        for (int i = 0; i < filterCardSet.size(); i++) {
-            if (!isAllCompleteCardSet(filterCardSet.get(i)) && !filterCardSet.get(i).isCompleteCardBook()) { //풀각x,세트효과 x 기준 가장 많이 모은 순서
-                completenessSortList.add(filterCardSet.get(i));
+        for (int i = 0; i < tempSetList.size(); i++) {
+            if (!isAllCompleteCardSet(tempSetList.get(i)) && !tempSetList.get(i).isCompleteCardBook()) { //풀각x,세트효과 x 기준 가장 많이 모은 순서
+                completenessSortList.add(tempSetList.get(i));
             }
         }
         filterCardSet = defaultSortList;
