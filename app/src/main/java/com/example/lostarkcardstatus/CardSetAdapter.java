@@ -879,9 +879,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     private boolean isAllCompleteCardSet(CardSetInfo cardSetInfo) {
-        int checkAll = cardSetInfo.getCheckCard0() + cardSetInfo.getCheckCard1() + cardSetInfo.getCheckCard2()
-                + cardSetInfo.getCheckCard3() + cardSetInfo.getCheckCard4() + cardSetInfo.getCheckCard5() + cardSetInfo.getCheckCard6();
-        if (cardSetInfo.getHaveCard() == checkAll) { //카드 세트 수집 완료시.
+        if (cardSetInfo.isCompleteCardBook()) { //카드 세트 수집 완료시.
             if (cardSetInfo.getHaveAwake() == (cardSetInfo.getHaveCard() * 5)) //수집한 카드의 각성도합이 최대값일시
                 return true;
             else
@@ -1013,11 +1011,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     return 1;
             }
         });
+
         for (int i = 0; i < tempSetList.size(); i++) {
             if (!isAllCompleteCardSet(tempSetList.get(i)) && tempSetList.get(i).isCompleteCardBook()) { //풀각x,세트효과 가능
                 completenessSortList.add(tempSetList.get(i));
             }
         }
+
         Collections.sort(tempSetList, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {

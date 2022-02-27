@@ -1,6 +1,8 @@
 package com.example.lostarkcardstatus;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
     private int id;
@@ -192,7 +194,7 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
     public float getDmgSum() {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         float result = 0;
-        if(!(getHaveCard() == getCompleteDEDBook())) {  //도감 미완성시 0 리턴
+        if (!(getHaveCard() == getCompleteDEDBook())) {  //도감 미완성시 0 리턴
             return 0;
         }
         if (getAwake_sum0() <= getHaveAwake() && getHaveAwake() < getAwake_sum1())    //각성합이 첫번째 각성 조건 달성시
@@ -388,5 +390,98 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
     @Override
     public int compareTo(DemonExtraDmgInfo o) {
         return this.getName().compareTo(o.getName());
+    }
+
+    //다음 수집까지 필요 각성도
+    public int nextCollect() {
+        if (awake_sum2 == haveAwake) {
+            return 0;
+        } else if (awake_sum2 > haveAwake && awake_sum1 <= haveAwake) {
+            return awake_sum2;
+        } else if (awake_sum1 > haveAwake && awake_sum0 <= haveAwake) {
+            return awake_sum1;
+        } else if (haveAwake < awake_sum0) {
+            return awake_sum0;
+        }
+        return 0;
+    }
+
+    //다음 수집할 카드 추천.
+    public ArrayList<String> nextCard() {
+        ArrayList<recommendCardList> recommendCardLists = new ArrayList<recommendCardList>();
+        recommendCardList recommendCardList0 = new recommendCardList(awakeCard0, checkCard0, card0);
+        recommendCardList recommendCardList1 = new recommendCardList(awakeCard1, checkCard1, card1);
+        recommendCardList recommendCardList2 = new recommendCardList(awakeCard2, checkCard2, card2);
+        recommendCardList recommendCardList3 = new recommendCardList(awakeCard3, checkCard3, card3);
+        recommendCardList recommendCardList4 = new recommendCardList(awakeCard4, checkCard4, card4);
+        recommendCardList recommendCardList5 = new recommendCardList(awakeCard5, checkCard5, card5);
+        recommendCardList recommendCardList6 = new recommendCardList(awakeCard6, checkCard6, card6);
+        recommendCardList recommendCardList7 = new recommendCardList(awakeCard7, checkCard7, card7);
+        recommendCardList recommendCardList8 = new recommendCardList(awakeCard8, checkCard8, card8);
+        recommendCardList recommendCardList9 = new recommendCardList(awakeCard9, checkCard9, card9);
+        recommendCardLists.add(recommendCardList0);
+        recommendCardLists.add(recommendCardList1);
+        recommendCardLists.add(recommendCardList2);
+        recommendCardLists.add(recommendCardList3);
+        recommendCardLists.add(recommendCardList4);
+        recommendCardLists.add(recommendCardList5);
+        recommendCardLists.add(recommendCardList6);
+        recommendCardLists.add(recommendCardList7);
+        recommendCardLists.add(recommendCardList8);
+        recommendCardLists.add(recommendCardList9);
+
+        Collections.sort(recommendCardLists);   //각성도 순서대로 정렬
+
+        ArrayList<String> returnString = new ArrayList<String>();
+        for(int i =0;i<recommendCardLists.size();i++){
+            if(!recommendCardLists.get(i).getName().equals("")){
+                returnString.add(recommendCardLists.get(i).getName());
+            }
+        }
+        return returnString;
+    }
+}
+
+class recommendCardList implements Comparable<recommendCardList> {
+    int awake;
+    int have;
+    String name;
+
+    public recommendCardList(int awake, int have, String name) {
+        this.awake = awake;
+        this.have = have;
+        this.name = name;
+    }
+
+    public int getAwake() {
+        return awake;
+    }
+
+    public void setAwake(int awake) {
+        this.awake = awake;
+    }
+
+    public int getHave() {
+        return have;
+    }
+
+    public void setHave(int have) {
+        this.have = have;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int compareTo(recommendCardList o) { //각성도 높은 순서대로 정렬
+        if (getAwake() > o.getAwake())
+            return -1;
+        else
+            return 1;
     }
 }
