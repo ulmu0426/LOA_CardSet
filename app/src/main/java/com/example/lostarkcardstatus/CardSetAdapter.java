@@ -103,13 +103,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         holder.imgCardSet5.setImageResource(getCardImg(filterCardSet.get(position).getCard5()));
         holder.imgCardSet6.setImageResource(getCardImg(filterCardSet.get(position).getCard6()));
 
-        imgDefaultColor(holder.imgCardSet0, filter, filterCardSet.get(position).getCheckCard0());
-        imgDefaultColor(holder.imgCardSet1, filter, filterCardSet.get(position).getCheckCard1());
-        imgDefaultColor(holder.imgCardSet2, filter, filterCardSet.get(position).getCheckCard2());
-        imgDefaultColor(holder.imgCardSet3, filter, filterCardSet.get(position).getCheckCard3());
-        imgDefaultColor(holder.imgCardSet4, filter, filterCardSet.get(position).getCheckCard4());
-        imgDefaultColor(holder.imgCardSet5, filter, filterCardSet.get(position).getCheckCard5());
-        imgDefaultColor(holder.imgCardSet6, filter, filterCardSet.get(position).getCheckCard6());
+        imgDefaultColor(holder.imgCardSet0, filter, filterCardSet.get(position).getCheckCard0(), position, filterCardSet.get(position).getCard0());
+        imgDefaultColor(holder.imgCardSet1, filter, filterCardSet.get(position).getCheckCard1(), position, filterCardSet.get(position).getCard1());
+        imgDefaultColor(holder.imgCardSet2, filter, filterCardSet.get(position).getCheckCard2(), position, filterCardSet.get(position).getCard2());
+        imgDefaultColor(holder.imgCardSet3, filter, filterCardSet.get(position).getCheckCard3(), position, filterCardSet.get(position).getCard3());
+        imgDefaultColor(holder.imgCardSet4, filter, filterCardSet.get(position).getCheckCard4(), position, filterCardSet.get(position).getCard4());
+        imgDefaultColor(holder.imgCardSet5, filter, filterCardSet.get(position).getCheckCard5(), position, filterCardSet.get(position).getCard5());
+        imgDefaultColor(holder.imgCardSet6, filter, filterCardSet.get(position).getCheckCard6(), position, filterCardSet.get(position).getCard6());
 
         //없는 카드 안 보이게
         imgVisibility(filterCardSet.get(position).getCard2(), holder.imgCardSet2);
@@ -168,13 +168,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
 
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
-                imgDefaultColor(imgCardSetDetail0, filter, filterCardSet.get(pos).getCheckCard0());
-                imgDefaultColor(imgCardSetDetail1, filter, filterCardSet.get(pos).getCheckCard1());
-                imgDefaultColor(imgCardSetDetail2, filter, filterCardSet.get(pos).getCheckCard2());
-                imgDefaultColor(imgCardSetDetail3, filter, filterCardSet.get(pos).getCheckCard3());
-                imgDefaultColor(imgCardSetDetail4, filter, filterCardSet.get(pos).getCheckCard4());
-                imgDefaultColor(imgCardSetDetail5, filter, filterCardSet.get(pos).getCheckCard5());
-                imgDefaultColor(imgCardSetDetail6, filter, filterCardSet.get(pos).getCheckCard6());
+                imgDefaultColor(imgCardSetDetail0, filter, filterCardSet.get(pos).getCheckCard0(), pos, filterCardSet.get(pos).getCard0());
+                imgDefaultColor(imgCardSetDetail1, filter, filterCardSet.get(pos).getCheckCard1(), pos, filterCardSet.get(pos).getCard1());
+                imgDefaultColor(imgCardSetDetail2, filter, filterCardSet.get(pos).getCheckCard2(), pos, filterCardSet.get(pos).getCard2());
+                imgDefaultColor(imgCardSetDetail3, filter, filterCardSet.get(pos).getCheckCard3(), pos, filterCardSet.get(pos).getCard3());
+                imgDefaultColor(imgCardSetDetail4, filter, filterCardSet.get(pos).getCheckCard4(), pos, filterCardSet.get(pos).getCard4());
+                imgDefaultColor(imgCardSetDetail5, filter, filterCardSet.get(pos).getCheckCard5(), pos, filterCardSet.get(pos).getCard5());
+                imgDefaultColor(imgCardSetDetail6, filter, filterCardSet.get(pos).getCheckCard6(), pos, filterCardSet.get(pos).getCard6());
 
                 imgCardSetDetail0.setImageResource(getCardImg(filterCardSet.get(pos).getCard0()));
                 imgCardSetDetail1.setImageResource(getCardImg(filterCardSet.get(pos).getCard1()));
@@ -249,7 +249,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     favoriteCardSetInfo.get(i).setActivation(check);
                                     cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
-                                    favoriteAdapter.addItem(favoriteCardSetInfo.get(i));
+                                    favoriteAdapter.updateActivationFavoriteCardSet();
                                 }
                             }
                         }
@@ -580,7 +580,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail0, filter, filterCardSet.get(pos).getCheckCard0());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail0, filter, pos, filterCardSet.get(pos).getCard0());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard0(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -597,7 +597,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail1, filter, filterCardSet.get(pos).getCheckCard1());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail1, filter, pos, filterCardSet.get(pos).getCard1());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard1(cardCheck);      //cardX수집 유무 업데이트(현재 DED array )
@@ -615,7 +615,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail2, filter, filterCardSet.get(pos).getCheckCard2());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail2, filter, pos, filterCardSet.get(pos).getCard2());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard2(cardCheck);                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -633,7 +633,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail3, filter, filterCardSet.get(pos).getCheckCard3());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail3, filter, pos, filterCardSet.get(pos).getCard3());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -651,7 +651,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail4, filter, filterCardSet.get(pos).getCheckCard4());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail4, filter, pos, filterCardSet.get(pos).getCard4());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -669,7 +669,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail5, filter, filterCardSet.get(pos).getCheckCard5());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail5, filter, pos, filterCardSet.get(pos).getCard5());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -687,7 +687,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgCardSetDetail6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int cardCheck = imgGrayScale(imgCardSetDetail6, filter, filterCardSet.get(pos).getCheckCard6());              //카드 획득 유무 0 미획득, 1획득
+                        int cardCheck = imgGrayScale(imgCardSetDetail6, filter, pos, filterCardSet.get(pos).getCard6());              //카드 획득 유무 0 미획득, 1획득
                         cardDbHelper.UpdateInfoDEDCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardCheck, filterCardSet.get(pos).getId());   //cardX수집 유무 업데이트(CardSet DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -800,34 +800,21 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
-    private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
+    private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check, int position, String name) {
         if (check == 1) {
-            iv.setBackgroundColor(Color.parseColor("#FFB300"));
+            setCardBorder(iv, position, name);
             iv.setColorFilter(null);
         } else {
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
         }
-    }
-
-    //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
-    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
-        if (iv.getColorFilter() != filter) {
-            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            iv.setColorFilter(filter);
-            check = 0;
-        } else {
-            iv.setBackgroundColor(Color.parseColor("#FFB300"));
-            iv.setColorFilter(null);
-            check = 1;
-        }
-        return check;
     }
 
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter) {
         int check = 0;
         if (iv.getColorFilter() != filter) {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
             check = 0;
         } else {
@@ -835,6 +822,37 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             check = 1;
         }
         return check;
+    }
+
+    //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
+    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int position, String name) {
+        int check = 0;
+        if (iv.getColorFilter() != filter) {
+            iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            iv.setColorFilter(filter);
+            check = 0;
+        } else {
+            setCardBorder(iv, position, name);
+            iv.setColorFilter(null);
+            check = 1;
+        }
+        return check;
+    }
+
+    private void setCardBorder(ImageView iv, int position, String name) {
+        if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("전설")) {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("영웅")) {
+            iv.setBackgroundColor(Color.parseColor("#5E35B1"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("희귀")) {
+            iv.setBackgroundColor(Color.parseColor("#1E88E5"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("고급")) {
+            iv.setBackgroundColor(Color.parseColor("#7CB342"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("일반")) {
+            iv.setBackgroundColor(Color.parseColor("#A1A1A1"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("스페셜")) {
+            iv.setBackgroundColor(Color.parseColor("#DF4F84"));
+        }
     }
 
     //cardList 갱신을 위한 메소드

@@ -72,6 +72,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     public void updateActivationFavoriteCardSet() {
+        activationFavoriteCardSet.clear();
         for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
             if (favoriteCardSetInfo.get(i).getActivation() == 1) {
                 FavoriteCardSetInfo favorite = new FavoriteCardSetInfo();
@@ -79,11 +80,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 activationFavoriteCardSet.add(favorite);
             }
         }
-    }
-
-    public void addItem(FavoriteCardSetInfo item) {
-        activationFavoriteCardSet.add(0, item);
-        notifyItemInserted(0);
+        notifyDataSetChanged();
     }
 
     public void removeItem(FavoriteCardSetInfo item) {

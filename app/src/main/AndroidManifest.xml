@@ -41,7 +41,7 @@
             android:name=".MainPage"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".testSettingCard"
+            android:name=".SettingCard"
             android:screenOrientation="portrait"></activity>
 
     </application>

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -127,7 +126,7 @@ public class MainPage extends AppCompatActivity {
         txtBtnCardList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), testSettingCard.class);
+                Intent intent = new Intent(getApplicationContext(), SettingCard.class);
                 startActivity(intent);
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }

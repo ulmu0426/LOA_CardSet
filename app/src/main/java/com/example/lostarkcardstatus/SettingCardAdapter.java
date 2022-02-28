@@ -11,6 +11,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -32,6 +33,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
 
@@ -56,6 +58,16 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         cardDBHelper = new CardDBHelper(context);
     }
 
+    public interface OnItemClickEventListener {
+        void onItemClick(View a_view, int a_position);
+    }
+
+    private OnItemClickEventListener mItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickEventListener a_listener) {
+        mItemClickListener = a_listener;
+    }
+
     public ArrayList<CardInfo> getFilterCardInfo() {
         return this.filterCardInfo;
     }
@@ -65,7 +77,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_cardlist, parent, false);
 
-        return new SettingCardAdapter.ViewHolder(holder);
+        return new SettingCardAdapter.ViewHolder(holder, mItemClickListener);
     }
 
 
@@ -84,6 +96,68 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.txtAwakeAndHave.setText("각성 : " + filterCardInfo.get(position).getAwake() + "  보유 : " + filterCardInfo.get(position).getCount());
         holder.isGetCheckbox.setChecked(isChecked(filterCardInfo.get(position).getGetCard()));
 
+        holder.txtName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                    cardInfoDialog.setContentView(R.layout.just_card);
+
+                    WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                    params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                    params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                    TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                    ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                    EditText etxtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                    EditText etxtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                    TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                    Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+                    Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer_JustCard);
+
+                    txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
+                    imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
+                    etxtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
+                    etxtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
+                    txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
+
+                    btnOk.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!(Integer.parseInt(etxtJustCardAwake.getText().toString()) == filterCardInfo.get(positionGet).getAwake())) {
+                                filterCardInfo.get(positionGet).setAwake(Integer.parseInt(etxtJustCardAwake.getText().toString()));
+                                cardDBHelper.UpdateInfoCardAwake(filterCardInfo.get(positionGet).getAwake(), filterCardInfo.get(positionGet).getId());
+                                ((MainPage) MainPage.mainContext).cardBookUpdate();
+                                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                                haveDEDUpdate();
+                            }
+                            if (!(Integer.parseInt(etxtJustCardHave.getText().toString()) == filterCardInfo.get(positionGet).getCount())) {
+                                filterCardInfo.get(positionGet).setCount(Integer.parseInt(etxtJustCardHave.getText().toString()));
+                                cardDBHelper.UpdateInfoCardNum(filterCardInfo.get(positionGet).getCount(), filterCardInfo.get(positionGet).getId());
+                                ((MainPage) MainPage.mainContext).cardBookUpdate();
+                                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                                haveDEDUpdate();
+                            }
+
+                            notifyDataSetChanged();
+                            cardInfoDialog.cancel();
+                        }
+                    });
+                    btnCancer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            cardInfoDialog.cancel();
+                        }
+                    });
+
+                    cardInfoDialog.show();
+                }
+
+            }
+        });
         holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +215,68 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 });
 
                 cardInfoDialog.show();
+            }
+        });
+        holder.txtAwakeAndHave.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Dialog awakeHaveDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                    awakeHaveDialog.setContentView(R.layout.awake_havecard_change);
+
+                    NumberPicker numberPickerAwake = awakeHaveDialog.findViewById(R.id.numberPickerAwake);
+                    numberPickerAwake.setMinValue(0);
+                    numberPickerAwake.setMaxValue(5);
+                    numberPickerAwake.setWrapSelectorWheel(false);
+
+                    NumberPicker numberPickerHave = awakeHaveDialog.findViewById(R.id.numberPickerHave);
+                    numberPickerHave.setMinValue(0);
+                    numberPickerHave.setMaxValue(15);
+                    numberPickerHave.setWrapSelectorWheel(false);
+
+                    Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
+                    Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
+                    numberPickerAwake.setValue(filterCardInfo.get(positionGet).getAwake());
+                    numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
+
+                    btnCancer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            awakeHaveDialog.cancel();
+                        }
+                    });
+
+                    btnOK.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int awake = numberPickerAwake.getValue();
+                            int number = numberPickerHave.getValue();
+                            numberPickerAwake.setValue(awake);
+                            numberPickerHave.setValue(number);
+                            //카드 arrayList update
+                            useCardList.get(positionGet).setAwake(awake);
+                            useCardList.get(positionGet).setCount(number);
+                            filterCardInfo.get(positionGet).setAwake(awake);
+                            filterCardInfo.get(positionGet).setCount(number);
+
+                            cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
+                            cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setCount(number);
+                            //카드 DB update
+                            cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
+                            cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());
+
+                            holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
+                            ((MainPage) MainPage.mainContext).cardBookUpdate();
+                            ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                            haveDEDUpdate();
+                            notifyDataSetChanged();
+                            awakeHaveDialog.cancel();
+                        }
+                    });
+
+                    awakeHaveDialog.show();
+
+                }
             }
         });
 
@@ -204,6 +340,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             }
         });
 
+
         holder.isGetCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,29 +379,20 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ConstraintLayout clCardList;
         private ImageView img;
         private TextView txtName;
         private TextView txtAwakeAndHave;
         private CheckBox isGetCheckbox;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, final OnItemClickEventListener mItemClickListener) {
             super(itemView);
-            clCardList = itemView.findViewById(R.id.clCardList);
             img = itemView.findViewById(R.id.img);
             txtName = itemView.findViewById(R.id.txtName);
             txtAwakeAndHave = itemView.findViewById(R.id.txtAwakeAndHave);
             isGetCheckbox = itemView.findViewById(R.id.isGetCheckbox);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int positionGet = getAdapterPosition();
-
-                }
-            });
-
         }
+
     }
 
 
@@ -379,18 +507,9 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         DEDDmg = 0;
         for (int i = 0; i < DEDInfo.size(); i++) {
             DEDDmg += DEDInfo.get(i).getDmgSum();
-            if (DEDInfo.get(i).getName().equals("고립된 영원의 섬")) {
-                Log.v("test", i + "고립된 영원의 섬 마리 획득 : " + DEDInfo.get(i).getCheckCard1());
-                Log.v("test", i + "고립된 영원의 섬 시그나투스 획득 : " + DEDInfo.get(i).getCheckCard0());
-                Log.v("test", i + "고립된 영원의 섬 마리 각성도 : " + DEDInfo.get(i).getAwakeCard1());
-                Log.v("test", i + "고립된 영원의 섬 시그나투스 각성도 : " + DEDInfo.get(i).getAwakeCard0());
-                Log.v("test", i + "고립된 영원의 섬 DMG : " + DEDInfo.get(i).getDmgSum());
-            }
-            Log.v("test", i + "DED DMG : " + DEDInfo.get(i).getDmgSum());
         }
         DEDDmg = Float.parseFloat(df.format(DEDDmg));
         ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(DEDDmg);
-        Log.v("test", "DED DMG Sum : " + DEDDmg);
     }
 
     // DB에 도감을 완성 시킨 경우 true else false
