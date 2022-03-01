@@ -135,16 +135,16 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         holder.txtDEDCardName8.setText(filterDED.get(position).getCard8());
         holder.txtDEDCardName9.setText(filterDED.get(position).getCard9());
         //미 획득 카드는 흑백으로
-        imgDefaultColor(holder.imgDEDCard0, filter, filterDED.get(position).getCheckCard0());
-        imgDefaultColor(holder.imgDEDCard1, filter, filterDED.get(position).getCheckCard1());
-        imgDefaultColor(holder.imgDEDCard2, filter, filterDED.get(position).getCheckCard2());
-        imgDefaultColor(holder.imgDEDCard3, filter, filterDED.get(position).getCheckCard3());
-        imgDefaultColor(holder.imgDEDCard4, filter, filterDED.get(position).getCheckCard4());
-        imgDefaultColor(holder.imgDEDCard5, filter, filterDED.get(position).getCheckCard5());
-        imgDefaultColor(holder.imgDEDCard6, filter, filterDED.get(position).getCheckCard6());
-        imgDefaultColor(holder.imgDEDCard7, filter, filterDED.get(position).getCheckCard7());
-        imgDefaultColor(holder.imgDEDCard8, filter, filterDED.get(position).getCheckCard8());
-        imgDefaultColor(holder.imgDEDCard9, filter, filterDED.get(position).getCheckCard9());
+        imgDefaultColor(holder.imgDEDCard0, filter, filterDED.get(position).getCheckCard0(), position, filterDED.get(position).getCard0());
+        imgDefaultColor(holder.imgDEDCard1, filter, filterDED.get(position).getCheckCard1(), position, filterDED.get(position).getCard1());
+        imgDefaultColor(holder.imgDEDCard2, filter, filterDED.get(position).getCheckCard2(), position, filterDED.get(position).getCard2());
+        imgDefaultColor(holder.imgDEDCard3, filter, filterDED.get(position).getCheckCard3(), position, filterDED.get(position).getCard3());
+        imgDefaultColor(holder.imgDEDCard4, filter, filterDED.get(position).getCheckCard4(), position, filterDED.get(position).getCard4());
+        imgDefaultColor(holder.imgDEDCard5, filter, filterDED.get(position).getCheckCard5(), position, filterDED.get(position).getCard5());
+        imgDefaultColor(holder.imgDEDCard6, filter, filterDED.get(position).getCheckCard6(), position, filterDED.get(position).getCard6());
+        imgDefaultColor(holder.imgDEDCard7, filter, filterDED.get(position).getCheckCard7(), position, filterDED.get(position).getCard7());
+        imgDefaultColor(holder.imgDEDCard8, filter, filterDED.get(position).getCheckCard8(), position, filterDED.get(position).getCard8());
+        imgDefaultColor(holder.imgDEDCard9, filter, filterDED.get(position).getCheckCard9(), position, filterDED.get(position).getCard9());
 
         //없는 카드 안 보이게
         imgVisibility(filterDED.get(position).getCard2(), holder.imgDEDCard2, holder.txtDEDCardName2);
@@ -208,16 +208,16 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card9.setImageResource(getCardImg(filterDED.get(pos).getCard9()));
 
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
-                imgDefaultColor(imgDED_Detail_Card0, filter, filterDED.get(pos).getCheckCard0());
-                imgDefaultColor(imgDED_Detail_Card1, filter, filterDED.get(pos).getCheckCard1());
-                imgDefaultColor(imgDED_Detail_Card2, filter, filterDED.get(pos).getCheckCard2());
-                imgDefaultColor(imgDED_Detail_Card3, filter, filterDED.get(pos).getCheckCard3());
-                imgDefaultColor(imgDED_Detail_Card4, filter, filterDED.get(pos).getCheckCard4());
-                imgDefaultColor(imgDED_Detail_Card5, filter, filterDED.get(pos).getCheckCard5());
-                imgDefaultColor(imgDED_Detail_Card6, filter, filterDED.get(pos).getCheckCard6());
-                imgDefaultColor(imgDED_Detail_Card7, filter, filterDED.get(pos).getCheckCard7());
-                imgDefaultColor(imgDED_Detail_Card8, filter, filterDED.get(pos).getCheckCard8());
-                imgDefaultColor(imgDED_Detail_Card9, filter, filterDED.get(pos).getCheckCard9());
+                imgDefaultColor(imgDED_Detail_Card0, filter, filterDED.get(pos).getCheckCard0(), pos, filterDED.get(pos).getCard0());
+                imgDefaultColor(imgDED_Detail_Card1, filter, filterDED.get(pos).getCheckCard1(), pos, filterDED.get(pos).getCard1());
+                imgDefaultColor(imgDED_Detail_Card2, filter, filterDED.get(pos).getCheckCard2(), pos, filterDED.get(pos).getCard2());
+                imgDefaultColor(imgDED_Detail_Card3, filter, filterDED.get(pos).getCheckCard3(), pos, filterDED.get(pos).getCard3());
+                imgDefaultColor(imgDED_Detail_Card4, filter, filterDED.get(pos).getCheckCard4(), pos, filterDED.get(pos).getCard4());
+                imgDefaultColor(imgDED_Detail_Card5, filter, filterDED.get(pos).getCheckCard5(), pos, filterDED.get(pos).getCard5());
+                imgDefaultColor(imgDED_Detail_Card6, filter, filterDED.get(pos).getCheckCard6(), pos, filterDED.get(pos).getCard6());
+                imgDefaultColor(imgDED_Detail_Card7, filter, filterDED.get(pos).getCheckCard7(), pos, filterDED.get(pos).getCard7());
+                imgDefaultColor(imgDED_Detail_Card8, filter, filterDED.get(pos).getCheckCard8(), pos, filterDED.get(pos).getCard8());
+                imgDefaultColor(imgDED_Detail_Card9, filter, filterDED.get(pos).getCheckCard9(), pos, filterDED.get(pos).getCard9());
 
                 //텍스트 연결
                 //카드 이름
@@ -676,7 +676,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card0, filter, filterDED.get(pos).getCheckCard0());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card0, filter, pos, filterDED.get(pos).getCard0());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard0(cardCheck);                                                        //cardX수집 유무 업데이트(현재 DED array )
@@ -694,7 +694,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card1, filter, filterDED.get(pos).getCheckCard1());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card1, filter, pos, filterDED.get(pos).getCard1());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard1(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -712,7 +712,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card2, filter, filterDED.get(pos).getCheckCard2());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card2, filter, pos, filterDED.get(pos).getCard2());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard2(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -730,7 +730,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card3, filter, filterDED.get(pos).getCheckCard3());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card3, filter, pos, filterDED.get(pos).getCard3());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -748,7 +748,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card4, filter, filterDED.get(pos).getCheckCard4());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card4, filter, pos, filterDED.get(pos).getCard4());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -766,7 +766,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card5, filter, filterDED.get(pos).getCheckCard5());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card5, filter, pos, filterDED.get(pos).getCard5());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -784,7 +784,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card6, filter, filterDED.get(pos).getCheckCard6());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card6, filter, pos, filterDED.get(pos).getCard6());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -802,7 +802,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card7, filter, filterDED.get(pos).getCheckCard7());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card7, filter, pos, filterDED.get(pos).getCard7());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard7());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard7(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -820,7 +820,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card8, filter, filterDED.get(pos).getCheckCard8());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card8, filter, pos, filterDED.get(pos).getCard8());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard8());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard8(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -838,7 +838,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 imgDED_Detail_Card9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int cardCheck = imgGrayScale(imgDED_Detail_Card9, filter, filterDED.get(pos).getCheckCard9());
+                        int cardCheck = imgGrayScale(imgDED_Detail_Card9, filter, pos, filterDED.get(pos).getCard9());
                         cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, cardCheck, filterDED.get(pos).getId());   //cardX수집 유무 업데이트(DED DB)
                         cardDbHelper.UpdateInfoCardCheck(cardCheck, filterDED.get(pos).getCard9());     //카드 수집 유무 업데이트(cardList DB)
                         DEDInfo.get(getIndex(filterDED.get(pos))).setCheckCard9(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
@@ -954,9 +954,9 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     //획득 못한 카드는 흑백이 기본으로 보이도록
-    private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check) {
+    private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check, int position, String name) {
         if (check == 1) {
-            iv.setBackgroundColor(Color.parseColor("#FFB300"));
+            setCardBorder(iv, position, name);
             iv.setColorFilter(null);
         } else {
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -965,17 +965,34 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     //클릭시 카드를 흑백으로 바꿈.(흑백이면 컬러로, 컬러면 흑백으로), 데이터베이스 카드 도감 획득 유무도 변경.(흑백은 0, 컬러는 1)
-    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int check) {
+    private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int position, String name) {
+        int check = 0;
         if (iv.getColorFilter() != filter) {
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
             iv.setColorFilter(filter);
             check = 0;
         } else {
-            iv.setBackgroundColor(Color.parseColor("#FFB300"));
+            setCardBorder(iv, position, name);
             iv.setColorFilter(null);
             check = 1;
         }
         return check;
+    }
+
+    private void setCardBorder(ImageView iv, int position, String name) {
+        if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("전설")) {
+            iv.setBackgroundColor(Color.parseColor("#FFB300"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("영웅")) {
+            iv.setBackgroundColor(Color.parseColor("#5E35B1"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("희귀")) {
+            iv.setBackgroundColor(Color.parseColor("#1E88E5"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("고급")) {
+            iv.setBackgroundColor(Color.parseColor("#7CB342"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("일반")) {
+            iv.setBackgroundColor(Color.parseColor("#A1A1A1"));
+        } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("스페셜")) {
+            iv.setBackgroundColor(Color.parseColor("#DF4F84"));
+        }
     }
 
     // 악추피 도감작을 완성시키면 각성도에 따라 도감의 배경을 각 단계별로 흰색->민트색->초록색->노란색으로 바꿈
