@@ -1,6 +1,6 @@
 package com.example.lostarkcardstatus;
 
-public class CardInfo implements Comparable<CardInfo>{
+public class CardInfo implements Comparable<CardInfo> {
     /*
      * 카드 id 등급별 id 앞 번호
      * 전설 : 1

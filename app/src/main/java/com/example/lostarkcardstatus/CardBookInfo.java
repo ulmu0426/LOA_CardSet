@@ -236,7 +236,7 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
     public int getSubComplete() {
         if (getCompleteCardBook() - getHaveCard() == 1)
             return 1;
-        else if(getCompleteCardBook() - getHaveCard() == 2)
+        else if (getCompleteCardBook() - getHaveCard() == 2)
             return 2;
         else if (getCompleteCardBook() - getHaveCard() == 3)
             return 3;

@@ -18,7 +18,7 @@ public class LoadingActivity extends Activity {
 
         try {
             Thread.sleep(700);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

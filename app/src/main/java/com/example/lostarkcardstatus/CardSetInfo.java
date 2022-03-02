@@ -315,7 +315,7 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int sumCheckCards() {
-        if(checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6 == 7)
+        if (checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6 == 7)
             return 6;
         return checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6;
     }
