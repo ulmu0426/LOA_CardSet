@@ -306,7 +306,7 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         this.favorite = favorite;
     }
 
-    public boolean isCompleteCardBook() {   //세트 효과 발동만 가능한 경우
+    public boolean isCompleteCardSet() {   //세트 효과 발동만 가능한 경우
         if (haveCard <= checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6) {
             return true;
         } else {
