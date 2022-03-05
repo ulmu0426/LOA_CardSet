@@ -1,5 +1,7 @@
 package com.example.lostarkcardstatus;
 
+import android.widget.Toast;
+
 public class CardInfo implements Comparable<CardInfo> {
     /*
      * 카드 id 등급별 id 앞 번호
@@ -40,7 +42,10 @@ public class CardInfo implements Comparable<CardInfo> {
     }
 
     public void setCount(int count) {
-        this.count = count;
+        if (maxHaveValue(awake) < count) {
+            this.count = maxHaveValue(awake);
+        } else
+            this.count = count;
     }
 
     public int getAwake() {
@@ -86,5 +91,22 @@ public class CardInfo implements Comparable<CardInfo> {
     @Override
     public int compareTo(CardInfo cardInfo) {
         return this.getName().compareTo(cardInfo.getName());
+    }
+
+    private int maxHaveValue(int haveAwake) {
+        if (haveAwake == 5) {
+            return 0;
+        } else if (haveAwake == 4) {
+            return 5;
+        } else if (haveAwake == 3) {
+            return 9;
+        } else if (haveAwake == 2) {
+            return 12;
+        } else if (haveAwake == 1) {
+            return 14;
+        } else if (haveAwake == 0) {
+            return 15;
+        } else
+            return 0;
     }
 }

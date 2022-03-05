@@ -16,8 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#000000">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/idTopMenu"
@@ -40,7 +39,7 @@
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
+                    app:srcCompat="@drawable/loa_main_img" />
             </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -58,28 +58,13 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         cardDBHelper = new CardDBHelper(context);
     }
 
-    public interface OnItemClickEventListener {
-        void onItemClick(View a_view, int a_position);
-    }
-
-    private OnItemClickEventListener mItemClickListener;
-
-    public void setOnItemClickListener(OnItemClickEventListener a_listener) {
-        mItemClickListener = a_listener;
-    }
-
-    public ArrayList<CardInfo> getFilterCardInfo() {
-        return this.filterCardInfo;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_cardlist, parent, false);
 
-        return new SettingCardAdapter.ViewHolder(holder, mItemClickListener);
+        return new SettingCardAdapter.ViewHolder(holder);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -111,42 +96,19 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
                     ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
 
-                    EditText etxtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
-                    EditText etxtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+                    TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                    TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                     TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
                     Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
-                    Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer_JustCard);
 
                     txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
                     imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
-                    etxtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
-                    etxtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
+                    txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
+                    txtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
                     txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
 
                     btnOk.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!(Integer.parseInt(etxtJustCardAwake.getText().toString()) == filterCardInfo.get(positionGet).getAwake())) {
-                                filterCardInfo.get(positionGet).setAwake(Integer.parseInt(etxtJustCardAwake.getText().toString()));
-                                cardDBHelper.UpdateInfoCardAwake(filterCardInfo.get(positionGet).getAwake(), filterCardInfo.get(positionGet).getId());
-                                ((MainPage) MainPage.mainContext).cardBookUpdate();
-                                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                                haveDEDUpdate();
-                            }
-                            if (!(Integer.parseInt(etxtJustCardHave.getText().toString()) == filterCardInfo.get(positionGet).getCount())) {
-                                filterCardInfo.get(positionGet).setCount(Integer.parseInt(etxtJustCardHave.getText().toString()));
-                                cardDBHelper.UpdateInfoCardNum(filterCardInfo.get(positionGet).getCount(), filterCardInfo.get(positionGet).getId());
-                                ((MainPage) MainPage.mainContext).cardBookUpdate();
-                                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                                haveDEDUpdate();
-                            }
-
-                            notifyDataSetChanged();
-                            cardInfoDialog.cancel();
-                        }
-                    });
-                    btnCancer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             cardInfoDialog.cancel();
@@ -158,6 +120,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
             }
         });
+
         holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,42 +135,19 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
                 ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
 
-                EditText etxtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
-                EditText etxtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+                TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                 TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
                 Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
-                Button btnCancer = cardInfoDialog.findViewById(R.id.btnCancer_JustCard);
 
                 txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
                 imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
-                etxtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
-                etxtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
+                txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
+                txtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
                 txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
 
                 btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!(Integer.parseInt(etxtJustCardAwake.getText().toString()) == filterCardInfo.get(positionGet).getAwake())) {
-                            filterCardInfo.get(positionGet).setAwake(Integer.parseInt(etxtJustCardAwake.getText().toString()));
-                            cardDBHelper.UpdateInfoCardAwake(filterCardInfo.get(positionGet).getAwake(), filterCardInfo.get(positionGet).getId());
-                            ((MainPage) MainPage.mainContext).cardBookUpdate();
-                            ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                            haveDEDUpdate();
-                        }
-                        if (!(Integer.parseInt(etxtJustCardHave.getText().toString()) == filterCardInfo.get(positionGet).getCount())) {
-                            filterCardInfo.get(positionGet).setCount(Integer.parseInt(etxtJustCardHave.getText().toString()));
-                            cardDBHelper.UpdateInfoCardNum(filterCardInfo.get(positionGet).getCount(), filterCardInfo.get(positionGet).getId());
-                            ((MainPage) MainPage.mainContext).cardBookUpdate();
-                            ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                            haveDEDUpdate();
-                        }
-
-                        notifyDataSetChanged();
-                        cardInfoDialog.cancel();
-                    }
-                });
-                btnCancer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         cardInfoDialog.cancel();
@@ -217,6 +157,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 cardInfoDialog.show();
             }
         });
+
+
         holder.txtAwakeAndHave.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -237,6 +179,13 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
                     Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
                     numberPickerAwake.setValue(filterCardInfo.get(positionGet).getAwake());
+                    numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                            numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                        }
+                    });
+                    numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                     numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
 
                     btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -299,6 +248,13 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
                 Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
                 numberPickerAwake.setValue(filterCardInfo.get(positionGet).getAwake());
+                numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                    }
+                });
+                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                 numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
 
                 btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -384,7 +340,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         private TextView txtAwakeAndHave;
         private CheckBox isGetCheckbox;
 
-        public ViewHolder(@NonNull View itemView, final OnItemClickEventListener mItemClickListener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
             txtName = itemView.findViewById(R.id.txtName);
@@ -443,6 +399,23 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             }
         }
         return index;
+    }
+
+    private int maxHaveValue(int haveAwake) {
+        if (haveAwake == 5) {
+            return 0;
+        } else if (haveAwake == 4) {
+            return 5;
+        } else if (haveAwake == 3) {
+            return 9;
+        } else if (haveAwake == 2) {
+            return 12;
+        } else if (haveAwake == 1) {
+            return 14;
+        } else if (haveAwake == 0) {
+            return 15;
+        } else
+            return 0;
     }
 
     public Filter getFilter() {

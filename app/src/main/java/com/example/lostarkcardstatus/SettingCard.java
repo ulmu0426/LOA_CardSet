@@ -75,13 +75,6 @@ public class SettingCard extends AppCompatActivity {
         rvList = findViewById(R.id.rvList);
 
         adapter = new SettingCardAdapter(context, cardLegend);
-        adapter.setOnItemClickListener(new SettingCardAdapter.OnItemClickEventListener() {
-            @Override
-            public void onItemClick(View a_view, int a_position) {
-                final CardInfo item = cardInfo.get(a_position);
-                Log.v("test", item.getName());
-            }
-        });
         rvList.setAdapter(adapter);
 
         btnL = findViewById(R.id.btnL);

@@ -294,6 +294,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard0());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getCount());
 
                         dialogChangeAwakeAndNum.show();
@@ -333,6 +340,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard1());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getCount());
                         dialogChangeAwakeAndNum.show();
 
@@ -372,6 +386,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard2());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -410,6 +431,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard3());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -448,6 +476,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard4());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -486,6 +521,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard5());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -524,6 +566,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard6());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -562,6 +611,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard7());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -600,6 +656,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard8());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -638,6 +701,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterDED.get(pos).getAwakeCard9());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getCount());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -1029,7 +1099,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         }
     }
 
-
     //악추피 값 합산.
     public void haveDEDUpdate() {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
@@ -1058,38 +1127,21 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return index;
     }
 
-    private int awakeRangeSet(String input) {
-        int result = 0;
-        if (input.isEmpty())
-            result = 0;
-
-        if (Integer.parseInt(input) > 5) {
-            result = 5;
-        } else if (Integer.parseInt(input) < 0) {
-            result = 0;
-        } else {
-            result = Integer.parseInt(input);
-        }
-        return result;
-
-    }
-
-    //카드 각성도에 따라 최대 보유 카드 수량이 달라짐. 다음에 수정 할것.
-    private int numRangeSet(String input) {
-        int result = 0;
-        if (input.isEmpty())
-            result = 0;
-
-        if (Integer.parseInt(input) > 15) {
-            result = 15;
-        } else if (Integer.parseInt(input) < 0) {
-            result = 0;
-        } else {
-            result = Integer.parseInt(input);
-        }
-
-        return result;
-
+    private int maxHaveValue(int haveAwake) {
+        if (haveAwake == 5) {
+            return 0;
+        } else if (haveAwake == 4) {
+            return 5;
+        } else if (haveAwake == 3) {
+            return 9;
+        } else if (haveAwake == 2) {
+            return 12;
+        } else if (haveAwake == 1) {
+            return 14;
+        } else if (haveAwake == 0) {
+            return 15;
+        } else
+            return 0;
     }
 
     private void updateDEDPage() {

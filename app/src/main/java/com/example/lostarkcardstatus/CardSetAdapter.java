@@ -277,6 +277,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard0());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -304,7 +311,6 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard0() + "\n"
                                         + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
-
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getCard0(), awake, filterCardSet.get(pos).getCheckCard0());
                                 favoriteAdapter.setAwake(filterCardSet.get(pos).getName(), awake);
 
@@ -323,6 +329,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard1());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -367,6 +380,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard2());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -411,6 +431,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard3());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -455,6 +482,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard4());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -499,6 +533,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard5());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -542,6 +583,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterCardSet.get(pos).getAwakeCard6());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
+                        numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
                         numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
 
                         dialogAwakeNHaveCard.show();
@@ -896,6 +944,23 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             }
         }
         return index;
+    }
+
+    private int maxHaveValue(int haveAwake) {
+        if (haveAwake == 5) {
+            return 0;
+        } else if (haveAwake == 4) {
+            return 5;
+        } else if (haveAwake == 3) {
+            return 9;
+        } else if (haveAwake == 2) {
+            return 12;
+        } else if (haveAwake == 1) {
+            return 14;
+        } else if (haveAwake == 0) {
+            return 15;
+        } else
+            return 0;
     }
 
     private void setFavoriteImg(ImageView iv, int position, ColorMatrixColorFilter filter) {
