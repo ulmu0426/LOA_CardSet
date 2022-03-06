@@ -48,20 +48,8 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.draw_main);
+        setContentView(R.layout.main_page);
         mainContext = this;
-
-        /*
-        test = findViewById(R.id.test);
-
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Test.class);
-                startActivity(intent);
-            }
-        });
-         */
 
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);
@@ -258,7 +246,6 @@ public class MainPage extends AppCompatActivity {
             }
         }
     }
-
 
     //최초 실행되는 메소드 : cardList 정보를 cardbook_all과 연동
     public void cardBookUpdate() {

@@ -81,218 +81,116 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.txtAwakeAndHave.setText("각성 : " + filterCardInfo.get(position).getAwake() + "  보유 : " + filterCardInfo.get(position).getCount());
         holder.isGetCheckbox.setChecked(isChecked(filterCardInfo.get(position).getGetCard()));
 
-        holder.txtName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        holder.txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
-                    cardInfoDialog.setContentView(R.layout.just_card);
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
 
-                    WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
-                    params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-                    params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                    cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
 
-                    TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
-                    ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
 
-                    TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
-                    TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
-                    TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
-                    Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
-                    txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
-                    imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
-                    txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
-                    txtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
-                    txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
+                        txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
+                        imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
+                        txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
+                        txtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
+                        txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
 
-                    btnOk.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            cardInfoDialog.cancel();
-                        }
-                    });
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
 
-                    cardInfoDialog.show();
+                        cardInfoDialog.show();
                 }
 
+                return false;
             }
         });
 
-        holder.txtName.setOnClickListener(new View.OnClickListener() {
+        holder.txtAwakeAndHave.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
-                cardInfoDialog.setContentView(R.layout.just_card);
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        Dialog awakeHaveDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        awakeHaveDialog.setContentView(R.layout.awake_havecard_change);
 
-                WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
-                params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+                        NumberPicker numberPickerAwake = awakeHaveDialog.findViewById(R.id.numberPickerAwake);
+                        numberPickerAwake.setMinValue(0);
+                        numberPickerAwake.setMaxValue(5);
+                        numberPickerAwake.setWrapSelectorWheel(false);
 
-                TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
-                ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+                        NumberPicker numberPickerHave = awakeHaveDialog.findViewById(R.id.numberPickerHave);
+                        numberPickerHave.setMinValue(0);
+                        numberPickerHave.setMaxValue(15);
+                        numberPickerHave.setWrapSelectorWheel(false);
 
-                TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
-                TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
-
-                TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
-                Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
-
-                txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
-                imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
-                txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
-                txtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
-                txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
-
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        cardInfoDialog.cancel();
-                    }
-                });
-
-                cardInfoDialog.show();
-            }
-        });
-
-
-        holder.txtAwakeAndHave.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    Dialog awakeHaveDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
-                    awakeHaveDialog.setContentView(R.layout.awake_havecard_change);
-
-                    NumberPicker numberPickerAwake = awakeHaveDialog.findViewById(R.id.numberPickerAwake);
-                    numberPickerAwake.setMinValue(0);
-                    numberPickerAwake.setMaxValue(5);
-                    numberPickerAwake.setWrapSelectorWheel(false);
-
-                    NumberPicker numberPickerHave = awakeHaveDialog.findViewById(R.id.numberPickerHave);
-                    numberPickerHave.setMinValue(0);
-                    numberPickerHave.setMaxValue(15);
-                    numberPickerHave.setWrapSelectorWheel(false);
-
-                    Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
-                    Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
-                    numberPickerAwake.setValue(filterCardInfo.get(positionGet).getAwake());
-                    numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                        @Override
-                        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                            numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        }
-                    });
-                    numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                    numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
-
-                    btnCancer.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            awakeHaveDialog.cancel();
-                        }
-                    });
-
-                    btnOK.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int awake = numberPickerAwake.getValue();
-                            int number = numberPickerHave.getValue();
-                            numberPickerAwake.setValue(awake);
-                            numberPickerHave.setValue(number);
-                            //카드 arrayList update
-                            useCardList.get(positionGet).setAwake(awake);
-                            useCardList.get(positionGet).setCount(number);
-                            filterCardInfo.get(positionGet).setAwake(awake);
-                            filterCardInfo.get(positionGet).setCount(number);
-
-                            cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
-                            cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setCount(number);
-                            //카드 DB update
-                            cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
-                            cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());
-
-                            holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
-                            ((MainPage) MainPage.mainContext).cardBookUpdate();
-                            ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                            haveDEDUpdate();
-                            notifyDataSetChanged();
-                            awakeHaveDialog.cancel();
-                        }
-                    });
-
-                    awakeHaveDialog.show();
-
-                }
-            }
-        });
-
-        holder.txtAwakeAndHave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog awakeHaveDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
-                awakeHaveDialog.setContentView(R.layout.awake_havecard_change);
-
-                NumberPicker numberPickerAwake = awakeHaveDialog.findViewById(R.id.numberPickerAwake);
-                numberPickerAwake.setMinValue(0);
-                numberPickerAwake.setMaxValue(5);
-                numberPickerAwake.setWrapSelectorWheel(false);
-
-                NumberPicker numberPickerHave = awakeHaveDialog.findViewById(R.id.numberPickerHave);
-                numberPickerHave.setMinValue(0);
-                numberPickerHave.setMaxValue(15);
-                numberPickerHave.setWrapSelectorWheel(false);
-
-                Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
-                Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
-                numberPickerAwake.setValue(filterCardInfo.get(positionGet).getAwake());
-                numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                    @Override
-                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        Button btnCancer = awakeHaveDialog.findViewById(R.id.btnCancer);
+                        Button btnOK = awakeHaveDialog.findViewById(R.id.btnOK);
+                        numberPickerAwake.setValue(filterCardInfo.get(positionGet).getAwake());
+                        numberPickerAwake.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                            @Override
+                            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
+                            }
+                        });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                    }
-                });
-                numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
+                        numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
 
-                btnCancer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        awakeHaveDialog.cancel();
-                    }
-                });
+                        btnCancer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                awakeHaveDialog.cancel();
+                            }
+                        });
 
-                btnOK.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int awake = numberPickerAwake.getValue();
-                        int number = numberPickerHave.getValue();
-                        numberPickerAwake.setValue(awake);
-                        numberPickerHave.setValue(number);
-                        //카드 arrayList update
-                        useCardList.get(positionGet).setAwake(awake);
-                        useCardList.get(positionGet).setCount(number);
-                        filterCardInfo.get(positionGet).setAwake(awake);
-                        filterCardInfo.get(positionGet).setCount(number);
+                        btnOK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                int awake = numberPickerAwake.getValue();
+                                int number = numberPickerHave.getValue();
+                                numberPickerAwake.setValue(awake);
+                                numberPickerHave.setValue(number);
+                                //카드 arrayList update
+                                useCardList.get(positionGet).setAwake(awake);
+                                useCardList.get(positionGet).setCount(number);
+                                filterCardInfo.get(positionGet).setAwake(awake);
+                                filterCardInfo.get(positionGet).setCount(number);
 
-                        cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
-                        cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setCount(number);
-                        //카드 DB update
-                        cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
-                        cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());
+                                cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
+                                cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setCount(number);
+                                //카드 DB update
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
+                                cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());
 
-                        holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
-                        ((MainPage) MainPage.mainContext).cardBookUpdate();
-                        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                        haveDEDUpdate();
-                        notifyDataSetChanged();
-                        awakeHaveDialog.cancel();
-                    }
-                });
+                                holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
+                                ((MainPage) MainPage.mainContext).cardBookUpdate();
+                                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                                haveDEDUpdate();
+                                notifyDataSetChanged();
+                                awakeHaveDialog.cancel();
+                            }
+                        });
 
-                awakeHaveDialog.show();
+                        awakeHaveDialog.show();
+                }
+                return false;
             }
         });
 

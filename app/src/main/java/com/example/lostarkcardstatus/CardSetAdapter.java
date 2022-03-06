@@ -153,6 +153,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 ImageView imgFavorites = dialog.findViewById(R.id.imgFavorites);
                 TextView txtCardSetName_Detail = dialog.findViewById(R.id.txtCardSetName_Detail);
                 TextView txtCardSetAwake_Detail = dialog.findViewById(R.id.txtCardSetAwake_Detail);
+                TextView txtCardSetNextStep_Detail = dialog.findViewById(R.id.txtCardSetNextStep_Detail);
 
                 ImageView imgCardSetDetail0 = dialog.findViewById(R.id.imgCardSetDetail0);
                 ImageView imgCardSetDetail1 = dialog.findViewById(R.id.imgCardSetDetail1);
@@ -207,6 +208,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                 txtCardSetName_Detail.setText(filterCardSet.get(pos).getName());
                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake() + "각성");
+                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
 
                 txtCardSetName0.setText(filterCardSet.get(pos).getCard0());
                 txtCardSetName1.setText(filterCardSet.get(pos).getCard1());
@@ -316,6 +318,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -367,6 +370,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -418,6 +422,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -469,6 +474,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -520,6 +526,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -570,6 +577,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -621,6 +629,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
 
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
+                                nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -865,6 +874,23 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             cv.setBackgroundColor(Color.parseColor("#D0FFE870"));
         } else
             cv.setBackgroundColor(Color.parseColor("#FFFFFF"));
+    }
+
+    //각 세트 보너스 수치도달까지 남는 각성도 수
+    private void nextSetBonus(TextView txtCardSetNextStep_Detail, CardSetInfo cardSetInfo) {
+        if (cardSetInfo.getNeedAwake0() != 0) {
+            if (cardSetInfo.getNeedAwake0() > cardSetInfo.getHaveAwake()) {   //카드 각성도가 필요카드 최소수보다 작을때
+                txtCardSetNextStep_Detail.setText("다음 효과 까지 : " + (cardSetInfo.getNeedAwake0() - cardSetInfo.getHaveAwake()) + " 남음");
+            } else if (cardSetInfo.getNeedAwake0() <= cardSetInfo.getHaveAwake() && cardSetInfo.getNeedAwake1() > cardSetInfo.getHaveAwake()) {
+                txtCardSetNextStep_Detail.setText("다음 효과 까지 : " + (cardSetInfo.getNeedAwake1() - cardSetInfo.getHaveAwake()) + " 남음");
+            } else if (cardSetInfo.getNeedAwake1() <= cardSetInfo.getHaveAwake() && cardSetInfo.getNeedAwake2() > cardSetInfo.getHaveAwake()) {
+                txtCardSetNextStep_Detail.setText("다음 효과 까지 : " + (cardSetInfo.getNeedAwake2() - cardSetInfo.getHaveAwake()) + " 남음");
+            }else {
+                txtCardSetNextStep_Detail.setVisibility(View.GONE);
+            }
+        }else {
+            txtCardSetNextStep_Detail.setVisibility(View.GONE);
+        }
     }
 
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정

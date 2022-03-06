@@ -21,6 +21,9 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     private String set_bonus5;
     private int haveCard;   //세트 활성화에 필요한 최소 카드 수
     private int haveAwake;
+    private int needAwake0;
+    private int needAwake1;
+    private int needAwake2;
     private int checkCard0;
     private int checkCard1;
     private int checkCard2;
@@ -184,6 +187,30 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     public void setHaveAwake(int haveAwake) {
 
         this.haveAwake = haveAwake;
+    }
+
+    public int getNeedAwake0() {
+        return needAwake0;
+    }
+
+    public void setNeedAwake0(int needAwake0) {
+        this.needAwake0 = needAwake0;
+    }
+
+    public int getNeedAwake1() {
+        return needAwake1;
+    }
+
+    public void setNeedAwake1(int needAwake1) {
+        this.needAwake1 = needAwake1;
+    }
+
+    public int getNeedAwake2() {
+        return needAwake2;
+    }
+
+    public void setNeedAwake2(int needAwake2) {
+        this.needAwake2 = needAwake2;
     }
 
     public int getCheckCard0() {

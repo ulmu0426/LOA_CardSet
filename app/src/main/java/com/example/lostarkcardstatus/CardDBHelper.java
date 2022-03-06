@@ -128,6 +128,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
     private static final String CARDSET_SETBONUS5 = "set_bonus5";               //카드세트 효과 6번째
     private static final String CARDSET_HAVECARD = "haveCard";                  //카드세트 현재 활성화된 카드 수
     private static final String CARDSET_HAVEAWAKE = "haveAwake";                //카드세트의 현재 각성 합계
+    private static final String CARDSET_NEEDAWAKE0 = "needAwake0";              //0번째 효과발동에 필요한 각성도
+    private static final String CARDSET_NEEDAWAKE1 = "needAwake1";              //1번째 효과발동에 필요한 각성도
+    private static final String CARDSET_NEEDAWAKE2 = "needAwake2";              //2번째 효과발동에 필요한 각성도
     private static final String CARDSET_COLUMN_CARD0_CHECK = "checkCard0";                 //카드1 획득유무
     private static final String CARDSET_COLUMN_CARD1_CHECK = "checkCard1";                 //카드2 획득유무
     private static final String CARDSET_COLUMN_CARD2_CHECK = "checkCard2";                 //카드3 획득유무
@@ -507,6 +510,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 String set_bonus5 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS5));
                 int haveCard = cursor.getInt(cursor.getColumnIndex(CARDSET_HAVECARD));
                 int haveAwake = cursor.getInt(cursor.getColumnIndex(CARDSET_HAVEAWAKE));
+                int needAwake0 = cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE0));
+                int needAwake1 = cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE1));
+                int needAwake2 = cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE2));
                 int checkCard0 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD0_CHECK));
                 int checkCard1 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD1_CHECK));
                 int checkCard2 = cursor.getInt(cursor.getColumnIndex(CARDSET_COLUMN_CARD2_CHECK));
@@ -542,6 +548,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 cardSetInfo.setSet_bonus5(set_bonus5);
                 cardSetInfo.setHaveCard(haveCard);
                 cardSetInfo.setHaveAwake(haveAwake);
+                cardSetInfo.setNeedAwake0(needAwake0);
+                cardSetInfo.setNeedAwake1(needAwake1);
+                cardSetInfo.setNeedAwake2(needAwake2);
                 cardSetInfo.setCheckCard0(checkCard0);
                 cardSetInfo.setCheckCard1(checkCard1);
                 cardSetInfo.setCheckCard2(checkCard2);

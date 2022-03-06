@@ -181,8 +181,10 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                 TextView txtDEDCardBookName = dialogDEDDetail.findViewById(R.id.txtDEDCardBookName);
                 TextView txtDED_AwakeValue = dialogDEDDetail.findViewById(R.id.txtDED_AwakeValue);
+                TextView txtDED_NextStep = dialogDEDDetail.findViewById(R.id.txtDED_NextStep);
                 txtDEDCardBookName.setText(filterDED.get(pos).getName());
                 txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
+                nextDED(txtDED_NextStep, filterDED.get(pos));
 
                 ImageView imgDED_Detail_Card0 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card0);
                 ImageView imgDED_Detail_Card1 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card1);
@@ -327,8 +329,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -373,8 +375,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -418,8 +420,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -463,8 +465,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -508,8 +510,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -553,8 +555,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -598,8 +600,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -643,8 +645,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -688,8 +690,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -733,8 +735,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
+                                nextDED(txtDED_NextStep, filterDED.get(pos));
 
-                                Toast.makeText(context, "각성도, 카드 보유 숫자 수정 완료.", Toast.LENGTH_LONG).show();
                                 updateDEDPage();
                                 notifyDataSetChanged();
                                 dialogChangeAwakeAndNum.cancel();
@@ -1078,6 +1080,20 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 cv.setBackgroundColor(Color.parseColor("#C5BEFF"));//연보라 - 전부수집
         } else
             cv.setBackgroundColor(Color.parseColor("#FFFFFF"));
+    }
+
+    //다음 악추피 도달까지 남은 각성도 수
+    private void nextDED(TextView txtDED_NextStep, DemonExtraDmgInfo demonExtraDmgInfo) {
+        if (demonExtraDmgInfo.getAwake_sum0() > demonExtraDmgInfo.getHaveAwake()) {
+            txtDED_NextStep.setText("다음 활성도까지 : " + (demonExtraDmgInfo.getAwake_sum0() - demonExtraDmgInfo.getHaveAwake()) + " 남음");
+        } else if (demonExtraDmgInfo.getAwake_sum0() <= demonExtraDmgInfo.getHaveAwake() && demonExtraDmgInfo.getAwake_sum1() > demonExtraDmgInfo.getHaveAwake()) {
+            txtDED_NextStep.setText("다음 활성도까지 : " + (demonExtraDmgInfo.getAwake_sum1() - demonExtraDmgInfo.getHaveAwake()) + " 남음");
+        } else if (demonExtraDmgInfo.getAwake_sum1() <= demonExtraDmgInfo.getHaveAwake() && demonExtraDmgInfo.getAwake_sum2() > demonExtraDmgInfo.getHaveAwake()) {
+            txtDED_NextStep.setText("다음 활성도까지 : " + (demonExtraDmgInfo.getAwake_sum2() - demonExtraDmgInfo.getHaveAwake()) + " 남음");
+        } else {
+            txtDED_NextStep.setVisibility(View.GONE);
+        }
+
     }
 
     // DB에 도감을 완성 시킨 경우 true else false
