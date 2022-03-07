@@ -35,11 +35,11 @@
                     app:srcCompat="@drawable/fix01menu" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="3dp"
-                    app:srcCompat="@drawable/loa_main_img" />
+                    app:srcCompat="@drawable/loaicon" />
             </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -304,6 +304,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/black" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:id="@+id/btnMakeInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="문의메일"
+                    android:textAlignment="center"
+                    android:textColor="#E8E8E8"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toTopOf="@+id/txtEmail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="kcor24@naver.com"
+                    android:textAlignment="center"
+                    android:textColor="#E8E8E8"
+                    android:textSize="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
