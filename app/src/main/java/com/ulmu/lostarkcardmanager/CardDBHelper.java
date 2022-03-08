@@ -275,6 +275,12 @@ public class CardDBHelper extends SQLiteOpenHelper {
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + ", activation = " + setActivation + " WHERE name = '" + whereName + "'");
     }
+    //DED 에서 카드 값 변경시 즐겨찾기 리스트에서 세트 값만 변동
+    public void UpdateInfoFavoriteList(int setAwake, String whereName) {
+        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
+        updateColumInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + " WHERE name = '" + whereName + "'");
+    }
 
     @SuppressLint("Range")
     public ArrayList<CardInfo> getCardInfo_All() {     //모든카드 리스트 가져오기

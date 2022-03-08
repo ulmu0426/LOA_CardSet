@@ -1,6 +1,7 @@
 package com.ulmu.lostarkcardmanager;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FavoriteCardSetInfo item = activationFavoriteCardSet.get(position);
 
-        String cardSetName = cardSetMainImg(item.getName());
+        String cardSetName = cardSetMainImg(activationFavoriteCardSet.get(position).getName());
 
         holder.imgFavoriteCardSet.setImageResource(getCardImg(cardSetName));
-        holder.txtFavoriteCardSetName.setText(item.getName());
-        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + item.getAwake());
+        holder.txtFavoriteCardSetName.setText(activationFavoriteCardSet.get(position).getName());
+        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + activationFavoriteCardSet.get(position).getAwake());
 
     }
 
@@ -96,13 +97,28 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         notifyItemRemoved(position);
     }
 
+    //CardSet에서 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
     public void setAwake(String awakeSetName, int changeAwake) {
         for (int i = 0; i < activationFavoriteCardSet.size(); i++) {
             if (activationFavoriteCardSet.get(i).getName().equals(awakeSetName)) {
                 activationFavoriteCardSet.get(i).setAwake(changeAwake);
-                notifyDataSetChanged();
+                break;
             }
         }
+        notifyDataSetChanged();
+    }
+
+    //DED에서 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
+    public void setAwake(ArrayList<CardSetInfo> awakeSetName) {
+        for (int i = 0; i < awakeSetName.size(); i++) {
+            for (int j = 0; j < activationFavoriteCardSet.size(); j++) {
+                if (activationFavoriteCardSet.get(j).getName().equals(awakeSetName.get(i).getName())) {
+                    activationFavoriteCardSet.get(j).setAwake(awakeSetName.get(i).getHaveAwake());
+                    break;
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     private int getCardImg(String cardName) {
