@@ -212,7 +212,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 imgVisibility(filterCardSet.get(pos).getCard6(), imgCardSetDetail6, txtCardSetName6, txtHaveAwakeHaveCard6);
 
                 txtCardSetName_Detail.setText(filterCardSet.get(pos).getName());
-                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake() + "각성");
+                txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
 
                 txtCardSetName0.setText(filterCardSet.get(pos).getCard0());
@@ -253,7 +253,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     cardSetInfo.get(getIndex(filterCardSet.get(pos))).setFavorite(favoriteCardSetInfo.get(i).getName());
                                     filterCardSet.get(pos).setFavorite(favoriteCardSetInfo.get(i).getName());
                                     favoriteCardSetInfo.get(i).setActivation(check);
-                                    cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    favoriteCardSetInfo.get(i).setAwake(cardSetInfo.get(getIndex(filterCardSet.get(pos))).getHaveAwake());
+                                    cardDbHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.get(pos).getAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
                                     favoriteAdapter.updateActivationFavoriteCardSet();
                                 }

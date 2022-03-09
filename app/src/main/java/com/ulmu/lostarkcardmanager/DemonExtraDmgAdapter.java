@@ -1447,7 +1447,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     //즐겨찾기 리스트 및 DB 갱신
     private void updateAwakeFavoriteCardSetInfoAndDB(ArrayList<CardSetInfo> changeAwakeCardName) {
-        if (changeAwakeCardName.get(0).equals("")) //카드세트 하나도 없을시 갱신없음
+        if (changeAwakeCardName.isEmpty()) //카드세트 하나도 없을시 갱신없음
             return;
 
         for (int i = 0; i < changeAwakeCardName.size(); i++) {
