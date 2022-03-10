@@ -108,7 +108,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    //DED에서 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
+    //DED에서 FavoriteList의 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
     public void setAwake(ArrayList<CardSetInfo> awakeSetName) {
         for (int i = 0; i < awakeSetName.size(); i++) {
             for (int j = 0; j < activationFavoriteCardSet.size(); j++) {

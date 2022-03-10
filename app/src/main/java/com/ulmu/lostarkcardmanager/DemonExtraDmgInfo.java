@@ -385,6 +385,22 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         this.awakeCard9 = awakeCard9;
     }
 
+    //다음 완성도가 가까운 순서대로 정렬을 위해 필요한 메소드
+    public int fastComplete() {
+        if (getHaveCard() != getCompleteDEDBook()) {  //카드 미획득시 우선순위 하위
+            return 999;
+        }
+        if (getHaveAwake() < getAwake_sum0()) {
+            return getAwake_sum0() - getHaveAwake();
+        } else if (getHaveAwake() >= getAwake_sum0() && getHaveAwake() < getAwake_sum1()) {
+            return getAwake_sum1() - getHaveAwake();
+        } else if (getHaveAwake() >= getAwake_sum1() && getHaveAwake() < getAwake_sum2()) {
+            return getAwake_sum2() - getHaveAwake();
+        } else {    //all Complete의 경우 우선순위 최하위
+            return 1000;
+        }
+    }
+
     @Override
     public int compareTo(DemonExtraDmgInfo o) {
         return this.getName().compareTo(o.getName());

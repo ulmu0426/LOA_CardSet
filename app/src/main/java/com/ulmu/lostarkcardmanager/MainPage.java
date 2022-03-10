@@ -98,8 +98,6 @@ public class MainPage extends AppCompatActivity {
         favoriteAdapter = new FavoriteAdapter(mainContext);
         rv.setAdapter(favoriteAdapter);
 
-        //test();
-
         imgBtnMenu_Main = (ImageView) findViewById(R.id.imgBtnMenu_Main);
         drawerLayout_Main = (DrawerLayout) findViewById(R.id.drawerLayout_Main);
         imgBtnMenu_Main.setOnClickListener(new View.OnClickListener() {

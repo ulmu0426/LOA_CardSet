@@ -34,6 +34,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
     private boolean checkDefault = true;
     private boolean checkName = false;
     private boolean checkCompleteness = false;
+    private boolean checkFastCompleteness = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,20 +110,34 @@ public class DemonExtraDmgPage extends AppCompatActivity {
                                 checkDefault = true;
                                 checkName = false;
                                 checkCompleteness = false;
+                                checkFastCompleteness = false;
 
                                 return true;
+
                             case R.id.nameSort:
                                 adapter.getNameSort();
 
                                 checkDefault = false;
                                 checkName = true;
                                 checkCompleteness = false;
+                                checkFastCompleteness = false;
                                 return true;
+
                             case R.id.completenessSort:
                                 adapter.getCompletenessSort();
                                 checkDefault = false;
                                 checkName = false;
                                 checkCompleteness = true;
+                                checkFastCompleteness = false;
+
+                                return true;
+
+                            case R.id.fastCompletenessSort:
+                                adapter.getFastCompletenessSort();
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = false;
+                                checkFastCompleteness = true;
 
                                 return true;
                         }
@@ -172,5 +187,8 @@ public class DemonExtraDmgPage extends AppCompatActivity {
 
     public boolean checkCompleteness() {
         return checkCompleteness;
+    }
+
+    public boolean checkFastCompleteness() {return checkFastCompleteness;
     }
 }
