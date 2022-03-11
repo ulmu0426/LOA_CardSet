@@ -245,6 +245,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard("", filterCardSet.get(pos).getId());
                                     favoriteAdapter.removeItem(favoriteCardSetInfo.get(i));
+                                    if (cardSetPage.checkFavorite())
+                                        getFavoriteSort();
                                 }
                             }
                         } else {         //즐찾이 되면
@@ -257,6 +259,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     cardDbHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.get(pos).getAwake(), check, favoriteCardSetInfo.get(i).getName());
                                     cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
                                     favoriteAdapter.updateActivationFavoriteCardSet();
+                                    if (cardSetPage.checkFavorite())
+                                        getFavoriteSort();
                                 }
                             }
                         }
@@ -1212,6 +1216,32 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             completePartRemove();
         } else {
             filterCardSet = completenessSortList;
+        }
+
+        notifyDataSetChanged();
+    }
+
+    public void getFavoriteSort() {
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+            @Override
+            public int compare(CardSetInfo o1, CardSetInfo o2) {
+                if (o1.getId() < o2.getId()) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+            @Override
+            public int compare(CardSetInfo o1, CardSetInfo o2) {
+                if (o1.favoriteCheck() <= o2.favoriteCheck()) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
         }
 
         notifyDataSetChanged();

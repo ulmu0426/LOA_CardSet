@@ -345,6 +345,14 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         return checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6;
     }
 
+    //즐겨찾기 순 정렬에서 Collections.sort 를 위해 필요한 메소드
+    public int favoriteCheck(){
+        if(favorite.isEmpty())
+            return 1;
+        else
+            return 0;
+    }
+
     @Override
     public int compareTo(CardSetInfo cardSetInfo) {
         return this.getName().compareTo(cardSetInfo.getName());

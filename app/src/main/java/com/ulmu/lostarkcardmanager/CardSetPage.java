@@ -33,6 +33,7 @@ public class CardSetPage extends AppCompatActivity {
     private boolean checkDefault = true;
     private boolean checkName = false;
     private boolean checkCompleteness = false;
+    private boolean checkFavorite = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,20 +109,35 @@ public class CardSetPage extends AppCompatActivity {
                                 checkDefault = true;
                                 checkName = false;
                                 checkCompleteness = false;
+                                checkFavorite = false;
 
                                 return true;
+
                             case R.id.nameSort:
                                 adapter.getNameSort();
 
                                 checkDefault = false;
                                 checkName = true;
                                 checkCompleteness = false;
+                                checkFavorite = false;
+
                                 return true;
+
                             case R.id.completenessSort:
                                 adapter.getCompletenessSort();
                                 checkDefault = false;
                                 checkName = false;
                                 checkCompleteness = true;
+                                checkFavorite = false;
+
+                                return true;
+
+                            case R.id.favoriteSort:
+                                adapter.getFavoriteSort();
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = false;
+                                checkFavorite = true;
 
                                 return true;
                         }
@@ -160,5 +176,9 @@ public class CardSetPage extends AppCompatActivity {
 
     public boolean checkCompleteness() {
         return checkCompleteness;
+    }
+
+    public boolean checkFavorite() {
+        return checkFavorite;
     }
 }

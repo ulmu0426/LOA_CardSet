@@ -101,6 +101,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(DemonExtraDmgPage.this, imgBtnDEDSortMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
+                popupMenu.getMenu().removeItem(R.id.favoriteSort);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
