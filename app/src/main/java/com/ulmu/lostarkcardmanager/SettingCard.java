@@ -60,6 +60,10 @@ public class SettingCard extends AppCompatActivity {
     private ConstraintLayout cvCardList;
     private EditText editSearchCard;
 
+    private boolean checkDefault = true;
+    private boolean checkName = true;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,6 +201,34 @@ public class SettingCard extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 adapter.getFilter().filter(s);
+                if (s.length() == 0) {
+                    settingCardList();
+                    if (btnL.getTypeface() == Typeface.DEFAULT_BOLD) {
+                        adapter = new SettingCardAdapter(context, cardLegend);
+                        rvList.setAdapter(adapter);
+                    }
+                    if (btnE.getTypeface() == Typeface.DEFAULT_BOLD) {
+                        adapter = new SettingCardAdapter(context, cardEpic);
+                        rvList.setAdapter(adapter);
+                    }
+                    if (btnR.getTypeface() == Typeface.DEFAULT_BOLD) {
+                        adapter = new SettingCardAdapter(context, cardRare);
+                        rvList.setAdapter(adapter);
+                    }
+                    if (btnU.getTypeface() == Typeface.DEFAULT_BOLD) {
+                        adapter = new SettingCardAdapter(context, cardUncommon);
+                        rvList.setAdapter(adapter);
+                    }
+                    if (btnC.getTypeface() == Typeface.DEFAULT_BOLD) {
+                        adapter = new SettingCardAdapter(context, cardCommon);
+                        rvList.setAdapter(adapter);
+                    }
+                    if (btnS.getTypeface() == Typeface.DEFAULT_BOLD) {
+                        adapter = new SettingCardAdapter(context, cardSpecial);
+                        rvList.setAdapter(adapter);
+                    }
+                }
+
             }
 
             @Override
@@ -219,11 +251,15 @@ public class SettingCard extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
                                 adapter.getDefaultSort();
+                                checkDefault = true;
+                                checkName = false;
 
                                 return true;
 
                             case R.id.nameSort:
                                 adapter.getNameSort();
+                                checkDefault = false;
+                                checkName = true;
 
                                 return true;
 
@@ -335,5 +371,13 @@ public class SettingCard extends AppCompatActivity {
     private void setBtnSettingBold(TextView btnBold) {
         btnBold.setTextSize(20);
         btnBold.setTypeface(Typeface.DEFAULT_BOLD);
+    }
+
+    public boolean isCheckDefault() {
+        return checkDefault;
+    }
+
+    public boolean isCheckName() {
+        return checkName;
     }
 }

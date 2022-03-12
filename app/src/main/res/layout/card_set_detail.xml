@@ -33,19 +33,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:autoSizeTextType="uniform"
         android:text="각성 합계 : 00"
         android:textSize="15dp"
-        android:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCardSetName_Detail" />
+
     <TextView
         android:id="@+id/txtCardSetNextStep_Detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
+        android:autoSizeTextType="uniform"
         android:text="다음 효과 까지 : 00 남음"
         android:textSize="15dp"
-        android:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCardSetAwake_Detail" />
 
@@ -200,45 +202,45 @@
                 android:id="@+id/txtHaveAwakeHaveCard0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
                 android:text="각성 : 0\n보유 : 00"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtHaveAwakeHaveCard1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
                 android:text="각성 : 0\n보유 : 00"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtHaveAwakeHaveCard2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
                 android:text="각성 : 0\n보유 : 00"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtHaveAwakeHaveCard3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
                 android:text="각성 : 0\n보유 : 00"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtHaveAwakeHaveCard4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
                 android:text="각성 : 0\n보유 : 00"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
                 android:textSize="15dp" />
         </TableRow>
 

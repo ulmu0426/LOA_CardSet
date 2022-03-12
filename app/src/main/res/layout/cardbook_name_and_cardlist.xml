@@ -9,9 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
+        android:autoSizeTextType="uniform"
         android:text="카드 도감 이름"
         android:textSize="20dp"
-        android:autoSizeTextType="uniform"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,17 +22,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
+        android:autoSizeTextType="uniform"
         android:text="특성 + 0"
         android:textSize="15dp"
-        android:autoSizeTextType="uniform"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -77,9 +77,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -93,9 +94,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -109,9 +111,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -125,7 +128,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
 
@@ -140,46 +143,46 @@
                     android:id="@+id/txtCardBookName_CardName0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
             </TableRow>
 
             <TableRow android:layout_marginTop="30dp">
@@ -197,9 +200,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -213,9 +217,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -229,9 +234,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -245,9 +251,10 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -261,7 +268,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
 
                 </LinearLayout>
             </TableRow>
@@ -272,46 +279,46 @@
                     android:id="@+id/txtCardBookName_CardName5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtCardBookName_CardName9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="카드 이름"
-                    android:textSize="15dp"
                     android:autoSizeTextType="uniform"
-                    android:textAlignment="center" />
+                    android:text="카드 이름"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
             </TableRow>
 
         </TableLayout>

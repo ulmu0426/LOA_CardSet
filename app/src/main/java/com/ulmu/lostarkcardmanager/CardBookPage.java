@@ -121,6 +121,8 @@ public class CardBookPage extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(CardBookPage.this, imgBtnCardBookSortMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
+                popupMenu.getMenu().removeItem(R.id.fastCompletenessSort);
+                popupMenu.getMenu().removeItem(R.id.favoriteSort);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {

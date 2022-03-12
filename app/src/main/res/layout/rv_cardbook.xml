@@ -220,8 +220,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -234,8 +234,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -248,8 +248,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -262,8 +262,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -276,8 +276,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -290,8 +290,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -304,8 +304,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -318,8 +318,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -332,8 +332,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -346,8 +346,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="카드이름"
-                        android:textSize="10dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
             </TableRow>

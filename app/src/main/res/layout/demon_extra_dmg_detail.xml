@@ -29,6 +29,7 @@
         android:id="@+id/txtDED_NextStep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="20dp"
         android:text="다음 활성도까지 : 0 남음"
         app:layout_constraintRight_toRightOf="parent"
@@ -37,8 +38,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -83,7 +84,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,7 +100,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
 
@@ -116,7 +117,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
 
@@ -133,7 +134,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
 
@@ -179,46 +180,46 @@
                     android:textAlignment="center" />
             </TableRow>
 
-            <TableRow>
+            <TableRow android:layout_marginTop="4dp">
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
             </TableRow>
 
@@ -239,7 +240,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -255,7 +256,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -271,7 +272,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -287,7 +288,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -303,7 +304,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto"/>
+                        app:srcCompat="@drawable/card_common_alberto" />
                 </LinearLayout>
 
             </TableRow>
@@ -346,46 +347,46 @@
                     android:textAlignment="center" />
             </TableRow>
 
-            <TableRow>
+            <TableRow android:layout_marginTop="4dp">
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/txtDED_Detail_CardAwakeHaveCard9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="각성 : 0\n보유 : 0"
                     android:autoSizeTextType="uniform"
+                    android:text="각성 : 0\n보유 : 0"
                     android:textAlignment="center" />
             </TableRow>
         </TableLayout>

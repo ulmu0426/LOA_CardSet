@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clCardList"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:id="@+id/llImg"
@@ -43,7 +43,7 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/llImg"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtAwakeAndHave"
@@ -52,8 +52,8 @@
         android:layout_height="60dp"
         android:layout_marginEnd="10dp"
         android:background="@null"
-        android:paddingHorizontal="4dp"
         android:focusable="true"
+        android:paddingHorizontal="4dp"
         android:text="각성 : 0  보유 : 0"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,5 +81,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llImg"/>
+        app:layout_constraintTop_toBottomOf="@+id/llImg" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -310,8 +310,8 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:id="@+id/btnMakeInfo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="문의메일"
@@ -321,19 +321,20 @@
                     app:layout_constraintBottom_toTopOf="@+id/txtEmail"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
                 <TextView
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:id="@+id/txtEmail"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="kcor24@naver.com"
-                    android:textAllCaps="false"
                     android:textAlignment="center"
+                    android:textAllCaps="false"
                     android:textColor="#E8E8E8"
                     android:textSize="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -100,6 +100,7 @@ public class CardSetPage extends AppCompatActivity {
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
                 popupMenu.getMenu().removeItem(R.id.fastCompletenessSort);
+                popupMenu.getMenu().getItem(2).setTitle("세트 완성도 순 정렬");
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
