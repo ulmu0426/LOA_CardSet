@@ -343,8 +343,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -396,8 +399,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -448,8 +454,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -500,8 +509,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -552,8 +564,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -604,8 +619,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -656,8 +674,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -708,8 +729,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -760,8 +784,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -812,8 +839,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
-                                if(DEDPage.checkFastCompleteness()){
+                                if (DEDPage.checkFastCompleteness()) {
                                     getFastCompletenessSort();
+                                }
+                                if (DEDPage.checkCompleteness()) {
+                                    getCompletenessSort();
                                 }
 
                                 updateDEDPage();
@@ -838,8 +868,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
 
@@ -862,8 +895,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -885,8 +921,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -908,8 +947,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -931,8 +973,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -954,8 +999,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -977,8 +1025,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -1000,8 +1051,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -1023,8 +1077,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -1046,8 +1103,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                         holder.txtDEDSumValue.setText("악마 계열 피해량 증가 합 : + " + filterDED.get(pos).getDmgSum() + "%");
                         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
-                        if(DEDPage.checkFastCompleteness()){
+                        if (DEDPage.checkFastCompleteness()) {
                             getFastCompletenessSort();
+                        }
+                        if (DEDPage.checkCompleteness()) {
+                            getCompletenessSort();
                         }
 
                         updateDEDPage();
@@ -1406,57 +1466,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         Collections.sort(tempDEDList);    //이름 순 정렬
         nameSortList.addAll(tempDEDList);
 
-        //완성도 순 정렬
-
-        for (int i = 0; i < tempDEDList.size(); i++) {       //완성된 도감 추가
-            if (isAllCompleteDED(tempDEDList.get(i))) {
-                completenessSortList.add(tempDEDList.get(i));
-            }
-        }
-
-        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
-            @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //필요 카드수가 가장 적은 순서대로 정렬
-                if (((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake()) < ((o2.getCompleteDEDBook() * 5) - o2.getHaveAwake())) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-
-        for (int i = 0; i < tempDEDList.size(); i++) {
-            if (isCompleteDED(tempDEDList.get(i)) && !isAllCompleteDED(tempDEDList.get(i))) {   //도감은 완성, 각성도 최대가 아닌 미완성 도감들 추가
-                completenessSortList.add(tempDEDList.get(i));
-            }
-        }
-
-        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
-            @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //도감 완성이 안 된 경우
-                if (o1.getCompleteDEDBook() - o1.getHaveCard() < o2.getCompleteDEDBook() - o2.getHaveCard()) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-
-        for (int i = 0; i < tempDEDList.size(); i++) {    //도감완성이 안된 경우 추가.
-            if (!isCompleteDED(tempDEDList.get(i))) {
-                completenessSortList.add(tempDEDList.get(i));
-            }
-        }
-
-        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
-            @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
-                if (o1.fastComplete() < o2.fastComplete()) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-        fastCompletenessSortList.addAll(tempDEDList);
-
         filterDED = defaultSortList;
     }
 
@@ -1491,11 +1500,50 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getCompletenessSort() {
+        //완성도 순 정렬
+
+        for (int i = 0; i < filterDED.size(); i++) {       //완성된 도감 추가
+            if (isAllCompleteDED(filterDED.get(i))) {
+                completenessSortList.add(filterDED.get(i));
+            }
+        }
+
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //필요 카드수가 가장 적은 순서대로 정렬
+                if (((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake()) < ((o2.getCompleteDEDBook() * 5) - o2.getHaveAwake())) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+
+        for (int i = 0; i < filterDED.size(); i++) {
+            if (isCompleteDED(filterDED.get(i)) && !isAllCompleteDED(filterDED.get(i))) {   //도감은 완성, 각성도 최대가 아닌 미완성 도감들 추가
+                completenessSortList.add(filterDED.get(i));
+            }
+        }
+
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //도감 완성이 안 된 경우
+                if (o1.getCompleteDEDBook() - o1.getHaveCard() < o2.getCompleteDEDBook() - o2.getHaveCard()) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
+
+        for (int i = 0; i < filterDED.size(); i++) {    //도감완성이 안된 경우 추가.
+            if (!isCompleteDED(filterDED.get(i))) {
+                completenessSortList.add(filterDED.get(i));
+            }
+        }
+
         filterDED = completenessSortList;
+
         if (DEDPage.completeChecked()) {
             completePartRemove();
-        } else {
-            filterDED = completenessSortList;
         }
 
         notifyDataSetChanged();

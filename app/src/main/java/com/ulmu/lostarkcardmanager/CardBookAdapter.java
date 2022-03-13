@@ -260,6 +260,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         //업데이트 및 갱신
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -277,6 +279,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard1())).setGetCard(cardCheck);
                         //카드리스트 갱신
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -294,6 +298,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard2())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -311,6 +317,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard3())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -328,6 +336,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard4())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -345,6 +355,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard5())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -362,6 +374,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard6())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -379,6 +393,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard7())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -396,6 +412,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard8())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -413,6 +431,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard9())).setGetCard(cardCheck);             //카드리스트 갱신
 
                         updateCardBookAndMain();
+                        if (cardBook_page.checkCompleteness())
+                            getCompletenessSort();
                         if (cardBook_page.completeChecked())
                             completePartRemove();
                         notifyDataSetChanged();
@@ -687,9 +707,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         filterCardBook = defaultSortList;
         if (cardBook_page.completeChecked()) {
             completePartRemove();
-        } else {
-            filterCardBook = defaultSortList;
         }
+
         notifyDataSetChanged();
     }
 
@@ -697,19 +716,25 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         filterCardBook = nameSortList;
         if (cardBook_page.completeChecked()) {
             completePartRemove();
-        } else {
-            filterCardBook = nameSortList;
         }
+
         notifyDataSetChanged();
     }
 
     public void getCompletenessSort() {  //완성도 순 정렬
-        filterCardBook = completenessSortList;
+        Collections.sort(filterCardBook, new Comparator<CardBookInfo>() {   //완성도 순 정렬 리스트
+            @Override
+            public int compare(CardBookInfo o1, CardBookInfo o2) {
+                if (o1.getSubComplete() < o2.getSubComplete()) {
+                    return -1;
+                } else
+                    return 1;
+            }
+        });
         if (cardBook_page.completeChecked()) {
             completePartRemove();
-        } else {
-            filterCardBook = completenessSortList;
         }
+
         notifyDataSetChanged();
     }
 

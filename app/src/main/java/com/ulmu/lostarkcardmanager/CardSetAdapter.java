@@ -330,6 +330,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -382,6 +384,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -434,6 +438,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -486,6 +492,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -538,6 +546,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -589,6 +599,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -641,6 +653,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                                 nextSetBonus(txtCardSetNextStep_Detail, filterCardSet.get(pos));
+                                if (cardSetPage.checkCompleteness())
+                                    getCompletenessSort();
                                 if (cardSetPage.completeChecked())
                                     completePartRemove();
 
@@ -665,6 +679,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -685,6 +701,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -706,6 +724,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -727,6 +747,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -748,6 +770,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -769,6 +793,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -790,6 +816,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
+                        if (cardSetPage.checkCompleteness())
+                            getCompletenessSort();
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -1150,13 +1178,36 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         Collections.sort(tempSetList);    //이름순 정렬
         nameSortList.addAll(tempSetList);
 
-        for (int i = 0; i < tempSetList.size(); i++) {    //완성 카드세트 추가
-            if (isAllCompleteCardSet(tempSetList.get(i))) {
-                completenessSortList.add(tempSetList.get(i));
+        filterCardSet = defaultSortList;
+
+    }
+
+    public void getDefaultSort() {
+        filterCardSet = defaultSortList;
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
+        }
+
+        notifyDataSetChanged();
+    }
+
+    public void getNameSort() {
+        filterCardSet = nameSortList;
+        if (cardSetPage.completeChecked()) {
+            completePartRemove();
+        }
+
+        notifyDataSetChanged();
+    }
+
+    public void getCompletenessSort() {
+        for (int i = 0; i < filterCardSet.size(); i++) {    //완성 카드세트 추가
+            if (isAllCompleteCardSet(filterCardSet.get(i))) {
+                completenessSortList.add(filterCardSet.get(i));
             }
         }
 
-        Collections.sort(tempSetList, new Comparator<CardSetInfo>() {
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
                 if ((o1.getHaveCard() * 5) - o1.getHaveAwake() < (o2.getHaveCard() * 5) - o2.getHaveAwake()) {  //완성도가 높은 순서대로(각성도 기준) 정렬
@@ -1166,13 +1217,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             }
         });
 
-        for (int i = 0; i < tempSetList.size(); i++) {
-            if (!isAllCompleteCardSet(tempSetList.get(i)) && tempSetList.get(i).isCompleteCardSet()) { //풀각x,세트효과 가능
-                completenessSortList.add(tempSetList.get(i));
+        for (int i = 0; i < filterCardSet.size(); i++) {
+            if (!isAllCompleteCardSet(filterCardSet.get(i)) && filterCardSet.get(i).isCompleteCardSet()) { //풀각x,세트효과 가능
+                completenessSortList.add(filterCardSet.get(i));
             }
         }
 
-        Collections.sort(tempSetList, new Comparator<CardSetInfo>() {
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
                 if (o1.getHaveCard() - o1.sumCheckCards() < o2.getHaveCard() - o2.sumCheckCards()) {  //도감 완성도 순 정렬
@@ -1181,41 +1232,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     return 1;
             }
         });
-        for (int i = 0; i < tempSetList.size(); i++) {
-            if (!isAllCompleteCardSet(tempSetList.get(i)) && !tempSetList.get(i).isCompleteCardSet()) { //풀각x,세트효과 x 기준 가장 많이 모은 순서
-                completenessSortList.add(tempSetList.get(i));
+        for (int i = 0; i < filterCardSet.size(); i++) {
+            if (!isAllCompleteCardSet(filterCardSet.get(i)) && !filterCardSet.get(i).isCompleteCardSet()) { //풀각x,세트효과 x 기준 가장 많이 모은 순서
+                completenessSortList.add(filterCardSet.get(i));
             }
         }
-        filterCardSet = defaultSortList;
-
-    }
-
-    public void getDefaultSort() {
-        filterCardSet = defaultSortList;
-        if (cardSetPage.completeChecked()) {
-            completePartRemove();
-        } else {
-            filterCardSet = defaultSortList;
-        }
-        notifyDataSetChanged();
-    }
-
-    public void getNameSort() {
-        filterCardSet = nameSortList;
-        if (cardSetPage.completeChecked()) {
-            completePartRemove();
-        } else {
-            filterCardSet = nameSortList;
-        }
-        notifyDataSetChanged();
-    }
-
-    public void getCompletenessSort() {
         filterCardSet = completenessSortList;
         if (cardSetPage.completeChecked()) {
             completePartRemove();
-        } else {
-            filterCardSet = completenessSortList;
         }
 
         notifyDataSetChanged();
