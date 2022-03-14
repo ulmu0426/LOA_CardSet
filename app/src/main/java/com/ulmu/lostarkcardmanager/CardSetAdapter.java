@@ -1084,6 +1084,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             if (cardSetPage.checkCompleteness()) {
                 filterCardSet = completenessSortList;
             }
+            if(cardSetPage.checkFavorite()){
+                getFavoriteSort();
+            }
         }
 
         notifyDataSetChanged();
@@ -1246,6 +1249,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getFavoriteSort() {
+        filterCardSet = defaultSortList;
         Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
