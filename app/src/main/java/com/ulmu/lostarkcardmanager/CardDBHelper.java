@@ -237,7 +237,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     //UPDATE 카드리스트 카드 획득 유무 수정(카드이름이 같은 경우)
     public void UpdateInfoCardCheck(int input, int cardId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
-        //카드 name 값으로 카드를 파악하고 해당 카드의 수량 조절.
+        //카드 id 값으로 카드를 파악하고 해당 카드의 획득 유무 변경.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + input + " WHERE id = " + cardId + "");
     }
 

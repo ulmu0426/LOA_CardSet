@@ -111,7 +111,6 @@ public class CardSetPage extends AppCompatActivity {
                                 checkName = false;
                                 checkCompleteness = false;
                                 checkFavorite = false;
-
                                 return true;
 
                             case R.id.nameSort:

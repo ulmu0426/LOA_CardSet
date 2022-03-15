@@ -17,7 +17,7 @@ public class CardInfo implements Comparable<CardInfo> {
     private String acquisition_info;    //카드 획득처 정보
     private String grade;               //카드 등급 정보
     private int getCard = 0;            //카드 획득 유무(기본 0)
-    private String path;              //카드 리소스 경로
+    private String path;                //카드 리소스 경로
 
     public int getId() {
         return id;
@@ -70,7 +70,10 @@ public class CardInfo implements Comparable<CardInfo> {
         this.grade = grade;
     }
 
-    public int getGetCard() {
+    public int getGetCard() {   //각성도가 1이상 있다면 획득한 카드로 침
+        if(awake > 0){
+            getCard = 1;
+        }
         return getCard;
     }
 

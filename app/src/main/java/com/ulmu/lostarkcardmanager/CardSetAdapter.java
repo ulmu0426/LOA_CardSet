@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private ArrayList<CardSetInfo> defaultSortList;
     private ArrayList<CardSetInfo> nameSortList;
     private ArrayList<CardSetInfo> completenessSortList;
-
+    private ArrayList<CardSetInfo> favoriteSortList;
 
     public CardSetAdapter(Context context, CardSetPage cardSetPage) {
         this.cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
@@ -71,12 +70,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         defaultSortList = new ArrayList<CardSetInfo>();
         nameSortList = new ArrayList<CardSetInfo>();
         completenessSortList = new ArrayList<CardSetInfo>();
+        favoriteSortList = new ArrayList<CardSetInfo>();
         setSortList();
-    }
-
-
-    public ArrayList<CardSetInfo> getFilterCardSet() {
-        return this.filterCardSet;
     }
 
     @NonNull
@@ -679,8 +674,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
-                        if (cardSetPage.checkCompleteness())
+                        if (cardSetPage.checkCompleteness()) {
                             getCompletenessSort();
+                        }
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -724,8 +720,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
-                        if (cardSetPage.checkCompleteness())
+                        if (cardSetPage.checkCompleteness()) {
                             getCompletenessSort();
+                        }
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -747,8 +744,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
                         haveStatUpdate();
-                        if (cardSetPage.checkCompleteness())
+                        if (cardSetPage.checkCompleteness()) {
                             getCompletenessSort();
+                        }
                         if (cardSetPage.completeChecked())
                             completePartRemove();
 
@@ -1084,7 +1082,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             if (cardSetPage.checkCompleteness()) {
                 filterCardSet = completenessSortList;
             }
-            if(cardSetPage.checkFavorite()){
+            if (cardSetPage.checkFavorite()) {
                 getFavoriteSort();
             }
         }
@@ -1204,43 +1202,21 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getCompletenessSort() {
-        for (int i = 0; i < filterCardSet.size(); i++) {    //완성 카드세트 추가
-            if (isAllCompleteCardSet(filterCardSet.get(i))) {
-                completenessSortList.add(filterCardSet.get(i));
-            }
-        }
-
-        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+        completenessSortList.clear();
+        ArrayList<CardSetInfo> tempList = new ArrayList<CardSetInfo>();
+        tempList.addAll(cardSetInfo);
+        Collections.sort(tempList, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
-                if ((o1.getHaveCard() * 5) - o1.getHaveAwake() < (o2.getHaveCard() * 5) - o2.getHaveAwake()) {  //완성도가 높은 순서대로(각성도 기준) 정렬
-                    return -1;
-                } else
+                if (o1.completePercent() < o2.completePercent())
                     return 1;
+                else
+                    return -1;
             }
         });
-
-        for (int i = 0; i < filterCardSet.size(); i++) {
-            if (!isAllCompleteCardSet(filterCardSet.get(i)) && filterCardSet.get(i).isCompleteCardSet()) { //풀각x,세트효과 가능
-                completenessSortList.add(filterCardSet.get(i));
-            }
-        }
-
-        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
-            @Override
-            public int compare(CardSetInfo o1, CardSetInfo o2) {
-                if (o1.getHaveCard() - o1.sumCheckCards() < o2.getHaveCard() - o2.sumCheckCards()) {  //도감 완성도 순 정렬
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-        for (int i = 0; i < filterCardSet.size(); i++) {
-            if (!isAllCompleteCardSet(filterCardSet.get(i)) && !filterCardSet.get(i).isCompleteCardSet()) { //풀각x,세트효과 x 기준 가장 많이 모은 순서
-                completenessSortList.add(filterCardSet.get(i));
-            }
-        }
+        completenessSortList.addAll(tempList);
         filterCardSet = completenessSortList;
+
         if (cardSetPage.completeChecked()) {
             completePartRemove();
         }
@@ -1249,17 +1225,10 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getFavoriteSort() {
-        filterCardSet = defaultSortList;
-        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
-            @Override
-            public int compare(CardSetInfo o1, CardSetInfo o2) {
-                if (o1.getId() < o2.getId()) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+        completenessSortList.clear();
+        ArrayList<CardSetInfo> tempList = new ArrayList<CardSetInfo>();
+        tempList.addAll(cardSetInfo);
+        Collections.sort(tempList, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
                 if (o1.favoriteCheck() <= o2.favoriteCheck()) {
@@ -1268,6 +1237,9 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     return 1;
             }
         });
+        favoriteSortList.addAll(tempList);
+        filterCardSet = favoriteSortList;
+
         if (cardSetPage.completeChecked()) {
             completePartRemove();
         }

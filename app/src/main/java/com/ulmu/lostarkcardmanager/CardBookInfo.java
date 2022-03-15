@@ -252,6 +252,8 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
             return 8;
         else if (getCompleteCardBook() - getHaveCard() == 9)
             return 9;
+        else if(getCompleteCardBook() - getHaveCard() == 10)
+            return 10;
         else
             return 0;
     }

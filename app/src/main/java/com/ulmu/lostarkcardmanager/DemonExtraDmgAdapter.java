@@ -340,6 +340,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard0(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
 
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
+
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
@@ -396,6 +403,14 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard1(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
 
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
+
+
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
@@ -446,6 +461,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard2.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
+
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard2(), awake);
@@ -506,6 +528,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard3(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
 
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
+
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
@@ -560,6 +589,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard4(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
+
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -616,6 +652,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard5(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
 
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
+
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
@@ -670,6 +713,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard6(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
+
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -726,6 +776,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard7(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
 
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
+
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
                                 nextDED(txtDED_NextStep, filterDED.get(pos));
@@ -776,6 +833,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).setCount(number);
                                 txtDED_Detail_CardAwakeHaveCard8.setText(DED_DIALOG_CARD_AWAKE + awake + "\n" + DED_DIALOG_CARD_NUM + number);
                                 txtDED_AwakeValue.setText("현재 각성 합계 : " + filterDED.get(pos).getHaveAwake());
+
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard8(), awake);
@@ -835,6 +899,13 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
                                 tempCardSetInfo = getCardSet(filterDED.get(pos).getCard9(), awake);
                                 updateAwakeFavoriteCardSetInfoAndDB(tempCardSetInfo);
+
+                                if (filterDED.get(pos).getCheckCard0() == 0 && awake > 0) {
+                                    filterDED.get(pos).setCheckCard0(1);
+                                    cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).setGetCard(1);
+                                    cardDbHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, 1, filterDED.get(pos).getId());
+                                    cardDbHelper.UpdateInfoCardCheck(1, cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getId());
+                                }
 
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 isCompleteCardBookBackgroundColor(filterDED.get(pos), holder.cvDemonExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1379,7 +1450,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 filterDED = nameSortList;
             }
             if (DEDPage.checkCompleteness()) {
-                filterDED = completenessSortList;
+                getCompletenessSort();
             }
             if (DEDPage.checkFastCompleteness()) {
                 getFastCompletenessSort();
@@ -1480,12 +1551,11 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getDefaultSort() {
-        filterDED = defaultSortList;
+        filterDED = DEDInfo;
         if (DEDPage.completeChecked()) {
             completePartRemove();
-        } else {
-            filterDED = defaultSortList;
         }
+
         notifyDataSetChanged();
     }
 
@@ -1500,46 +1570,20 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getCompletenessSort() {
-        //완성도 순 정렬
+        completenessSortList.clear();
+        ArrayList<DemonExtraDmgInfo> tempDEDList = new ArrayList<DemonExtraDmgInfo>();
+        tempDEDList.addAll(DEDInfo);
 
-        for (int i = 0; i < filterDED.size(); i++) {       //완성된 도감 추가
-            if (isAllCompleteDED(filterDED.get(i))) {
-                completenessSortList.add(filterDED.get(i));
-            }
-        }
-
-        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
             @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //필요 카드수가 가장 적은 순서대로 정렬
-                if (((o1.getCompleteDEDBook() * 5) - o1.getHaveAwake()) < ((o2.getCompleteDEDBook() * 5) - o2.getHaveAwake())) {
-                    return -1;
-                } else
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
+                if(o1.completePercent() < o2.completePercent())
                     return 1;
+                else
+                    return -1;
             }
         });
-
-        for (int i = 0; i < filterDED.size(); i++) {
-            if (isCompleteDED(filterDED.get(i)) && !isAllCompleteDED(filterDED.get(i))) {   //도감은 완성, 각성도 최대가 아닌 미완성 도감들 추가
-                completenessSortList.add(filterDED.get(i));
-            }
-        }
-
-        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
-            @Override
-            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {    //도감 완성이 안 된 경우
-                if (o1.getCompleteDEDBook() - o1.getHaveCard() < o2.getCompleteDEDBook() - o2.getHaveCard()) {
-                    return -1;
-                } else
-                    return 1;
-            }
-        });
-
-        for (int i = 0; i < filterDED.size(); i++) {    //도감완성이 안된 경우 추가.
-            if (!isCompleteDED(filterDED.get(i))) {
-                completenessSortList.add(filterDED.get(i));
-            }
-        }
-
+        completenessSortList.addAll(tempDEDList);
         filterDED = completenessSortList;
 
         if (DEDPage.completeChecked()) {
@@ -1550,15 +1594,21 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getFastCompletenessSort() {
-        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+        fastCompletenessSortList.clear();
+        ArrayList<DemonExtraDmgInfo> tempDEDList = new ArrayList<DemonExtraDmgInfo>();
+        tempDEDList.addAll(DEDInfo);
+        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
-                if (o1.fastComplete() < o2.fastComplete()) {
+                if (o1.fastComplete() <= o2.fastComplete()) {
                     return -1;
                 } else
                     return 1;
             }
         });
+        fastCompletenessSortList.addAll(tempDEDList);
+        filterDED = fastCompletenessSortList;
+
         if (DEDPage.completeChecked()) {
             completePartRemove();
         }
@@ -1642,4 +1692,5 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
         return cardSetName;
     }
+
 }

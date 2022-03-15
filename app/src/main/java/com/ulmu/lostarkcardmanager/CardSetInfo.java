@@ -1,5 +1,7 @@
 package com.ulmu.lostarkcardmanager;
 
+import android.util.Log;
+
 public class CardSetInfo implements Comparable<CardSetInfo> {
 
     private int id;
@@ -345,9 +347,26 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         return checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6;
     }
 
+    //완성도 순 정렬을 위해 필요한 메소드. 완성도를 퍼센트로 나타내줌.(모든 카드 수집이 다 됐다는 전제가 필요)
+    public double completePercent() {
+        int needCompleteAwake = haveCard * 5;
+        if (!isCompleteCardSet()) {  //카드 미획득시 우선순위 하위
+            return -5;
+        }
+        if (needCompleteAwake > haveAwake){
+            if (haveAwake == 0)
+                return 0;
+            else {
+                Log.v("test", name + " complete percent : " + ((double) haveAwake / (double) needCompleteAwake) * 100);
+                return ((double) haveAwake / (double) needCompleteAwake) * 100;
+            }
+        } else    //all Complete의 경우 우선순위 최하위
+        return -10;
+    }
+
     //즐겨찾기 순 정렬에서 Collections.sort 를 위해 필요한 메소드
-    public int favoriteCheck(){
-        if(favorite.isEmpty())
+    public int favoriteCheck() {
+        if (favorite.isEmpty())
             return 1;
         else
             return 0;

@@ -1,5 +1,7 @@
 package com.ulmu.lostarkcardmanager;
 
+import android.util.Log;
+
 import java.text.DecimalFormat;
 
 public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
@@ -383,6 +385,21 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
 
     public void setAwakeCard9(int awakeCard9) {
         this.awakeCard9 = awakeCard9;
+    }
+
+    //완성도 순 정렬을 위해 필요한 메소드. 완성도를 퍼센트로 나타내줌.(모든 카드 수집이 다 됐다는 전제가 필요)
+    public double completePercent() {
+        if (getHaveCard() != getCompleteDEDBook()) {  //카드 미획득시 우선순위 하위
+            return -5;
+        }
+        if (awake_sum2 > haveAwake) {
+            if (haveAwake == 0)
+                return 0;
+            else {
+                return ((double) haveAwake / (double) awake_sum2) * 100;
+            }
+        } else    //all Complete의 경우 우선순위 최하위
+            return -10;
     }
 
     //다음 완성도가 가까운 순서대로 정렬을 위해 필요한 메소드

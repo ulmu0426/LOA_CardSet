@@ -770,7 +770,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         Collections.sort(tempBookList, new Comparator<CardBookInfo>() {   //완성도 순 정렬 리스트
             @Override
             public int compare(CardBookInfo o1, CardBookInfo o2) {
-                if (o1.getSubComplete() < o2.getSubComplete()) {
+                if (o1.getSubComplete() <= o2.getSubComplete()) {
                     return -1;
                 } else
                     return 1;
