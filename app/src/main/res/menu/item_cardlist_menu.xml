@@ -9,9 +9,17 @@
             android:id="@+id/nameSort"
             android:layout_gravity="center"
             android:title="이름 정렬" />
+        <item
+            android:id="@+id/notAcquiredSort"
+            android:layout_gravity="center"
+            android:title="미획득 카드 정렬" />
+        <item
+            android:id="@+id/acquiredSort"
+            android:layout_gravity="center"
+            android:title="획득 카드 정렬" />
     </group>
     <item
-        android:id="@+id/all_check"
+        android:id="@+id/allCheck"
         android:layout_gravity="center"
         android:title="카드 모두 획득하기" />
 </menu>

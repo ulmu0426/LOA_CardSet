@@ -41,14 +41,16 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private ArrayList<CardInfo> filterCardInfo;
     private ArrayList<CardBookInfo> cardBookInfo;
     private ArrayList<DemonExtraDmgInfo> DEDInfo;
+    private SettingCard settingCard;
 
-    public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
+    public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList, SettingCard settingCard) {
         this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
         this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
         this.context = context;
         this.useCardList = useCardList;
         this.filterCardInfo = useCardList;
+        this.settingCard = settingCard;
         cardDBHelper = new CardDBHelper(context);
     }
 
@@ -176,6 +178,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                                 holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
                                 ((MainPage) MainPage.mainContext).cardBookUpdate();
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                                settingCard.followSorting();
+
                                 haveDEDUpdate();
                                 notifyDataSetChanged();
                                 awakeHaveDialog.cancel();
@@ -201,6 +205,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                    settingCard.followSorting();
                     haveStatUpdate(cardBookInfo);
                     haveDEDUpdate();
                 } else {
@@ -212,6 +217,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                    settingCard.followSorting();
                     haveStatUpdate(cardBookInfo);
                     haveDEDUpdate();
                 }
@@ -401,6 +407,32 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
     public void getNameSort() {
         Collections.sort(filterCardInfo);
+        notifyDataSetChanged();
+    }
+
+    public void getNotAcquiredSort() {
+        Collections.sort(filterCardInfo, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if (o1.getGetCard() <= o2.getGetCard())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void getAcquiredSort() {
+        Collections.sort(filterCardInfo, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if (o1.getGetCard() <= o2.getGetCard())
+                    return 1;
+                else
+                    return -1;
+            }
+        });
         notifyDataSetChanged();
     }
 

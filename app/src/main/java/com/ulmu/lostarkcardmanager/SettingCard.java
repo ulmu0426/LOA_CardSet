@@ -51,6 +51,7 @@ public class SettingCard extends AppCompatActivity {
     private TextView btnC;
     private TextView btnS;
 
+    private SettingCard settingCard;
     private SettingCardAdapter adapter;
 
     private ImageView imgMenu;
@@ -61,7 +62,9 @@ public class SettingCard extends AppCompatActivity {
     private EditText editSearchCard;
 
     private boolean checkDefault = true;
-    private boolean checkName = true;
+    private boolean checkName = false;
+    private boolean checkNotAcquiredSort = false;
+    private boolean checkAcquiredSort = false;
 
 
     @Override
@@ -69,6 +72,7 @@ public class SettingCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardlist);
         context = this;
+        settingCard = this;
         cardDBHelper = new CardDBHelper(context);
 
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
@@ -77,7 +81,7 @@ public class SettingCard extends AppCompatActivity {
 
         rvList = findViewById(R.id.rvList);
 
-        adapter = new SettingCardAdapter(context, cardLegend);
+        adapter = new SettingCardAdapter(context, cardLegend, settingCard);
         rvList.setAdapter(adapter);
 
         btnL = findViewById(R.id.btnL);
@@ -90,7 +94,7 @@ public class SettingCard extends AppCompatActivity {
         btnL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardLegend);
+                adapter = new SettingCardAdapter(context, cardLegend, settingCard);
                 rvList.setAdapter(adapter);
                 setBtnSettingBold(btnL);
                 setBtnSettingNormal(btnE);
@@ -99,13 +103,14 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
                 rvList.setBackgroundColor(Color.parseColor("#FFF6D1"));
+                followSorting();
                 adapter.notifyDataSetChanged();
             }
         });
         btnE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardEpic);
+                adapter = new SettingCardAdapter(context, cardEpic, settingCard);
                 rvList.setAdapter(adapter);
                 setBtnSettingNormal(btnL);
                 setBtnSettingBold(btnE);
@@ -114,13 +119,14 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
                 rvList.setBackgroundColor(Color.parseColor("#ECE2FF"));
+                followSorting();
                 adapter.notifyDataSetChanged();
             }
         });
         btnR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardRare);
+                adapter = new SettingCardAdapter(context, cardRare, settingCard);
                 rvList.setAdapter(adapter);
                 setBtnSettingNormal(btnL);
                 setBtnSettingNormal(btnE);
@@ -129,13 +135,14 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
                 rvList.setBackgroundColor(Color.parseColor("#DDEFFF"));
+                followSorting();
                 adapter.notifyDataSetChanged();
             }
         });
         btnU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardUncommon);
+                adapter = new SettingCardAdapter(context, cardUncommon, settingCard);
                 rvList.setAdapter(adapter);
                 setBtnSettingNormal(btnL);
                 setBtnSettingNormal(btnE);
@@ -144,13 +151,14 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
                 rvList.setBackgroundColor(Color.parseColor("#DEFFBB"));
+                followSorting();
                 adapter.notifyDataSetChanged();
             }
         });
         btnC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardCommon);
+                adapter = new SettingCardAdapter(context, cardCommon, settingCard);
                 rvList.setAdapter(adapter);
                 setBtnSettingNormal(btnL);
                 setBtnSettingNormal(btnE);
@@ -159,13 +167,14 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingBold(btnC);
                 setBtnSettingNormal(btnS);
                 rvList.setBackgroundColor(Color.parseColor("#F4F4F4"));
+                followSorting();
                 adapter.notifyDataSetChanged();
             }
         });
         btnS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardSpecial);
+                adapter = new SettingCardAdapter(context, cardSpecial, settingCard);
                 rvList.setAdapter(adapter);
                 setBtnSettingNormal(btnL);
                 setBtnSettingNormal(btnE);
@@ -174,6 +183,7 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnC);
                 setBtnSettingBold(btnS);
                 rvList.setBackgroundColor(Color.parseColor("#FFDCE9"));
+                followSorting();
                 adapter.notifyDataSetChanged();
             }
         });
@@ -204,27 +214,27 @@ public class SettingCard extends AppCompatActivity {
                 if (s.length() == 0) {
                     settingCardList();
                     if (btnL.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardLegend);
+                        adapter = new SettingCardAdapter(context, cardLegend, settingCard);
                         rvList.setAdapter(adapter);
                     }
                     if (btnE.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardEpic);
+                        adapter = new SettingCardAdapter(context, cardEpic, settingCard);
                         rvList.setAdapter(adapter);
                     }
                     if (btnR.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardRare);
+                        adapter = new SettingCardAdapter(context, cardRare, settingCard);
                         rvList.setAdapter(adapter);
                     }
                     if (btnU.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardUncommon);
+                        adapter = new SettingCardAdapter(context, cardUncommon, settingCard);
                         rvList.setAdapter(adapter);
                     }
                     if (btnC.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardCommon);
+                        adapter = new SettingCardAdapter(context, cardCommon, settingCard);
                         rvList.setAdapter(adapter);
                     }
                     if (btnS.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardSpecial);
+                        adapter = new SettingCardAdapter(context, cardSpecial, settingCard);
                         rvList.setAdapter(adapter);
                     }
                 }
@@ -253,6 +263,8 @@ public class SettingCard extends AppCompatActivity {
                                 adapter.getDefaultSort();
                                 checkDefault = true;
                                 checkName = false;
+                                checkNotAcquiredSort = false;
+                                checkAcquiredSort = false;
 
                                 return true;
 
@@ -260,10 +272,30 @@ public class SettingCard extends AppCompatActivity {
                                 adapter.getNameSort();
                                 checkDefault = false;
                                 checkName = true;
+                                checkNotAcquiredSort = false;
+                                checkAcquiredSort = false;
 
                                 return true;
 
-                            case R.id.all_check:
+                            case R.id.notAcquiredSort:
+                                adapter.getNotAcquiredSort();
+                                checkDefault = false;
+                                checkName = false;
+                                checkNotAcquiredSort = true;
+                                checkAcquiredSort = false;
+
+                                return true;
+
+                            case R.id.acquiredSort:
+                                adapter.getAcquiredSort();
+                                checkDefault = false;
+                                checkName = false;
+                                checkNotAcquiredSort = false;
+                                checkAcquiredSort = true;
+
+                                return true;
+
+                            case R.id.allCheck:
                                 for (int i = 0; i < cardInfo.size(); i++) {
                                     cardInfo.get(i).setGetCard(1);
                                     cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
@@ -379,5 +411,28 @@ public class SettingCard extends AppCompatActivity {
 
     public boolean isCheckName() {
         return checkName;
+    }
+
+    public boolean isCheckNotAcquiredSort() {
+        return checkNotAcquiredSort;
+    }
+
+    public boolean isCheckAcquiredSort() {
+        return checkAcquiredSort;
+    }
+
+    public void followSorting() {
+        if (isCheckDefault())
+            adapter.getDefaultSort();
+
+        if (isCheckName())
+            adapter.getNameSort();
+
+        if (isCheckNotAcquiredSort())
+            adapter.getNotAcquiredSort();
+
+        if (isCheckAcquiredSort())
+            adapter.getAcquiredSort();
+
     }
 }

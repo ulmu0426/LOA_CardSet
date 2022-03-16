@@ -314,7 +314,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="문의메일"
+                    android:text="버그제보 및 문의메일"
                     android:textAlignment="center"
                     android:textColor="#E8E8E8"
                     android:textSize="20dp"
