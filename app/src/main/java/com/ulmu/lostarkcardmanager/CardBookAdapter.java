@@ -564,7 +564,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     private void isCompleteCardBookBackgroundColor(CardBookInfo cardbook_all, ConstraintLayout cv) {
         if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
-            cv.setBackgroundColor(parseColor("#D0FFE870"));
+            cv.setBackgroundColor(parseColor("#FFF4BD"));
         else
             cv.setBackgroundColor(parseColor("#FFFFFF"));
     }

@@ -102,7 +102,7 @@ public class SettingCard extends AppCompatActivity {
                 setBtnSettingNormal(btnU);
                 setBtnSettingNormal(btnC);
                 setBtnSettingNormal(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#FFF6D1"));
+                rvList.setBackgroundColor(Color.parseColor("#FFF4BD"));
                 followSorting();
                 adapter.notifyDataSetChanged();
             }

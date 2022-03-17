@@ -398,8 +398,8 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
             else {
                 return ((double) haveAwake / (double) awake_sum2) * 100;
             }
-        } else    //all Complete의 경우 우선순위 최하위
-            return -10;
+        } else    //all Complete의 경우 우선순위 최상위
+            return 100;
     }
 
     //다음 완성도가 가까운 순서대로 정렬을 위해 필요한 메소드
