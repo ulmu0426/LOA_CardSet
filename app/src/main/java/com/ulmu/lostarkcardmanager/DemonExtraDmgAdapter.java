@@ -68,10 +68,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     private float haveDED;
     private int completeDED;
     private ArrayList<DemonExtraDmgInfo> baseFilteredDED;
-    private ArrayList<DemonExtraDmgInfo> defaultSortList;
-    private ArrayList<DemonExtraDmgInfo> nameSortList;
-    private ArrayList<DemonExtraDmgInfo> completenessSortList;
-    private ArrayList<DemonExtraDmgInfo> fastCompletenessSortList;
 
     public DemonExtraDmgAdapter(ArrayList<DemonExtraDmgInfo> DEDInfo) {
         this.DEDInfo = DEDInfo;
@@ -93,11 +89,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         this.DEDPage = demonExtraDmgPage;
         baseFilteredDED = new ArrayList<DemonExtraDmgInfo>();
         setFilteredDED();
-        defaultSortList = new ArrayList<DemonExtraDmgInfo>();
-        nameSortList = new ArrayList<DemonExtraDmgInfo>();
-        completenessSortList = new ArrayList<DemonExtraDmgInfo>();
-        fastCompletenessSortList = new ArrayList<DemonExtraDmgInfo>();
-        setSortList();
 
         ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
         updateDEDPage();
@@ -1539,10 +1530,10 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             completePartRemove();
         } else {
             if (DEDPage.checkDefault()) {
-                filterDED = defaultSortList;
+                getDefaultSort();
             }
             if (DEDPage.checkName()) {
-                filterDED = nameSortList;
+                getNameSort();
             }
             if (DEDPage.checkCompleteness()) {
                 getCompletenessSort();
@@ -1624,17 +1615,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return imageResource;
     }
 
-    private void setSortList() {
-        ArrayList<DemonExtraDmgInfo> tempDEDList = new ArrayList<DemonExtraDmgInfo>();
-        tempDEDList.addAll(DEDInfo);
-        defaultSortList.addAll(tempDEDList);  //기본 정렬
-
-        Collections.sort(tempDEDList);    //이름 순 정렬
-        nameSortList.addAll(tempDEDList);
-
-        filterDED = defaultSortList;
-    }
-
     private void completePartRemove() {  //완성도감 지우기
         ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
         for (int i = 0; i < filterDED.size(); i++) {
@@ -1655,21 +1635,15 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getNameSort() {
-        filterDED = nameSortList;
+        Collections.sort(filterDED);
         if (DEDPage.completeChecked()) {
             completePartRemove();
-        } else {
-            filterDED = nameSortList;
         }
         notifyDataSetChanged();
     }
 
     public void getCompletenessSort() {
-        completenessSortList.clear();
-        ArrayList<DemonExtraDmgInfo> tempDEDList = new ArrayList<DemonExtraDmgInfo>();
-        tempDEDList.addAll(DEDInfo);
-
-        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
                 if (o1.completePercent() < o2.completePercent())
@@ -1678,8 +1652,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     return -1;
             }
         });
-        completenessSortList.addAll(tempDEDList);
-        filterDED = completenessSortList;
 
         if (DEDPage.completeChecked()) {
             completePartRemove();
@@ -1689,10 +1661,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getFastCompletenessSort() {
-        fastCompletenessSortList.clear();
-        ArrayList<DemonExtraDmgInfo> tempDEDList = new ArrayList<DemonExtraDmgInfo>();
-        tempDEDList.addAll(DEDInfo);
-        Collections.sort(tempDEDList, new Comparator<DemonExtraDmgInfo>() {
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
                 if (o1.fastComplete() <= o2.fastComplete()) {
@@ -1701,8 +1670,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     return 1;
             }
         });
-        fastCompletenessSortList.addAll(tempDEDList);
-        filterDED = fastCompletenessSortList;
 
         if (DEDPage.completeChecked()) {
             completePartRemove();

@@ -45,8 +45,6 @@ public class MainPage extends AppCompatActivity {
 
     public static Context mainContext;
 
-    private Button btnMakeInfo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

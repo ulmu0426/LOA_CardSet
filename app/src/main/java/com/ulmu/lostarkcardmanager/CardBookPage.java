@@ -73,6 +73,7 @@ public class CardBookPage extends AppCompatActivity {
 
         //2. 완성 도감 온 오프 기능
         checkBoxInvisibilityCardBookPage = (CheckBox) findViewById(R.id.checkboxCompleteCardbookInvisibility);
+        adapter.getDefaultSort();
         checkBoxInvisibilityCardBookPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

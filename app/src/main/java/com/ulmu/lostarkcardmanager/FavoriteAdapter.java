@@ -60,14 +60,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ConstraintLayout cvFavoriteCardSet;
         private ImageView imgFavoriteCardSet;
         private TextView txtFavoriteCardSetName;
         private TextView txtFavoriteCardSetAwake;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cvFavoriteCardSet = itemView.findViewById(R.id.cvFavoriteCardSet);
             imgFavoriteCardSet = itemView.findViewById(R.id.imgFavoriteCardSet);
             txtFavoriteCardSetName = itemView.findViewById(R.id.txtFavoriteCardSetName);
             txtFavoriteCardSetAwake = itemView.findViewById(R.id.txtFavoriteCardSetAwake);

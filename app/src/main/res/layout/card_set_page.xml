@@ -92,6 +92,7 @@
             android:id="@+id/checkBoxInvisibilityCardSetPage"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:checked="false"
             android:buttonTint="#676767"
             tools:ignore="TouchTargetSizeCheck" />
 

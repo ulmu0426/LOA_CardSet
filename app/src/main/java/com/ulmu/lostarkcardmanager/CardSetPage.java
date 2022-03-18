@@ -55,6 +55,7 @@ public class CardSetPage extends AppCompatActivity {
 
 
         checkBoxInvisibilityCardSetPage = findViewById(R.id.checkBoxInvisibilityCardSetPage);
+        adapter.getDefaultSort();
         checkBoxInvisibilityCardSetPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

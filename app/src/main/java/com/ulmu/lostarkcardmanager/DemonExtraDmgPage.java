@@ -53,6 +53,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         rv.setAdapter(adapter);
 
         checkBoxInvisibilityDEDPage = (CheckBox) findViewById(R.id.checkBoxInvisibilityDEDPage);
+        adapter.getDefaultSort();
         checkBoxInvisibilityDEDPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
