@@ -20,7 +20,6 @@ import com.example.lostarkcardmanager.R;
 public class CardSetPage extends AppCompatActivity {
 
     private RecyclerView rv;
-    private CardDBHelper dbHelper;
     private CheckBox checkBoxInvisibilityCardSetPage;
     private CardSetAdapter adapter;
 
@@ -48,7 +47,6 @@ public class CardSetPage extends AppCompatActivity {
          * */
 
         rv = findViewById(R.id.rvCardSet);
-        dbHelper = new CardDBHelper(this);
         adapter = new CardSetAdapter(this, this);
 
         rv.setAdapter(adapter);

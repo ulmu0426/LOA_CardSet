@@ -341,19 +341,13 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         }
     }
 
-    public int sumCheckCards() {
-        if (checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6 == 7)
-            return 6;
-        return checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6;
-    }
-
     //완성도 순 정렬을 위해 필요한 메소드. 완성도를 퍼센트로 나타내줌.(모든 카드 수집이 다 됐다는 전제가 필요)
     public double completePercent() {
         int needCompleteAwake = haveCard * 5;
         if (!isCompleteCardSet()) {  //카드 미획득시 우선순위 하위
             return -5;
         }
-        if (needCompleteAwake > haveAwake){
+        if (needCompleteAwake > haveAwake) {
             if (haveAwake == 0)
                 return 0;
             else {
@@ -361,7 +355,7 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
                 return ((double) haveAwake / (double) needCompleteAwake) * 100;
             }
         } else    //all Complete의 경우 우선순위 최하위
-        return -10;
+            return 100;
     }
 
     //즐겨찾기 순 정렬에서 Collections.sort 를 위해 필요한 메소드

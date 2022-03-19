@@ -417,7 +417,8 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
             return 1000;
         }
     }
-
+    
+    //이름 순서대로 정렬
     @Override
     public int compareTo(DemonExtraDmgInfo o) {
         return this.getName().compareTo(o.getName());

@@ -1158,21 +1158,23 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getCompleteFilter() {
+        filterCardSet = cardSetInfo;
+
         if (cardSetPage.completeChecked()) {
             completePartRemove();
-        } else {
-            if (cardSetPage.checkDefault()) {
-                getDefaultSort();
-            }
-            if (cardSetPage.checkName()) {
-                getNameSort();
-            }
-            if (cardSetPage.checkCompleteness()) {
-                getCompletenessSort();
-            }
-            if (cardSetPage.checkFavorite()) {
-                getFavoriteSort();
-            }
+        }
+
+        if (cardSetPage.checkDefault()) {
+            getDefaultSort();
+        }
+        if (cardSetPage.checkName()) {
+            getNameSort();
+        }
+        if (cardSetPage.checkCompleteness()) {
+            getCompletenessSort();
+        }
+        if (cardSetPage.checkFavorite()) {
+            getFavoriteSort();
         }
 
         notifyDataSetChanged();
@@ -1259,7 +1261,15 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getDefaultSort() {
-        filterCardSet = cardSetInfo;
+        Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
+            @Override
+            public int compare(CardSetInfo o1, CardSetInfo o2) {
+                if (o1.getId() < o2.getId())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
         if (cardSetPage.completeChecked()) {
             completePartRemove();
         }
@@ -1277,6 +1287,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getCompletenessSort() {
+        getNameSort();
         Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {
@@ -1295,6 +1306,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     }
 
     public void getFavoriteSort() {
+        getNameSort();
         Collections.sort(filterCardSet, new Comparator<CardSetInfo>() {
             @Override
             public int compare(CardSetInfo o1, CardSetInfo o2) {

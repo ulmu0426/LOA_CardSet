@@ -73,10 +73,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         this.DEDInfo = DEDInfo;
     }
 
-    public float getHaveDED() {
-        return haveDED;
-    }
-
     public DemonExtraDmgAdapter(Context context, DemonExtraDmgPage demonExtraDmgPage) {
         this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
         this.filterDED = ((MainPage) MainPage.mainContext).DEDInfo;
@@ -1526,21 +1522,22 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getCompleteFilter() {
+        filterDED = DEDInfo;
         if (DEDPage.completeChecked()) {
             completePartRemove();
-        } else {
-            if (DEDPage.checkDefault()) {
-                getDefaultSort();
-            }
-            if (DEDPage.checkName()) {
-                getNameSort();
-            }
-            if (DEDPage.checkCompleteness()) {
-                getCompletenessSort();
-            }
-            if (DEDPage.checkFastCompleteness()) {
-                getFastCompletenessSort();
-            }
+        }
+
+        if (DEDPage.checkDefault()) {
+            getDefaultSort();
+        }
+        if (DEDPage.checkName()) {
+            getNameSort();
+        }
+        if (DEDPage.checkCompleteness()) {
+            getCompletenessSort();
+        }
+        if (DEDPage.checkFastCompleteness()) {
+            getFastCompletenessSort();
         }
 
         notifyDataSetChanged();
@@ -1626,7 +1623,15 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getDefaultSort() {
-        filterDED = DEDInfo;
+        Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
+            @Override
+            public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
+                if (o1.getId() < o2.getId())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
         if (DEDPage.completeChecked()) {
             completePartRemove();
         }
@@ -1643,6 +1648,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getCompletenessSort() {
+        getNameSort();
         Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {
@@ -1661,6 +1667,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
     }
 
     public void getFastCompletenessSort() {
+        getNameSort();
         Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
             @Override
             public int compare(DemonExtraDmgInfo o1, DemonExtraDmgInfo o2) {

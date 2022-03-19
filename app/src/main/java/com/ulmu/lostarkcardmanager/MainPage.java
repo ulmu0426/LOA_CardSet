@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +68,8 @@ public class MainPage extends AppCompatActivity {
 
         //카드 DB 정보 ArrayList 전달
         cardInfo = cardDBHelper.getCardInfo_All();
+        updateEpic();
+        updateUncommon();
 
         //카드 도감 DB 정보 ArrayList 전달
         cardBookInfo = cardDBHelper.getCardBookInfo_All();
@@ -481,5 +484,82 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
+    private void updateEpic(){
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals("크로마니움")) {
+                if (cardInfo.get(i).getId() == 40042) {
+                    return;
+                }
+            }
+        }
+
+        cardDBHelper.UpdateInfoCardID(20046, "루메루스");
+        cardDBHelper.UpdateInfoCardID(20047, "엔비스카");
+        cardDBHelper.UpdateInfoCardID(20048, "혹한의 헬가이아");
+        cardDBHelper.UpdateInfoCardID(20049, "타이탈로스");
+        cardDBHelper.UpdateInfoCardID(20040, "흑야의 요호");
+        cardDBHelper.UpdateInfoCardID(20051, "벨가누스");
+        cardDBHelper.UpdateInfoCardID(20052, "칼엘리고스");
+        cardDBHelper.UpdateInfoCardID(20053, "아카테스");
+        cardDBHelper.UpdateInfoCardID(20054, "이그렉시온");
+        cardDBHelper.UpdateInfoCardID(20055, "미스틱");
+        cardDBHelper.UpdateInfoCardID(20056, "창조의 아크 오르투스");
+        cardDBHelper.UpdateInfoCardID(20057, "신뢰의 아크 아스타");
+        cardDBHelper.UpdateInfoCardID(20058, "나히니르");
+        cardDBHelper.UpdateInfoCardID(20059, "파르쿠나스");
+        cardDBHelper.UpdateInfoCardID(20050, "피요르긴");
+        cardDBHelper.UpdateInfoCardID(20061, "아르카디아");
+        cardDBHelper.UpdateInfoCardID(20062, "엘버하스틱");
+        cardDBHelper.UpdateInfoCardID(20063, "카이슈테르");
+        cardDBHelper.UpdateInfoCardID(20064, "예지의 아크 아가톤");
+        cardDBHelper.UpdateInfoCardID(20065, "희망의 아크 엘피스");
+        cardDBHelper.UpdateInfoCardID(20066, "지혜의 아크 라디체");
+        cardDBHelper.UpdateInfoCardID(20067, "헌신의 아크 카르타");
+        cardDBHelper.UpdateInfoCardID(20068, "에르제베트");
+        cardDBHelper.UpdateInfoCardID(20069, "크리스틴");
+        cardDBHelper.UpdateInfoCardID(20060, "칼바서스");
+        cardDBHelper.UpdateInfoCardID(20071, "니아");
+        cardDBHelper.UpdateInfoCardID(20072, "샤나");
+        cardDBHelper.UpdateInfoCardID(20073, "알비온");
+        cardDBHelper.UpdateInfoCardID(20074, "아르고스");
+        cardDBHelper.UpdateInfoCardID(20075, "데스칼루다");
+        cardDBHelper.UpdateInfoCardID(20076, "쿤겔라니움");
+        cardDBHelper.UpdateInfoCardID(20077, "하누마탄");
+        cardDBHelper.UpdateInfoCardID(20078, "뮨 히다카");
+        cardDBHelper.UpdateInfoCardID(20079, "오스피어");
+        cardDBHelper.UpdateInfoCardID(20080, "다르시");
+        cardDBHelper.UpdateInfoCardID(20045, "크로마니움");
+        cardInfo = cardDBHelper.getCardInfo_All();
+
+    }
+
+    private void updateUncommon() {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals("고비우스 24세")) {
+                if (cardInfo.get(i).getId() == 40042) {
+                    return;
+                }
+            }
+        }
+
+        cardDBHelper.UpdateInfoCardID(40042, "고비우스 24세");
+        cardDBHelper.UpdateInfoCardID(40043, "표류소녀 엠마");
+        cardDBHelper.UpdateInfoCardID(40044, "다쿠쿠");
+        cardDBHelper.UpdateInfoCardID(40045, "월향도사");
+        cardDBHelper.UpdateInfoCardID(40046, "모리나");
+        cardDBHelper.UpdateInfoCardID(40047, "모르페오");
+        cardDBHelper.UpdateInfoCardID(40048, "이마르");
+        cardDBHelper.UpdateInfoCardID(40049, "루벤스타인 델 아르코");
+        cardDBHelper.UpdateInfoCardID(40050, "용병 세이라");
+        cardDBHelper.UpdateInfoCardID(40051, "루티아");
+        cardDBHelper.UpdateInfoCardID(40052, "하리야");
+        cardDBHelper.UpdateInfoCardID(40053, "사트라");
+        cardDBHelper.UpdateInfoCardID(40054, "킬리언");
+        cardDBHelper.UpdateInfoCardID(40055, "오크 장로 질록");
+        cardDBHelper.UpdateInfoCardID(40056, "루드벡");
+        cardDBHelper.UpdateInfoCardID(40057, "로웬 젠로드");
+        cardDBHelper.UpdateInfoCardID(40058, "레퓌스");
+        cardInfo = cardDBHelper.getCardInfo_All();
+    }
 
 }

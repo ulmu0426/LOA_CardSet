@@ -32,18 +32,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     private static int[] haveStatCardBook;
     private static int[] haveStatCardBookCount;
 
-    public int[] getHaveStat() {
-        return haveStat;
-    }
-
-    public int[] getHaveStatCardBook() {
-        return haveStatCardBook;
-    }
-
-    public int[] getHaveStatCardBookCount() {
-        return haveStatCardBookCount;
-    }
-
     private final String CARD_BOOK_COLUMN_NAME_CARD0_CHECK = "checkCard0";
     private final String CARD_BOOK_COLUMN_NAME_CARD1_CHECK = "checkCard1";
     private final String CARD_BOOK_COLUMN_NAME_CARD2_CHECK = "checkCard2";
@@ -81,7 +69,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         setFilteredCardBook();
 
     }
-
 
     @NonNull
     @Override
@@ -608,18 +595,18 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     //
     public void getCompleteFilter() {
+        filterCardBook = cardBookInfo;
         if (cardBook_page.completeChecked()) {
             completePartRemove();
-        } else {
-            if (cardBook_page.checkDefault()) {
-                getDefaultSort();
-            }
-            if (cardBook_page.checkName()) {
-                getNameSort();
-            }
-            if (cardBook_page.checkCompleteness()) {
-                getCompletenessSort();
-            }
+        }
+        if (cardBook_page.checkDefault()) {
+            getDefaultSort();
+        }
+        if (cardBook_page.checkName()) {
+            getNameSort();
+        }
+        if (cardBook_page.checkCompleteness()) {
+            getCompletenessSort();
         }
         notifyDataSetChanged();
     }
@@ -691,7 +678,15 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     }
 
     public void getDefaultSort() {
-        filterCardBook = cardBookInfo;
+        Collections.sort(filterCardBook, new Comparator<CardBookInfo>() {
+            @Override
+            public int compare(CardBookInfo o1, CardBookInfo o2) {
+                if (o1.getId() < o2.getId())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
         if (cardBook_page.completeChecked()) {
             completePartRemove();
         }
@@ -709,6 +704,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
     }
 
     public void getCompletenessSort() {  //완성도 순 정렬
+        getNameSort();
         Collections.sort(filterCardBook, new Comparator<CardBookInfo>() {   //완성도 순 정렬 리스트
             @Override
             public int compare(CardBookInfo o1, CardBookInfo o2) {
