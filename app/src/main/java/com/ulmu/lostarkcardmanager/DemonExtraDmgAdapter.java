@@ -347,6 +347,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -416,6 +418,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -483,6 +487,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -550,6 +556,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -617,6 +625,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -684,6 +694,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -751,6 +763,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
 
                                 updateDEDPage();
@@ -818,6 +832,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
                                 updateDEDPage();
                                 notifyDataSetChanged();
@@ -884,6 +900,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
                                 updateDEDPage();
                                 notifyDataSetChanged();
@@ -950,6 +968,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                                 }
 
                                  */
+                                if (DEDPage.completeChecked())
+                                    completePartRemove();
 
                                 updateDEDPage();
                                 notifyDataSetChanged();
@@ -983,6 +1003,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
                         updateDEDPage();
                         notifyDataSetChanged();
@@ -1013,6 +1035,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1044,6 +1068,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1075,6 +1101,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1106,6 +1134,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1137,6 +1167,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1168,6 +1200,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1199,6 +1233,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1230,6 +1266,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1261,6 +1299,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         }
 
                         */
+                        if (DEDPage.completeChecked())
+                            completePartRemove();
 
 
                         updateDEDPage();
@@ -1439,7 +1479,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
     }
 
-    // DB에 도감을 완성 시킨 경우 true else false
+    // DB에 도감을 완성 시킨 경우(카드 수집만) true else false
     public boolean isCompleteDED(DemonExtraDmgInfo DEDInfo) {
         if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook())
             return true;

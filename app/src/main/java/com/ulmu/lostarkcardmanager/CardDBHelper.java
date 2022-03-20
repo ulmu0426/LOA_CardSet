@@ -256,17 +256,17 @@ public class CardDBHelper extends SQLiteOpenHelper {
     }
 
     //UPDATE 악추피 checkCardX획득 유무 수정
-    public void UpdateInfoDEDCard(String columnName, int cardCheck, int cardBookId) {
+    public void UpdateInfoDEDCard(String columnName, int cardCheck, int DEDId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
-        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
+        //DEDId 값으로 파악하고 해당 카드의 획득유무 or 각성도 수정.
+        updateColumInfo.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET " + columnName + " = " + cardCheck + " WHERE id = " + DEDId);
     }
 
     //UPDATE 카드세트 checkCardX획득 유무 수정
-    public void UpdateInfoCardSetCard(String columnName, int cardCheck, int cardBookId) {
+    public void UpdateInfoCardSetCard(String columnName, int cardCheck, int cardSetId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
+        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardSetId);
     }
 
     //UPDATE 카드세트 즐겨찾기 등록 유무 수정

@@ -85,7 +85,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="완성 도감 숨기기"
+            android:text="완성된 카드 세트 숨기기"
             android:textAlignment="center" />
 
         <CheckBox

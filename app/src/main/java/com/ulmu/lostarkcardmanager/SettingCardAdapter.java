@@ -437,7 +437,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     }
 
     public void allCardCheck() {
-
         for (int j = 0; j < filterCardInfo.size(); j++) {
             filterCardInfo.get(j).setGetCard(1);
         }

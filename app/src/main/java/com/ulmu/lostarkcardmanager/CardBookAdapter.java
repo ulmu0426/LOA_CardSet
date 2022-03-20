@@ -28,9 +28,9 @@ import java.util.Comparator;
 
 public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHolder> {
     private final String[] STAT = {"치명", "특화", "신속"};
-    private static int[] haveStat;
-    private static int[] haveStatCardBook;
-    private static int[] haveStatCardBookCount;
+    private static int[] haveStat;                  //카드도감 페이지 상단에 현재 도감 완성도에 따른 스탯 상승치. 치명, 특화, 신속 순서
+    private static int[] haveStatCardBook;          //카드도감 페이지 상단에 현재 도감 완성도에 따른 스탯별 최대 도감 달성 개수. 치명, 특화, 신속 순서
+    private static int[] haveStatCardBookCount;     //카드도감 페이지 상단에 현재 도감 완성도에 따른 스탯별 현재 도감 달성 개수. 치명, 특화, 신속 순서
 
     private final String CARD_BOOK_COLUMN_NAME_CARD0_CHECK = "checkCard0";
     private final String CARD_BOOK_COLUMN_NAME_CARD1_CHECK = "checkCard1";

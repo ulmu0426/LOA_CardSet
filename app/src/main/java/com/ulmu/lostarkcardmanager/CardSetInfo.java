@@ -214,6 +214,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard0() {
+        if (awakeCard0 > 0)
+            checkCard0 = 1;
         return checkCard0;
     }
 
@@ -222,6 +224,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard1() {
+        if (awakeCard1 > 0)
+            checkCard1 = 1;
         return checkCard1;
     }
 
@@ -230,6 +234,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard2() {
+        if (awakeCard2 > 0)
+            checkCard2 = 1;
         return checkCard2;
     }
 
@@ -238,6 +244,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard3() {
+        if (awakeCard3 > 0)
+            checkCard3 = 1;
         return checkCard3;
     }
 
@@ -246,6 +254,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard4() {
+        if (awakeCard4 > 0)
+            checkCard4 = 1;
         return checkCard4;
     }
 
@@ -254,6 +264,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard5() {
+        if (awakeCard5 > 0)
+            checkCard5 = 1;
         return checkCard5;
     }
 
@@ -262,6 +274,8 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     }
 
     public int getCheckCard6() {
+        if (awakeCard6 > 0)
+            checkCard6 = 1;
         return checkCard6;
     }
 
