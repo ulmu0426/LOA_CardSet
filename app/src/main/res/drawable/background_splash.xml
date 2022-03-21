@@ -3,6 +3,6 @@
     <item android:drawable="@color/black"/>
     <item>
         <bitmap
-            android:src="@drawable/loading"/>
+            android:src="@drawable/app_icon"/>
     </item>
 </layer-list>

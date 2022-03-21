@@ -77,6 +77,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.txtAwakeAndHave.setText("각성 : " + filterCardInfo.get(position).getAwake() + "  보유 : " + filterCardInfo.get(position).getCount());
         holder.isGetCheckbox.setChecked(isChecked(filterCardInfo.get(position).getGetCard()));
 
+        //click 대신 touch 로 변경. -> click 을 두번 해야 Dialog 가 뜨던 현상 방지를 위해.
         holder.txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

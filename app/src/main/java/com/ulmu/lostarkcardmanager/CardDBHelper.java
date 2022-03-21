@@ -23,8 +23,6 @@ public class CardDBHelper extends SQLiteOpenHelper {
     //assets 폴더
     private static String DB_PATH = "";
 
-    private SQLiteDatabase mDataBase;
-
     //카드 테이블 column
     private static final String TABLE_CARD_LIST = "cardList";                       //카드정보 테이블 명
     private static final String CARD_COLUMN_ID = "id";                              //테이블별 카드 번호
@@ -212,10 +210,10 @@ public class CardDBHelper extends SQLiteOpenHelper {
 
     }
 
-    //UPDATE 카드리스트 카드 수량 수정
+    //UPDATE 카드리스트 카드 id 값 수정
     public void UpdateInfoCardID(int input, String cardName) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
-        //카드 id 값으로 카드를 파악하고 해당 카드의 수량 조절.
+        //카드 name 으로 카드를 파악하고 해당 카드의 id값 수정
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET id = " + input + " WHERE name = '" + cardName + "'");
     }
 
@@ -234,49 +232,49 @@ public class CardDBHelper extends SQLiteOpenHelper {
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET awake = " + input + " WHERE id = " + cardId);
     }
 
-    //UPDATE 카드리스트 카드 획득 유무 수정(카드이름이 같은 경우)
+    //UPDATE 카드리스트 카드 획득 유무 수정(카드 name)
     public void UpdateInfoCardCheck(int input, String cardName) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
-        //카드 name 값으로 카드를 파악하고 해당 카드의 수량 조절.
+        //카드 name 값으로 카드를 파악하고 해당 카드의 획득 유무 조절.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + input + " WHERE name = '" + cardName + "'");
     }
 
-    //UPDATE 카드리스트 카드 획득 유무 수정(카드이름이 같은 경우)
+    //UPDATE 카드리스트 카드 획득 유무 수정(카드 id)
     public void UpdateInfoCardCheck(int input, int cardId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 획득 유무 변경.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + input + " WHERE id = " + cardId + "");
     }
 
-    //UPDATE 카드 도감 획득 유무 수정
+    //UPDATE cardBookInfo 각 카드별 획득 유무 수정
     public void UpdateInfoCardBookCard(String columnName, int cardCheck, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardBookId);
     }
 
-    //UPDATE 악추피 checkCardX획득 유무 수정
+    //UPDATE DEDInfo checkCardX 각 카드별 획득 유무 수정
     public void UpdateInfoDEDCard(String columnName, int cardCheck, int DEDId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //DEDId 값으로 파악하고 해당 카드의 획득유무 or 각성도 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET " + columnName + " = " + cardCheck + " WHERE id = " + DEDId);
     }
 
-    //UPDATE 카드세트 checkCardX획득 유무 수정
+    //UPDATE CardSetInfo  각 카드별 획득 유무 수정
     public void UpdateInfoCardSetCard(String columnName, int cardCheck, int cardSetId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET " + columnName + " = " + cardCheck + " WHERE id = " + cardSetId);
     }
 
-    //UPDATE 카드세트 즐겨찾기 등록 유무 수정
+    //CardSetInfo 에서 즐겨찾기 유무 업데이트
     public void UpdateInfoCardSetCard(String favoriteName, int cardBookId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
         updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
     }
 
-    //카드세트 삽입
+    //즐겨찾기 목록 업데이트
     public void UpdateInfoFavoriteList(int setAwake, int setActivation, String whereName) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.

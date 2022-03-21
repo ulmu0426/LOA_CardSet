@@ -252,6 +252,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 txtDED_Detail_Card7.setText(filterDED.get(pos).getCard7());
                 txtDED_Detail_Card8.setText(filterDED.get(pos).getCard8());
                 txtDED_Detail_Card9.setText(filterDED.get(pos).getCard9());
+
                 //카드 각성도 세팅
                 txtDED_Detail_CardAwakeHaveCard0.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard0() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getCount());
                 txtDED_Detail_CardAwakeHaveCard1.setText(DED_DIALOG_CARD_AWAKE + filterDED.get(pos).getAwakeCard1() + "\n" + DED_DIALOG_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getCount());

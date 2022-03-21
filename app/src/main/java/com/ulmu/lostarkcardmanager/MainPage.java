@@ -68,8 +68,10 @@ public class MainPage extends AppCompatActivity {
 
         //카드 DB 정보 ArrayList 전달
         cardInfo = cardDBHelper.getCardInfo_All();
-        updateEpic();
-        updateUncommon();
+        
+        //DB 순서 변경을 위해 넣어놨던 메소드. 현재 비활성화
+        //updateEpic();
+        //updateUncommon();
 
         //카드 도감 DB 정보 ArrayList 전달
         cardBookInfo = cardDBHelper.getCardBookInfo_All();
@@ -447,6 +449,7 @@ public class MainPage extends AppCompatActivity {
 
     }
 
+    //DED DB 에서 도감에 없는 Card 의 check 값이 1이 넘어가는 현상을 수정.
     private void DEDDBErrorFix() {
         for (int i = 0; i < DEDInfo.size(); i++) {
             if (DEDInfo.get(i).getCard2().equals("")) {
@@ -487,7 +490,7 @@ public class MainPage extends AppCompatActivity {
     private void updateEpic(){
         for (int i = 0; i < cardInfo.size(); i++) {
             if (cardInfo.get(i).getName().equals("크로마니움")) {
-                if (cardInfo.get(i).getId() == 40042) {
+                if (cardInfo.get(i).getId() == 40045) {
                     return;
                 }
             }
