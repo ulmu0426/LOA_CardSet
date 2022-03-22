@@ -292,6 +292,48 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/txtBtnCardSet_Draw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="카드 세트"
+                android:textColor="#E8E8E8"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/txtBtnCardBook_Draw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="카드 도감"
+                android:textColor="#E8E8E8"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/txtBtnDED_Draw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="악마 추가 피해"
+                android:textColor="#E8E8E8"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
+            <TextView
                 android:id="@+id/txtBtnCardList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

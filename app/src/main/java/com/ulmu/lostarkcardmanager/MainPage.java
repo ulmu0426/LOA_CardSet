@@ -2,15 +2,16 @@ package com.ulmu.lostarkcardmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,30 +22,34 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-
 public class MainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
-    protected ArrayList<CardInfo> cardInfo;
-    protected ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
-    protected ArrayList<CardBookInfo> cardBookInfo;
-    protected ArrayList<CardSetInfo> cardSetInfo;
-    protected ArrayList<DemonExtraDmgInfo> DEDInfo;
-    private DrawerLayout drawerLayout_Main;
+    protected ArrayList<CardInfo> cardInfo;         //카드목록
+    protected ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;   //즐겨찾기 목록
+    protected ArrayList<CardBookInfo> cardBookInfo; //카드 도감 목록
+    protected ArrayList<CardSetInfo> cardSetInfo;   //카드 세트 목록
+    protected ArrayList<DemonExtraDmgInfo> DEDInfo; //악추피 목록
+    private DrawerLayout drawerLayout_Main;         //메인페이지 메뉴
 
-    protected FavoriteAdapter favoriteAdapter;
-    private RecyclerView rv;
+    protected FavoriteAdapter favoriteAdapter;      //즐겨찾기 어뎁터
+    private RecyclerView rv;                        //카드세트의 즐겨찾기 리스트를 보여주기 위한 리사이클러뷰
 
-    private ImageView imgBtnMenu_Main;
+    private ImageView imgBtnMenu_Main;              //메뉴 버튼
 
-    private TextView txtBtnCardList;
+    private TextView txtBtnCardSet_Draw;            //메뉴 안에 있는 카드 세트 페이지 버튼
+    private TextView txtBtnCardBook_Draw;           //메뉴 안에 있는 카드 도감 페이지 버튼
+    private TextView txtBtnDED_Draw;                //메뉴 안에 있는 악추피 페이지 버튼
+    private TextView txtBtnCardList;                //메뉴 안에 있는 카드 목록 페이지 버튼
 
     //메인화면 값들
-    private TextView txtCardBookStat_Critical;
-    private TextView txtCardBookStat_Speciality;
-    private TextView txtCardBookStat_Agility;
-    private TextView txtDemonExtraDmg;
+    private TextView txtCardBookStat_Critical;      //메인 화면에 있는 카드 도감 스텟 : 치명
+    private TextView txtCardBookStat_Speciality;    //메인 화면에 있는 카드 도감 스텟 : 특화
+    private TextView txtCardBookStat_Agility;       //메인 화면에 있는 카드 도감 스텟 : 신속
+    private TextView txtDemonExtraDmg;              //메인 화면에 있는 악추피 값
 
     public static Context mainContext;
+
+    protected SharedPreferences preferences;        //최초 실행시 가이드 페이지 호출을 위한 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +58,19 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.main_page);
         mainContext = this;
 
+        preferences = getSharedPreferences("Pref", MODE_PRIVATE);
+        boolean isFirstRun = preferences.getBoolean("isFirstRun", true);
+        if (isFirstRun) {
+            Intent guideIntent = new Intent(MainPage.this, GuidePage.class);
+            startActivity(guideIntent);
+        }
+
+
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);
         txtCardBookStat_Speciality = (TextView) findViewById(R.id.txtCardBookStat_Speciality);
         txtCardBookStat_Agility = (TextView) findViewById(R.id.txtCardBookStat_Agility);
+        
         //악추피 값
         txtDemonExtraDmg = (TextView) findViewById(R.id.txtDemonExtraDmg);
 
@@ -68,7 +82,7 @@ public class MainPage extends AppCompatActivity {
 
         //카드 DB 정보 ArrayList 전달
         cardInfo = cardDBHelper.getCardInfo_All();
-        
+
         //DB 순서 변경을 위해 넣어놨던 메소드. 현재 비활성화
         //updateEpic();
         //updateUncommon();
@@ -119,6 +133,36 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SettingCard.class);
+                startActivity(intent);
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
+            }
+        });
+
+        txtBtnCardSet_Draw = (TextView) findViewById(R.id.txtBtnCardSet_Draw);
+        txtBtnCardSet_Draw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CardSetPage.class);
+                startActivity(intent);
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
+            }
+        });
+
+        txtBtnCardBook_Draw = (TextView) findViewById(R.id.txtBtnCardBook_Draw);
+        txtBtnCardBook_Draw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CardBookPage.class);
+                startActivity(intent);
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
+            }
+        });
+
+        txtBtnDED_Draw = (TextView) findViewById(R.id.txtBtnDED_Draw);
+        txtBtnDED_Draw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DemonExtraDmgPage.class);
                 startActivity(intent);
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }
@@ -487,7 +531,7 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    private void updateEpic(){
+    private void updateEpic() {
         for (int i = 0; i < cardInfo.size(); i++) {
             if (cardInfo.get(i).getName().equals("크로마니움")) {
                 if (cardInfo.get(i).getId() == 40045) {

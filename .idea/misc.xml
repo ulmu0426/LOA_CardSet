@@ -13,6 +13,9 @@
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/background_splash.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/custom_checkbox.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/guide_dot.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/guide_select_dot.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/guide_selector.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/awake_havecard_change.xml" value="0.25" />
@@ -28,6 +31,11 @@
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/demon_extra_dmg_page.xml" value="0.33" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/dialog_search_card.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/draw_main.xml" value="0.25" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/guide.xml" value="0.25" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/guide_step_four.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/guide_step_one.xml" value="0.25" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/guide_step_three.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/guide_step_two.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/introduce.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/just_card.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/loading.xml" value="0.35054347826086957" />

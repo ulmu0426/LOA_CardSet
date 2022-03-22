@@ -19,7 +19,7 @@
 
     </style>
     <style name="SplashTheme" parent="Theme.Design.NoActionBar">
-        <item name="android:windowBackground">@drawable/card_legend_wei</item>
+        <item name="android:windowBackground">@drawable/lost_ark_splash2</item>
     </style>
 
 </resources>

@@ -111,30 +111,18 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
+    <CheckBox
+        android:id="@+id/checkBoxInvisibilityDEDPage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_margin="10dp"
         android:background="#E7D4FF"
-        android:paddingHorizontal="10dp"
+        android:buttonTint="#676767"
+        android:layoutDirection="rtl"
+        android:text="  완성된 악추피 도감 숨기기"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="완성된 악추피 도감 숨기기"
-            android:textAlignment="center" />
-
-        <CheckBox
-            android:id="@+id/checkBoxInvisibilityDEDPage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:buttonTint="#676767"
-            tools:ignore="TouchTargetSizeCheck" />
-
-    </LinearLayout>
-
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
