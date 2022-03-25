@@ -1,20 +1,18 @@
 package com.ulmu.lostarkcardmanager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lostarkcardmanager.R;
 
@@ -132,7 +130,7 @@ public class MainPage extends AppCompatActivity {
         txtBtnCardList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SettingCard.class);
+                Intent intent = new Intent(getApplicationContext(), TestSettingCard.class);
                 startActivity(intent);
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }

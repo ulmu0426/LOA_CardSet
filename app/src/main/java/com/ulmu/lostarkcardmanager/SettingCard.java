@@ -57,9 +57,9 @@ public class SettingCard extends AppCompatActivity {
     private ImageView imgMenu;
 
     private ImageView imgSearch;
+    private EditText editSearchCard;
 
     private ConstraintLayout cvCardList;
-    private EditText editSearchCard;
 
     private boolean checkDefault = true;
     private boolean checkName = false;
@@ -391,8 +391,6 @@ public class SettingCard extends AppCompatActivity {
                 continue;
             }
         }
-
-
     }
 
     private void setBtnSettingNormal(TextView btnGrade) {
