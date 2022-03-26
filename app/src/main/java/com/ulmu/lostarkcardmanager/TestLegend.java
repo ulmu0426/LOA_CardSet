@@ -16,14 +16,19 @@ import com.example.lostarkcardmanager.R;
 import java.util.ArrayList;
 
 public class TestLegend extends Fragment {
-    private static String LEGEND = "전설";
-    private RecyclerView rvL;
+    private RecyclerView rv;
     private TestSettingCardAdapter testSettingCardAdapter;
     private TestSettingCard testSettingCard = ((TestSettingCard) TestSettingCard.testSettingCard).getTestSettingCard();
 
     private ArrayList<CardInfo> cardLegend = new ArrayList<>();
+
+    private CharSequence catchFilter;
+    private static final String LEGEND = "전설";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
 
+    private LayoutInflater inflater;
+    private ViewGroup container;
+    private Bundle savedInstanceState;
 
     public static TestLegend newInstance() {
         TestLegend testLegend = new TestLegend();
@@ -33,20 +38,31 @@ public class TestLegend extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        rvL = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
-        rvL.setHasFixedSize(true);
-        rvL.setBackgroundColor(Color.parseColor("#FFF4BD"));
-        settingLegend();
+        this.inflater = inflater;
+        this.container = container;
+        this.savedInstanceState = savedInstanceState;
+
+        rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
+        rv.setHasFixedSize(true);
+        rv.setBackgroundColor(Color.parseColor("#FFF4BD"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardLegend, testSettingCard);
-        rvL.setAdapter(testSettingCardAdapter);
+        rv.setAdapter(testSettingCardAdapter);
 
+        Bundle getData = getArguments();
+        if (getData != null) {
+            catchFilter = getData.getCharSequence("dataSend");
+            testSettingCardAdapter.getFilter().filter(catchFilter);
+        }
 
         return rootView;
     }
 
-    private void settingLegend(){
+    private void settingCardList() {
+        cardLegend = new ArrayList<CardInfo>();
+
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
             if (cardInfo.get(i).getGrade().equals(LEGEND)) {
@@ -58,6 +74,16 @@ public class TestLegend extends Fragment {
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade(cardInfo.get(i).getGrade());
                 cardLegend.add(ci);
+            }
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isResumed()) {
+            if (isVisibleToUser) {
+                onCreateView(inflater, container, savedInstanceState);
             }
         }
     }

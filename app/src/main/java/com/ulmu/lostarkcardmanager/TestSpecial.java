@@ -16,15 +16,17 @@ import com.example.lostarkcardmanager.R;
 import java.util.ArrayList;
 
 public class TestSpecial extends Fragment {
-    private static String SPECIAL = "스페셜";
-    private RecyclerView rvS;
+    private RecyclerView rv;
     private TestSettingCardAdapter testSettingCardAdapter;
     private TestSettingCard testSettingCard = ((TestSettingCard) TestSettingCard.testSettingCard).getTestSettingCard();
 
     private ArrayList<CardInfo> cardSpecial = new ArrayList<>();
+    private static final String SPECIAL = "스페셜";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
 
-    public static TestSpecial newInstance(){
+    private CharSequence catchFilter;
+
+    public static TestSpecial newInstance() {
         TestSpecial testSpecial = new TestSpecial();
         return testSpecial;
     }
@@ -32,19 +34,27 @@ public class TestSpecial extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        rvS = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
-        rvS.setHasFixedSize(true);
-        settingSpecial();
-        rvS.setBackgroundColor(Color.parseColor("#DEFFBB"));
+        rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
+        rv.setHasFixedSize(true);
+        rv.setBackgroundColor(Color.parseColor("#FFDCE9"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardSpecial, testSettingCard);
-        rvS.setAdapter(testSettingCardAdapter);
+        rv.setAdapter(testSettingCardAdapter);
+
+        Bundle getData = getArguments();
+        if (getData != null) {
+            catchFilter = getData.getCharSequence("dataSend");
+            testSettingCardAdapter.getFilter().filter(catchFilter);
+        }
 
         return rootView;
     }
 
-    private void settingSpecial(){
+    private void settingCardList() {
+        cardSpecial = new ArrayList<CardInfo>();
+
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
             if (cardInfo.get(i).getGrade().equals(SPECIAL)) {
@@ -59,4 +69,5 @@ public class TestSpecial extends Fragment {
             }
         }
     }
+
 }

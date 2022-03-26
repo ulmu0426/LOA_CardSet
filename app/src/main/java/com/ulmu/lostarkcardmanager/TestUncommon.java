@@ -16,15 +16,17 @@ import com.example.lostarkcardmanager.R;
 import java.util.ArrayList;
 
 public class TestUncommon extends Fragment {
-    private static String Uncommon = "고급";
-    private RecyclerView rvU;
+    private RecyclerView rv;
     private TestSettingCardAdapter testSettingCardAdapter;
     private TestSettingCard testSettingCard = ((TestSettingCard) TestSettingCard.testSettingCard).getTestSettingCard();
 
     private ArrayList<CardInfo> cardUncommon = new ArrayList<>();
+    private static final String UNCOMMON = "고급";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
 
-    public static TestUncommon newInstance(){
+    private CharSequence catchFilter;
+
+    public static TestUncommon newInstance() {
         TestUncommon testUncommon = new TestUncommon();
         return testUncommon;
     }
@@ -32,22 +34,30 @@ public class TestUncommon extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        rvU = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
-        rvU.setHasFixedSize(true);
-        settingUncommon();
-        rvU.setBackgroundColor(Color.parseColor("#DEFFBB"));
+        rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
+        rv.setHasFixedSize(true);
+        rv.setBackgroundColor(Color.parseColor("#DEFFBB"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardUncommon, testSettingCard);
-        rvU.setAdapter(testSettingCardAdapter);
+        rv.setAdapter(testSettingCardAdapter);
+
+        Bundle getData = getArguments();
+        if (getData != null) {
+            catchFilter = getData.getCharSequence("dataSend");
+            testSettingCardAdapter.getFilter().filter(catchFilter);
+        }
 
         return rootView;
     }
 
-    private void settingUncommon(){
+    private void settingCardList() {
+        cardUncommon = new ArrayList<CardInfo>();
+
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
-            if (cardInfo.get(i).getGrade().equals(Uncommon)) {
+            if (cardInfo.get(i).getGrade().equals(UNCOMMON)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
@@ -59,4 +69,5 @@ public class TestUncommon extends Fragment {
             }
         }
     }
+
 }

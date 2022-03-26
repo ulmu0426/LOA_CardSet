@@ -16,15 +16,21 @@ import com.example.lostarkcardmanager.R;
 import java.util.ArrayList;
 
 public class TestEpic extends Fragment {
-    private static String EPIC = "영웅";
-    private RecyclerView rvE;
+    private RecyclerView rv;
     private TestSettingCardAdapter testSettingCardAdapter;
     private TestSettingCard testSettingCard = ((TestSettingCard) TestSettingCard.testSettingCard).getTestSettingCard();
 
     private ArrayList<CardInfo> cardEpic = new ArrayList<>();
+    private static final String EPIC = "영웅";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
 
-    public static TestEpic newInstance(){
+    private CharSequence catchFilter;
+
+    private LayoutInflater inflater;
+    private ViewGroup container;
+    private Bundle savedInstanceState;
+
+    public static TestEpic newInstance() {
         TestEpic testEpic = new TestEpic();
         return testEpic;
     }
@@ -32,19 +38,31 @@ public class TestEpic extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        rvE = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
-        rvE.setHasFixedSize(true);
-        rvE.setBackgroundColor(Color.parseColor("#ECE2FF"));
-        settingEpic();
+        this.inflater = inflater;
+        this.container = container;
+        this.savedInstanceState = savedInstanceState;
+
+        rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
+        rv.setHasFixedSize(true);
+        rv.setBackgroundColor(Color.parseColor("#ECE2FF"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardEpic, testSettingCard);
-        rvE.setAdapter(testSettingCardAdapter);
+        rv.setAdapter(testSettingCardAdapter);
+
+        Bundle getData = getArguments();
+        if (getData != null) {
+            catchFilter = getData.getCharSequence("dataSend");
+            testSettingCardAdapter.getFilter().filter(catchFilter);
+        }
 
         return rootView;
     }
 
-    private void settingEpic(){
+    private void settingCardList() {
+        cardEpic = new ArrayList<CardInfo>();
+
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
             if (cardInfo.get(i).getGrade().equals(EPIC)) {
@@ -56,6 +74,17 @@ public class TestEpic extends Fragment {
                 ci.setGetCard(cardInfo.get(i).getGetCard());
                 ci.setGrade(cardInfo.get(i).getGrade());
                 cardEpic.add(ci);
+            }
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        onResume();
+        if (isResumed()) {
+            if (isVisibleToUser) {
+                onCreateView(inflater, container, savedInstanceState);
             }
         }
     }

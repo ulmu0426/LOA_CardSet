@@ -16,15 +16,17 @@ import com.example.lostarkcardmanager.R;
 import java.util.ArrayList;
 
 public class TestRare extends Fragment {
-    private static String RARE = "희귀";
-    private RecyclerView rvR;
+    private RecyclerView rv;
     private TestSettingCardAdapter testSettingCardAdapter;
     private TestSettingCard testSettingCard = ((TestSettingCard) TestSettingCard.testSettingCard).getTestSettingCard();
 
     private ArrayList<CardInfo> cardRare = new ArrayList<>();
+    private static final String RARE = "희귀";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
 
-    public static TestRare newInstance(){
+    private CharSequence catchFilter;
+
+    public static TestRare newInstance() {
         TestRare testRare = new TestRare();
         return testRare;
     }
@@ -32,19 +34,27 @@ public class TestRare extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        rvR = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
-        rvR.setHasFixedSize(true);
-        settingRare();
-        rvR.setBackgroundColor(Color.parseColor("#DDEFFF"));
+        rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
+        rv.setHasFixedSize(true);
+        rv.setBackgroundColor(Color.parseColor("#DDEFFF"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardRare, testSettingCard);
-        rvR.setAdapter(testSettingCardAdapter);
+        rv.setAdapter(testSettingCardAdapter);
+
+        Bundle getData = getArguments();
+        if (getData != null) {
+            catchFilter = getData.getCharSequence("dataSend");
+            testSettingCardAdapter.getFilter().filter(catchFilter);
+        }
 
         return rootView;
     }
 
-    private void settingRare(){
+    private void settingCardList() {
+        cardRare = new ArrayList<CardInfo>();
+
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
             if (cardInfo.get(i).getGrade().equals(RARE)) {
@@ -59,4 +69,5 @@ public class TestRare extends Fragment {
             }
         }
     }
+
 }

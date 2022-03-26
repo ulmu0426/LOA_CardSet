@@ -16,13 +16,15 @@ import com.example.lostarkcardmanager.R;
 import java.util.ArrayList;
 
 public class TestCommon extends Fragment {
-    private static String Common = "일반";
-    private RecyclerView rvC;
+    private RecyclerView rv;
     private TestSettingCardAdapter testSettingCardAdapter;
     private TestSettingCard testSettingCard = ((TestSettingCard) TestSettingCard.testSettingCard).getTestSettingCard();
 
     private ArrayList<CardInfo> cardCommon = new ArrayList<>();
+    private static final String COMMON = "일반";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+
+    private CharSequence catchFilter;
 
     public static TestCommon newInstance() {
         TestCommon testCommon = new TestCommon();
@@ -34,20 +36,28 @@ public class TestCommon extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        rvC = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
-        rvC.setHasFixedSize(true);
-        settingCommon();
-        rvC.setBackgroundColor(Color.parseColor("#F4F4F4"));
+        rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
+        rv.setHasFixedSize(true);
+        rv.setBackgroundColor(Color.parseColor("#F4F4F4"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardCommon, testSettingCard);
-        rvC.setAdapter(testSettingCardAdapter);
+        rv.setAdapter(testSettingCardAdapter);
+
+        Bundle getData = getArguments();
+        if (getData != null) {
+            catchFilter = getData.getCharSequence("dataSend");
+            testSettingCardAdapter.getFilter().filter(catchFilter);
+        }
 
         return rootView;
     }
 
-    private void settingCommon() {
+    private void settingCardList() {
+        cardCommon = new ArrayList<CardInfo>();
+
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
-            if (cardInfo.get(i).getGrade().equals(Common)) {
+            if (cardInfo.get(i).getGrade().equals(COMMON)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
                 ci.setCount(cardInfo.get(i).getCount());
@@ -59,4 +69,5 @@ public class TestCommon extends Fragment {
             }
         }
     }
+
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/clViewPager">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTopPanelViewPager"
@@ -55,6 +56,7 @@
         android:id="@+id/cvViewPager2CardList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tabLayoutCardList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +68,6 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +80,7 @@
         android:id="@+id/tabLayoutCardList"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="#DDDDDD"
         app:layout_constraintBottom_toTopOf="@+id/cvViewPager2Background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,32 +89,38 @@
         app:tabTextColor="#000000">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tILegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusedByDefault="true"
             android:text="전설" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tIEpic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="영웅" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tIRare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="희귀" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tIUncommon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="고급" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tICommon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="일반" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tISpecial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="스페셜" />

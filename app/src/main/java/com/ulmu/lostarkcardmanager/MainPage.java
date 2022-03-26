@@ -56,12 +56,14 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.main_page);
         mainContext = this;
 
+/*
         preferences = getSharedPreferences("Pref", MODE_PRIVATE);
         boolean isFirstRun = preferences.getBoolean("isFirstRun", true);
         if (isFirstRun) {
             Intent guideIntent = new Intent(MainPage.this, GuidePage.class);
             startActivity(guideIntent);
         }
+*/
 
 
         //치,특,신 값

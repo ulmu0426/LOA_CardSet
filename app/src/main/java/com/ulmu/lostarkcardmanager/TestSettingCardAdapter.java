@@ -345,5 +345,10 @@ public class TestSettingCardAdapter extends RecyclerView.Adapter<TestSettingCard
         };
     }
 
+    public void startFilter(boolean isResumed, CharSequence s){
+        if(isResumed){
+            getFilter().filter(s);
+        }
+    }
 
 }
