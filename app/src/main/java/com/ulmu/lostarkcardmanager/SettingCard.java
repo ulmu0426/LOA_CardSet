@@ -19,8 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.util.ArrayList;
 
 public class SettingCard extends AppCompatActivity {

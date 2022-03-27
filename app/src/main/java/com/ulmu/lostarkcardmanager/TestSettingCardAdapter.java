@@ -21,8 +21,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.util.ArrayList;
 
 public class TestSettingCardAdapter extends RecyclerView.Adapter<TestSettingCardAdapter.ViewHolder> {
@@ -343,12 +341,6 @@ public class TestSettingCardAdapter extends RecyclerView.Adapter<TestSettingCard
                 notifyDataSetChanged();
             }
         };
-    }
-
-    public void startFilter(boolean isResumed, CharSequence s){
-        if(isResumed){
-            getFilter().filter(s);
-        }
     }
 
 }

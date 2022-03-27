@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;

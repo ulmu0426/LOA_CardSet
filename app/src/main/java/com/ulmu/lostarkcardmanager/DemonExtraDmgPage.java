@@ -15,8 +15,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.text.DecimalFormat;
 
 public class DemonExtraDmgPage extends AppCompatActivity {

@@ -1,37 +1,47 @@
 package com.ulmu.lostarkcardmanager;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.lostarkcardmanager.R;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestSettingCard extends AppCompatActivity {
 
     private CardDBHelper cardDBHelper;
     private Context context;
 
-    private ViewPager viewPager;
-    private FragmentPagerAdapter fragmentPagerAdapter;
+    private ViewPager2 viewPager;
     private TabLayout tabLayout;
+
+    private TestViewPagerAdapter testViewPagerAdapter;
+    private TestFragmentPagerAdapter fragmentPagerAdapter;
+    private ArrayList<Fragment> fragmentList;
 
     private ArrayList<CardInfo> cardInfo;
     private ArrayList<CardInfo> cardLegend;
@@ -48,12 +58,6 @@ public class TestSettingCard extends AppCompatActivity {
     private String COMMON = "일반";
     private String SPECIAL = "스페셜";
 
-    private TabItem tILegend;
-    private TabItem tIEpic;
-    private TabItem tIRare;
-    private TabItem tIUncommon;
-    private TabItem tICommon;
-    private TabItem tISpecial;
 
     private ImageView imgSearch;
     private ConstraintLayout cvCardList;
@@ -84,24 +88,60 @@ public class TestSettingCard extends AppCompatActivity {
         checkAll[2] = checkNotAcquiredSort;
         checkAll[3] = checkAcquiredSort;
 
-        tILegend = findViewById(R.id.tILegend);
-        tIEpic = findViewById(R.id.tIEpic);
-        tIRare = findViewById(R.id.tIRare);
-        tIUncommon = findViewById(R.id.tIUncommon);
-        tICommon = findViewById(R.id.tICommon);
-        tISpecial = findViewById(R.id.tISpecial);
-
 
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         settingCardList();
 
-
-        viewPager = findViewById(R.id.vpCardList);
-        fragmentPagerAdapter = new TestFragmentPagerAdapter(getSupportFragmentManager());
-
         tabLayout = findViewById(R.id.tabLayoutCardList);
-        viewPager.setAdapter(fragmentPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        viewPager = findViewById(R.id.vpCardList);
+
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new TestLegend().newInstance());
+        fragmentList.add(new TestEpic().newInstance());
+        fragmentList.add(new TestRare().newInstance());
+        fragmentList.add(new TestUncommon().newInstance());
+        fragmentList.add(new TestCommon().newInstance());
+        fragmentList.add(new TestSpecial().newInstance());
+
+        testViewPagerAdapter = new TestViewPagerAdapter(this);
+        fragmentPagerAdapter = new TestFragmentPagerAdapter(this, fragmentList);
+
+        //viewPager.setAdapter(testViewPagerAdapter); //리사이클러뷰 형태로 어뎁팅
+        viewPager.setAdapter(fragmentPagerAdapter); //프래그먼트 어뎁팅
+
+        final List<String> tabText = Arrays.asList(LEGEND, EPIC, RARE, UNCOMMON, COMMON, SPECIAL);
+
+        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                TextView textView = new TextView(TestSettingCard.this);
+                textView.setText(tabText.get(position));
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textView.setTypeface(null, Typeface.BOLD);
+                tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
+                switch (position) {
+                    case 0:
+                        textView.setTextColor(Color.parseColor("#FFF4BD"));
+                        break;
+                    case 1:
+                        textView.setTextColor(Color.parseColor("#ECE2FF"));
+                        break;
+                    case 2:
+                        textView.setTextColor(Color.parseColor("#DDEFFF"));
+                        break;
+                    case 3:
+                        textView.setTextColor(Color.parseColor("#DEFFBB"));
+                        break;
+                    case 4:
+                        textView.setTextColor(Color.parseColor("#F4F4F4"));
+                        break;
+                    case 5:
+                        textView.setTextColor(Color.parseColor("#FFDCE9"));
+                        break;
+                }
+                tab.setCustomView(textView);
+            }
+        }).attach();
 
         imgSearch = findViewById(R.id.imgSearch_ViewPager);
         cvCardList = findViewById(R.id.cvViewPager2CardList);
@@ -118,22 +158,22 @@ public class TestSettingCard extends AppCompatActivity {
             }
         });
 
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
-                currentItem = position;
-
+                super.onPageSelected(position);
+                currentItem = viewPager.getCurrentItem();
+                Log.v("test", "currentItem : " + currentItem);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                super.onPageScrollStateChanged(state);
             }
         });
 
@@ -145,48 +185,7 @@ public class TestSettingCard extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                Bundle data = new Bundle();
-
-                if (s.length() == 0) {
-                    filterChar = "";
-                } else {
-                    filterChar = s;
-                }
-
-                data.putCharSequence("dataSend", filterChar);
-
-                if (currentItem == 0){
-                    TestLegend sendFragment = new TestLegend();
-                    sendFragment.setArguments(data);
-                    fragmentTransaction.replace(R.id.clFragment, sendFragment).commit();
-                }
-                if (currentItem == 1){
-                    TestEpic sendFragment = new TestEpic();
-                    sendFragment.setArguments(data);
-                    fragmentTransaction.replace(R.id.clFragment, sendFragment).commit();
-                }
-                if (currentItem == 2){
-                    TestRare sendFragment = new TestRare();
-                    sendFragment.setArguments(data);
-                    fragmentTransaction.replace(R.id.clFragment, sendFragment).commit();
-                }
-                if (currentItem == 3){
-                    TestUncommon sendFragment = new TestUncommon();
-                    sendFragment.setArguments(data);
-                    fragmentTransaction.replace(R.id.clFragment, sendFragment).commit();
-                }
-                if (currentItem == 4){
-                    TestCommon sendFragment = new TestCommon();
-                    sendFragment.setArguments(data);
-                    fragmentTransaction.replace(R.id.clFragment, sendFragment).commit();
-                }
-                if (currentItem == 5){
-                    TestSpecial sendFragment = new TestSpecial();
-                    sendFragment.setArguments(data);
-                    fragmentTransaction.replace(R.id.clFragment, sendFragment).commit();
-                }
+                
             }
 
             @Override

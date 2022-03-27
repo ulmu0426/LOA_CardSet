@@ -1,63 +1,38 @@
 package com.ulmu.lostarkcardmanager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.adapter.FragmentViewHolder;
 
-public class TestFragmentPagerAdapter extends FragmentPagerAdapter {
+import java.util.ArrayList;
+import java.util.List;
 
-    public TestFragmentPagerAdapter(@NonNull FragmentManager fm) {
-        super(fm);
+public class TestFragmentPagerAdapter extends FragmentStateAdapter {
+
+    private ArrayList<Fragment> fragmentArrayList;
+
+    public TestFragmentPagerAdapter(@NonNull FragmentActivity fragmentActivity, ArrayList<Fragment> fragmentArrayList) {
+        super(fragmentActivity);
+        this.fragmentArrayList = fragmentArrayList;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull FragmentViewHolder holder, int position, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return TestLegend.newInstance();
-            case 1:
-                return TestEpic.newInstance();
-            case 2:
-                return TestRare.newInstance();
-            case 3:
-                return TestUncommon.newInstance();
-            case 4:
-                return TestCommon.newInstance();
-            case 5:
-                return TestSpecial.newInstance();
-            default:
-                return null;
-        }
+    public Fragment createFragment(int position) {
+        return fragmentArrayList.get(position);
     }
 
     @Override
-    public int getCount() {
-        return 6;
-    }
-
-    //상단의 탭 레이아웃 인디케이터의 텍스트를 선언해주는 곳
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "전설";
-            case 1:
-                return "영웅";
-            case 2:
-                return "희귀";
-            case 3:
-                return "고급";
-            case 4:
-                return "일반";
-            case 5:
-                return "스페셜";
-            default:
-                return null;
-        }
+    public int getItemCount() {
+        return fragmentArrayList.size();
     }
 
 }

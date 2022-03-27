@@ -11,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.util.ArrayList;
 
 public class TestEpic extends Fragment {
@@ -30,7 +28,7 @@ public class TestEpic extends Fragment {
     private ViewGroup container;
     private Bundle savedInstanceState;
 
-    public static TestEpic newInstance() {
+    public TestEpic newInstance() {
         TestEpic testEpic = new TestEpic();
         return testEpic;
     }

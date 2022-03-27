@@ -16,8 +16,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 public class CardBookPage extends AppCompatActivity {
     private static final String CRITICAL = "치명 + ";
     private static final String SPECIALITY = "특화 + ";

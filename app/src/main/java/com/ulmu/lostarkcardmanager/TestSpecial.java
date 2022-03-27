@@ -11,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.util.ArrayList;
 
 public class TestSpecial extends Fragment {
@@ -26,10 +24,13 @@ public class TestSpecial extends Fragment {
 
     private CharSequence catchFilter;
 
-    public static TestSpecial newInstance() {
+
+    public TestSpecial newInstance() {
         TestSpecial testSpecial = new TestSpecial();
+        settingCardList();
         return testSpecial;
     }
+
 
     @Nullable
     @Override
@@ -39,7 +40,6 @@ public class TestSpecial extends Fragment {
         rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
         rv.setHasFixedSize(true);
         rv.setBackgroundColor(Color.parseColor("#FFDCE9"));
-        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardSpecial, testSettingCard);
         rv.setAdapter(testSettingCardAdapter);
 

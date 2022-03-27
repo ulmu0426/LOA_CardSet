@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.lostarkcardmanager.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class GuidePage extends FragmentActivity {
@@ -25,7 +24,6 @@ public class GuidePage extends FragmentActivity {
         setContentView(R.layout.guide);
 
         vpGuide = findViewById(R.id.vpGuide);
-        tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpGuide);
 
         skip = findViewById(R.id.btnSkip);

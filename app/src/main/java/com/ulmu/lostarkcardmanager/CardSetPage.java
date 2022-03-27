@@ -14,9 +14,6 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
-
 public class CardSetPage extends AppCompatActivity {
 
     private RecyclerView rv;

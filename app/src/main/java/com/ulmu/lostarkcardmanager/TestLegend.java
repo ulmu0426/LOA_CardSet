@@ -2,6 +2,7 @@ package com.ulmu.lostarkcardmanager;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.lostarkcardmanager.R;
 
 import java.util.ArrayList;
 
@@ -30,10 +29,12 @@ public class TestLegend extends Fragment {
     private ViewGroup container;
     private Bundle savedInstanceState;
 
-    public static TestLegend newInstance() {
+    public TestLegend newInstance() {
         TestLegend testLegend = new TestLegend();
+        settingCardList();
         return testLegend;
     }
+
 
     @Nullable
     @Override
@@ -47,7 +48,6 @@ public class TestLegend extends Fragment {
         rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
         rv.setHasFixedSize(true);
         rv.setBackgroundColor(Color.parseColor("#FFF4BD"));
-        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardLegend, testSettingCard);
         rv.setAdapter(testSettingCardAdapter);
 
@@ -76,6 +76,10 @@ public class TestLegend extends Fragment {
                 cardLegend.add(ci);
             }
         }
+    }
+
+    public void LOGMEN() {
+        Log.v("test", "log");
     }
 
     @Override

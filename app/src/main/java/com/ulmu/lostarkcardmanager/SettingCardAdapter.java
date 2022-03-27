@@ -22,8 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;

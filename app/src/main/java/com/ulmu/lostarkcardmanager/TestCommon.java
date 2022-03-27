@@ -11,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lostarkcardmanager.R;
-
 import java.util.ArrayList;
 
 public class TestCommon extends Fragment {
@@ -26,7 +24,7 @@ public class TestCommon extends Fragment {
 
     private CharSequence catchFilter;
 
-    public static TestCommon newInstance() {
+    public TestCommon newInstance() {
         TestCommon testCommon = new TestCommon();
         return testCommon;
     }
