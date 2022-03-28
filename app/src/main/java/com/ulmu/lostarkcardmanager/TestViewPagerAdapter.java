@@ -96,11 +96,6 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
 
     }
 
-    public void filtered(CharSequence s){
-        testSettingCardAdapter.getFilter().filter(s);
-    }
-
-
     private void settingCardList() {
         cardLegend = new ArrayList<CardInfo>();
         cardEpic = new ArrayList<CardInfo>();

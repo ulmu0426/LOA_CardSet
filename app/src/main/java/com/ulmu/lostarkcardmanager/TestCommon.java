@@ -41,9 +41,9 @@ public class TestCommon extends Fragment {
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardCommon, testSettingCard);
         rv.setAdapter(testSettingCardAdapter);
 
-        Bundle getData = getArguments();
-        if (getData != null) {
-            catchFilter = getData.getCharSequence("dataSend");
+
+        if (getArguments() != null) {
+            catchFilter = getArguments().getCharSequence("dataSend");
             testSettingCardAdapter.getFilter().filter(catchFilter);
         }
 

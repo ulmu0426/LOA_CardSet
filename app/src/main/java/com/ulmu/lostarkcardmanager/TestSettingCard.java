@@ -88,6 +88,8 @@ public class TestSettingCard extends AppCompatActivity {
         checkAll[2] = checkNotAcquiredSort;
         checkAll[3] = checkAcquiredSort;
 
+        Bundle bundle = new Bundle();
+        bundle.putCharSequence("dataSend", filterChar);
 
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         settingCardList();
@@ -102,6 +104,7 @@ public class TestSettingCard extends AppCompatActivity {
         fragmentList.add(new TestUncommon().newInstance());
         fragmentList.add(new TestCommon().newInstance());
         fragmentList.add(new TestSpecial().newInstance());
+
 
         testViewPagerAdapter = new TestViewPagerAdapter(this);
         fragmentPagerAdapter = new TestFragmentPagerAdapter(this, fragmentList);
@@ -142,6 +145,13 @@ public class TestSettingCard extends AppCompatActivity {
                 tab.setCustomView(textView);
             }
         }).attach();
+
+
+        Fragment frg = null;
+        frg = (TestLegend)getSupportFragmentManager().findFragmentById(R.id.rvCardListFragment);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.detach(fragmentList.get(currentItem)).attach(fragmentList.get(currentItem)).commit();
 
         imgSearch = findViewById(R.id.imgSearch_ViewPager);
         cvCardList = findViewById(R.id.cvViewPager2CardList);
@@ -185,7 +195,16 @@ public class TestSettingCard extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                
+                filterChar = s;
+                Bundle putCharSequence = new Bundle();
+                putCharSequence.putCharSequence("dataSend", filterChar);
+
+                for (int i = 0; i < fragmentList.size(); i++) {
+                    fragmentList.get(i).setArguments(putCharSequence);
+                }
+
+                fragmentPagerAdapter.filtering(currentItem);
+
             }
 
             @Override
@@ -375,6 +394,7 @@ public class TestSettingCard extends AppCompatActivity {
     public void onBackPressed() {
         if (cvCardList.getVisibility() == View.VISIBLE) {
             cvCardList.setVisibility(View.GONE);
+            editSearchCard.setText(null);
             return;
         }
         finish();

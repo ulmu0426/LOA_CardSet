@@ -2,7 +2,6 @@ package com.ulmu.lostarkcardmanager;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +24,8 @@ public class TestLegend extends Fragment {
     private static final String LEGEND = "전설";
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
 
-    private LayoutInflater inflater;
-    private ViewGroup container;
-    private Bundle savedInstanceState;
-
-    public TestLegend newInstance() {
+    public static TestLegend newInstance() {
         TestLegend testLegend = new TestLegend();
-        settingCardList();
         return testLegend;
     }
 
@@ -41,20 +35,17 @@ public class TestLegend extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cardlist, container, false);
 
-        this.inflater = inflater;
-        this.container = container;
-        this.savedInstanceState = savedInstanceState;
-
         rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
         rv.setHasFixedSize(true);
         rv.setBackgroundColor(Color.parseColor("#FFF4BD"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardLegend, testSettingCard);
         rv.setAdapter(testSettingCardAdapter);
 
-        Bundle getData = getArguments();
-        if (getData != null) {
-            catchFilter = getData.getCharSequence("dataSend");
+        if (getArguments() != null) {
+            catchFilter = getArguments().getCharSequence("dataSend");
             testSettingCardAdapter.getFilter().filter(catchFilter);
+            rv.setAdapter(testSettingCardAdapter);
         }
 
         return rootView;
@@ -78,17 +69,4 @@ public class TestLegend extends Fragment {
         }
     }
 
-    public void LOGMEN() {
-        Log.v("test", "log");
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isResumed()) {
-            if (isVisibleToUser) {
-                onCreateView(inflater, container, savedInstanceState);
-            }
-        }
-    }
 }

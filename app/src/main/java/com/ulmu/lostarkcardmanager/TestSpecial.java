@@ -27,7 +27,6 @@ public class TestSpecial extends Fragment {
 
     public TestSpecial newInstance() {
         TestSpecial testSpecial = new TestSpecial();
-        settingCardList();
         return testSpecial;
     }
 
@@ -40,12 +39,13 @@ public class TestSpecial extends Fragment {
         rv = (RecyclerView) rootView.findViewById(R.id.rvCardListFragment);
         rv.setHasFixedSize(true);
         rv.setBackgroundColor(Color.parseColor("#FFDCE9"));
+        settingCardList();
         testSettingCardAdapter = new TestSettingCardAdapter(getContext(), cardSpecial, testSettingCard);
         rv.setAdapter(testSettingCardAdapter);
 
-        Bundle getData = getArguments();
-        if (getData != null) {
-            catchFilter = getData.getCharSequence("dataSend");
+
+        if (getArguments() != null) {
+            catchFilter = getArguments().getCharSequence("dataSend");
             testSettingCardAdapter.getFilter().filter(catchFilter);
         }
 
