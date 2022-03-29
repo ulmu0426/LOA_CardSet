@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdapter.ViewHolder> {
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
@@ -58,7 +60,8 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.onBind(cardListInfo.get(position));
-        testSettingCardAdapter = new TestSettingCardAdapter(context, cardListInfo.get(position), testSettingCard);
+        testSettingCardAdapter = new TestSettingCardAdapter(context, cardListInfo.get(position));
+
         holder.rv.setAdapter(testSettingCardAdapter);
 
     }
@@ -93,8 +96,166 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             }
         }
 
-
     }
+
+    private ArrayList<CardInfo> searchFilter(CharSequence filterString, ArrayList<CardInfo> cardInfo) {
+        ArrayList<CardInfo> tempFilterList = new ArrayList<>();
+        String charString = filterString.toString();
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().contains(charString)) {
+                tempFilterList.add(cardInfo.get(i));
+            }
+        }
+        return tempFilterList;
+    }
+
+    public void search(CharSequence filterString) {
+        ArrayList<CardInfo> tempFilterListL = new ArrayList<>();
+        ArrayList<CardInfo> tempFilterListE = new ArrayList<>();
+        ArrayList<CardInfo> tempFilterListR = new ArrayList<>();
+        ArrayList<CardInfo> tempFilterListU = new ArrayList<>();
+        ArrayList<CardInfo> tempFilterListC = new ArrayList<>();
+        ArrayList<CardInfo> tempFilterListS = new ArrayList<>();
+        tempFilterListL.addAll(cardLegend);
+        tempFilterListE.addAll(cardEpic);
+        tempFilterListR.addAll(cardRare);
+        tempFilterListU.addAll(cardUncommon);
+        tempFilterListC.addAll(cardCommon);
+        tempFilterListS.addAll(cardSpecial);
+
+        if (!filterString.equals(null) || filterString.length() != 0) {
+            tempFilterListL = searchFilter(filterString, tempFilterListL);
+            tempFilterListE = searchFilter(filterString, tempFilterListE);
+            tempFilterListR = searchFilter(filterString, tempFilterListR);
+            tempFilterListU = searchFilter(filterString, tempFilterListU);
+            tempFilterListC = searchFilter(filterString, tempFilterListC);
+            tempFilterListS = searchFilter(filterString, tempFilterListS);
+        }else {
+            tempFilterListL.addAll(cardLegend);
+            tempFilterListE.addAll(cardEpic);
+            tempFilterListR.addAll(cardRare);
+            tempFilterListU.addAll(cardUncommon);
+            tempFilterListC.addAll(cardCommon);
+            tempFilterListS.addAll(cardSpecial);
+        }
+
+        cardListInfo.set(0, tempFilterListL);
+        cardListInfo.set(1, tempFilterListE);
+        cardListInfo.set(2, tempFilterListR);
+        cardListInfo.set(3, tempFilterListU);
+        cardListInfo.set(4, tempFilterListC);
+        cardListInfo.set(5, tempFilterListS);
+        notifyDataSetChanged();
+    }
+
+
+    private int boolArrayCheck(boolean[] checkAll) {
+        int check = 0;
+        // 0 : 디폴트
+        // 1 : 이름
+        // 2 : 미획득
+        // 3 : 획득
+        for (int i = 0; i < checkAll.length; i++) {
+            if (checkAll[i]) {
+                check = i;
+            }
+        }
+
+        return check;
+    }
+
+    public void sortingCard(boolean[] checkAll) {
+        switch (boolArrayCheck(checkAll)) {
+            case 0:
+                getDefaultSort(cardLegend);
+                getDefaultSort(cardEpic);
+                getDefaultSort(cardRare);
+                getDefaultSort(cardUncommon);
+                getDefaultSort(cardCommon);
+                getDefaultSort(cardSpecial);
+                break;
+            case 1:
+                getNameSort(cardLegend);
+                getNameSort(cardEpic);
+                getNameSort(cardRare);
+                getNameSort(cardUncommon);
+                getNameSort(cardCommon);
+                getNameSort(cardSpecial);
+                break;
+            case 2:
+                getNotAcquiredSort(cardLegend);
+                getNotAcquiredSort(cardEpic);
+                getNotAcquiredSort(cardRare);
+                getNotAcquiredSort(cardUncommon);
+                getNotAcquiredSort(cardCommon);
+                getNotAcquiredSort(cardSpecial);
+                break;
+            case 3:
+                getAcquiredSort(cardLegend);
+                getAcquiredSort(cardEpic);
+                getAcquiredSort(cardRare);
+                getAcquiredSort(cardUncommon);
+                getAcquiredSort(cardCommon);
+                getAcquiredSort(cardSpecial);
+                break;
+            default:
+                return;
+        }
+        cardListInfo.set(0, cardLegend);
+        cardListInfo.set(1, cardEpic);
+        cardListInfo.set(2, cardRare);
+        cardListInfo.set(3, cardUncommon);
+        cardListInfo.set(4, cardCommon);
+        cardListInfo.set(5, cardSpecial);
+
+        notifyDataSetChanged();
+    }
+
+
+    private void getDefaultSort(ArrayList<CardInfo> cardInfo) {
+        Collections.sort(cardInfo, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if (o1.getId() < o2.getId())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    private void getNameSort(ArrayList<CardInfo> cardInfo) {
+        Collections.sort(cardInfo);
+        notifyDataSetChanged();
+    }
+
+    private void getNotAcquiredSort(ArrayList<CardInfo> cardInfo) {
+        Collections.sort(cardInfo, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if (o1.getGetCard() <= o2.getGetCard())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    private void getAcquiredSort(ArrayList<CardInfo> cardInfo) {
+        Collections.sort(cardInfo, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if (o1.getGetCard() <= o2.getGetCard())
+                    return 1;
+                else
+                    return -1;
+            }
+        });
+        notifyDataSetChanged();
+    }
+
 
     private void settingCardList() {
         cardLegend = new ArrayList<CardInfo>();

@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -40,7 +37,7 @@ public class TestSettingCard extends AppCompatActivity {
     private TabLayout tabLayout;
 
     private TestViewPagerAdapter testViewPagerAdapter;
-    private TestFragmentPagerAdapter fragmentPagerAdapter;
+    //private TestFragmentPagerAdapter fragmentPagerAdapter;
     private ArrayList<Fragment> fragmentList;
 
     private ArrayList<CardInfo> cardInfo;
@@ -83,6 +80,7 @@ public class TestSettingCard extends AppCompatActivity {
         setContentView(R.layout.cardlist_viewpager);
         testSettingCard = this;
         context = this;
+        cardDBHelper = new CardDBHelper(context);
         checkAll[0] = checkDefault;
         checkAll[1] = checkName;
         checkAll[2] = checkNotAcquiredSort;
@@ -97,20 +95,10 @@ public class TestSettingCard extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayoutCardList);
         viewPager = findViewById(R.id.vpCardList);
 
-        fragmentList = new ArrayList<>();
-        fragmentList.add(new TestLegend().newInstance());
-        fragmentList.add(new TestEpic().newInstance());
-        fragmentList.add(new TestRare().newInstance());
-        fragmentList.add(new TestUncommon().newInstance());
-        fragmentList.add(new TestCommon().newInstance());
-        fragmentList.add(new TestSpecial().newInstance());
-
 
         testViewPagerAdapter = new TestViewPagerAdapter(this);
-        fragmentPagerAdapter = new TestFragmentPagerAdapter(this, fragmentList);
 
-        //viewPager.setAdapter(testViewPagerAdapter); //리사이클러뷰 형태로 어뎁팅
-        viewPager.setAdapter(fragmentPagerAdapter); //프래그먼트 어뎁팅
+        viewPager.setAdapter(testViewPagerAdapter); //리사이클러뷰 형태로 어뎁팅
 
         final List<String> tabText = Arrays.asList(LEGEND, EPIC, RARE, UNCOMMON, COMMON, SPECIAL);
 
@@ -146,13 +134,6 @@ public class TestSettingCard extends AppCompatActivity {
             }
         }).attach();
 
-
-        Fragment frg = null;
-        frg = (TestLegend)getSupportFragmentManager().findFragmentById(R.id.rvCardListFragment);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.detach(fragmentList.get(currentItem)).attach(fragmentList.get(currentItem)).commit();
-
         imgSearch = findViewById(R.id.imgSearch_ViewPager);
         cvCardList = findViewById(R.id.cvViewPager2CardList);
 
@@ -168,25 +149,6 @@ public class TestSettingCard extends AppCompatActivity {
             }
         });
 
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                currentItem = viewPager.getCurrentItem();
-                Log.v("test", "currentItem : " + currentItem);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
-            }
-        });
-
         editSearchCard.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -196,14 +158,7 @@ public class TestSettingCard extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 filterChar = s;
-                Bundle putCharSequence = new Bundle();
-                putCharSequence.putCharSequence("dataSend", filterChar);
-
-                for (int i = 0; i < fragmentList.size(); i++) {
-                    fragmentList.get(i).setArguments(putCharSequence);
-                }
-
-                fragmentPagerAdapter.filtering(currentItem);
+                testViewPagerAdapter.search(filterChar);
 
             }
 
@@ -213,7 +168,7 @@ public class TestSettingCard extends AppCompatActivity {
             }
         });
 
-        cardDBHelper = new CardDBHelper(context);
+
         imgMenu = findViewById(R.id.imgMenu_ViewPager);
         imgMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,8 +176,6 @@ public class TestSettingCard extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(context, imgMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                Bundle data = new Bundle();
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -235,6 +188,7 @@ public class TestSettingCard extends AppCompatActivity {
                                     else
                                         checkAll[i] = false;
                                 }
+                                testViewPagerAdapter.sortingCard(checkAll);
 
                                 return true;
 
@@ -245,6 +199,7 @@ public class TestSettingCard extends AppCompatActivity {
                                     else
                                         checkAll[i] = false;
                                 }
+                                testViewPagerAdapter.sortingCard(checkAll);
 
                                 return true;
 
@@ -255,6 +210,8 @@ public class TestSettingCard extends AppCompatActivity {
                                     else
                                         checkAll[i] = false;
                                 }
+                                testViewPagerAdapter.sortingCard(checkAll);
+
 
                                 return true;
 
@@ -265,6 +222,8 @@ public class TestSettingCard extends AppCompatActivity {
                                     else
                                         checkAll[i] = false;
                                 }
+                                testViewPagerAdapter.sortingCard(checkAll);
+
 
                                 return true;
 
@@ -362,42 +321,14 @@ public class TestSettingCard extends AppCompatActivity {
         }
     }
 
-    public boolean isCheckDefault() {
-        return checkDefault;
-    }
-
-    public boolean isCheckName() {
-        return checkName;
-    }
-
-    public boolean isCheckNotAcquiredSort() {
-        return checkNotAcquiredSort;
-    }
-
-    public boolean isCheckAcquiredSort() {
-        return checkAcquiredSort;
-    }
-
-    private static class PageListener extends ViewPager.SimpleOnPageChangeListener {
-        private int currentPage = 0;
-
-        public void onPageSelected(int position) {
-            currentPage = position;
-        }
-
-        public int getCurrentPage() {
-            return currentPage;
-        }
-    }
-
     @Override
     public void onBackPressed() {
         if (cvCardList.getVisibility() == View.VISIBLE) {
             cvCardList.setVisibility(View.GONE);
-            editSearchCard.setText(null);
             return;
         }
         finish();
     }
+
 
 }

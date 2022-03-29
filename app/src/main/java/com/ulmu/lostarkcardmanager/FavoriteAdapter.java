@@ -91,6 +91,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         notifyItemRemoved(position);
     }
 
+
     //CardSet에서 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
     public void setAwake(String awakeSetName, int changeAwake) {
         for (int i = 0; i < activationFavoriteCardSet.size(); i++) {

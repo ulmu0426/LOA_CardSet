@@ -32,13 +32,14 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private static final String[] STAT = {"치명", "특화", "신속"};
 
     private float DEDDmg;
+    private ArrayList<CardBookInfo> cardBookInfo;
+    private ArrayList<DemonExtraDmgInfo> DEDInfo;
+
     private ArrayList<CardInfo> cardInfo;
     private Context context;
     private CardDBHelper cardDBHelper;
     private ArrayList<CardInfo> useCardList;
     private ArrayList<CardInfo> filterCardInfo;
-    private ArrayList<CardBookInfo> cardBookInfo;
-    private ArrayList<DemonExtraDmgInfo> DEDInfo;
     private SettingCard settingCard;
 
     public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList, SettingCard settingCard) {
@@ -383,8 +384,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     }
 
     // DB에 도감을 완성 시킨 경우 true else false
-    private boolean isCompleteCardBook(CardBookInfo cardbook_all) {
-        if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
+    private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
+        if (cardBookInfo.getHaveCard() == cardBookInfo.getCompleteCardBook())
             return true;
         else
             return false;
