@@ -4,41 +4,41 @@ import android.util.Log;
 
 public class CardSetInfo implements Comparable<CardSetInfo> {
 
-    private int id;
-    private String name;
-    private String card0;
-    private String card1;
-    private String card2;
-    private String card3;
-    private String card4;
-    private String card5;
-    private String card6;
-    private String set_bonus0;
-    private String set_bonus1;
-    private String set_bonus2;
-    private String set_bonus3;
-    private String set_bonus4;
-    private String set_bonus5;
-    private int haveCard;   //세트 활성화에 필요한 최소 카드 수
-    private int haveAwake;
-    private int needAwake0;
-    private int needAwake1;
-    private int needAwake2;
-    private int checkCard0;
-    private int checkCard1;
-    private int checkCard2;
-    private int checkCard3;
-    private int checkCard4;
-    private int checkCard5;
-    private int checkCard6;
-    private int awakeCard0;
-    private int awakeCard1;
-    private int awakeCard2;
-    private int awakeCard3;
-    private int awakeCard4;
-    private int awakeCard5;
-    private int awakeCard6;
-    private String favorite;
+    private int id;                 //id
+    private String name;            //카드세트이름
+    private String card0;           //카드0 이름
+    private String card1;           //카드1 이름
+    private String card2;           //카드2 이름
+    private String card3;           //카드3 이름
+    private String card4;           //카드4 이름
+    private String card5;           //카드5 이름
+    private String card6;           //카드6 이름
+    private String set_bonus0;      //0번째 카드세트 보너스 효과
+    private String set_bonus1;      //1번째 카드세트 보너스 효과
+    private String set_bonus2;      //2번째 카드세트 보너스 효과
+    private String set_bonus3;      //3번째 카드세트 보너스 효과
+    private String set_bonus4;      //4번째 카드세트 보너스 효과
+    private String set_bonus5;      //5번째 카드세트 보너스 효과
+    private int haveCard;           //세트 활성화에 필요한 최소 카드 수
+    private int haveAwake;          //카드 세트 각성도 합
+    private int needAwake0;         //카드세트 효과 발동을 위한 필요 각성도0
+    private int needAwake1;         //카드세트 효과 발동을 위한 필요 각성도1
+    private int needAwake2;         //카드세트 효과 발동을 위한 필요 각성도2
+    private int checkCard0;         //카드0 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int checkCard1;         //카드1 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int checkCard2;         //카드2 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int checkCard3;         //카드3 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int checkCard4;         //카드4 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int checkCard5;         //카드5 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int checkCard6;         //카드6 획득 유무(값이 1이명 획득 0 이면 미획득)
+    private int awakeCard0;         //카드0 각성도
+    private int awakeCard1;         //카드1 각성도
+    private int awakeCard2;         //카드2 각성도
+    private int awakeCard3;         //카드3 각성도
+    private int awakeCard4;         //카드4 각성도
+    private int awakeCard5;         //카드5 각성도
+    private int awakeCard6;         //카드6 각성도
+    private String favorite;        //즐겨찾기 포함 유무(값이 있는경우 즐겨찾기 된 것)
 
     public int getId() {
         return id;
@@ -380,6 +380,7 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
             return 0;
     }
 
+    //이름 순 정렬
     @Override
     public int compareTo(CardSetInfo cardSetInfo) {
         return this.getName().compareTo(cardSetInfo.getName());

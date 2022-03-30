@@ -49,10 +49,9 @@ public class CardBookPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardbook_page);
         /* 카드 도감 페이지.
-         *  이루어질 작업 목록
          *  1. 카드 도감 목록 불러오기
          *  2. 완성 도감 온 오프 기능
-         *  3. 이름 순 정렬 기능
+         *  3. 정렬 기능(기본, 이름, 완성도 순)
          *  4. 도감 검색 기능
          * */
 
@@ -174,6 +173,7 @@ public class CardBookPage extends AppCompatActivity {
         finish();
     }
 
+    // 현재 도감 완성 현황 및 스탯 증가치 현황
     public void setStatAndStatBook(int[] stat, int[] statBookComplete, int[] statBookAll) {
         txtBtnCritical.setText(CRITICAL + stat[0]);
         txtBtnSpeciality.setText(SPECIALITY + stat[1]);
@@ -183,6 +183,8 @@ public class CardBookPage extends AppCompatActivity {
         txtBtnNotAchievedSpecificityAgility.setText(AGILITY_BOOK_COMPLETE + statBookComplete[2] + "/" + statBookAll[2] + "개");
     }
 
+
+    // 현재 어떤 정렬인지 알 수 있도록 adapter에 정보를 줄 함수
     public boolean completeChecked() {
         return checkBoxInvisibilityCardBookPage.isChecked();
     }

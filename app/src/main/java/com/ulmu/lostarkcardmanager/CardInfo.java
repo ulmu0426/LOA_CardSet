@@ -12,7 +12,7 @@ public class CardInfo implements Comparable<CardInfo> {
      */
     private int id;                     //카드 id
     private String name;                //카드 이름
-    private int count;                  //보유 카드 장수
+    private int num;                  //보유 카드 장수
     private int awake;                  //카드 각성도
     private String acquisition_info;    //카드 획득처 정보
     private String grade;               //카드 등급 정보
@@ -35,15 +35,15 @@ public class CardInfo implements Comparable<CardInfo> {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    public int getNum() {
+        return num;
     }
 
-    public void setCount(int count) {
-        if (maxHaveValue(awake) < count) {
-            this.count = maxHaveValue(awake);
+    public void setNum(int num) {
+        if (maxHaveValue(awake) < num) {
+            this.num = maxHaveValue(awake);
         } else
-            this.count = count;
+            this.num = num;
     }
 
     public int getAwake() {
@@ -93,7 +93,8 @@ public class CardInfo implements Comparable<CardInfo> {
     public int compareTo(CardInfo cardInfo) {
         return this.getName().compareTo(cardInfo.getName());
     }
-
+    
+    //각성 수치에 따른 최대 보유 카드 수 제한을 위한 함수
     private int maxHaveValue(int haveAwake) {
         if (haveAwake == 5) {
             return 0;

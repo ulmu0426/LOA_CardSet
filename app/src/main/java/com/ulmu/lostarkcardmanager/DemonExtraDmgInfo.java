@@ -1,51 +1,49 @@
 package com.ulmu.lostarkcardmanager;
 
-import android.util.Log;
-
 import java.text.DecimalFormat;
 
 public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
-    private int id;
-    private String name;
-    private String card0;
-    private String card1;
-    private String card2;
-    private String card3;
-    private String card4;
-    private String card5;
-    private String card6;
-    private String card7;
-    private String card8;
-    private String card9;
-    private int awake_sum0;
-    private int awake_sum1;
-    private int awake_sum2;
-    private float dmg_p0;
-    private float dmg_p1;
-    private float dmg_p2;
-    private int haveAwake;
-    private int cardListSum;
-    private int haveCard;
-    private int checkCard0;
-    private int checkCard1;
-    private int checkCard2;
-    private int checkCard3;
-    private int checkCard4;
-    private int checkCard5;
-    private int checkCard6;
-    private int checkCard7;
-    private int checkCard8;
-    private int checkCard9;
-    private int awakeCard0;
-    private int awakeCard1;
-    private int awakeCard2;
-    private int awakeCard3;
-    private int awakeCard4;
-    private int awakeCard5;
-    private int awakeCard6;
-    private int awakeCard7;
-    private int awakeCard8;
-    private int awakeCard9;
+    private int id;             //id
+    private String name;        //DED도감 이름
+    private String card0;       //0번 카드 이름
+    private String card1;       //1번 카드 이름
+    private String card2;       //2번 카드 이름
+    private String card3;       //3번 카드 이름
+    private String card4;       //4번 카드 이름
+    private String card5;       //5번 카드 이름
+    private String card6;       //6번 카드 이름
+    private String card7;       //7번 카드 이름
+    private String card8;       //8번 카드 이름
+    private String card9;       //9번 카드 이름
+    private int awake_sum0;     //0번째 활성화를 위한 각성도 수치
+    private int awake_sum1;     //1번째 활성화를 위한 각성도 수치
+    private int awake_sum2;     //2번째 활성화를 위한 각성도 수치
+    private float dmg_p0;       //0번째 활성화시 증가하는 데미지 값
+    private float dmg_p1;       //1번째 활성화시 증가하는 데미지 값
+    private float dmg_p2;       //2번째 활성화시 증가하는 데미지 값
+    private int haveAwake;      //현재 각성도 합계
+    private int cardListSum;    //도감 완성에 필요한 카드 수집 수
+    private int haveCard;       //현재 수집한 카드 수
+    private int checkCard0;     //0번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard1;     //1번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard2;     //2번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard3;     //3번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard4;     //4번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard5;     //5번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard6;     //6번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard7;     //7번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard8;     //8번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int checkCard9;     //9번 카드 획득 유무(1이면 획득 0이면 미획득)
+    private int awakeCard0;     //0번 카드 각성도 수치
+    private int awakeCard1;     //1번 카드 각성도 수치
+    private int awakeCard2;     //2번 카드 각성도 수치
+    private int awakeCard3;     //3번 카드 각성도 수치
+    private int awakeCard4;     //4번 카드 각성도 수치
+    private int awakeCard5;     //5번 카드 각성도 수치
+    private int awakeCard6;     //6번 카드 각성도 수치
+    private int awakeCard7;     //7번 카드 각성도 수치
+    private int awakeCard8;     //8번 카드 각성도 수치
+    private int awakeCard9;     //9번 카드 각성도 수치
 
     public int getId() {
         return id;
@@ -191,6 +189,7 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         this.dmg_p2 = dmg_p2;
     }
 
+    //DED 도감 달성시 현재 도감의 악마 추가피해 수치
     public float getDmgSum() {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         float result = 0;

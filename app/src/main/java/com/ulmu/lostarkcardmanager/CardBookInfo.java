@@ -1,32 +1,32 @@
 package com.ulmu.lostarkcardmanager;
 
 public class CardBookInfo implements Comparable<CardBookInfo> {
-    private int id;
-    private String name;
-    private int value;
-    private String card0;
-    private String card1;
-    private String card2;
-    private String card3;
-    private String card4;
-    private String card5;
-    private String card6;
-    private String card7;
-    private String card8;
-    private String card9;
-    private String option;
-    private int cardListSum;
-    private int haveCard;
-    private int checkCard0;
-    private int checkCard1;
-    private int checkCard2;
-    private int checkCard3;
-    private int checkCard4;
-    private int checkCard5;
-    private int checkCard6;
-    private int checkCard7;
-    private int checkCard8;
-    private int checkCard9;
+    private int id;         //id
+    private String name;    //이름
+    private int value;      //도감 완성시 증가되는 스탯 수치
+    private String card0;   //카드0번 이름
+    private String card1;   //카드1번 이름
+    private String card2;   //카드2번 이름
+    private String card3;   //카드3번 이름
+    private String card4;   //카드4번 이름
+    private String card5;   //카드5번 이름
+    private String card6;   //카드6번 이름
+    private String card7;   //카드7번 이름
+    private String card8;   //카드8번 이름
+    private String card9;   //카드9번 이름
+    private String option;  //도감 완성시 증가되는 스탯 종류
+    private int cardListSum;//완성에 필요한 카드 수
+    private int haveCard;   //현재 수집한 카드 수
+    private int checkCard0; //0번 카드 획득 유무
+    private int checkCard1; //1번 카드 획득 유무
+    private int checkCard2; //2번 카드 획득 유무
+    private int checkCard3; //3번 카드 획득 유무
+    private int checkCard4; //4번 카드 획득 유무
+    private int checkCard5; //5번 카드 획득 유무
+    private int checkCard6; //6번 카드 획득 유무
+    private int checkCard7; //7번 카드 획득 유무
+    private int checkCard8; //8번 카드 획득 유무
+    private int checkCard9; //9번 카드 획득 유무
 
 
     public int getId() {
@@ -233,6 +233,7 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
         this.checkCard9 = checkCard9;
     }
 
+    //완성도 순 정렬에 호출할 함수
     public int getSubComplete() {
         if (getCompleteCardBook() - getHaveCard() == 1)
             return 1;

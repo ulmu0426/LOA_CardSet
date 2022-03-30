@@ -42,6 +42,8 @@ public class DemonExtraDmgPage extends AppCompatActivity {
          *  작업 목록
          *  1. 악추피 도감 목록 불러오기
          *  2. 악추피 완성 도감 숨기기 기능(풀각만 숨김)
+         *  3. 검색 기능
+         *  4. 정렬 기능(기본, 이름, 완성도, 다음 활성도가 가까운 순)
          * */
 
         txtDED = (TextView) findViewById(R.id.txtDED);
@@ -50,6 +52,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         adapter = new DemonExtraDmgAdapter(this, this);
         rv.setAdapter(adapter);
 
+        //완성된 악추피 도감 숨기기 기능
         checkBoxInvisibilityDEDPage = (CheckBox) findViewById(R.id.checkBoxInvisibilityDEDPage);
         adapter.getDefaultSort();
         checkBoxInvisibilityDEDPage.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +62,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
             }
         });
 
+        //검색기능
         editSearchDED = findViewById(R.id.editSearchDED);
         editSearchDED.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,6 +97,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         });
 
 
+        //정렬 기능
         imgBtnDEDSortMenu = findViewById(R.id.imgBtnDEDsortMenu);
         imgBtnDEDSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -264,7 +264,7 @@ public class TestSettingCard extends AppCompatActivity {
             if (cardInfo.get(i).getGrade().equals(LEGEND)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -273,7 +273,7 @@ public class TestSettingCard extends AppCompatActivity {
             } else if (cardInfo.get(i).getGrade().equals(EPIC)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -282,7 +282,7 @@ public class TestSettingCard extends AppCompatActivity {
             } else if (cardInfo.get(i).getGrade().equals(RARE)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -291,7 +291,7 @@ public class TestSettingCard extends AppCompatActivity {
             } else if (cardInfo.get(i).getGrade().equals(UNCOMMON)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -300,7 +300,7 @@ public class TestSettingCard extends AppCompatActivity {
             } else if (cardInfo.get(i).getGrade().equals(COMMON)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -309,7 +309,7 @@ public class TestSettingCard extends AppCompatActivity {
             } else if (cardInfo.get(i).getGrade().equals(SPECIAL)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());

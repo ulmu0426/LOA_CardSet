@@ -73,7 +73,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
         holder.txtName.setText(filterCardInfo.get(position).getName());
 
-        holder.txtAwakeAndHave.setText("각성 : " + filterCardInfo.get(position).getAwake() + "  보유 : " + filterCardInfo.get(position).getCount());
+        holder.txtAwakeAndHave.setText("각성 : " + filterCardInfo.get(position).getAwake() + "  보유 : " + filterCardInfo.get(position).getNum());
         holder.isGetCheckbox.setChecked(isChecked(filterCardInfo.get(position).getGetCard()));
 
         //click 대신 touch 로 변경. -> click 을 두번 해야 Dialog 가 뜨던 현상 방지를 위해.
@@ -102,7 +102,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                         txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
                         imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
                         txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");
-                        txtJustCardHave.setText(filterCardInfo.get(positionGet).getCount() + "");
+                        txtJustCardHave.setText(filterCardInfo.get(positionGet).getNum() + "");
                         txtJustCardAcquisition_info.setText(filterCardInfo.get(positionGet).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +147,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(filterCardInfo.get(positionGet).getCount());
+                        numberPickerHave.setValue(filterCardInfo.get(positionGet).getNum());
 
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -165,12 +165,12 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                                 numberPickerHave.setValue(number);
                                 //카드 arrayList update
                                 useCardList.get(positionGet).setAwake(awake);
-                                useCardList.get(positionGet).setCount(number);
+                                useCardList.get(positionGet).setNum(number);
                                 filterCardInfo.get(positionGet).setAwake(awake);
-                                filterCardInfo.get(positionGet).setCount(number);
+                                filterCardInfo.get(positionGet).setNum(number);
 
                                 cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
-                                cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setCount(number);
+                                cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setNum(number);
                                 //카드 DB update
                                 cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
                                 cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());

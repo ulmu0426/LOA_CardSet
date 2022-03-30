@@ -147,7 +147,7 @@
                 <TextView
                     android:id="@+id/txtDED_Detail_Card0"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 

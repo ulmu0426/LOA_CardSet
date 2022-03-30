@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txtCardBookName_incardbooknamexmlpage"
+        android:id="@+id/txtCardBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtCardBookValue_incardbooknamexmlpage"
+        android:id="@+id/txtCardBookValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCardBookValue_incardbooknamexmlpage">
+        app:layout_constraintTop_toBottomOf="@+id/txtCardBookValue">
 
         <TableLayout
             android:id="@+id/tablelayoutCardSetDetail"
@@ -55,7 +55,25 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg0"
+                        android:id="@+id/imgCardBookImg0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCardBookImg1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -72,7 +90,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg1"
+                        android:id="@+id/imgCardBookImg2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -89,7 +107,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg2"
+                        android:id="@+id/imgCardBookImg3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -106,24 +124,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="2dp">
-
-                    <ImageView
-                        android:id="@+id/imgCardBookName_CardImg4"
+                        android:id="@+id/imgCardBookImg4"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -195,7 +196,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg5"
+                        android:id="@+id/imgCardBookImg5"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -212,7 +213,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg6"
+                        android:id="@+id/imgCardBookImg6"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -229,7 +230,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg7"
+                        android:id="@+id/imgCardBookImg7"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -246,7 +247,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg8"
+                        android:id="@+id/imgCardBookImg8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -263,7 +264,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgCardBookName_CardImg9"
+                        android:id="@+id/imgCardBookImg9"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"

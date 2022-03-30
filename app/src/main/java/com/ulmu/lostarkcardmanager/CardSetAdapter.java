@@ -36,7 +36,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     private FavoriteAdapter favoriteAdapter;        //즐겨찾기 어뎁터(카드세트 페이지에서 즐겨찾기된 카드세트의 세부 값 변경시 메인 페이지와 연결해 바로 변경 될 수 있도록 하기 위해 넣음)
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo; //즐겨찾기된 카드세트 목록 ArrayList
     private Context context;
-    private CardDBHelper cardDbHelper;              //DB값 변경을 위해 필요한 DBHelper
+    private CardDBHelper cardDBHelper;              //DB값 변경을 위해 필요한 DBHelper
     private CardSetPage cardSetPage;                //CardSetPage 에서 리사이클러뷰의 정렬, 완성도감 체크 유무등의 정보를 얻기 위해
 
     private final String CARDSET_AWAKE = "각성 : ";
@@ -69,7 +69,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         this.cardSetPage = cardSetPage;
         this.favoriteAdapter = ((MainPage) MainPage.mainContext).favoriteAdapter;
         this.favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
-        cardDbHelper = new CardDBHelper(context);
+        cardDBHelper = new CardDBHelper(context);
         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
         baseFilteredCardSet = new ArrayList<CardSetInfo>();
         setFilteredCardSet();
@@ -222,13 +222,13 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 txtCardSetName5.setText(filterCardSet.get(pos).getCard5());
                 txtCardSetName6.setText(filterCardSet.get(pos).getCard6());
 
-                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard0() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount());
-                txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard1() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getCount());
-                txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard2() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getCount());
-                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard3() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getCount());
-                txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
-                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getCount());
-                txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
+                txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard0() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getNum());
+                txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard1() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getNum());
+                txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard2() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getNum());
+                txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard3() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getNum());
+                txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard4() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getNum());
+                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getNum());
+                txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard6() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getNum());
 
                 imgFavorites.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -240,8 +240,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     cardSetInfo.get(getIndex(filterCardSet.get(pos))).setFavorite("");
                                     filterCardSet.get(pos).setFavorite("");
                                     favoriteCardSetInfo.get(i).setActivation(check);
-                                    cardDbHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
-                                    cardDbHelper.UpdateInfoCardSetCard("", filterCardSet.get(pos).getId());
+                                    cardDBHelper.UpdateInfoFavoriteList(filterCardSet.get(pos).getHaveAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    cardDBHelper.UpdateInfoCardSetCard("", filterCardSet.get(pos).getId());
                                     favoriteAdapter.removeItem(favoriteCardSetInfo.get(i));
                                     holder.imgFavoritesCardSet.setColorFilter(filter);
 
@@ -259,8 +259,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                     filterCardSet.get(pos).setFavorite(favoriteCardSetInfo.get(i).getName());
                                     favoriteCardSetInfo.get(i).setActivation(check);
                                     favoriteCardSetInfo.get(i).setAwake(cardSetInfo.get(getIndex(filterCardSet.get(pos))).getHaveAwake());
-                                    cardDbHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.get(pos).getAwake(), check, favoriteCardSetInfo.get(i).getName());
-                                    cardDbHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
+                                    cardDBHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.get(pos).getAwake(), check, favoriteCardSetInfo.get(i).getName());
+                                    cardDBHelper.UpdateInfoCardSetCard(favoriteCardSetInfo.get(i).getName(), filterCardSet.get(pos).getId());
                                     favoriteAdapter.updateActivationFavoriteCardSet();
                                     holder.imgFavoritesCardSet.setColorFilter(null);
 
@@ -304,7 +304,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getNum());
 
                         dialogAwakeNHaveCard.show();
 
@@ -321,18 +321,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard0());//카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard0(awake);
                                 filterCardSet.get(pos).setAwakeCard0(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).setCount(number);
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).setNum(number);
                                 txtHaveAwakeHaveCard0.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard0() + "\n"
-                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getCount());
+                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard0());
@@ -372,7 +372,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getNum());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -388,18 +388,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard1());//카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard1(awake);
                                 filterCardSet.get(pos).setAwakeCard1(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).setCount(number);
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).setNum(number);
                                 txtHaveAwakeHaveCard1.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard1() + "\n"
-                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getCount());
+                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard1());
@@ -439,7 +439,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getNum());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -455,18 +455,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard2());//카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard2(awake);
                                 filterCardSet.get(pos).setAwakeCard2(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).setCount(number);
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).setNum(number);
                                 txtHaveAwakeHaveCard2.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard2() + "\n"
-                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getCount());
+                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard2());
@@ -506,7 +506,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getNum());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -522,18 +522,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard3());//카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard3(awake);
                                 filterCardSet.get(pos).setAwakeCard3(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).setCount(number);
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).setNum(number);
                                 txtHaveAwakeHaveCard3.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard3() + "\n"
-                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getCount());
+                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard3());
@@ -573,7 +573,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getNum());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -589,18 +589,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard4());//카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard4(awake);
                                 filterCardSet.get(pos).setAwakeCard4(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setCount(number);
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setNum(number);
                                 txtHaveAwakeHaveCard4.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard4() + "\n"
-                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getCount());
+                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard4());
@@ -640,7 +640,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getNum());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -656,17 +656,17 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard5());                                             //카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_AWAKE, awake, filterCardSet.get(pos).getId()); //카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_AWAKE, awake, filterCardSet.get(pos).getId()); //카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());             //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());             //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard5(awake);
                                 filterCardSet.get(pos).setAwakeCard5(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setCount(number);
-                                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getCount());
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setNum(number);
+                                txtHaveAwakeHaveCard5.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard5() + "\n" + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, cardSetInfo.get(pos).getCard5())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard5());
@@ -706,7 +706,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
+                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getNum());
 
                         dialogAwakeNHaveCard.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -722,18 +722,18 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 updateDEDAwakeInfoDB(awake, filterCardSet.get(pos).getCard6());//카드 각성도 업데이트(DED DB)
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_AWAKE, awake, filterCardSet.get(pos).getId());//카드 각성도 업데이트(cardSet DB)
                                 int check = 0;
                                 if (awake > 0) check = 1;
-                                cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
-                                cardDbHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDbHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_CHECK, check, filterCardSet.get(pos).getId());//카드 획득 업데이트(cardSet DB)
+                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(filterCardSet.get(pos))).getId());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardSetInfo.get(getIndex(filterCardSet.get(pos))).setAwakeCard6(awake);
                                 filterCardSet.get(pos).setAwakeCard6(awake);
                                 cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setAwake(awake);
-                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setCount(number);
+                                cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setNum(number);
                                 txtHaveAwakeHaveCard6.setText(CARDSET_AWAKE + filterCardSet.get(pos).getAwakeCard6() + "\n"
-                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getCount());
+                                        + CARDSET_CARD_NUM + cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getNum());
                                 txtCardSetAwake_Detail.setText(CARD_SET_AWAKE_SUM + filterCardSet.get(pos).getHaveAwake());
 
                                 updateAwakeFavoriteCardSetInfoAndDB(filterCardSet.get(pos).getName(), filterCardSet.get(pos).getHaveAwake(), filterCardSet.get(pos).getCheckCard6());
@@ -768,8 +768,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail0, filter, pos, filterCardSet.get(pos).getCard0());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard0());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard0(cardCheck);         //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard0(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -799,8 +799,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail1, filter, pos, filterCardSet.get(pos).getCard1());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard1());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard1(cardCheck);      //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard1(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -831,8 +831,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail2, filter, pos, filterCardSet.get(pos).getCard2());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard2());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard2(cardCheck);                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard2(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -863,8 +863,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail3, filter, pos, filterCardSet.get(pos).getCard3());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard3());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard3(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -895,8 +895,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail4, filter, pos, filterCardSet.get(pos).getCard4());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard4());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard4(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard4(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -927,8 +927,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail5, filter, pos, filterCardSet.get(pos).getCard5());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard5());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard5(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard5(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -958,8 +958,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                     public void onClick(View v) {
                         int cardCheck = imgGrayScale(imgCardSetDetail6, filter, pos, filterCardSet.get(pos).getCard6());              //카드 획득 유무 0 미획득, 1획득
                         updateDEDCheckInfoDB(cardCheck, filterCardSet.get(pos).getCard6());              //cardX수집 유무 업데이트(DED DB)
-                        cardDbHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
-                        cardDbHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
+                        cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardCheck, filterCardSet.get(pos).getId());//cardX수집 유무 업데이트(CardSet DB)
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, filterCardSet.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard6(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
@@ -1224,7 +1224,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
             if (favoriteCardSetInfo.get(i).getName().equals(changeAwakeCardName)) {
                 favoriteCardSetInfo.get(i).setAwake(changeAwake);
-                cardDbHelper.UpdateInfoFavoriteList(changeAwake, check, favoriteCardSetInfo.get(i).getName());
+                cardDBHelper.UpdateInfoFavoriteList(changeAwake, check, favoriteCardSetInfo.get(i).getName());
                 break;
             }
         }
@@ -1444,52 +1444,52 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         for (int i = 0; i < DEDInfo.size(); i++) {
             if (DEDInfo.get(i).getCard0().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard0(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard0", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard0", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard1().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard1(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard1", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard1", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard2().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard2(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard2", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard2", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard3().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard3(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard3", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard3", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard4().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard4(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard4", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard4", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard5().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard5(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard5", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard5", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard6().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard6(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard6", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard6", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard7().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard7(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard7", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard7", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard8().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard8(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard8", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard8", check, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard9().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard9(check);
-                cardDbHelper.UpdateInfoDEDCard("checkCard9", check, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("checkCard9", check, DEDInfo.get(i).getId());
                 continue;
             }
         }
@@ -1501,72 +1501,72 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         for (int i = 0; i < DEDInfo.size(); i++) {
             if (DEDInfo.get(i).getCard0().equals(cardName)) {
                 DEDInfo.get(i).setAwakeCard0(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard0", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard0", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard0", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard0", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard1().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard1(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard1", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard1", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard1", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard1", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard2().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard2(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard2", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard2", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard2", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard2", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard3().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard3(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard3", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard3", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard3", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard3", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard4().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard4(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard4", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard4", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard4", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard4", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard5().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard5(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard5", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard5", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard5", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard5", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard6().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard6(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard6", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard6", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard6", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard6", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard7().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard7(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard7", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard7", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard7", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard7", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard8().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard8(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard8", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard8", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard8", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard8", 1, DEDInfo.get(i).getId());
                 continue;
             }
             if (DEDInfo.get(i).getCard9().equals(cardName)) {
                 DEDInfo.get(i).setCheckCard9(awake);
-                cardDbHelper.UpdateInfoDEDCard("awakeCard9", awake, DEDInfo.get(i).getId());
+                cardDBHelper.UpdateInfoDEDCard("awakeCard9", awake, DEDInfo.get(i).getId());
                 if (awake > 0)      //각성도 수치가 1이상이면 무조건 카드는 획득판정
-                    cardDbHelper.UpdateInfoDEDCard("checkCard9", 1, DEDInfo.get(i).getId());
+                    cardDBHelper.UpdateInfoDEDCard("checkCard9", 1, DEDInfo.get(i).getId());
                 continue;
             }
         }

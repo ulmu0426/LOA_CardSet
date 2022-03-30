@@ -59,7 +59,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(cardListInfo.get(position));
+        holder.onBind(position);
         testSettingCardAdapter = new TestSettingCardAdapter(context, cardListInfo.get(position));
 
         holder.rv.setAdapter(testSettingCardAdapter);
@@ -79,21 +79,31 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             rv = itemView.findViewById(R.id.rvCardListFragment);
         }
 
-        public void onBind(ArrayList<CardInfo> cardListInfo) {
-            if (!cardListInfo.isEmpty()) {
-                if (cardListInfo.get(0).getGrade().equals(LEGEND))
+        public void onBind(int position) {
+
+            switch (position) {
+                case 0:
                     rv.setBackgroundColor(Color.parseColor("#FFF4BD"));
-                if (cardListInfo.get(0).getGrade().equals(EPIC))
+                    break;
+                case 1:
                     rv.setBackgroundColor(Color.parseColor("#ECE2FF"));
-                if (cardListInfo.get(0).getGrade().equals(RARE))
+                    break;
+                case 2:
                     rv.setBackgroundColor(Color.parseColor("#DDEFFF"));
-                if (cardListInfo.get(0).getGrade().equals(UNCOMMON))
+                    break;
+                case 3:
                     rv.setBackgroundColor(Color.parseColor("#DEFFBB"));
-                if (cardListInfo.get(0).getGrade().equals(COMMON))
+                    break;
+                case 4:
                     rv.setBackgroundColor(Color.parseColor("#F4F4F4"));
-                if (cardListInfo.get(0).getGrade().equals(SPECIAL))
+                    break;
+                case 5:
                     rv.setBackgroundColor(Color.parseColor("#FFDCE9"));
+                    break;
+                default:
+                    return;
             }
+
         }
 
     }
@@ -130,7 +140,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             tempFilterListU = searchFilter(filterString, tempFilterListU);
             tempFilterListC = searchFilter(filterString, tempFilterListC);
             tempFilterListS = searchFilter(filterString, tempFilterListS);
-        }else {
+        } else {
             tempFilterListL.addAll(cardLegend);
             tempFilterListE.addAll(cardEpic);
             tempFilterListR.addAll(cardRare);
@@ -256,7 +266,6 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
         notifyDataSetChanged();
     }
 
-
     private void settingCardList() {
         cardLegend = new ArrayList<CardInfo>();
         cardEpic = new ArrayList<CardInfo>();
@@ -270,7 +279,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             if (cardInfo.get(i).getGrade().equals(LEGEND)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -279,7 +288,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             } else if (cardInfo.get(i).getGrade().equals(EPIC)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -288,7 +297,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             } else if (cardInfo.get(i).getGrade().equals(RARE)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -297,7 +306,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             } else if (cardInfo.get(i).getGrade().equals(UNCOMMON)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -306,7 +315,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             } else if (cardInfo.get(i).getGrade().equals(COMMON)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());
@@ -315,7 +324,7 @@ public class TestViewPagerAdapter extends RecyclerView.Adapter<TestViewPagerAdap
             } else if (cardInfo.get(i).getGrade().equals(SPECIAL)) {
                 ci.setId(cardInfo.get(i).getId());
                 ci.setName(cardInfo.get(i).getName());
-                ci.setCount(cardInfo.get(i).getCount());
+                ci.setNum(cardInfo.get(i).getNum());
                 ci.setAwake(cardInfo.get(i).getAwake());
                 ci.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 ci.setGetCard(cardInfo.get(i).getGetCard());

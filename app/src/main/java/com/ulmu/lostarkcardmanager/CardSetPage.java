@@ -17,11 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CardSetPage extends AppCompatActivity {
 
     private RecyclerView rv;
-    private CheckBox checkBoxInvisibilityCardSetPage;
+    private CheckBox checkBoxInvisibilityCardSetPage;   //완성된 카드세트 숨기기를 위한 CheckBox
     private CardSetAdapter adapter;
 
     private ImageView imgBtnSortMenu;
-
 
     private EditText editSearchCardSet;
     private ImageView imgSearchCardSet;
@@ -39,8 +38,10 @@ public class CardSetPage extends AppCompatActivity {
         /* 카드 세트 페이지.
          *  작업 목록
          *  1. 카드 세트 목록 불러오기
-         *  2. 카드 세트 클릭시 카드세트 세부 페이지로 이동
+         *  2. 카드 세트 정렬 기능
          *  3. 카드 세트 즐겨찾기 기능(메인페이지에 띄울 카드 세트 지정)
+         *  4. 카드 세트 검색 기능(기본, 이름, 완성도, 즐겨찾기)
+         *  5. 완성된 카드 세트 숨기기 on/off 기능
          * */
 
         rv = findViewById(R.id.rvCardSet);
@@ -48,7 +49,7 @@ public class CardSetPage extends AppCompatActivity {
 
         rv.setAdapter(adapter);
 
-
+        //완성된 카드 세트 숨기기 on/off
         checkBoxInvisibilityCardSetPage = findViewById(R.id.checkBoxInvisibilityCardSetPage);
         adapter.getDefaultSort();
         checkBoxInvisibilityCardSetPage.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +59,7 @@ public class CardSetPage extends AppCompatActivity {
             }
         });
 
+        //검색
         editSearchCardSet = findViewById(R.id.editSearchCardSet);
         editSearchCardSet.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,7 +89,7 @@ public class CardSetPage extends AppCompatActivity {
             }
         });
 
-
+        //정렬
         imgBtnSortMenu = findViewById(R.id.imgBtnCardSetSortMenu);
         imgBtnSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -309,7 +309,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 CardInfo cardinfo = new CardInfo();
                 cardinfo.setId(id);
                 cardinfo.setName(name);
-                cardinfo.setCount(count);
+                cardinfo.setNum(count);
                 cardinfo.setAwake(awake);
                 cardinfo.setAcquisition_info(acquisition_info);
                 cardinfo.setGrade(grade);
