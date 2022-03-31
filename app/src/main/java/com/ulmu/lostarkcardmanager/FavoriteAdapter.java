@@ -17,8 +17,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public Context context;
     private ArrayList<CardInfo> cardInfo;
     private ArrayList<CardSetInfo> cardSetInfo;
-    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
-    protected ArrayList<FavoriteCardSetInfo> activationFavoriteCardSet;
+    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;         //즐겨찾기 리스트 원본
+    protected ArrayList<FavoriteCardSetInfo> activationFavoriteCardSet; //즐겨찾기 리스트 MainPage에 뿌릴 리스트
 
     public FavoriteAdapter(Context context) {
         this.context = context;
@@ -40,8 +40,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FavoriteCardSetInfo item = activationFavoriteCardSet.get(position);
-
         String cardSetName = cardSetMainImg(activationFavoriteCardSet.get(position).getName());
 
         holder.imgFavoriteCardSet.setImageResource(getCardImg(cardSetName));
@@ -68,6 +66,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
     }
 
+    // MainPage에 뿌릴 즐겨찾기 list update
     public void updateActivationFavoriteCardSet() {
         activationFavoriteCardSet.clear();
         for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
@@ -80,6 +79,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    //즐겨찾기 해제 함수
     public void removeItem(FavoriteCardSetInfo item) {
         int position = 0;
         for (int i = 0; i < activationFavoriteCardSet.size(); i++) {
@@ -116,6 +116,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    //카드 이미지 세팅 함수
     private int getCardImg(String cardName) {
         String name = "";
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -129,6 +130,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         return imageResource;
     }
 
+    //
     private String cardSetMainImg(String cardSetName) {
         String mainImgName = "";
         for (int i = 0; i < cardSetInfo.size(); i++) {

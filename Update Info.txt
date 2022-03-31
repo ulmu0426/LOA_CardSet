@@ -84,6 +84,10 @@ CardDBHelper, CardBookAdapter 주석 진행중.
 악추피도감에서 일부 도감의 첫번째 카드의 이름 일부가 잘려서 보이지 않던 현상 수정.
 기타 주석 작업중 : 완료된 class : CardBookAdapter, CardBookInfo, CardInfo, CardSetAdapter, CardSetInfo, CardSetPage, DemonExtraDmgAdapter, DemonExtraDmgInfo, DemonExtraDmgPage
 
+업데이트 내역 22.03.31
+카드목록에서 모두 체크시 체크UI가 나오지 않던 현상 수정.
+카드목록에 카드 획득 초기화 추가.
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 현재 있는 버그.

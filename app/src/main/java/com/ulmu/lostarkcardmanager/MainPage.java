@@ -72,6 +72,7 @@ public class MainPage extends AppCompatActivity {
         //악추피 값
         txtDemonExtraDmg = (TextView) findViewById(R.id.txtDemonExtraDmg);
 
+        //DB정보 가져오기
         try {
             setInit();
         } catch (IOException e) {
@@ -80,10 +81,6 @@ public class MainPage extends AppCompatActivity {
 
         //카드 DB 정보 ArrayList 전달
         cardInfo = cardDBHelper.getCardInfo_All();
-
-        //DB 순서 변경을 위해 넣어놨던 메소드. 현재 비활성화
-        //updateEpic();
-        //updateUncommon();
 
         //카드 도감 DB 정보 ArrayList 전달
         cardBookInfo = cardDBHelper.getCardBookInfo_All();
@@ -94,7 +91,7 @@ public class MainPage extends AppCompatActivity {
 
         favoriteCardSetInfo = cardDBHelper.getFavoriteCardSetInfo();
 
-        //cardList Table 정보를 cardbook_all,DEDInfo,cardSetInfo ArrayList와 DB에 연동
+        //cardList Table 정보를 cardBookInfo,DEDInfo,cardSetInfo List와 DB에 연동
         cardBookUpdate();           //카드 도감 DB
         haveDEDCardCheckUpdate();   //악추피 DB
         haveCardSetCheckUpdate();   //카드세트 DB
@@ -113,6 +110,7 @@ public class MainPage extends AppCompatActivity {
         favoriteAdapter = new FavoriteAdapter(mainContext);
         rv.setAdapter(favoriteAdapter);
 
+        //drawerLayout
         imgBtnMenu_Main = (ImageView) findViewById(R.id.imgBtnMenu_Main);
         drawerLayout_Main = (DrawerLayout) findViewById(R.id.drawerLayout_Main);
         imgBtnMenu_Main.setOnClickListener(new View.OnClickListener() {
@@ -126,16 +124,18 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+        //drawerLayout 메뉴에 카드목록 터치시 이동
         txtBtnCardList = (TextView) findViewById(R.id.txtBtnCardList);
         txtBtnCardList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TestSettingCard.class);
+                Intent intent = new Intent(getApplicationContext(), SettingCard.class);
                 startActivity(intent);
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }
         });
 
+        //drawerLayout 메뉴에 카드세트 터치시 이동
         txtBtnCardSet_Draw = (TextView) findViewById(R.id.txtBtnCardSet_Draw);
         txtBtnCardSet_Draw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +146,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+        //drawerLayout 메뉴에 카드도감 터치시 이동
         txtBtnCardBook_Draw = (TextView) findViewById(R.id.txtBtnCardBook_Draw);
         txtBtnCardBook_Draw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +157,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+        //drawerLayout 메뉴에 악추피 터치시 이동
         txtBtnDED_Draw = (TextView) findViewById(R.id.txtBtnDED_Draw);
         txtBtnDED_Draw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +209,6 @@ public class MainPage extends AppCompatActivity {
     //뒤로가기 2회 터치시 종료(2.5초 안에 두번 눌러야 함)
     private long backKeyPressedTime = 0;
     private Toast finish;
-
     @Override
     public void onBackPressed() {
         if (drawerLayout_Main.isDrawerOpen(Gravity.LEFT)) {
@@ -239,13 +240,14 @@ public class MainPage extends AppCompatActivity {
         return a;
     }
 
+    //MainPage 카드도감 현황 update
     public void setCardBookStatInfo(int[] stat) {
         txtCardBookStat_Critical.setText(stat[0] + "");
         txtCardBookStat_Speciality.setText(stat[1] + "");
         txtCardBookStat_Agility.setText(stat[2] + "");
     }
 
-    //악추피 도감 악추피 입력
+    //악추피 도감 악추피 값 세팅
     private float getDEDValueInfo() {
         float a = 0;
         DemonExtraDmgAdapter DEDAdapter = new DemonExtraDmgAdapter(DEDInfo);
@@ -261,8 +263,8 @@ public class MainPage extends AppCompatActivity {
         return a;
     }
 
+    //MainPage 악추피 수치 update
     public void setDemonExtraDmgInfo(float value) {
-
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         txtDemonExtraDmg.setText(df.format(value) + "%");
     }
@@ -293,7 +295,7 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    //최초 실행되는 메소드 : cardList 정보를 cardbook_all과 연동
+    //최초 실행되는 메소드 : cardList 정보를 cardBookInfo 연동
     public void cardBookUpdate() {
         for (int i = 0; i < cardBookInfo.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {
@@ -527,84 +529,6 @@ public class MainPage extends AppCompatActivity {
                 cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, 0, DEDInfo.get(i).getId());
             }
         }
-    }
-
-    private void updateEpic() {
-        for (int i = 0; i < cardInfo.size(); i++) {
-            if (cardInfo.get(i).getName().equals("크로마니움")) {
-                if (cardInfo.get(i).getId() == 40045) {
-                    return;
-                }
-            }
-        }
-
-        cardDBHelper.UpdateInfoCardID(20046, "루메루스");
-        cardDBHelper.UpdateInfoCardID(20047, "엔비스카");
-        cardDBHelper.UpdateInfoCardID(20048, "혹한의 헬가이아");
-        cardDBHelper.UpdateInfoCardID(20049, "타이탈로스");
-        cardDBHelper.UpdateInfoCardID(20040, "흑야의 요호");
-        cardDBHelper.UpdateInfoCardID(20051, "벨가누스");
-        cardDBHelper.UpdateInfoCardID(20052, "칼엘리고스");
-        cardDBHelper.UpdateInfoCardID(20053, "아카테스");
-        cardDBHelper.UpdateInfoCardID(20054, "이그렉시온");
-        cardDBHelper.UpdateInfoCardID(20055, "미스틱");
-        cardDBHelper.UpdateInfoCardID(20056, "창조의 아크 오르투스");
-        cardDBHelper.UpdateInfoCardID(20057, "신뢰의 아크 아스타");
-        cardDBHelper.UpdateInfoCardID(20058, "나히니르");
-        cardDBHelper.UpdateInfoCardID(20059, "파르쿠나스");
-        cardDBHelper.UpdateInfoCardID(20050, "피요르긴");
-        cardDBHelper.UpdateInfoCardID(20061, "아르카디아");
-        cardDBHelper.UpdateInfoCardID(20062, "엘버하스틱");
-        cardDBHelper.UpdateInfoCardID(20063, "카이슈테르");
-        cardDBHelper.UpdateInfoCardID(20064, "예지의 아크 아가톤");
-        cardDBHelper.UpdateInfoCardID(20065, "희망의 아크 엘피스");
-        cardDBHelper.UpdateInfoCardID(20066, "지혜의 아크 라디체");
-        cardDBHelper.UpdateInfoCardID(20067, "헌신의 아크 카르타");
-        cardDBHelper.UpdateInfoCardID(20068, "에르제베트");
-        cardDBHelper.UpdateInfoCardID(20069, "크리스틴");
-        cardDBHelper.UpdateInfoCardID(20060, "칼바서스");
-        cardDBHelper.UpdateInfoCardID(20071, "니아");
-        cardDBHelper.UpdateInfoCardID(20072, "샤나");
-        cardDBHelper.UpdateInfoCardID(20073, "알비온");
-        cardDBHelper.UpdateInfoCardID(20074, "아르고스");
-        cardDBHelper.UpdateInfoCardID(20075, "데스칼루다");
-        cardDBHelper.UpdateInfoCardID(20076, "쿤겔라니움");
-        cardDBHelper.UpdateInfoCardID(20077, "하누마탄");
-        cardDBHelper.UpdateInfoCardID(20078, "뮨 히다카");
-        cardDBHelper.UpdateInfoCardID(20079, "오스피어");
-        cardDBHelper.UpdateInfoCardID(20080, "다르시");
-        cardDBHelper.UpdateInfoCardID(20045, "크로마니움");
-        cardInfo = cardDBHelper.getCardInfo_All();
-
-    }
-
-    private void updateUncommon() {
-        for (int i = 0; i < cardInfo.size(); i++) {
-            if (cardInfo.get(i).getName().equals("고비우스 24세")) {
-                if (cardInfo.get(i).getId() == 40042) {
-                    return;
-                }
-            }
-        }
-
-        cardDBHelper.UpdateInfoCardID(40042, "고비우스 24세");
-        cardDBHelper.UpdateInfoCardID(40043, "표류소녀 엠마");
-        cardDBHelper.UpdateInfoCardID(40044, "다쿠쿠");
-        cardDBHelper.UpdateInfoCardID(40045, "월향도사");
-        cardDBHelper.UpdateInfoCardID(40046, "모리나");
-        cardDBHelper.UpdateInfoCardID(40047, "모르페오");
-        cardDBHelper.UpdateInfoCardID(40048, "이마르");
-        cardDBHelper.UpdateInfoCardID(40049, "루벤스타인 델 아르코");
-        cardDBHelper.UpdateInfoCardID(40050, "용병 세이라");
-        cardDBHelper.UpdateInfoCardID(40051, "루티아");
-        cardDBHelper.UpdateInfoCardID(40052, "하리야");
-        cardDBHelper.UpdateInfoCardID(40053, "사트라");
-        cardDBHelper.UpdateInfoCardID(40054, "킬리언");
-        cardDBHelper.UpdateInfoCardID(40055, "오크 장로 질록");
-        cardDBHelper.UpdateInfoCardID(40056, "루드벡");
-        cardDBHelper.UpdateInfoCardID(40057, "로웬 젠로드");
-        cardDBHelper.UpdateInfoCardID(40058, "레퓌스");
-        cardInfo = cardDBHelper.getCardInfo_All();
     }
 
 }

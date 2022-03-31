@@ -41,7 +41,7 @@
             android:name="com.ulmu.lostarkcardmanager.GuidePage"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.ulmu.lostarkcardmanager.TestSettingCard"
+            android:name="com.ulmu.lostarkcardmanager.SettingCard"
             android:screenOrientation="portrait"></activity>
 
     </application>

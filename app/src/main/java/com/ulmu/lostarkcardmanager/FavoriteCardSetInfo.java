@@ -1,9 +1,9 @@
 package com.ulmu.lostarkcardmanager;
 
 public class FavoriteCardSetInfo {
-    private String name;
-    private int awake;
-    private int activation;
+    private String name;        //이름
+    private int awake;          //각성도
+    private int activation;     //즐겨찾기 활성이 되어있는가
 
     public String getName() {
         return name;

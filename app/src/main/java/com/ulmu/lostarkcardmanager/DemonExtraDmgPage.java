@@ -169,11 +169,13 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         finish();
     }
 
+    //DEDPage 악추피 수치 update
     public void setDED(float value) {
         DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
         txtDED.setText("악마 추가 피해 + " + df.format(value) + "%");
     }
 
+    //DEDPage 악추피 도감 완성 개수 update
     public void setDEDBook(int completeDED, int DEDBook) {
         txtCompleteDED.setText("완성 도감 개수 : " + completeDED + "/" + DEDBook + "개");
     }

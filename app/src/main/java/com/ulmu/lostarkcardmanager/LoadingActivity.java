@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class LoadingActivity extends Activity {
 
-
+    //로딩화면
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

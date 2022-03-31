@@ -1427,6 +1427,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return check;
     }
 
+    // 카드 등급에 따른 테두리색
     private void setCardBorder(ImageView iv, int position, String name) {
         if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("전설")) {
             iv.setBackgroundColor(Color.parseColor("#FFB300"));
@@ -1480,6 +1481,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             return false;
     }
 
+    // DB에 도감을 완성 시킨 경우(카드수집 + 각성도)
     private boolean isAllCompleteDED(DemonExtraDmgInfo DEDInfo) {
         if (DEDInfo.getHaveCard() == DEDInfo.getCompleteDEDBook()) {
             if (DEDInfo.getHaveAwake() == DEDInfo.getAwake_sum2())
@@ -1519,6 +1521,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return index;
     }
 
+    //보유카드 수량 제한
     private int maxHaveValue(int haveAwake) {
         if (haveAwake == 5) {
             return 0;
@@ -1536,6 +1539,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             return 0;
     }
 
+    // 메인페이지와 DEDPage의 수치 update
     private void updateDEDPage() {
         haveDEDUpdate();                                                                                     //악추피 값,완성도 갱신
         DEDPage.setDED(haveDED);                                                                           //악추피 페이지 값 갱신한 것 세팅
@@ -1543,6 +1547,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
     }
 
+    //DEDInfo filtering 되지 않은 index 값을 얻는 함수
     private int getIndex(DemonExtraDmgInfo demonExtraDmgInfo) {
         int index = 0;
         for (int i = 0; i < DEDInfo.size(); i++) {
@@ -1554,6 +1559,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return index;
     }
 
+    // 완성도감 필터
     public void getCompleteFilter() {
         filterDED = DEDInfo;
         if (DEDPage.completeChecked()) {
@@ -1576,6 +1582,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         notifyDataSetChanged();
     }
 
+    // 검색 필터
     public Filter getSearchFilter() {
         return new Filter() {
             @Override
@@ -1622,6 +1629,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         };
     }
 
+    //완성 안된 DED 도감 세팅
     private void setFilteredDED() {
         ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
         for (int i = 0; i < DEDInfo.size(); i++) {
@@ -1632,6 +1640,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         baseFilteredDED = filteringList;
     }
 
+    //카드 이미지 세팅
     private int getCardImg(String cardName) {
         String name = "";
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -1645,7 +1654,8 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         return imageResource;
     }
 
-    private void completePartRemove() {  //완성도감 지우기
+    //완성도감 지우기
+    private void completePartRemove() {
         ArrayList<DemonExtraDmgInfo> filteringList = new ArrayList<DemonExtraDmgInfo>();
         for (int i = 0; i < filterDED.size(); i++) {
             if (!isAllCompleteDED(filterDED.get(i))) {
@@ -1655,6 +1665,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         filterDED = filteringList;
     }
 
+    //기본 정렬
     public void getDefaultSort() {
         Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
             @Override
@@ -1672,6 +1683,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         notifyDataSetChanged();
     }
 
+    //이름 정렬
     public void getNameSort() {
         Collections.sort(filterDED);
         if (DEDPage.completeChecked()) {
@@ -1680,6 +1692,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         notifyDataSetChanged();
     }
 
+    //완성도 정렬
     public void getCompletenessSort() {
         getNameSort();
         Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
@@ -1699,6 +1712,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         notifyDataSetChanged();
     }
 
+    //다음 활성도가 가까운 순 정렬
     public void getFastCompletenessSort() {
         getNameSort();
         Collections.sort(filterDED, new Comparator<DemonExtraDmgInfo>() {
@@ -1732,6 +1746,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
     }
 
+    //CardBook의 완성도 체크
     private boolean isCompleteCardBook(CardBookInfo cardBook_all) {
         if (cardBook_all.getHaveCard() == cardBook_all.getCompleteCardBook())
             return true;

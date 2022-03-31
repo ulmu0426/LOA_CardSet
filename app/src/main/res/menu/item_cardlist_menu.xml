@@ -22,4 +22,8 @@
         android:id="@+id/allCheck"
         android:layout_gravity="center"
         android:title="카드 모두 획득하기" />
+    <item
+        android:id="@+id/allUncheck"
+        android:layout_gravity="center"
+        android:title="카드 획득 초기화" />
 </menu>

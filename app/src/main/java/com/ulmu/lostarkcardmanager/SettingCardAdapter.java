@@ -1,6 +1,5 @@
 package com.ulmu.lostarkcardmanager;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -24,33 +22,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
 
     private static final String[] STAT = {"치명", "특화", "신속"};
 
+    //메인 페이지의 값을 변경시키기 위한 ArrayList들
     private float DEDDmg;
+    private ArrayList<CardSetInfo> cardSetInfo;
     private ArrayList<CardBookInfo> cardBookInfo;
     private ArrayList<DemonExtraDmgInfo> DEDInfo;
+    private FavoriteAdapter favoriteAdapter;
+    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
 
-    private ArrayList<CardInfo> cardInfo;
     private Context context;
-    private CardDBHelper cardDBHelper;
-    private ArrayList<CardInfo> useCardList;
+    private ArrayList<CardInfo> cardInfo;
     private ArrayList<CardInfo> filterCardInfo;
-    private SettingCard settingCard;
+    private ArrayList<CardInfo> useCardList;
+    private CardDBHelper cardDBHelper;
 
-    public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList, SettingCard settingCard) {
+    public SettingCardAdapter(Context context, ArrayList<CardInfo> useCardList) {
         this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+        this.context = context;
         this.cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
         this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
-        this.context = context;
+        this.favoriteAdapter = ((MainPage) MainPage.mainContext).favoriteAdapter;
+        this.favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
+        this.cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
         this.useCardList = useCardList;
         this.filterCardInfo = useCardList;
-        this.settingCard = settingCard;
         cardDBHelper = new CardDBHelper(context);
+
     }
 
     @NonNull
@@ -163,6 +165,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                                 int number = numberPickerHave.getValue();
                                 numberPickerAwake.setValue(awake);
                                 numberPickerHave.setValue(number);
+
                                 //카드 arrayList update
                                 useCardList.get(positionGet).setAwake(awake);
                                 useCardList.get(positionGet).setNum(number);
@@ -171,15 +174,21 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
                                 cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setAwake(awake);
                                 cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setNum(number);
+
                                 //카드 DB update
                                 cardDBHelper.UpdateInfoCardAwake(awake, filterCardInfo.get(positionGet).getId());
                                 cardDBHelper.UpdateInfoCardNum(number, filterCardInfo.get(positionGet).getId());
 
+
                                 holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
+                                ;
+                                ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                                 ((MainPage) MainPage.mainContext).cardBookUpdate();
                                 ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                                settingCard.followSorting();
+                                //즐겨찾기 DB Update, 및 갱신
+                                favoriteCardSetUpdate(searchCardSet(filterCardInfo.get(positionGet).getName()));
 
+                                haveStatUpdate();
                                 haveDEDUpdate();
                                 notifyDataSetChanged();
                                 awakeHaveDialog.cancel();
@@ -205,8 +214,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                    settingCard.followSorting();
-                    haveStatUpdate(cardBookInfo);
+                    haveStatUpdate();
                     haveDEDUpdate();
                 } else {
                     useCardList.get(positionGet).setGetCard(0);
@@ -214,11 +222,13 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(0);
                     cardDBHelper.UpdateInfoCardCheck(0, filterCardInfo.get(positionGet).getId());
                     defaultColorFilter(holder.img, positionGet, filter);
+                    if (filterCardInfo.get(positionGet).getAwake() > 0) {
+                        holder.isGetCheckbox.setChecked(true);
+                    }
 
                     ((MainPage) MainPage.mainContext).cardBookUpdate();
                     ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                    settingCard.followSorting();
-                    haveStatUpdate(cardBookInfo);
+                    haveStatUpdate();
                     haveDEDUpdate();
                 }
 
@@ -244,11 +254,21 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             txtName = itemView.findViewById(R.id.txtName);
             txtAwakeAndHave = itemView.findViewById(R.id.txtAwakeAndHave);
             isGetCheckbox = itemView.findViewById(R.id.isGetCheckbox);
-
         }
-
     }
 
+    private int getCardImg(String cardName) {
+        String name = "";
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardName)) {
+                name = cardInfo.get(i).getPath();
+                break;
+            }
+        }
+        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+
+        return imageResource;
+    }
 
     private void defaultColorFilter(ImageView iv, int position, ColorFilter filter) {
         if (filterCardInfo.get(position).getGetCard() == 0) {
@@ -287,7 +307,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         return tf;
     }
 
-
     private int matchIndex(int id) {
         int index = 0;
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -316,56 +335,14 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             return 0;
     }
 
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    filterCardInfo = useCardList;
-                } else {
-                    ArrayList<CardInfo> filteringList = new ArrayList<CardInfo>();
-                    for (int i = 0; i < useCardList.size(); i++) {
-                        if (useCardList.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteringList.add(useCardList.get(i));
-                        }
-                    }
-                    filterCardInfo = filteringList;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterCardInfo;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                filterCardInfo = (ArrayList<CardInfo>) results.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
-
-    private int getCardImg(String cardName) {
-        String name = "";
-        for (int i = 0; i < cardInfo.size(); i++) {
-            if (cardInfo.get(i).getName().equals(cardName)) {
-                name = cardInfo.get(i).getPath();
-                break;
-            }
-        }
-        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-
-        return imageResource;
-    }
-
     //스텟, 도감 달성 개수 업데이트 메소드
-    private void haveStatUpdate(ArrayList<CardBookInfo> cardBook_all) {
+    private void haveStatUpdate() {
         int[] haveStat = new int[]{0, 0, 0};
 
         for (int i = 0; i < haveStat.length; i++) {
-            for (int j = 0; j < cardBook_all.size(); j++) {
-                if (cardBook_all.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBook_all.get(j))) {
-                    haveStat[i] += cardBook_all.get(j).getValue();
+            for (int j = 0; j < cardBookInfo.size(); j++) {
+                if (cardBookInfo.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBookInfo.get(j))) {
+                    haveStat[i] += cardBookInfo.get(j).getValue();
                 }
             }
         }
@@ -391,60 +368,54 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             return false;
     }
 
-
-    public void getDefaultSort() {
-        Collections.sort(filterCardInfo, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getId() < o2.getId())
-                    return -1;
-                else
-                    return 1;
+    //변경한 카드의 이름이 포함된 카드세트 찾기
+    private ArrayList<CardSetInfo> searchCardSet(String cardName) {
+        ArrayList<CardSetInfo> tempCardSet = new ArrayList<>();
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getCard0().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
             }
-        });
-        notifyDataSetChanged();
-    }
-
-    public void getNameSort() {
-        Collections.sort(filterCardInfo);
-        notifyDataSetChanged();
-    }
-
-    public void getNotAcquiredSort() {
-        Collections.sort(filterCardInfo, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getGetCard() <= o2.getGetCard())
-                    return -1;
-                else
-                    return 1;
+            if (cardSetInfo.get(i).getCard1().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
             }
-        });
-        notifyDataSetChanged();
-    }
-
-    public void getAcquiredSort() {
-        Collections.sort(filterCardInfo, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getGetCard() <= o2.getGetCard())
-                    return 1;
-                else
-                    return -1;
+            if (cardSetInfo.get(i).getCard2().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
             }
-        });
-        notifyDataSetChanged();
-    }
-
-    public void allCardCheck() {
-        for (int j = 0; j < filterCardInfo.size(); j++) {
-            filterCardInfo.get(j).setGetCard(1);
+            if (cardSetInfo.get(i).getCard3().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
+            }
+            if (cardSetInfo.get(i).getCard4().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
+            }
+            if (cardSetInfo.get(i).getCard5().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
+            }
+            if (cardSetInfo.get(i).getCard6().equals(cardName)) {
+                tempCardSet.add(cardSetInfo.get(i));
+                continue;
+            }
         }
-        ((MainPage) MainPage.mainContext).cardBookUpdate();
-        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-        haveStatUpdate(cardBookInfo);
-        haveDEDUpdate();
-        notifyDataSetChanged();
+        return tempCardSet;
+    }
+
+    //즐겨찾기된 cardSet가 있다면 해당 카드세트의 각성도 정보 수정 및 DB갱신
+    private void favoriteCardSetUpdate(ArrayList<CardSetInfo> cardSetInfo) {
+        if (cardSetInfo.isEmpty())
+            return;
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            for (int j = 0; j < favoriteCardSetInfo.size(); j++) {
+                if (favoriteCardSetInfo.get(j).getName().equals(cardSetInfo.get(i).getName())) {
+                    cardDBHelper.UpdateInfoFavoriteList(cardSetInfo.get(i).getHaveAwake(), favoriteCardSetInfo.get(j).getName());
+                    favoriteAdapter.setAwake(favoriteCardSetInfo.get(j).getName(), cardSetInfo.get(i).getHaveAwake());
+                }
+            }
+        }
     }
 
 }

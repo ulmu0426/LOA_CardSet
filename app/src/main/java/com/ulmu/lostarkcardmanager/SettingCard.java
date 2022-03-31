@@ -14,25 +14,35 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SettingCard extends AppCompatActivity {
 
-    private Context context;
     private CardDBHelper cardDBHelper;
+    private Context context;
 
-    private ArrayList<CardInfo> cardInfo;
-    private ArrayList<CardInfo> cardLegend;
-    private ArrayList<CardInfo> cardEpic;
-    private ArrayList<CardInfo> cardRare;
-    private ArrayList<CardInfo> cardUncommon;
-    private ArrayList<CardInfo> cardCommon;
-    private ArrayList<CardInfo> cardSpecial;
+    private ViewPager2 viewPager;                   //뷰페이저
+    private TabLayout tabLayout;                    //뷰페이저탭
+
+    private ViewPagerAdapter viewPagerAdapter;      //뷰페이저 어뎁터
+    private ArrayList<CardInfo> cardInfo;           //카드정보
+    private ArrayList<CardInfo> cardLegend;         //카드정보 : 전설
+    private ArrayList<CardInfo> cardEpic;           //카드정보 : 영웅
+    private ArrayList<CardInfo> cardRare;           //카드정보 : 희귀
+    private ArrayList<CardInfo> cardUncommon;       //카드정보 : 고급
+    private ArrayList<CardInfo> cardCommon;         //카드정보 : 일반
+    private ArrayList<CardInfo> cardSpecial;        //카드정보 : 스페셜
 
     private String LEGEND = "전설";
     private String EPIC = "영웅";
@@ -41,165 +51,92 @@ public class SettingCard extends AppCompatActivity {
     private String COMMON = "일반";
     private String SPECIAL = "스페셜";
 
-    private RecyclerView rvList;
-    private TextView btnL;
-    private TextView btnE;
-    private TextView btnR;
-    private TextView btnU;
-    private TextView btnC;
-    private TextView btnS;
-
-    private SettingCard settingCard;
-    private SettingCardAdapter adapter;
-
-    private ImageView imgMenu;
 
     private ImageView imgSearch;
+    private ConstraintLayout cvCardList;
     private EditText editSearchCard;
 
-    private ConstraintLayout cvCardList;
+    private ImageView imgMenu;                      //카드목록 메뉴(정렬, 카드 전부획득, 카드 초기화)
 
+    private boolean[] checkAll = new boolean[4];
     private boolean checkDefault = true;
     private boolean checkName = false;
     private boolean checkNotAcquiredSort = false;
     private boolean checkAcquiredSort = false;
 
+    private CharSequence filterChar = "";           //검색한 단어
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cardlist);
+        setContentView(R.layout.cardlist_viewpager);
         context = this;
-        settingCard = this;
         cardDBHelper = new CardDBHelper(context);
+        checkAll[0] = checkDefault;
+        checkAll[1] = checkName;
+        checkAll[2] = checkNotAcquiredSort;
+        checkAll[3] = checkAcquiredSort;
 
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
-
         settingCardList();
 
-        rvList = findViewById(R.id.rvList);
+        tabLayout = findViewById(R.id.tabLayoutCardList);
+        viewPager = findViewById(R.id.vpCardList);
 
-        adapter = new SettingCardAdapter(context, cardLegend, settingCard);
-        rvList.setAdapter(adapter);
+        viewPagerAdapter = new ViewPagerAdapter(this);
 
-        btnL = findViewById(R.id.btnL);
-        btnE = findViewById(R.id.btnE);
-        btnR = findViewById(R.id.btnR);
-        btnC = findViewById(R.id.btnC);
-        btnU = findViewById(R.id.btnU);
-        btnS = findViewById(R.id.btnS);
+        viewPager.setAdapter(viewPagerAdapter); //리사이클러뷰 형태로 어뎁팅
 
-        btnL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardLegend, settingCard);
-                rvList.setAdapter(adapter);
-                setBtnSettingBold(btnL);
-                setBtnSettingNormal(btnE);
-                setBtnSettingNormal(btnR);
-                setBtnSettingNormal(btnU);
-                setBtnSettingNormal(btnC);
-                setBtnSettingNormal(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#FFF4BD"));
-                followSorting();
-                adapter.notifyDataSetChanged();
-            }
-        });
-        btnE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardEpic, settingCard);
-                rvList.setAdapter(adapter);
-                setBtnSettingNormal(btnL);
-                setBtnSettingBold(btnE);
-                setBtnSettingNormal(btnR);
-                setBtnSettingNormal(btnU);
-                setBtnSettingNormal(btnC);
-                setBtnSettingNormal(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#ECE2FF"));
-                followSorting();
-                adapter.notifyDataSetChanged();
-            }
-        });
-        btnR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardRare, settingCard);
-                rvList.setAdapter(adapter);
-                setBtnSettingNormal(btnL);
-                setBtnSettingNormal(btnE);
-                setBtnSettingBold(btnR);
-                setBtnSettingNormal(btnU);
-                setBtnSettingNormal(btnC);
-                setBtnSettingNormal(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#DDEFFF"));
-                followSorting();
-                adapter.notifyDataSetChanged();
-            }
-        });
-        btnU.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardUncommon, settingCard);
-                rvList.setAdapter(adapter);
-                setBtnSettingNormal(btnL);
-                setBtnSettingNormal(btnE);
-                setBtnSettingNormal(btnR);
-                setBtnSettingBold(btnU);
-                setBtnSettingNormal(btnC);
-                setBtnSettingNormal(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#DEFFBB"));
-                followSorting();
-                adapter.notifyDataSetChanged();
-            }
-        });
-        btnC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardCommon, settingCard);
-                rvList.setAdapter(adapter);
-                setBtnSettingNormal(btnL);
-                setBtnSettingNormal(btnE);
-                setBtnSettingNormal(btnR);
-                setBtnSettingNormal(btnU);
-                setBtnSettingBold(btnC);
-                setBtnSettingNormal(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#F4F4F4"));
-                followSorting();
-                adapter.notifyDataSetChanged();
-            }
-        });
-        btnS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter = new SettingCardAdapter(context, cardSpecial, settingCard);
-                rvList.setAdapter(adapter);
-                setBtnSettingNormal(btnL);
-                setBtnSettingNormal(btnE);
-                setBtnSettingNormal(btnR);
-                setBtnSettingNormal(btnU);
-                setBtnSettingNormal(btnC);
-                setBtnSettingBold(btnS);
-                rvList.setBackgroundColor(Color.parseColor("#FFDCE9"));
-                followSorting();
-                adapter.notifyDataSetChanged();
-            }
-        });
+        final List<String> tabText = Arrays.asList(LEGEND, EPIC, RARE, UNCOMMON, COMMON, SPECIAL);
 
-        cvCardList = findViewById(R.id.cvCardList);
+        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                TextView textView = new TextView(SettingCard.this);
+                textView.setText(tabText.get(position));
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textView.setTypeface(null, Typeface.BOLD);
+                tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
+                switch (position) {
+                    case 0:
+                        textView.setTextColor(Color.parseColor("#FFF4BD"));
+                        break;
+                    case 1:
+                        textView.setTextColor(Color.parseColor("#ECE2FF"));
+                        break;
+                    case 2:
+                        textView.setTextColor(Color.parseColor("#DDEFFF"));
+                        break;
+                    case 3:
+                        textView.setTextColor(Color.parseColor("#DEFFBB"));
+                        break;
+                    case 4:
+                        textView.setTextColor(Color.parseColor("#F4F4F4"));
+                        break;
+                    case 5:
+                        textView.setTextColor(Color.parseColor("#FFDCE9"));
+                        break;
+                }
+                tab.setCustomView(textView);
+            }
+        }).attach();
 
-        imgSearch = findViewById(R.id.imgSearch);
+        imgSearch = findViewById(R.id.imgSearch_ViewPager);
+        cvCardList = findViewById(R.id.cvViewPager2CardList);
+
+        editSearchCard = findViewById(R.id.editSearchCard_ViewPager);
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cvCardList.getVisibility() == View.VISIBLE)
+                if (cvCardList.getVisibility() == View.VISIBLE) {
+                    editSearchCard.setText("");
                     cvCardList.setVisibility(View.GONE);
-                else
+                } else
                     cvCardList.setVisibility(View.VISIBLE);
             }
         });
 
-        editSearchCard = findViewById(R.id.editSearchCard);
         editSearchCard.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -208,34 +145,8 @@ public class SettingCard extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s);
-                if (s.length() == 0) {
-                    settingCardList();
-                    if (btnL.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardLegend, settingCard);
-                        rvList.setAdapter(adapter);
-                    }
-                    if (btnE.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardEpic, settingCard);
-                        rvList.setAdapter(adapter);
-                    }
-                    if (btnR.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardRare, settingCard);
-                        rvList.setAdapter(adapter);
-                    }
-                    if (btnU.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardUncommon, settingCard);
-                        rvList.setAdapter(adapter);
-                    }
-                    if (btnC.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardCommon, settingCard);
-                        rvList.setAdapter(adapter);
-                    }
-                    if (btnS.getTypeface() == Typeface.DEFAULT_BOLD) {
-                        adapter = new SettingCardAdapter(context, cardSpecial, settingCard);
-                        rvList.setAdapter(adapter);
-                    }
-                }
+                filterChar = s;
+                viewPagerAdapter.search(filterChar);
 
             }
 
@@ -245,7 +156,8 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
-        imgMenu = findViewById(R.id.imgMenu);
+        //정렬(기본, 이름, 미획득, 획득) 카드 모두획득, 카드 획득 초기화
+        imgMenu = findViewById(R.id.imgMenu_ViewPager);
         imgMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,38 +170,48 @@ public class SettingCard extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
-                                adapter.getDefaultSort();
-                                checkDefault = true;
-                                checkName = false;
-                                checkNotAcquiredSort = false;
-                                checkAcquiredSort = false;
+                                for (int i = 0; i < checkAll.length; i++) {
+                                    if (i == 0)
+                                        checkAll[i] = true;
+                                    else
+                                        checkAll[i] = false;
+                                }
+                                viewPagerAdapter.sortingCard(checkAll);
 
                                 return true;
 
                             case R.id.nameSort:
-                                adapter.getNameSort();
-                                checkDefault = false;
-                                checkName = true;
-                                checkNotAcquiredSort = false;
-                                checkAcquiredSort = false;
+                                for (int i = 0; i < checkAll.length; i++) {
+                                    if (i == 1)
+                                        checkAll[i] = true;
+                                    else
+                                        checkAll[i] = false;
+                                }
+                                viewPagerAdapter.sortingCard(checkAll);
 
                                 return true;
 
                             case R.id.notAcquiredSort:
-                                adapter.getNotAcquiredSort();
-                                checkDefault = false;
-                                checkName = false;
-                                checkNotAcquiredSort = true;
-                                checkAcquiredSort = false;
+                                for (int i = 0; i < checkAll.length; i++) {
+                                    if (i == 2)
+                                        checkAll[i] = true;
+                                    else
+                                        checkAll[i] = false;
+                                }
+                                viewPagerAdapter.sortingCard(checkAll);
+
 
                                 return true;
 
                             case R.id.acquiredSort:
-                                adapter.getAcquiredSort();
-                                checkDefault = false;
-                                checkName = false;
-                                checkNotAcquiredSort = false;
-                                checkAcquiredSort = true;
+                                for (int i = 0; i < checkAll.length; i++) {
+                                    if (i == 3)
+                                        checkAll[i] = true;
+                                    else
+                                        checkAll[i] = false;
+                                }
+                                viewPagerAdapter.sortingCard(checkAll);
+
 
                                 return true;
 
@@ -299,7 +221,17 @@ public class SettingCard extends AppCompatActivity {
                                     cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
                                 }
                                 settingCardList();
-                                adapter.allCardCheck();
+                                viewPagerAdapter.allCheck();
+
+                                return true;
+
+                            case R.id.allUncheck:
+                                for (int i = 0; i < cardInfo.size(); i++) {
+                                    cardInfo.get(i).setGetCard(0);
+                                    cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
+                                }
+                                settingCardList();
+                                viewPagerAdapter.allUncheck();
 
                                 return true;
                         }
@@ -310,17 +242,10 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+
     }
 
-    @Override
-    public void onBackPressed() {
-        if (cvCardList.getVisibility() == View.VISIBLE) {
-            cvCardList.setVisibility(View.GONE);
-            return;
-        }
-        finish();
-    }
-
+    //카드 목록 update
     private void settingCardList() {
         cardLegend = new ArrayList<CardInfo>();
         cardEpic = new ArrayList<CardInfo>();
@@ -391,44 +316,14 @@ public class SettingCard extends AppCompatActivity {
         }
     }
 
-    private void setBtnSettingNormal(TextView btnGrade) {
-        btnGrade.setTextSize(18);
-        btnGrade.setTypeface(Typeface.DEFAULT);
+    @Override
+    public void onBackPressed() {
+        if (cvCardList.getVisibility() == View.VISIBLE) {
+            cvCardList.setVisibility(View.GONE);
+            return;
+        }
+        finish();
     }
 
-    private void setBtnSettingBold(TextView btnBold) {
-        btnBold.setTextSize(20);
-        btnBold.setTypeface(Typeface.DEFAULT_BOLD);
-    }
 
-    public boolean isCheckDefault() {
-        return checkDefault;
-    }
-
-    public boolean isCheckName() {
-        return checkName;
-    }
-
-    public boolean isCheckNotAcquiredSort() {
-        return checkNotAcquiredSort;
-    }
-
-    public boolean isCheckAcquiredSort() {
-        return checkAcquiredSort;
-    }
-
-    public void followSorting() {
-        if (isCheckDefault())
-            adapter.getDefaultSort();
-
-        if (isCheckName())
-            adapter.getNameSort();
-
-        if (isCheckNotAcquiredSort())
-            adapter.getNotAcquiredSort();
-
-        if (isCheckAcquiredSort())
-            adapter.getAcquiredSort();
-
-    }
 }
