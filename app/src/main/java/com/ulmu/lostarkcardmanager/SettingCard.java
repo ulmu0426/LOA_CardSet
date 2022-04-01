@@ -3,6 +3,7 @@ package com.ulmu.lostarkcardmanager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,8 +30,8 @@ import java.util.List;
 
 public class SettingCard extends AppCompatActivity {
 
-    private CardDBHelper cardDBHelper;
     private Context context;
+    private CardDBHelper cardDBHelper;
 
     private ViewPager2 viewPager;                   //뷰페이저
     private TabLayout tabLayout;                    //뷰페이저탭
@@ -70,7 +71,7 @@ public class SettingCard extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cardlist_viewpager);
+        setContentView(R.layout.cardlist);
         context = this;
         cardDBHelper = new CardDBHelper(context);
         checkAll[0] = checkDefault;
@@ -156,18 +157,23 @@ public class SettingCard extends AppCompatActivity {
             }
         });
 
+        ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setCanceledOnTouchOutside(false);
+
         //정렬(기본, 이름, 미획득, 획득) 카드 모두획득, 카드 획득 초기화
         imgMenu = findViewById(R.id.imgMenu_ViewPager);
         imgMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 PopupMenu popupMenu = new PopupMenu(context, imgMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_cardlist_menu, popupMenu.getMenu());
-
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+
                         switch (item.getItemId()) {
                             case R.id.defaultSort:
                                 for (int i = 0; i < checkAll.length; i++) {
@@ -216,29 +222,22 @@ public class SettingCard extends AppCompatActivity {
                                 return true;
 
                             case R.id.allCheck:
-                                for (int i = 0; i < cardInfo.size(); i++) {
-                                    cardInfo.get(i).setGetCard(1);
-                                    cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
-                                }
-                                settingCardList();
-                                viewPagerAdapter.allCheck();
+                                allCheck();
 
                                 return true;
 
                             case R.id.allUncheck:
-                                for (int i = 0; i < cardInfo.size(); i++) {
-                                    cardInfo.get(i).setGetCard(0);
-                                    cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
-                                }
-                                settingCardList();
-                                viewPagerAdapter.allUncheck();
+                                allUncheck();
 
                                 return true;
+
                         }
+
                         return false;
                     }
                 });
                 popupMenu.show();
+
             }
         });
 
@@ -325,5 +324,22 @@ public class SettingCard extends AppCompatActivity {
         finish();
     }
 
+    private void allCheck() {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            cardInfo.get(i).setGetCard(1);
+            cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
+        }
+        settingCardList();
+        viewPagerAdapter.allCheck();
+    }
+
+    private void allUncheck() {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            cardInfo.get(i).setGetCard(0);
+            cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
+        }
+        settingCardList();
+        viewPagerAdapter.allUncheck();
+    }
 
 }

@@ -54,21 +54,20 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.main_page);
         mainContext = this;
 
-/*
+
         preferences = getSharedPreferences("Pref", MODE_PRIVATE);
         boolean isFirstRun = preferences.getBoolean("isFirstRun", true);
         if (isFirstRun) {
             Intent guideIntent = new Intent(MainPage.this, GuidePage.class);
             startActivity(guideIntent);
         }
-*/
 
 
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);
         txtCardBookStat_Speciality = (TextView) findViewById(R.id.txtCardBookStat_Speciality);
         txtCardBookStat_Agility = (TextView) findViewById(R.id.txtCardBookStat_Agility);
-        
+
         //악추피 값
         txtDemonExtraDmg = (TextView) findViewById(R.id.txtDemonExtraDmg);
 
@@ -209,6 +208,7 @@ public class MainPage extends AppCompatActivity {
     //뒤로가기 2회 터치시 종료(2.5초 안에 두번 눌러야 함)
     private long backKeyPressedTime = 0;
     private Toast finish;
+
     @Override
     public void onBackPressed() {
         if (drawerLayout_Main.isDrawerOpen(Gravity.LEFT)) {

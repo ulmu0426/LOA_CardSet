@@ -31,7 +31,8 @@
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/cardlist_viewpager.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/ded_detail_awake_number_change.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/demon_extra_dmg_detail.xml" value="0.25" />
-        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/demon_extra_dmg_page.xml" value="0.33" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/demon_extra_dmg_page.xml" value="0.22" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/dialog_loading.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/dialog_search_card.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/draw_main.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/fragment_cardlist.xml" value="0.25" />
@@ -58,6 +59,8 @@
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/rv_favorite_cardset.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/sub_main.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/switch_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/vp_cardlist.xml" value="0.3641304347826087" />
+        <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/layout/vp_guide.xml" value="0.25" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/menu/item_cardlist_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/menu/item_sort_menu.xml" value="0.3386243386243386" />
         <entry key="..\:/Users/kcor2/Documents/Project LOA Card/app/src/main/res/menu/sidebar_menu.xml" value="0.36614583333333334" />

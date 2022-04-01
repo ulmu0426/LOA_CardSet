@@ -291,6 +291,7 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                 Button btnCancer = dialogChangeAwakeAndNum.findViewById(R.id.btnCancer);
                 Button btnOK = dialogChangeAwakeAndNum.findViewById(R.id.btnOK);
 
+
                 txtDED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -972,6 +973,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                     }
                 });
 
+
+                imgDED_Detail_Card0.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard0());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard0()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard0() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard0())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
+                    }
+                });
                 imgDED_Detail_Card0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1002,6 +1041,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         updateDEDPage();
                         notifyDataSetChanged();
 
+                    }
+                });
+
+                imgDED_Detail_Card1.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard1());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard1()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard1() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard1())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
                     }
                 });
                 imgDED_Detail_Card1.setOnClickListener(new View.OnClickListener() {
@@ -1037,6 +1114,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                     }
                 });
+
+                imgDED_Detail_Card2.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard2());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard2()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard2() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard2())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
+                    }
+                });
                 imgDED_Detail_Card2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1068,6 +1183,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         updateDEDPage();
                         notifyDataSetChanged();
 
+                    }
+                });
+
+                imgDED_Detail_Card3.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard3());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard3()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard3() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard3())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
                     }
                 });
                 imgDED_Detail_Card3.setOnClickListener(new View.OnClickListener() {
@@ -1103,6 +1256,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                     }
                 });
+
+                imgDED_Detail_Card4.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard4());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard4()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard4() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard4())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
+                    }
+                });
                 imgDED_Detail_Card4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1134,6 +1325,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         updateDEDPage();
                         notifyDataSetChanged();
 
+                    }
+                });
+
+                imgDED_Detail_Card5.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard5());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard5()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard5() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard5())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
                     }
                 });
                 imgDED_Detail_Card5.setOnClickListener(new View.OnClickListener() {
@@ -1169,6 +1398,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                     }
                 });
+
+                imgDED_Detail_Card6.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard6());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard6()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard6() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard6())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
+                    }
+                });
                 imgDED_Detail_Card6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1200,6 +1467,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         updateDEDPage();
                         notifyDataSetChanged();
 
+                    }
+                });
+
+                imgDED_Detail_Card7.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard7());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard7()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard7() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard7())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
                     }
                 });
                 imgDED_Detail_Card7.setOnClickListener(new View.OnClickListener() {
@@ -1235,6 +1540,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
 
                     }
                 });
+
+                imgDED_Detail_Card8.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard8());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard8()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard8() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard8())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
+                    }
+                });
                 imgDED_Detail_Card8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -1266,6 +1609,44 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
                         updateDEDPage();
                         notifyDataSetChanged();
 
+                    }
+                });
+
+                imgDED_Detail_Card9.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
+                        cardInfoDialog.setContentView(R.layout.just_card);
+
+                        WindowManager.LayoutParams params = cardInfoDialog.getWindow().getAttributes();
+                        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                        cardInfoDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                        TextView txtJustCardName = cardInfoDialog.findViewById(R.id.txtJustCardName);
+                        ImageView imgJustCard = cardInfoDialog.findViewById(R.id.imgJustCard);
+
+                        TextView txtJustCardAwake = cardInfoDialog.findViewById(R.id.etxtJustCardAwake);
+                        TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
+
+                        TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
+
+                        txtJustCardName.setText(filterDED.get(pos).getCard9());
+                        imgJustCard.setImageResource(getCardImg(filterDED.get(pos).getCard9()));
+                        txtJustCardAwake.setText(filterDED.get(pos).getAwakeCard9() + "");
+                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getNum() + "");
+                        txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterDED.get(pos).getCard9())).getAcquisition_info());
+
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cardInfoDialog.cancel();
+                            }
+                        });
+
+                        cardInfoDialog.show();
+                        return false;
                     }
                 });
                 imgDED_Detail_Card9.setOnClickListener(new View.OnClickListener() {

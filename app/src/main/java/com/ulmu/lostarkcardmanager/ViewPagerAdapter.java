@@ -62,7 +62,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_cardlist, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.vp_cardlist, parent, false);
         return new ViewHolder(view);
     }
 
@@ -307,6 +307,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
         haveStatUpdate();
         haveDEDUpdate();
+
         notifyDataSetChanged();
     }
 
