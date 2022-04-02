@@ -66,20 +66,20 @@ public class GuidePage extends AppCompatActivity {
 
 
     public void addDotsIndicator(int position) {
-        dots = new TextView[5];
+        dots = new TextView[7];
         tabLayout.removeAllViews();
 
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(context);
             dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.default_white));
+            dots[i].setTextColor(getResources().getColor(R.color.default_dots));
 
             tabLayout.addView(dots[i]);
         }
 
         if (dots.length > 0) {
-            dots[position].setTextColor(getResources().getColor(R.color.selected_white));
+            dots[position].setTextColor(getResources().getColor(R.color.selected_dots));
         }
     }
 

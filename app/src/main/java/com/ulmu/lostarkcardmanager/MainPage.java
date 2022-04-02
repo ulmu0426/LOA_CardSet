@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class MainPage extends AppCompatActivity {
 
     public static Context mainContext;
 
+    private Button btnGuide;
     protected SharedPreferences preferences;        //최초 실행시 가이드 페이지 호출을 위한 변수
 
     @Override
@@ -54,12 +56,22 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.main_page);
         mainContext = this;
 
+        btnGuide = findViewById(R.id.txtGuide);
+        btnGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GuidePage.class);
+                startActivity(intent);
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
+            }
+        });
 
         preferences = getSharedPreferences("Pref", MODE_PRIVATE);
         boolean isFirstRun = preferences.getBoolean("isFirstRun", true);
         if (isFirstRun) {
             Intent guideIntent = new Intent(MainPage.this, GuidePage.class);
             startActivity(guideIntent);
+            preferences.edit().putBoolean("isFirstRun", false).apply();
         }
 
 

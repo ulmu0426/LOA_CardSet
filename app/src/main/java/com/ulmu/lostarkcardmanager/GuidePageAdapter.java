@@ -25,7 +25,9 @@ public class GuidePageAdapter extends PagerAdapter {
             R.drawable.guide1,
             R.drawable.guide2,
             R.drawable.guide3,
-            R.drawable.guide4
+            R.drawable.guide4,
+            R.drawable.guide5,
+            R.drawable.guide6
 
 
     };

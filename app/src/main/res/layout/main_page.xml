@@ -40,9 +40,9 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="3dp"
+                    android:adjustViewBounds="true"
                     app:srcCompat="@drawable/loaicon" />
             </RelativeLayout>
 
@@ -223,7 +223,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            //구분선
 
             <View
                 android:id="@+id/lineBetweenCardbookAndDemonDMG"
@@ -279,16 +278,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:background="#404040"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="49dp"
-                android:layout_height="49dp"
-                app:srcCompat="@drawable/abc_vector_test" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#2E2E2E"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    app:srcCompat="@drawable/abc_vector_test" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -297,9 +303,10 @@
 
             <TextView
                 android:id="@+id/txtBtnCardSet_Draw"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:paddingLeft="5dp"
                 android:text="카드 세트"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
@@ -314,6 +321,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:paddingLeft="5dp"
                 android:text="카드 도감"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
@@ -328,6 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:paddingLeft="5dp"
                 android:text="악마 추가 피해"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
@@ -342,7 +351,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="보유 카드"
+                android:paddingLeft="5dp"
+                android:text="카드 목록"
                 android:textColor="#E8E8E8"
                 android:textSize="25dp" />
 
@@ -354,6 +364,32 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+
+                <Button
+                    android:id="@+id/txtGuide"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingVertical="5dp"
+                    android:text="가이드 다시보기"
+                    android:textAlignment="center"
+                    android:textColor="#E8E8E8"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toTopOf="@+id/btnMakeInfo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:rippleColor="#B6B6B6"
+                    app:strokeColor="#9C9C9C" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/medium_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtGuide" />
 
                 <TextView
                     android:id="@+id/btnMakeInfo"

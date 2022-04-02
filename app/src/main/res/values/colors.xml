@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gold_black">#FF272000</color>
     <color name="gold">#FFFFB300</color>
-    <color name="medium_white">#191919</color>
+    <color name="medium_black">#191919</color>
 </resources>
