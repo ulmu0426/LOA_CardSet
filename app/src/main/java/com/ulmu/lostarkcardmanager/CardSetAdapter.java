@@ -14,6 +14,7 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -1040,6 +1041,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         filterCardSet.get(pos).setCheckCard0(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard0())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail0, filterCardSet.get(pos).getCard0());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
@@ -1070,6 +1076,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard1(cardCheck);      //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard1(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard1())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail1, filterCardSet.get(pos).getCard1());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
 
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
@@ -1103,6 +1114,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         filterCardSet.get(pos).setCheckCard2(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard2())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail2, filterCardSet.get(pos).getCard2());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
@@ -1134,6 +1150,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard3(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard3(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard3())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail3, filterCardSet.get(pos).getCard3());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
 
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
@@ -1167,6 +1188,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         filterCardSet.get(pos).setCheckCard4(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard4())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail4, filterCardSet.get(pos).getCard4());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
@@ -1199,6 +1225,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         filterCardSet.get(pos).setCheckCard5(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard5())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail5, filterCardSet.get(pos).getCard5());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
                         isCompleteCardBookBackgroundColor(filterCardSet.get(pos), holder.cvCardSetBackground);
@@ -1229,6 +1260,11 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                         cardSetInfo.get(getIndex(filterCardSet.get(pos))).setCheckCard6(cardCheck);                                                          //cardX수집 유무 업데이트(현재 DED array )
                         filterCardSet.get(pos).setCheckCard6(cardCheck);
                         cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
+
+                        if (cardInfo.get(getIndex(cardInfo, filterCardSet.get(pos).getCard6())).getAwake() > 0) {
+                            cardAwake(imgCardSetDetail6, filterCardSet.get(pos).getCard6());
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
 
                         ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
                         ((MainPage) MainPage.mainContext).cardBookUpdate();
@@ -1406,6 +1442,12 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
         return check;
     }
 
+    //클릭시 카드의 각성도 정보가 1이상인 경우 카드가 무조건 획득으로(컬러필터 제거 및 획득)
+    private void cardAwake(ImageView iv, String name) {
+        iv.setColorFilter(null);
+        setCardBorder(iv,name);
+    }
+
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
     private int imgGrayScale(ImageView iv, ColorMatrixColorFilter filter, int position, String name) {
         int check = 0;
@@ -1414,14 +1456,14 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
             iv.setColorFilter(filter);
             check = 0;
         } else {
-            setCardBorder(iv, position, name);
+            setCardBorder(iv, name);
             iv.setColorFilter(null);
             check = 1;
         }
         return check;
     }
 
-    private void setCardBorder(ImageView iv, int position, String name) {
+    private void setCardBorder(ImageView iv, String name) {
         if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("전설")) {
             iv.setBackgroundColor(Color.parseColor("#FFB300"));
         } else if (cardInfo.get(getIndex(cardInfo, name)).getGrade().equals("영웅")) {

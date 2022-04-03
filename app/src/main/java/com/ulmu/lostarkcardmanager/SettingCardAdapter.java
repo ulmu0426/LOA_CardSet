@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -205,33 +206,25 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.isGetCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.isGetCheckbox.isChecked()) {
-                    useCardList.get(positionGet).setGetCard(1);
-                    filterCardInfo.get(positionGet).setGetCard(1);
-                    cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(1);
-                    cardDBHelper.UpdateInfoCardCheck(1, filterCardInfo.get(positionGet).getId());
-                    defaultColorFilter(holder.img, positionGet, filter);
+                int check = 0;
+                if(holder.isGetCheckbox.isChecked())
+                    check = 1;
 
-                    ((MainPage) MainPage.mainContext).cardBookUpdate();
-                    ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                    haveStatUpdate();
-                    haveDEDUpdate();
-                } else {
-                    useCardList.get(positionGet).setGetCard(0);
-                    filterCardInfo.get(positionGet).setGetCard(0);
-                    cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(0);
-                    cardDBHelper.UpdateInfoCardCheck(0, filterCardInfo.get(positionGet).getId());
-                    defaultColorFilter(holder.img, positionGet, filter);
-                    if (filterCardInfo.get(positionGet).getAwake() > 0) {
-                        holder.isGetCheckbox.setChecked(true);
-                    }
+                useCardList.get(positionGet).setGetCard(check);
+                filterCardInfo.get(positionGet).setGetCard(check);
+                cardInfo.get(matchIndex(filterCardInfo.get(positionGet).getId())).setGetCard(check);
+                cardDBHelper.UpdateInfoCardCheck(check, filterCardInfo.get(positionGet).getId());
+                defaultColorFilter(holder.img, positionGet, filter);
 
-                    ((MainPage) MainPage.mainContext).cardBookUpdate();
-                    ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-                    haveStatUpdate();
-                    haveDEDUpdate();
+                if (filterCardInfo.get(positionGet).getAwake() > 0) {
+                    holder.isGetCheckbox.setChecked(true);
+                    Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                 }
 
+                ((MainPage) MainPage.mainContext).cardBookUpdate();
+                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
+                haveStatUpdate();
+                haveDEDUpdate();
             }
         });
 
