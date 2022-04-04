@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,13 +16,6 @@ import java.util.Comparator;
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
     private Context context;
-
-
-    private static final String[] STAT = {"치명", "특화", "신속"};
-
-    private float DEDDmg;
-    private ArrayList<CardBookInfo> cardBookInfo;
-    private ArrayList<DemonExtraDmgInfo> DEDInfo;
 
     private ArrayList<CardInfo> cardLegend;
     private ArrayList<CardInfo> cardEpic;
@@ -46,8 +38,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     public ViewPagerAdapter(Context context) {
         this.context = context;
-        this.cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
-        this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
         cardListInfo = new ArrayList<>();
         settingCardList();
         cardListInfo.add(cardLegend);
@@ -291,8 +281,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         }
         ((MainPage) MainPage.mainContext).cardBookUpdate();
         ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-        haveStatUpdate();
-        haveDEDUpdate();
         notifyDataSetChanged();
     }
 
@@ -305,12 +293,10 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         }
         ((MainPage) MainPage.mainContext).cardBookUpdate();
         ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-        haveStatUpdate();
-        haveDEDUpdate();
 
         notifyDataSetChanged();
     }
-
+/*
     // DB에 도감을 완성 시킨 경우 true else false
     private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
         if (cardBookInfo.getHaveCard() == cardBookInfo.getCompleteCardBook())
@@ -318,6 +304,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         else
             return false;
     }
+
 
     //스텟, 도감 달성 개수 업데이트 메소드
     private void haveStatUpdate() {
@@ -343,6 +330,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         DEDDmg = Float.parseFloat(df.format(DEDDmg));
         ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(DEDDmg);
     }
+*/
 
     //카드 목록 update
     private void settingCardList() {

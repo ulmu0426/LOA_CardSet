@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,9 +25,18 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SettingCard extends AppCompatActivity {
 
@@ -218,17 +228,18 @@ public class SettingCard extends AppCompatActivity {
                                 }
                                 viewPagerAdapter.sortingCard(checkAll);
 
-
                                 return true;
 
                             case R.id.allCheck:
-                                allCheck();
-
+                                allCheck = true;
+                                allUncheck = false;
+                                testMethod();
                                 return true;
 
                             case R.id.allUncheck:
-                                allUncheck();
-
+                                allCheck = false;
+                                allUncheck = true;
+                                testMethod();
                                 return true;
 
                         }
@@ -242,6 +253,48 @@ public class SettingCard extends AppCompatActivity {
         });
 
 
+    }
+
+    private ProgressDialog progressDialog;
+    private boolean allCheck = false;
+    private boolean allUncheck = false;
+    private Disposable backgroundTask;
+
+    private void testMethod() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        //시작 전 실행코드(task 시작 전)
+        progressDialog = new ProgressDialog(context);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        backgroundTask = Observable.fromCallable(() -> {
+            //task에서 실행할 코드
+            allUncheck();
+            allCheck();
+
+            settingCardList();
+
+            return hashMap;
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<HashMap<String, String>>() {
+            @Override
+            public void accept(HashMap<String, String> stringStringHashMap) throws Throwable {
+                //task끝난 후 실행될 코드
+                backgroundTask.dispose();
+                if (allCheck)
+                    viewPagerAdapter.allCheck();
+                if (allUncheck)
+                    viewPagerAdapter.allUncheck();
+                progressDialog.dismiss();
+            }
+        });
+
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Throwable {
+                Log.v("test", throwable.toString());
+            }
+        });
     }
 
     //카드 목록 update
@@ -321,25 +374,72 @@ public class SettingCard extends AppCompatActivity {
             cvCardList.setVisibility(View.GONE);
             return;
         }
+        haveStatUpdate();
+        haveDEDUpdate();
         finish();
     }
 
     private void allCheck() {
+        if (!allCheck)
+            return;
         for (int i = 0; i < cardInfo.size(); i++) {
             cardInfo.get(i).setGetCard(1);
             cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
         }
-        settingCardList();
-        viewPagerAdapter.allCheck();
+        settingCardList();/*
+        viewPagerAdapter.allCheck();*/
     }
 
     private void allUncheck() {
+        if (!allUncheck)
+            return;
         for (int i = 0; i < cardInfo.size(); i++) {
             cardInfo.get(i).setGetCard(0);
             cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
         }
-        settingCardList();
-        viewPagerAdapter.allUncheck();
+        settingCardList();/*
+        viewPagerAdapter.allUncheck();*/
     }
+
+
+    private static final String[] STAT = {"치명", "특화", "신속"};
+
+    private float DEDDmg;
+    private ArrayList<CardBookInfo> cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
+    private ArrayList<DemonExtraDmgInfo> DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
+
+    // DB에 도감을 완성 시킨 경우 true else false
+    private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
+        if (cardBookInfo.getHaveCard() == cardBookInfo.getCompleteCardBook())
+            return true;
+        else
+            return false;
+    }
+
+    //스텟, 도감 달성 개수 업데이트 메소드
+    private void haveStatUpdate() {
+        int[] haveStat = new int[]{0, 0, 0};
+
+        for (int i = 0; i < haveStat.length; i++) {
+            for (int j = 0; j < cardBookInfo.size(); j++) {
+                if (cardBookInfo.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBookInfo.get(j))) {
+                    haveStat[i] += cardBookInfo.get(j).getValue();
+                }
+            }
+        }
+        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+    }
+
+    //DED Dmb 값
+    private void haveDEDUpdate() {
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
+        DEDDmg = 0;
+        for (int i = 0; i < DEDInfo.size(); i++) {
+            DEDDmg += DEDInfo.get(i).getDmgSum();
+        }
+        DEDDmg = Float.parseFloat(df.format(DEDDmg));
+        ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(DEDDmg);
+    }
+
 
 }

@@ -1420,7 +1420,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check, int position, String name) {
         if (check == 1) {
-            setCardBorder(iv, position, name);
+            setCardBorder(iv, name);
             iv.setColorFilter(null);
         } else {
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -1445,7 +1445,7 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
     //클릭시 카드의 각성도 정보가 1이상인 경우 카드가 무조건 획득으로(컬러필터 제거 및 획득)
     private void cardAwake(ImageView iv, String name) {
         iv.setColorFilter(null);
-        setCardBorder(iv,name);
+        setCardBorder(iv, name);
     }
 
     //클릭시 카드를 흑백으로 바꾸는 함수, 데이터베이스 카드 도감 획득 유무도 변경.
