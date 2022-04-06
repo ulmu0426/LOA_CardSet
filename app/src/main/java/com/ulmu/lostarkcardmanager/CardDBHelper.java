@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     //assets 폴더
     private static String DB_PATH = "";
 
@@ -207,7 +207,12 @@ public class CardDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if(oldVersion < newVersion) {
+            db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET card3 = '' WHERE id = 8");
+            db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET card4 = '' WHERE id = 8");
+            db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET card5 = '' WHERE id = 8");
+            db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET cardListSum = 3 WHERE id = 8");
+        }
     }
 
     //UPDATE 카드리스트 카드 id 값 수정

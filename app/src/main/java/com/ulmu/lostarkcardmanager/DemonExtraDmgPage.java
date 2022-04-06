@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class DemonExtraDmgPage extends AppCompatActivity {
+    private final String[] STAT = {"치명", "특화", "신속"};
     private RecyclerView rv;
     private TextView txtDED;
     private TextView txtCompleteDED;
@@ -166,7 +168,31 @@ public class DemonExtraDmgPage extends AppCompatActivity {
             return;
         }
 
+        ((MainPage)MainPage.mainContext).cardBookUpdate();
+        haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
         finish();
+    }
+
+    //스텟, 도감 달성 개수 업데이트 메소드
+    private void haveStatUpdate(ArrayList<CardBookInfo> cardBook_all) {
+        int[] haveStat = new int[]{0, 0, 0};
+
+        for (int i = 0; i < haveStat.length; i++) {
+            for (int j = 0; j < cardBook_all.size(); j++) {
+                if (cardBook_all.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBook_all.get(j))) {
+                    haveStat[i] += cardBook_all.get(j).getValue();
+                }
+            }
+        }
+        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+    }
+
+    //CardBook의 완성도 체크
+    private boolean isCompleteCardBook(CardBookInfo cardBook_all) {
+        if (cardBook_all.getHaveCard() == cardBook_all.getCompleteCardBook())
+            return true;
+        else
+            return false;
     }
 
     //DEDPage 악추피 수치 update

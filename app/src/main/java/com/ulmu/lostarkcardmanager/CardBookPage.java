@@ -16,7 +16,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CardBookPage extends AppCompatActivity {
+    private final String[] STAT = {"치명", "특화", "신속"};
+    private static int[] haveStat;                  //카드도감 페이지 상단에 현재 도감 완성도에 따른 스탯 상승치. 치명, 특화, 신속 순서
+    private static int[] haveStatCardBook;          //카드도감 페이지 상단에 현재 도감 완성도에 따른 스탯별 최대 도감 달성 개수. 치명, 특화, 신속 순서
+    private static int[] haveStatCardBookCount;     //카드도감 페이지 상단에 현재 도감 완성도에 따른 스탯별 현재 도감 달성 개수. 치명, 특화, 신속 순서
+    private ArrayList<CardBookInfo> cardBookInfo;
+
     private static final String CRITICAL = "치명 + ";
     private static final String SPECIALITY = "특화 + ";
     private static final String AGILITY = "신속 + ";
@@ -159,6 +167,8 @@ public class CardBookPage extends AppCompatActivity {
 
         });
 
+        cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
+
     }
 
     @Override
@@ -169,8 +179,37 @@ public class CardBookPage extends AppCompatActivity {
 
             return;
         }
-
+        haveStatUpdate(cardBookInfo);
+        setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+        ((MainPage) MainPage.mainContext).cardBookUpdate();
+        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
         finish();
+    }
+
+    // DB에 도감을 완성 시킨 경우 true else false
+    public boolean isCompleteCardBook(CardBookInfo cardbook_all) {
+        if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
+            return true;
+        else
+            return false;
+    }
+
+    //스텟, 도감 달성 개수 업데이트 메소드
+    private void haveStatUpdate(ArrayList<CardBookInfo> cardBookInfo) {
+        haveStat = new int[]{0, 0, 0};
+        haveStatCardBook = new int[]{0, 0, 0};
+        haveStatCardBookCount = new int[]{0, 0, 0};
+
+        for (int i = 0; i < haveStat.length; i++) {
+            for (int j = 0; j < cardBookInfo.size(); j++) {
+                if (cardBookInfo.get(j).getOption().equals(STAT[i]))
+                    haveStatCardBook[i]++;
+                if (cardBookInfo.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBookInfo.get(j))) {
+                    haveStatCardBookCount[i]++;
+                    haveStat[i] += cardBookInfo.get(j).getValue();
+                }
+            }
+        }
     }
 
     // 현재 도감 완성 현황 및 스탯 증가치 현황

@@ -377,7 +377,7 @@ public class MainPage extends AppCompatActivity {
     private final String DED_COLUMN_NAME_CARD8_AWAKE = "awakeCard8";
     private final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
 
-    //최초 실행되는 메소드 : cardList 정보를 DEDInfo에 연동
+    //cardList 정보를 DEDInfo에 연동
     public void haveDEDCardCheckUpdate() {
         for (int i = 0; i < DEDInfo.size(); i++) {
             for (int j = 0; j < cardInfo.size(); j++) {

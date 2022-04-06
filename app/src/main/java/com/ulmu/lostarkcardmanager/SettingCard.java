@@ -233,13 +233,13 @@ public class SettingCard extends AppCompatActivity {
                             case R.id.allCheck:
                                 allCheck = true;
                                 allUncheck = false;
-                                testMethod();
+                                getCardLoading();
                                 return true;
 
                             case R.id.allUncheck:
                                 allCheck = false;
                                 allUncheck = true;
-                                testMethod();
+                                getCardLoading();
                                 return true;
 
                         }
@@ -260,7 +260,8 @@ public class SettingCard extends AppCompatActivity {
     private boolean allUncheck = false;
     private Disposable backgroundTask;
 
-    private void testMethod() {
+    //카드 전부획득, 초기화시 로딩창
+    private void getCardLoading() {
         HashMap<String, String> hashMap = new HashMap<>();
         //시작 전 실행코드(task 시작 전)
         progressDialog = new ProgressDialog(context);
