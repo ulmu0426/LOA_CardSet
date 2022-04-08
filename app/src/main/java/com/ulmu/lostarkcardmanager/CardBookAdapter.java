@@ -913,11 +913,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
         }
     }
 
-    private void cvBackgroundSet(CardBookInfo cardBookInfo, ConstraintLayout cv) {
-        if (isCompleteCardBook(cardBookInfo))
-            cv.setBackgroundColor(parseColor("#FFF4BD"));
-    }
-
     //획득 못한 카드는 흑백이 기본으로 보이도록 최초 설정
     private void imgDefaultColor(ImageView iv, ColorMatrixColorFilter filter, int check, String name) {
         if (check == 1) {

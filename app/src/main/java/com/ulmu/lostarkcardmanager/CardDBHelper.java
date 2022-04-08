@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     //assets 폴더
     private static String DB_PATH = "";
 
@@ -217,6 +217,12 @@ public class CardDBHelper extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET awake_sum2 = 25 WHERE id = 5");
             db.execSQL("UPDATE " + TABLE_DEMON_EXTRA_DMG + " SET awake_sum2 = 25 WHERE id = 7");
             db.execSQL("INSERT INTO " + TABLE_CARD_LIST + " VALUES(40059,'파파', 0, 0,'고급 카드 팩\n고급 카드 선택 팩 ','고급', 0,'card_uncommon_papa')");
+        }
+        if (oldVersion < 4) {
+            db.execSQL("DELETE FROM cardList WHERE id is NULL");
+        }
+        if(oldVersion < 5){
+            db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET cardListSum = 6, card3 = '에스더 루테란', card4 = '아비시나', card5 ='마법사 로나운' WHERE id = 20");
         }
     }
 

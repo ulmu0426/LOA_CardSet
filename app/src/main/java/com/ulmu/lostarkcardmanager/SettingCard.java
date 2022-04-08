@@ -387,8 +387,7 @@ public class SettingCard extends AppCompatActivity {
             cardInfo.get(i).setGetCard(1);
             cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
         }
-        settingCardList();/*
-        viewPagerAdapter.allCheck();*/
+        settingCardList();
     }
 
     private void allUncheck() {
@@ -398,8 +397,7 @@ public class SettingCard extends AppCompatActivity {
             cardInfo.get(i).setGetCard(0);
             cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
         }
-        settingCardList();/*
-        viewPagerAdapter.allUncheck();*/
+        settingCardList();
     }
 
 
