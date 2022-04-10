@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txtCardbookName_DED"
+        android:id="@+id/txtBEDName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtDEDSumValue"
+        android:id="@+id/txtBEDSumValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -39,7 +39,7 @@
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCardbookName_DED">
+        app:layout_constraintTop_toBottomOf="@+id/txtBEDName">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDEDCard0"
+                        android:id="@+id/imgBEDCard0"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -358,7 +358,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtDED_cardCollection"
+        android:id="@+id/txtBED_cardCollection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -366,52 +366,52 @@
         android:autoSizeTextType="uniform"
         android:text="00장 수집 "
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDED_cardAwake0"
+        app:layout_constraintBottom_toTopOf="@+id/txtBED_cardAwake0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llTableFrame" />
 
     <TextView
-        android:id="@+id/txtDED_cardAwake0"
+        android:id="@+id/txtBED_cardAwake0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:autoSizeTextType="uniform"
         android:text="00장 수집(각성단계 합계00) : 악마 계열 피해량 증가 +0.00%"
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDED_cardAwake1"
+        app:layout_constraintBottom_toTopOf="@+id/txtBED_cardAwake1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED_cardCollection" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBED_cardCollection" />
 
     <TextView
-        android:id="@+id/txtDED_cardAwake1"
+        android:id="@+id/txtBED_cardAwake1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:autoSizeTextType="uniform"
         android:text="00장 수집(각성단계 합계00) : 악마 계열 피해량 증가 +0.00%"
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDED_cardAwake2"
+        app:layout_constraintBottom_toTopOf="@+id/txtBED_cardAwake2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED_cardAwake0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBED_cardAwake0" />
 
     <TextView
-        android:id="@+id/txtDED_cardAwake2"
+        android:id="@+id/txtBED_cardAwake2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:autoSizeTextType="uniform"
         android:text="00장 수집(각성단계 합계00) : 악마 계열 피해량 증가 +0.00%"
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/demonExtraDmgBottomLine"
+        app:layout_constraintBottom_toTopOf="@+id/BEDBottomLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED_cardAwake1" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBED_cardAwake1" />
 
     <View
-        android:id="@+id/demonExtraDmgBottomLine"
+        android:id="@+id/BEDBottomLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
@@ -419,6 +419,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED_cardAwake2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBED_cardAwake2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

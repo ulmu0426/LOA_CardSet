@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class BeastExtraDmgInfo implements Comparable<BeastExtraDmgInfo> {
     private ArrayList<CardInfo> cardInfo;
+
     private int id;
 
     //야추피 도감 이름
@@ -156,6 +157,7 @@ public class BeastExtraDmgInfo implements Comparable<BeastExtraDmgInfo> {
         this.dmgP2 = dmgP2;
     }
 
+    //도감 완성에 필요 카드 수
     public int getNeedCard() {
         if (getCard0().isEmpty()) {
             needCard++;
@@ -190,11 +192,13 @@ public class BeastExtraDmgInfo implements Comparable<BeastExtraDmgInfo> {
         return needCard;
     }
 
+    //현재 각성도
     public int getHaveAwake() {
         return (getAwakeCard0() + getAwakeCard1() + getAwakeCard2() + getAwakeCard3() + getAwakeCard4()
                 + getAwakeCard5() + getAwakeCard6() + getAwakeCard7() + getAwakeCard8() + getAwakeCard9());
     }
 
+    //현재 보유 카드 수
     public int getHaveCard() {
         if (isCheckCard0()) {
             haveCard++;
@@ -242,6 +246,7 @@ public class BeastExtraDmgInfo implements Comparable<BeastExtraDmgInfo> {
         return (needCard * 5);
     }
 
+    //X번 카드 보유 유무
     public boolean isCheckCard0() {
         return getCardCheck(getCard0());
     }
@@ -282,6 +287,7 @@ public class BeastExtraDmgInfo implements Comparable<BeastExtraDmgInfo> {
         return getCardCheck(getCard9());
     }
 
+    //X번 카드 각성도
     public int getAwakeCard0() {
         return getCardAwake(getCard0());
     }

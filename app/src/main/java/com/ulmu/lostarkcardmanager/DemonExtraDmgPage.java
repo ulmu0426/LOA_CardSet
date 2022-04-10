@@ -48,8 +48,8 @@ public class DemonExtraDmgPage extends AppCompatActivity {
          *  4. 정렬 기능(기본, 이름, 완성도, 다음 활성도가 가까운 순)
          * */
 
-        txtDED = (TextView) findViewById(R.id.txtDED);
-        txtCompleteDED = (TextView) findViewById(R.id.txtCompleteDED);
+        txtDED = (TextView) findViewById(R.id.txtBED);
+        txtCompleteDED = (TextView) findViewById(R.id.txtCompleteBED);
         rv = findViewById(R.id.rvDemonExtraDmg);
         adapter = new DemonExtraDmgAdapter(this, this);
         rv.setAdapter(adapter);
@@ -65,7 +65,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         });
 
         //검색기능
-        editSearchDED = findViewById(R.id.editSearchDED);
+        editSearchDED = findViewById(R.id.editSearchBED);
         editSearchDED.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,7 +100,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
 
 
         //정렬 기능
-        imgBtnDEDSortMenu = findViewById(R.id.imgBtnDEDsortMenu);
+        imgBtnDEDSortMenu = findViewById(R.id.imgBtnBEDSortMenu);
         imgBtnDEDSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

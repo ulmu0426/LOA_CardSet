@@ -81,7 +81,7 @@ public class MainPage extends AppCompatActivity {
         txtCardBookStat_Agility = (TextView) findViewById(R.id.txtCardBookStat_Agility);
 
         //악추피 값
-        txtDemonExtraDmg = (TextView) findViewById(R.id.txtDemonExtraDmg);
+        txtDemonExtraDmg = (TextView) findViewById(R.id.txtExtraDmg);
 
         //DB정보 가져오기
         try {
@@ -199,7 +199,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
         //악마 추가 피해로 이동
-        TextView txtBtnDemonExtraDmg = (TextView) findViewById(R.id.txtBtnDemonExtraDmg);
+        TextView txtBtnDemonExtraDmg = (TextView) findViewById(R.id.txtBtnExtraDmg);
         txtBtnDemonExtraDmg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

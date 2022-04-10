@@ -245,23 +245,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardbookAndDemonDMG"
                 app:layout_constraintVertical_weight="1">
 
-
                 <TextView
-                    android:id="@+id/txtBtnDemonExtraDmg"
+                    android:id="@+id/txtBtnExtraDmg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:padding="10dp"
+                    android:layout_marginTop="30dp"
                     android:text="악마 추가 피해"
                     android:textAlignment="center"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
-                    android:id="@+id/txtDemonExtraDmg"
+                    android:id="@+id/txtExtraDmg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
@@ -270,7 +269,7 @@
                     android:textAlignment="center"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtBtnDemonExtraDmg" />
+                    app:layout_constraintTop_toBottomOf="@id/txtBtnExtraDmg" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

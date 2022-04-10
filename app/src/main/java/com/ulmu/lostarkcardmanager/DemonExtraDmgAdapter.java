@@ -1769,9 +1769,9 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cvDemonExtraDmgBackground = itemView.findViewById(R.id.cvDemonExtraDmgBackground);
-            txtCardbookName_DED = itemView.findViewById(R.id.txtCardbookName_DED);
-            txtDEDSumValue = itemView.findViewById(R.id.txtDEDSumValue);
-            imgDEDCard0 = itemView.findViewById(R.id.imgDEDCard0);
+            txtCardbookName_DED = itemView.findViewById(R.id.txtBEDName);
+            txtDEDSumValue = itemView.findViewById(R.id.txtBEDSumValue);
+            imgDEDCard0 = itemView.findViewById(R.id.imgBEDCard0);
             imgDEDCard1 = itemView.findViewById(R.id.imgDEDCard1);
             imgDEDCard2 = itemView.findViewById(R.id.imgDEDCard2);
             imgDEDCard3 = itemView.findViewById(R.id.imgDEDCard3);
@@ -1791,10 +1791,10 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
             txtDEDCardName7 = itemView.findViewById(R.id.txtDEDCardName7);
             txtDEDCardName8 = itemView.findViewById(R.id.txtDEDCardName8);
             txtDEDCardName9 = itemView.findViewById(R.id.txtDEDCardName9);
-            txtDED_cardCollection = itemView.findViewById(R.id.txtDED_cardCollection);
-            txtDED_cardAwake0 = itemView.findViewById(R.id.txtDED_cardAwake0);
-            txtDED_cardAwake1 = itemView.findViewById(R.id.txtDED_cardAwake1);
-            txtDED_cardAwake2 = itemView.findViewById(R.id.txtDED_cardAwake2);
+            txtDED_cardCollection = itemView.findViewById(R.id.txtBED_cardCollection);
+            txtDED_cardAwake0 = itemView.findViewById(R.id.txtBED_cardAwake0);
+            txtDED_cardAwake1 = itemView.findViewById(R.id.txtBED_cardAwake1);
+            txtDED_cardAwake2 = itemView.findViewById(R.id.txtBED_cardAwake2);
 
         }
     }
