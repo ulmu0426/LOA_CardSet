@@ -48,8 +48,8 @@ public class DemonExtraDmgPage extends AppCompatActivity {
          *  4. 정렬 기능(기본, 이름, 완성도, 다음 활성도가 가까운 순)
          * */
 
-        txtDED = (TextView) findViewById(R.id.txtBED);
-        txtCompleteDED = (TextView) findViewById(R.id.txtCompleteBED);
+        txtDED = (TextView) findViewById(R.id.txtDED);
+        txtCompleteDED = (TextView) findViewById(R.id.txtCompleteDED);
         rv = findViewById(R.id.rvDemonExtraDmg);
         adapter = new DemonExtraDmgAdapter(this, this);
         rv.setAdapter(adapter);
@@ -65,7 +65,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
         });
 
         //검색기능
-        editSearchDED = findViewById(R.id.editSearchBED);
+        editSearchDED = findViewById(R.id.editSearchDED);
         editSearchDED.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,7 +100,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
 
 
         //정렬 기능
-        imgBtnDEDSortMenu = findViewById(R.id.imgBtnBEDSortMenu);
+        imgBtnDEDSortMenu = findViewById(R.id.imgDtnBEDSortMenu);
         imgBtnDEDSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +168,6 @@ public class DemonExtraDmgPage extends AppCompatActivity {
             return;
         }
 
-        ((MainPage)MainPage.mainContext).cardBookUpdate();
         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
         finish();
     }
@@ -189,7 +188,7 @@ public class DemonExtraDmgPage extends AppCompatActivity {
 
     //CardBook의 완성도 체크
     private boolean isCompleteCardBook(CardBookInfo cardBook_all) {
-        if (cardBook_all.getHaveCard() == cardBook_all.getCompleteCardBook())
+        if (cardBook_all.getHaveCard() == cardBook_all.getNeedCard())
             return true;
         else
             return false;

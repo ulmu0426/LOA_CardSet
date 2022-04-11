@@ -31,6 +31,7 @@ public class CardBookPage extends AppCompatActivity {
     private final String CRITICAL_BOOK_COMPLETE = "치명 도감 달성 개수 : ";
     private final String AGILITY_BOOK_COMPLETE = "신속 도감 달성 개수 : ";
     private final String SPECIALITY_BOOK_COMPLETE = "특화 도감 달성 개수 : ";
+
     private RecyclerView rv;
     private CardBookAdapter adapter;
 
@@ -181,14 +182,13 @@ public class CardBookPage extends AppCompatActivity {
         }
         haveStatUpdate(cardBookInfo);
         setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
-        ((MainPage) MainPage.mainContext).cardBookUpdate();
         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
         finish();
     }
 
     // DB에 도감을 완성 시킨 경우 true else false
     public boolean isCompleteCardBook(CardBookInfo cardbook_all) {
-        if (cardbook_all.getHaveCard() == cardbook_all.getCompleteCardBook())
+        if (cardbook_all.getHaveCard() == cardbook_all.getNeedCard())
             return true;
         else
             return false;

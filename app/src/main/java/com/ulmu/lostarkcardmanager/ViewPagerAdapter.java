@@ -249,7 +249,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         Collections.sort(cardInfo, new Comparator<CardInfo>() {
             @Override
             public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getGetCard() <= o2.getGetCard())
+                if (o1.getAcquired() <= o2.getAcquired())
                     return -1;
                 else
                     return 1;
@@ -263,7 +263,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         Collections.sort(cardInfo, new Comparator<CardInfo>() {
             @Override
             public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getGetCard() <= o2.getGetCard())
+                if (o1.getAcquired() <= o2.getAcquired())
                     return 1;
                 else
                     return -1;
@@ -276,11 +276,9 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     public void allUncheck() {
         for (int i = 0; i < cardListInfo.size(); i++) {
             for (int j = 0; j < cardListInfo.get(i).size(); j++) {
-                cardListInfo.get(i).get(j).setGetCard(0);
+                cardListInfo.get(i).get(j).setGetCard(false);
             }
         }
-        ((MainPage) MainPage.mainContext).cardBookUpdate();
-        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
         notifyDataSetChanged();
     }
 
@@ -288,11 +286,9 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     public void allCheck() {
         for (int i = 0; i < cardListInfo.size(); i++) {
             for (int j = 0; j < cardListInfo.get(i).size(); j++) {
-                cardListInfo.get(i).get(j).setGetCard(1);
+                cardListInfo.get(i).get(j).setGetCard(true);
             }
         }
-        ((MainPage) MainPage.mainContext).cardBookUpdate();
-        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
 
         notifyDataSetChanged();
     }

@@ -11,13 +11,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="#535353"
-        app:layout_constraintBottom_toTopOf="@+id/txtBED"
+        app:layout_constraintBottom_toTopOf="@+id/txtDED"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgBtnBEDSortMenu"
+            android:id="@+id/imgDtnBEDSortMenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
@@ -46,7 +46,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/txtBED"
+        android:id="@+id/txtDED"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
@@ -54,12 +54,12 @@
         android:text="악마 추가 피해 + 0.00%"
         android:textAlignment="textStart"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/lineBeast"
+        app:layout_constraintBottom_toTopOf="@+id/lineDemon"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu" />
 
     <EditText
-        android:id="@+id/editSearchBED"
+        android:id="@+id/editSearchDED"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -68,13 +68,13 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/lineBeast"
+        app:layout_constraintBottom_toTopOf="@+id/lineDemon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu" />
 
     <TextView
-        android:id="@+id/txtCompleteBED"
+        android:id="@+id/txtCompleteDED"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
@@ -82,20 +82,20 @@
         android:text="완성 도감 개수 : 00/00개"
         android:textAlignment="textStart"
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/lineBeast"
+        app:layout_constraintBottom_toTopOf="@+id/lineDemon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
         app:layout_constraintVertical_bias="0.4" />
 
     <View
-        android:id="@+id/lineBeast"
+        android:id="@+id/lineDemon"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:background="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBED" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDED" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDemonExtraDmg"
@@ -106,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lineBeast"
+        app:layout_constraintTop_toBottomOf="@+id/lineDemon"
         tools:listitem="@layout/rv_demon_extra_dmg">
 
     </androidx.recyclerview.widget.RecyclerView>

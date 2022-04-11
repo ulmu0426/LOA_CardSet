@@ -2,7 +2,10 @@ package com.ulmu.lostarkcardmanager;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class CardSetInfo implements Comparable<CardSetInfo> {
+    private ArrayList<CardInfo> cardInfo;
 
     private int id;                 //id
     private String name;            //카드세트이름
@@ -19,26 +22,20 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     private String set_bonus3;      //3번째 카드세트 보너스 효과
     private String set_bonus4;      //4번째 카드세트 보너스 효과
     private String set_bonus5;      //5번째 카드세트 보너스 효과
-    private int haveCard;           //세트 활성화에 필요한 최소 카드 수
-    private int haveAwake;          //카드 세트 각성도 합
+
+    private int haveAwake;
+
     private int needAwake0;         //카드세트 효과 발동을 위한 필요 각성도0
     private int needAwake1;         //카드세트 효과 발동을 위한 필요 각성도1
     private int needAwake2;         //카드세트 효과 발동을 위한 필요 각성도2
-    private int checkCard0;         //카드0 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int checkCard1;         //카드1 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int checkCard2;         //카드2 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int checkCard3;         //카드3 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int checkCard4;         //카드4 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int checkCard5;         //카드5 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int checkCard6;         //카드6 획득 유무(값이 1이명 획득 0 이면 미획득)
-    private int awakeCard0;         //카드0 각성도
-    private int awakeCard1;         //카드1 각성도
-    private int awakeCard2;         //카드2 각성도
-    private int awakeCard3;         //카드3 각성도
-    private int awakeCard4;         //카드4 각성도
-    private int awakeCard5;         //카드5 각성도
-    private int awakeCard6;         //카드6 각성도
-    private String favorite;        //즐겨찾기 포함 유무(값이 있는경우 즐겨찾기 된 것)
+
+    private boolean favorite;        //즐겨찾기 포함 유무(값이 있는경우 즐겨찾기 된 것)
+
+    public CardSetInfo() {
+        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+        this.favorite = false;
+    }
+
 
     public int getId() {
         return id;
@@ -160,35 +157,55 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         this.set_bonus5 = set_bonus5;
     }
 
+    //세트효과 발동에 필요한 카드 수
+    public int getNeedCard() {
+        int needCard = 0;
+        if (!getCard0().isEmpty()) needCard++;
+        if (!getCard1().isEmpty()) needCard++;
+        if (!getCard2().isEmpty()) needCard++;
+        if (!getCard3().isEmpty()) needCard++;
+        if (!getCard4().isEmpty()) needCard++;
+        if (!getCard5().isEmpty()) needCard++;
+        if (!getCard6().isEmpty()) needCard++;
+        if (needCard > 6)
+            needCard = 6;
+
+        return needCard;
+    }
+
+    //현재 보유 카드 수
     public int getHaveCard() {
+        int haveCard = 0;
+        if (isCheckCard0()) haveCard++;
+        if (isCheckCard1()) haveCard++;
+        if (isCheckCard2()) haveCard++;
+        if (isCheckCard3()) haveCard++;
+        if (isCheckCard4()) haveCard++;
+        if (isCheckCard5()) haveCard++;
+        if (isCheckCard6()) haveCard++;
         return haveCard;
     }
 
-    public void setHaveCard(int haveCard) {
-        this.haveCard = haveCard;
-    }
-
     public int getHaveAwake() { //카드세트 효과 발동을 위한 각성도 합
+        haveAwake = 0;
         int min = 6;
-        int check = checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6;
-        int[] awakeArray = {awakeCard0, awakeCard1, awakeCard2, awakeCard3, awakeCard4, awakeCard5, awakeCard6};
-        if (getHaveCard() < check) {
+        int[] awakeArray = {getAwakeCard0(), getAwakeCard1(), getAwakeCard2(), getAwakeCard3(), getAwakeCard4(), getAwakeCard5(), getAwakeCard6()};
+        for (int i = 0; i < awakeArray.length; i++) {
+            haveAwake += awakeArray[i];
+        }
+
+        if (getHaveCard() > getNeedCard()) {
             for (int i = 0; i < awakeArray.length; i++) {
                 if (awakeArray[i] < min)
                     min = awakeArray[i];
             }
-            haveAwake = (awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6) - min;
-        } else
-            haveAwake = awakeCard0 + awakeCard1 + awakeCard2 + awakeCard3 + awakeCard4 + awakeCard5 + awakeCard6;
+            haveAwake -= min;
+        }
 
         return haveAwake;
     }
 
-    public void setHaveAwake(int haveAwake) {
-
-        this.haveAwake = haveAwake;
-    }
-
+    //활성화에 필요한 각성도
     public int getNeedAwake0() {
         return needAwake0;
     }
@@ -213,142 +230,75 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         this.needAwake2 = needAwake2;
     }
 
-    public int getCheckCard0() {
-        if (awakeCard0 > 0)
-            checkCard0 = 1;
-        return checkCard0;
+    //X번 카드 보유 유무
+    public boolean isCheckCard0() {
+        return getCardCheck(getCard0());
     }
 
-    public void setCheckCard0(int checkCard0) {
-        this.checkCard0 = checkCard0;
+    public boolean isCheckCard1() {
+        return getCardCheck(getCard1());
     }
 
-    public int getCheckCard1() {
-        if (awakeCard1 > 0)
-            checkCard1 = 1;
-        return checkCard1;
+    public boolean isCheckCard2() {
+        return getCardCheck(getCard2());
     }
 
-    public void setCheckCard1(int checkCard1) {
-        this.checkCard1 = checkCard1;
+    public boolean isCheckCard3() {
+        return getCardCheck(getCard3());
     }
 
-    public int getCheckCard2() {
-        if (awakeCard2 > 0)
-            checkCard2 = 1;
-        return checkCard2;
+    public boolean isCheckCard4() {
+        return getCardCheck(getCard4());
     }
 
-    public void setCheckCard2(int checkCard2) {
-        this.checkCard2 = checkCard2;
+    public boolean isCheckCard5() {
+        return getCardCheck(getCard5());
     }
 
-    public int getCheckCard3() {
-        if (awakeCard3 > 0)
-            checkCard3 = 1;
-        return checkCard3;
+    public boolean isCheckCard6() {
+        return getCardCheck(getCard6());
     }
 
-    public void setCheckCard3(int checkCard3) {
-        this.checkCard3 = checkCard3;
-    }
-
-    public int getCheckCard4() {
-        if (awakeCard4 > 0)
-            checkCard4 = 1;
-        return checkCard4;
-    }
-
-    public void setCheckCard4(int checkCard4) {
-        this.checkCard4 = checkCard4;
-    }
-
-    public int getCheckCard5() {
-        if (awakeCard5 > 0)
-            checkCard5 = 1;
-        return checkCard5;
-    }
-
-    public void setCheckCard5(int checkCard5) {
-        this.checkCard5 = checkCard5;
-    }
-
-    public int getCheckCard6() {
-        if (awakeCard6 > 0)
-            checkCard6 = 1;
-        return checkCard6;
-    }
-
-    public void setCheckCard6(int checkCard6) {
-        this.checkCard6 = checkCard6;
-    }
-
+    //X번 카드 각성도
     public int getAwakeCard0() {
-        return awakeCard0;
-    }
-
-    public void setAwakeCard0(int awakeCard0) {
-        this.awakeCard0 = awakeCard0;
+        return getCardAwake(getCard0());
     }
 
     public int getAwakeCard1() {
-        return awakeCard1;
-    }
-
-    public void setAwakeCard1(int awakeCard1) {
-        this.awakeCard1 = awakeCard1;
+        return getCardAwake(getCard1());
     }
 
     public int getAwakeCard2() {
-        return awakeCard2;
-    }
-
-    public void setAwakeCard2(int awakeCard2) {
-        this.awakeCard2 = awakeCard2;
+        return getCardAwake(getCard2());
     }
 
     public int getAwakeCard3() {
-        return awakeCard3;
-    }
-
-    public void setAwakeCard3(int awakeCard3) {
-        this.awakeCard3 = awakeCard3;
+        return getCardAwake(getCard3());
     }
 
     public int getAwakeCard4() {
-        return awakeCard4;
-    }
-
-    public void setAwakeCard4(int awakeCard4) {
-        this.awakeCard4 = awakeCard4;
+        return getCardAwake(getCard4());
     }
 
     public int getAwakeCard5() {
-        return awakeCard5;
-    }
-
-    public void setAwakeCard5(int awakeCard5) {
-        this.awakeCard5 = awakeCard5;
+        return getCardAwake(getCard5());
     }
 
     public int getAwakeCard6() {
-        return awakeCard6;
+        return getCardAwake(getCard6());
     }
 
-    public void setAwakeCard6(int awakeCard6) {
-        this.awakeCard6 = awakeCard6;
-    }
-
-    public String getFavorite() {
+    //즐겨찾기 유무
+    public boolean getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(String favorite) {
+    public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
     }
 
     public boolean isCompleteCardSet() {   //세트 효과 발동만 가능한 경우
-        if (haveCard <= checkCard0 + checkCard1 + checkCard2 + checkCard3 + checkCard4 + checkCard5 + checkCard6) {
+        if (getNeedCard() <= getHaveCard()) {
             return true;
         } else {
             return false;
@@ -357,7 +307,7 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
 
     //완성도 순 정렬을 위해 필요한 메소드. 완성도를 퍼센트로 나타내줌.(모든 카드 수집이 다 됐다는 전제가 필요)
     public double completePercent() {
-        int needCompleteAwake = haveCard * 5;
+        int needCompleteAwake = getNeedCard() * 5;
         if (!isCompleteCardSet()) {  //카드 미획득시 우선순위 하위
             return -5;
         }
@@ -374,7 +324,7 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
 
     //즐겨찾기 순 정렬에서 Collections.sort 를 위해 필요한 메소드
     public int favoriteCheck() {
-        if (favorite.isEmpty())
+        if (favorite)
             return 1;
         else
             return 0;
@@ -384,6 +334,23 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     @Override
     public int compareTo(CardSetInfo cardSetInfo) {
         return this.getName().compareTo(cardSetInfo.getName());
+    }
+
+
+    private boolean getCardCheck(String cardX) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardX) && cardInfo.get(i).getGetCard())
+                return true;
+        }
+        return false;
+    }
+
+    private int getCardAwake(String cardX) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardX))
+                return cardInfo.get(i).getAwake();
+        }
+        return 0;
     }
 
 }

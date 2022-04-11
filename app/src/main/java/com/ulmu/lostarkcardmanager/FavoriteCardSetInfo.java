@@ -3,7 +3,11 @@ package com.ulmu.lostarkcardmanager;
 public class FavoriteCardSetInfo {
     private String name;        //이름
     private int awake;          //각성도
-    private int activation;     //즐겨찾기 활성이 되어있는가
+    private boolean activation;     //즐겨찾기 활성이 되어있는가
+
+    public FavoriteCardSetInfo() {
+        this.activation = false;
+    }
 
     public String getName() {
         return name;
@@ -21,11 +25,12 @@ public class FavoriteCardSetInfo {
         this.awake = awake;
     }
 
-    public int getActivation() {
+    public boolean getActivation() {
         return activation;
     }
 
-    public void setActivation(int activation) {
+    public void setActivation(boolean activation) {
         this.activation = activation;
     }
+
 }

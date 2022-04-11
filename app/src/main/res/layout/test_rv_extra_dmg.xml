@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvDemonExtraDmgBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/txtXEDName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="XX 추가 피해 도감 이름"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtXEDSumValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="XX 계열 피해량 증가 합 : +0.00%"
+        android:textAlignment="center"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llTableFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtXEDName">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXEDCard9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_epic_shana" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtXEDCardName9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카드이름"
+                        android:textAlignment="center"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtXED_cardCollection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="00장 수집 "
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtXED_cardAwake0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTableFrame" />
+
+    <TextView
+        android:id="@+id/txtXED_cardAwake0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="00장 수집(각성단계 합계00) : XX 계열 피해량 증가 +0.00%"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtXED_cardAwake1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardCollection" />
+
+    <TextView
+        android:id="@+id/txtXED_cardAwake1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="00장 수집(각성단계 합계00) : XX 계열 피해량 증가 +0.00%"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtXED_cardAwake2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake0" />
+
+    <TextView
+        android:id="@+id/txtXED_cardAwake2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="00장 수집(각성단계 합계00) : XX 계열 피해량 증가 +0.00%"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/XEDBottomLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake1" />
+
+    <View
+        android:id="@+id/XEDBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

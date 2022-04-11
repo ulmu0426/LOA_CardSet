@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="#FFE0B7"
-                app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardbookAndDemonDMG"
+                app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardBookAndExtraDmg"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardSetAndCardbook"
@@ -225,28 +225,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
-                android:id="@+id/lineBetweenCardbookAndDemonDMG"
+                android:id="@+id/lineBetweenCardBookAndExtraDmg"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/black"
-                app:layout_constraintBottom_toTopOf="@id/conlayoutDemonExtraDMG"
+                app:layout_constraintBottom_toTopOf="@id/clDEDExtraDMG"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/conlayoutCardbookStats" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/conlayoutDemonExtraDMG"
+                android:id="@+id/clDEDExtraDMG"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="#FFEBEB"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardbookAndDemonDMG"
+                app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardBookAndExtraDmg"
                 app:layout_constraintVertical_weight="1">
 
                 <TextView
-                    android:id="@+id/txtBtnExtraDmg"
+                    android:id="@+id/txtBtnDEDExtraDmg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -260,7 +260,7 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
-                    android:id="@+id/txtExtraDmg"
+                    android:id="@+id/txtDEDExtraDmg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
@@ -269,7 +269,7 @@
                     android:textAlignment="center"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtBtnExtraDmg" />
+                    app:layout_constraintTop_toBottomOf="@id/txtBtnDEDExtraDmg" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

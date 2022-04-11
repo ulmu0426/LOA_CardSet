@@ -164,8 +164,6 @@ public class CardSetPage extends AppCompatActivity {
             editSearchCardSet.setVisibility(View.GONE);
             return;
         }
-        ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
-        ((MainPage) MainPage.mainContext).cardBookUpdate();
         haveStatUpdate(((MainPage) MainPage.mainContext).cardBookInfo);
         haveDEDDmgUpdate();
 
@@ -173,7 +171,7 @@ public class CardSetPage extends AppCompatActivity {
     }
 
     private boolean isCompleteCardBook(CardBookInfo cardBook_all) {
-        if (cardBook_all.getHaveCard() == cardBook_all.getCompleteCardBook())
+        if (cardBook_all.getHaveCard() == cardBook_all.getNeedCard())
             return true;
         else
             return false;

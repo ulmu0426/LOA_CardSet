@@ -77,7 +77,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.txtName.setText(filterCardInfo.get(position).getName());
 
         holder.txtAwakeAndHave.setText("각성 : " + filterCardInfo.get(position).getAwake() + "  보유 : " + filterCardInfo.get(position).getNum());
-        holder.isGetCheckbox.setChecked(isChecked(filterCardInfo.get(position).getGetCard()));
+        holder.isGetCheckbox.setChecked(filterCardInfo.get(position).getGetCard());
 
         //click 대신 touch 로 변경. -> click 을 두번 해야 Dialog 가 뜨던 현상 방지를 위해.
         holder.txtName.setOnTouchListener(new View.OnTouchListener() {
@@ -183,9 +183,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
                                 holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
                                 ;
-                                ((MainPage) MainPage.mainContext).haveCardSetCheckUpdate();
-                                ((MainPage) MainPage.mainContext).cardBookUpdate();
-                                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                                 //즐겨찾기 DB Update, 및 갱신
                                 favoriteCardSetUpdate(searchCardSet(filterCardInfo.get(positionGet).getName()));
 
@@ -206,9 +203,9 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         holder.isGetCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int check = 0;
+                boolean check = false;
                 if(holder.isGetCheckbox.isChecked())
-                    check = 1;
+                    check = true;
 
                 useCardList.get(positionGet).setGetCard(check);
                 filterCardInfo.get(positionGet).setGetCard(check);
@@ -221,8 +218,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                 }
 
-                ((MainPage) MainPage.mainContext).cardBookUpdate();
-                ((MainPage) MainPage.mainContext).haveDEDCardCheckUpdate();
                 haveStatUpdate();
                 haveDEDUpdate();
             }
@@ -264,7 +259,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     }
 
     private void defaultColorFilter(ImageView iv, int position, ColorFilter filter) {
-        if (filterCardInfo.get(position).getGetCard() == 0) {
+        if (!filterCardInfo.get(position).getGetCard()) {
             iv.setColorFilter(filter);
             iv.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
@@ -355,7 +350,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
     // DB에 도감을 완성 시킨 경우 true else false
     private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
-        if (cardBookInfo.getHaveCard() == cardBookInfo.getCompleteCardBook())
+        if (cardBookInfo.getHaveCard() == cardBookInfo.getNeedCard())
             return true;
         else
             return false;

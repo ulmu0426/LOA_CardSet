@@ -384,7 +384,7 @@ public class SettingCard extends AppCompatActivity {
         if (!allCheck)
             return;
         for (int i = 0; i < cardInfo.size(); i++) {
-            cardInfo.get(i).setGetCard(1);
+            cardInfo.get(i).setGetCard(true);
             cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
         }
         settingCardList();
@@ -394,7 +394,7 @@ public class SettingCard extends AppCompatActivity {
         if (!allUncheck)
             return;
         for (int i = 0; i < cardInfo.size(); i++) {
-            cardInfo.get(i).setGetCard(0);
+            cardInfo.get(i).setGetCard(false);
             cardDBHelper.UpdateInfoCardCheck(cardInfo.get(i).getGetCard(), cardInfo.get(i).getId());
         }
         settingCardList();
@@ -409,7 +409,7 @@ public class SettingCard extends AppCompatActivity {
 
     // DB에 도감을 완성 시킨 경우 true else false
     private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
-        if (cardBookInfo.getHaveCard() == cardBookInfo.getCompleteCardBook())
+        if (cardBookInfo.getHaveCard() == cardBookInfo.getNeedCard())
             return true;
         else
             return false;

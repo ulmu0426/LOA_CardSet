@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -81,7 +82,7 @@ public class MainPage extends AppCompatActivity {
         txtCardBookStat_Agility = (TextView) findViewById(R.id.txtCardBookStat_Agility);
 
         //악추피 값
-        txtDemonExtraDmg = (TextView) findViewById(R.id.txtExtraDmg);
+        txtDemonExtraDmg = (TextView) findViewById(R.id.txtDEDExtraDmg);
 
         //DB정보 가져오기
         try {
@@ -94,7 +95,7 @@ public class MainPage extends AppCompatActivity {
         cardInfo = cardDBHelper.getCardInfo_All();
 
         //카드 도감 DB 정보 ArrayList 전달
-        cardBookInfo = cardDBHelper.getCardBookInfo_All();
+        cardBookInfo = cardDBHelper.getCardBookInfo();
         cardSetInfo = cardDBHelper.getCardSetInfo();
 
         //악추피 DB 정보 ArrayList 전달
@@ -103,12 +104,8 @@ public class MainPage extends AppCompatActivity {
         favoriteCardSetInfo = cardDBHelper.getFavoriteCardSetInfo();
 
         //cardList Table 정보를 cardBookInfo,DEDInfo,cardSetInfo List와 DB에 연동
-        cardBookUpdate();           //카드 도감 DB
-        haveDEDCardCheckUpdate();   //악추피 DB
-        haveCardSetCheckUpdate();   //카드세트 DB
         favoriteUpdate();           //카드세트 즐겨찾기 DB 업데이트
 
-        DEDDBErrorFix();   //악추피 에러픽스 : 비정상적 종료시 악추피 도감에서 악추피도감에 존재하지 않는 카드의 checkCardX의 check가 0에서 1로 바뀌는 오류 수정
 
         //치,특,신 값 출력
         int[] stat = {getStatInfo("치명"), getStatInfo("특화"), getStatInfo("신속")};
@@ -169,7 +166,7 @@ public class MainPage extends AppCompatActivity {
         });
 
         //drawerLayout 메뉴에 악추피 터치시 이동
-        txtBtnDED_Draw = (TextView) findViewById(R.id.txtBtnDED_Draw);
+        txtBtnDED_Draw = (TextView) findViewById(R.id.txtBtnDEDExtraDmg);
         txtBtnDED_Draw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +196,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
         //악마 추가 피해로 이동
-        TextView txtBtnDemonExtraDmg = (TextView) findViewById(R.id.txtBtnExtraDmg);
+        TextView txtBtnDemonExtraDmg = (TextView) findViewById(R.id.txtBtnDEDExtraDmg);
         txtBtnDemonExtraDmg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,9 +240,8 @@ public class MainPage extends AppCompatActivity {
     //카드 도감 (치명, 특화, 신속) 값 입력
     private int getStatInfo(String STAT) {
         int a = 0;
-        CardBookAdapter cardBookAdapter = new CardBookAdapter(cardBookInfo);
         for (int i = 0; i < cardBookInfo.size(); i++) {
-            if (cardBookInfo.get(i).getOption().equals(STAT) && cardBookAdapter.isCompleteCardBook(cardBookInfo.get(i))) {
+            if (cardBookInfo.get(i).getOption().equals(STAT) && (cardBookInfo.get(i).getNeedCard() == cardBookInfo.get(i).getHaveCard())) {
                 a += cardBookInfo.get(i).getValue();
             }
         }
@@ -264,11 +260,11 @@ public class MainPage extends AppCompatActivity {
         float a = 0;
         DemonExtraDmgAdapter DEDAdapter = new DemonExtraDmgAdapter(DEDInfo);
         for (int i = 0; i < DEDInfo.size(); i++) {
-            if (DEDAdapter.isCompleteDED(DEDInfo.get(i)) && DEDInfo.get(i).getHaveAwake() == DEDInfo.get(i).getAwake_sum2()) {
+            if (DEDAdapter.isCompleteDED(DEDInfo.get(i)) && DEDInfo.get(i).getHaveAwake() == DEDInfo.get(i).getAwakeSum2()) {
                 a += DEDInfo.get(i).getDmg_p2() + DEDInfo.get(i).getDmg_p1() + DEDInfo.get(i).getDmg_p0();
-            } else if (DEDAdapter.isCompleteDED(DEDInfo.get(i)) && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwake_sum1() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwake_sum2())) {
+            } else if (DEDAdapter.isCompleteDED(DEDInfo.get(i)) && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwakeSum1() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwakeSum2())) {
                 a += DEDInfo.get(i).getDmg_p1() + DEDInfo.get(i).getDmg_p0();
-            } else if (DEDAdapter.isCompleteDED(DEDInfo.get(i)) && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwake_sum0() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwake_sum1())) {
+            } else if (DEDAdapter.isCompleteDED(DEDInfo.get(i)) && (DEDInfo.get(i).getHaveAwake() >= DEDInfo.get(i).getAwakeSum0() && DEDInfo.get(i).getHaveAwake() < DEDInfo.get(i).getAwakeSum1())) {
                 a += DEDInfo.get(i).getDmg_p0();
             }
         }
@@ -281,264 +277,18 @@ public class MainPage extends AppCompatActivity {
         txtDemonExtraDmg.setText(df.format(value) + "%");
     }
 
-    private final String CARD_BOOK_COLUMN_NAME_CARD0_CHECK = "checkCard0";
-    private final String CARD_BOOK_COLUMN_NAME_CARD1_CHECK = "checkCard1";
-    private final String CARD_BOOK_COLUMN_NAME_CARD2_CHECK = "checkCard2";
-    private final String CARD_BOOK_COLUMN_NAME_CARD3_CHECK = "checkCard3";
-    private final String CARD_BOOK_COLUMN_NAME_CARD4_CHECK = "checkCard4";
-    private final String CARD_BOOK_COLUMN_NAME_CARD5_CHECK = "checkCard5";
-    private final String CARD_BOOK_COLUMN_NAME_CARD6_CHECK = "checkCard6";
-    private final String CARD_BOOK_COLUMN_NAME_CARD7_CHECK = "checkCard7";
-    private final String CARD_BOOK_COLUMN_NAME_CARD8_CHECK = "checkCard8";
-    private final String CARD_BOOK_COLUMN_NAME_CARD9_CHECK = "checkCard9";
 
     //최초 실행되는 메소드 : cardSet 정보에서 즐겨찾기 기능 DB와 연동
     private void favoriteUpdate() {
         for (int i = 0; i < cardSetInfo.size(); i++) {
             for (int j = 0; j < favoriteCardSetInfo.size(); j++) {
-                if (cardSetInfo.get(i).getFavorite().equals(favoriteCardSetInfo.get(j).getName())) {
+                if (cardSetInfo.get(i).getName().equals(favoriteCardSetInfo.get(j).getName()) && cardSetInfo.get(i).getFavorite()) {
+                    Log.v("test", "cardSetInfo : favorite status : "+ cardSetInfo.get(i).getName() + cardSetInfo.get(i).getFavorite());
                     //각성도 정보 및 즐겨찾기 활성화 여부 업데이트
-                    favoriteCardSetInfo.get(j).setActivation(1); //즐겨찾기 활성화
+                    favoriteCardSetInfo.get(j).setActivation(true); //즐겨찾기 활성화
                     favoriteCardSetInfo.get(j).setAwake(cardSetInfo.get(i).getHaveAwake());
-                    cardDBHelper.UpdateInfoFavoriteList(favoriteCardSetInfo.get(j).getAwake(), favoriteCardSetInfo.get(j).getActivation(), favoriteCardSetInfo.get(j).getName());
                 }
 
-            }
-        }
-    }
-
-    //최초 실행되는 메소드 : cardList 정보를 cardBookInfo 연동
-    public void cardBookUpdate() {
-        for (int i = 0; i < cardBookInfo.size(); i++) {
-            for (int j = 0; j < cardInfo.size(); j++) {
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
-                    cardBookInfo.get(i).setCheckCard0(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD0_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());  //카드 획득유무 업데이트
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard1())) {
-                    cardBookInfo.get(i).setCheckCard1(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD1_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard2())) {
-                    cardBookInfo.get(i).setCheckCard2(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD2_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard3())) {
-                    cardBookInfo.get(i).setCheckCard3(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD3_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard4())) {
-                    cardBookInfo.get(i).setCheckCard4(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD4_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard5())) {
-                    cardBookInfo.get(i).setCheckCard5(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD5_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard6())) {
-                    cardBookInfo.get(i).setCheckCard6(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD6_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard7())) {
-                    cardBookInfo.get(i).setCheckCard7(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD7_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard8())) {
-                    cardBookInfo.get(i).setCheckCard8(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD8_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-                if (cardInfo.get(j).getName().equals(cardBookInfo.get(i).getCard9())) {
-                    cardBookInfo.get(i).setCheckCard9(cardInfo.get(j).getGetCard());
-                    cardDBHelper.UpdateInfoCardBookCard(CARD_BOOK_COLUMN_NAME_CARD9_CHECK, cardInfo.get(j).getGetCard(), cardBookInfo.get(i).getId());
-                }
-            }
-        }
-    }
-
-    private final String DED_COLUMN_NAME_CARD0_CHECK = "checkCard0";
-    private final String DED_COLUMN_NAME_CARD1_CHECK = "checkCard1";
-    private final String DED_COLUMN_NAME_CARD2_CHECK = "checkCard2";
-    private final String DED_COLUMN_NAME_CARD3_CHECK = "checkCard3";
-    private final String DED_COLUMN_NAME_CARD4_CHECK = "checkCard4";
-    private final String DED_COLUMN_NAME_CARD5_CHECK = "checkCard5";
-    private final String DED_COLUMN_NAME_CARD6_CHECK = "checkCard6";
-    private final String DED_COLUMN_NAME_CARD7_CHECK = "checkCard7";
-    private final String DED_COLUMN_NAME_CARD8_CHECK = "checkCard8";
-    private final String DED_COLUMN_NAME_CARD9_CHECK = "checkCard9";
-
-    private final String DED_COLUMN_NAME_CARD0_AWAKE = "awakeCard0";
-    private final String DED_COLUMN_NAME_CARD1_AWAKE = "awakeCard1";
-    private final String DED_COLUMN_NAME_CARD2_AWAKE = "awakeCard2";
-    private final String DED_COLUMN_NAME_CARD3_AWAKE = "awakeCard3";
-    private final String DED_COLUMN_NAME_CARD4_AWAKE = "awakeCard4";
-    private final String DED_COLUMN_NAME_CARD5_AWAKE = "awakeCard5";
-    private final String DED_COLUMN_NAME_CARD6_AWAKE = "awakeCard6";
-    private final String DED_COLUMN_NAME_CARD7_AWAKE = "awakeCard7";
-    private final String DED_COLUMN_NAME_CARD8_AWAKE = "awakeCard8";
-    private final String DED_COLUMN_NAME_CARD9_AWAKE = "awakeCard9";
-
-    //cardList 정보를 DEDInfo에 연동
-    public void haveDEDCardCheckUpdate() {
-        for (int i = 0; i < DEDInfo.size(); i++) {
-            for (int j = 0; j < cardInfo.size(); j++) {
-                if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
-                    //카드 이름이 같으면
-                    DEDInfo.get(i).setCheckCard0(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard0(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_CHECK, DEDInfo.get(i).getCheckCard0(), DEDInfo.get(i).getId());  //카드 획득유무 업데이트
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD0_AWAKE, DEDInfo.get(i).getAwakeCard0(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard1())) {
-                    DEDInfo.get(i).setCheckCard1(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard1(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_CHECK, DEDInfo.get(i).getCheckCard1(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD1_AWAKE, DEDInfo.get(i).getAwakeCard1(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard2())) {
-                    DEDInfo.get(i).setCheckCard2(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard2(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, DEDInfo.get(i).getCheckCard2(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_AWAKE, DEDInfo.get(i).getAwakeCard2(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard3())) {
-                    DEDInfo.get(i).setCheckCard3(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard3(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, DEDInfo.get(i).getCheckCard3(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_AWAKE, DEDInfo.get(i).getAwakeCard3(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard4())) {
-                    DEDInfo.get(i).setCheckCard4(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard4(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, DEDInfo.get(i).getCheckCard4(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_AWAKE, DEDInfo.get(i).getAwakeCard4(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard5())) {
-                    DEDInfo.get(i).setCheckCard5(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard5(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, DEDInfo.get(i).getCheckCard5(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_AWAKE, DEDInfo.get(i).getAwakeCard5(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard6())) {
-                    DEDInfo.get(i).setCheckCard6(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard6(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, DEDInfo.get(i).getCheckCard6(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_AWAKE, DEDInfo.get(i).getAwakeCard6(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard7())) {
-                    DEDInfo.get(i).setCheckCard7(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard7(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, DEDInfo.get(i).getCheckCard7(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_AWAKE, DEDInfo.get(i).getAwakeCard7(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard8())) {
-                    DEDInfo.get(i).setCheckCard8(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard8(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, DEDInfo.get(i).getCheckCard8(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_AWAKE, DEDInfo.get(i).getAwakeCard8(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(DEDInfo.get(i).getCard9())) {
-                    DEDInfo.get(i).setCheckCard9(cardInfo.get(j).getGetCard());
-                    DEDInfo.get(i).setAwakeCard9(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, DEDInfo.get(i).getCheckCard9(), DEDInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_AWAKE, DEDInfo.get(i).getAwakeCard9(), DEDInfo.get(i).getId());   //카드 각성도 업데이트
-                }
-            }
-            cardDBHelper.UpdateInfoDEDCard("haveCard", DEDInfo.get(i).getHaveCard(), DEDInfo.get(i).getId());
-            cardDBHelper.UpdateInfoDEDCard("haveAwake", DEDInfo.get(i).getHaveAwake(), DEDInfo.get(i).getId());
-        }
-    }
-
-    private final String CARDSET_COLUMN_NAME_CARD0_CHECK = "checkCard0";
-    private final String CARDSET_COLUMN_NAME_CARD1_CHECK = "checkCard1";
-    private final String CARDSET_COLUMN_NAME_CARD2_CHECK = "checkCard2";
-    private final String CARDSET_COLUMN_NAME_CARD3_CHECK = "checkCard3";
-    private final String CARDSET_COLUMN_NAME_CARD4_CHECK = "checkCard4";
-    private final String CARDSET_COLUMN_NAME_CARD5_CHECK = "checkCard5";
-    private final String CARDSET_COLUMN_NAME_CARD6_CHECK = "checkCard6";
-
-    private final String CARDSET_COLUMN_NAME_CARD0_AWAKE = "awakeCard0";
-    private final String CARDSET_COLUMN_NAME_CARD1_AWAKE = "awakeCard1";
-    private final String CARDSET_COLUMN_NAME_CARD2_AWAKE = "awakeCard2";
-    private final String CARDSET_COLUMN_NAME_CARD3_AWAKE = "awakeCard3";
-    private final String CARDSET_COLUMN_NAME_CARD4_AWAKE = "awakeCard4";
-    private final String CARDSET_COLUMN_NAME_CARD5_AWAKE = "awakeCard5";
-    private final String CARDSET_COLUMN_NAME_CARD6_AWAKE = "awakeCard6";
-
-    //최초 실행되는 메소드 : cardList 정보를 CardSet에 연동
-    //cardSetPage에 들어갈때도 한번씩 실행됨.
-    public void haveCardSetCheckUpdate() {
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            for (int j = 0; j < cardInfo.size(); j++) {
-                if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard0())) {  //카드 이름이 같으면 실행됨.(실행후 이번 반복 해제)
-                    //카드 이름이 같으면
-                    cardSetInfo.get(i).setCheckCard0(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard0(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_CHECK, cardSetInfo.get(i).getCheckCard0(), cardSetInfo.get(i).getId());  //카드 획득유무 업데이트
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD0_AWAKE, cardSetInfo.get(i).getAwakeCard0(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard1())) {
-                    cardSetInfo.get(i).setCheckCard1(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard1(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_CHECK, cardSetInfo.get(i).getCheckCard1(), cardSetInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD1_AWAKE, cardSetInfo.get(i).getAwakeCard1(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard2())) {
-                    cardSetInfo.get(i).setCheckCard2(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard2(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_CHECK, cardSetInfo.get(i).getCheckCard2(), cardSetInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD2_AWAKE, cardSetInfo.get(i).getAwakeCard2(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard3())) {
-                    cardSetInfo.get(i).setCheckCard3(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard3(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_CHECK, cardSetInfo.get(i).getCheckCard3(), cardSetInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD3_AWAKE, cardSetInfo.get(i).getAwakeCard3(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard4())) {
-                    cardSetInfo.get(i).setCheckCard4(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard4(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_CHECK, cardSetInfo.get(i).getCheckCard4(), cardSetInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD4_AWAKE, cardSetInfo.get(i).getAwakeCard4(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard5())) {
-                    cardSetInfo.get(i).setCheckCard5(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard5(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_CHECK, cardSetInfo.get(i).getCheckCard5(), cardSetInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD5_AWAKE, cardSetInfo.get(i).getAwakeCard5(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                } else if (cardInfo.get(j).getName().equals(cardSetInfo.get(i).getCard6())) {
-                    cardSetInfo.get(i).setCheckCard6(cardInfo.get(j).getGetCard());
-                    cardSetInfo.get(i).setAwakeCard6(cardInfo.get(j).getAwake());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_CHECK, cardSetInfo.get(i).getCheckCard6(), cardSetInfo.get(i).getId());
-                    cardDBHelper.UpdateInfoCardSetCard(CARDSET_COLUMN_NAME_CARD6_AWAKE, cardSetInfo.get(i).getAwakeCard6(), cardSetInfo.get(i).getId());   //카드 각성도 업데이트
-                }
-            }
-            cardDBHelper.UpdateInfoCardSetCard("haveCard", cardSetInfo.get(i).getHaveCard(), cardSetInfo.get(i).getId());
-            cardDBHelper.UpdateInfoCardSetCard("haveAwake", cardSetInfo.get(i).getHaveAwake(), cardSetInfo.get(i).getId());
-
-        }
-
-    }
-
-    //DED DB 에서 도감에 없는 Card 의 check 값이 1이 넘어가는 현상을 수정.
-    private void DEDDBErrorFix() {
-        for (int i = 0; i < DEDInfo.size(); i++) {
-            if (DEDInfo.get(i).getCard2().equals("")) {
-                DEDInfo.get(i).setCheckCard2(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD2_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard3().equals("")) {
-                DEDInfo.get(i).setCheckCard3(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD3_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard4().equals("")) {
-                DEDInfo.get(i).setCheckCard4(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD4_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard5().equals("")) {
-                DEDInfo.get(i).setCheckCard5(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD5_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard6().equals("")) {
-                DEDInfo.get(i).setCheckCard6(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD6_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard7().equals("")) {
-                DEDInfo.get(i).setCheckCard7(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD7_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard8().equals("")) {
-                DEDInfo.get(i).setCheckCard8(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD8_CHECK, 0, DEDInfo.get(i).getId());
-            }
-            if (DEDInfo.get(i).getCard9().equals("")) {
-                DEDInfo.get(i).setCheckCard9(0);
-                cardDBHelper.UpdateInfoDEDCard(DED_COLUMN_NAME_CARD9_CHECK, 0, DEDInfo.get(i).getId());
             }
         }
     }

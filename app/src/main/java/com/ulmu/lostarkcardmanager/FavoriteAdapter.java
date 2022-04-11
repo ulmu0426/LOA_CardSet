@@ -25,7 +25,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
-        activationFavoriteCardSet = new ArrayList<FavoriteCardSetInfo>();
+        activationFavoriteCardSet = new ArrayList<>();
         updateActivationFavoriteCardSet();
     }
 
@@ -70,9 +70,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public void updateActivationFavoriteCardSet() {
         activationFavoriteCardSet.clear();
         for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
-            if (favoriteCardSetInfo.get(i).getActivation() == 1) {
-                FavoriteCardSetInfo favorite = new FavoriteCardSetInfo();
-                favorite = favoriteCardSetInfo.get(i);
+            if (favoriteCardSetInfo.get(i).getActivation()) {
+                FavoriteCardSetInfo favorite = favoriteCardSetInfo.get(i);
                 activationFavoriteCardSet.add(favorite);
             }
         }

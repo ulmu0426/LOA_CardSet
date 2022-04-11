@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#FFE0B7"
-            app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardbookAndDemonDMG"
+            app:layout_constraintBottom_toTopOf="@+id/lineBetweenCardBookAndExtraDmg"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardSetAndCardbook"
@@ -210,34 +210,53 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-            android:id="@+id/lineBetweenCardbookAndDemonDMG"
+            android:id="@+id/lineBetweenCardBookAndExtraDmg"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/conlayoutDemonExtraDMG"
+            app:layout_constraintBottom_toTopOf="@id/clExtraDMG"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/conlayoutCardbookStats" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/conlayoutDemonExtraDMG"
+            android:id="@+id/clExtraDMG"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#FFEBEB"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardbookAndDemonDMG"
+            app:layout_constraintTop_toBottomOf="@+id/lineBetweenCardBookAndExtraDmg"
             app:layout_constraintVertical_weight="1">
 
+            <ImageView
+                android:id="@+id/backExtraDmg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_media_previous" />
+
             <androidx.viewpager2.widget.ViewPager2
-                android:layout_width="match_parent"
+                android:id="@+id/vpExtraDmg"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nextExtraDmg"
+                app:layout_constraintStart_toEndOf="@+id/backExtraDmg"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/nextExtraDmg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_media_next" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -299,7 +318,7 @@
             android:background="@color/black" />
 
         <TextView
-            android:id="@+id/txtBtnDED_Draw"
+            android:id="@+id/txtBtnXED_Draw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

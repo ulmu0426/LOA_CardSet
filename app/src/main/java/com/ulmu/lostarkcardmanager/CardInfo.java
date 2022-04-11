@@ -16,7 +16,7 @@ public class CardInfo implements Comparable<CardInfo> {
     private int awake;                  //카드 각성도
     private String acquisition_info;    //카드 획득처 정보
     private String grade;               //카드 등급 정보
-    private int getCard = 0;            //카드 획득 유무(기본 0)
+    private boolean getCard = false;            //카드 획득 유무(기본 0)
     private String path;                //카드 리소스 경로
 
     public int getId() {
@@ -70,15 +70,22 @@ public class CardInfo implements Comparable<CardInfo> {
         this.grade = grade;
     }
 
-    public int getGetCard() {   //각성도가 1이상 있다면 획득한 카드로 침
-        if(awake > 0){
-            getCard = 1;
+    public boolean getGetCard() {   //각성도가 1이상 있다면 획득한 카드로 침
+        if (awake > 0) {
+            getCard = true;
         }
         return getCard;
     }
 
-    public void setGetCard(int getCard) {
+    public void setGetCard(boolean getCard) {
         this.getCard = getCard;
+    }
+
+    public int getAcquired(){
+        if(getCard)
+            return 1;
+        else
+            return 0;
     }
 
     public String getPath() {
@@ -93,7 +100,7 @@ public class CardInfo implements Comparable<CardInfo> {
     public int compareTo(CardInfo cardInfo) {
         return this.getName().compareTo(cardInfo.getName());
     }
-    
+
     //각성 수치에 따른 최대 보유 카드 수 제한을 위한 함수
     private int maxHaveValue(int haveAwake) {
         if (haveAwake == 5) {
