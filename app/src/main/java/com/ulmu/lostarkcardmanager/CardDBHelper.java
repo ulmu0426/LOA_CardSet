@@ -20,6 +20,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
     private static final int DATABASE_VERSION = 5;
+
     //assets 폴더
     private static String DB_PATH = "";
 
@@ -171,7 +172,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     public void UpdateInfoCardCheck(boolean input, String cardName) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 name 값으로 카드를 파악하고 해당 카드의 획득 유무 조절.
-        if(input)
+        if (input)
             updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 1 + " WHERE name = '" + cardName + "'");
         else
             updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 0 + " WHERE name = '" + cardName + "'");
@@ -181,7 +182,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     public void UpdateInfoCardCheck(boolean input, int cardId) {
         SQLiteDatabase updateColumInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 획득 유무 변경.
-        if(input)
+        if (input)
             updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 1 + " WHERE id = " + cardId + "");
         else
             updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 0 + " WHERE id = " + cardId + "");
@@ -347,11 +348,11 @@ public class CardDBHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<TestExtraDmgInfo> getBEDInfo() {
-        ArrayList<TestExtraDmgInfo> getBEDInfo = new ArrayList<>();
+    public ArrayList<TestExtraDmgInfo> getExtraDmgInfo(String TABLE_NAME) {
+        ArrayList<TestExtraDmgInfo> getExtraDmgInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_BEAST_EXTRA_DMG + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
@@ -370,29 +371,28 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 float dmgP1 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P1));
                 float dmgP2 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P2));
 
-                TestExtraDmgInfo BEDInfo = new TestExtraDmgInfo();
-                BEDInfo.setId(id);
-                BEDInfo.setName(name);
-                BEDInfo.setCard0(card0);
-                BEDInfo.setCard1(card1);
-                BEDInfo.setCard2(card2);
-                BEDInfo.setCard3(card3);
-                BEDInfo.setCard4(card4);
-                BEDInfo.setCard5(card5);
-                BEDInfo.setCard6(card6);
-                BEDInfo.setCard7(card7);
-                BEDInfo.setCard8(card8);
-                BEDInfo.setCard9(card9);
-                BEDInfo.setDmgP0(dmgP0);
-                BEDInfo.setDmgP1(dmgP1);
-                BEDInfo.setDmgP2(dmgP2);
+                TestExtraDmgInfo extraDmgInfo = new TestExtraDmgInfo();
+                extraDmgInfo.setId(id);
+                extraDmgInfo.setName(name);
+                extraDmgInfo.setCard0(card0);
+                extraDmgInfo.setCard1(card1);
+                extraDmgInfo.setCard2(card2);
+                extraDmgInfo.setCard3(card3);
+                extraDmgInfo.setCard4(card4);
+                extraDmgInfo.setCard5(card5);
+                extraDmgInfo.setCard6(card6);
+                extraDmgInfo.setCard7(card7);
+                extraDmgInfo.setCard8(card8);
+                extraDmgInfo.setCard9(card9);
+                extraDmgInfo.setDmgP0(dmgP0);
+                extraDmgInfo.setDmgP1(dmgP1);
+                extraDmgInfo.setDmgP2(dmgP2);
 
-                getBEDInfo.add(BEDInfo);
+                getExtraDmgInfo.add(extraDmgInfo);
             }
         }
         cursor.close();
-
-        return getBEDInfo;
+        return getExtraDmgInfo;
     }
 
 
@@ -446,7 +446,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 cardSetInfo.setNeedAwake0(needAwake0);
                 cardSetInfo.setNeedAwake1(needAwake1);
                 cardSetInfo.setNeedAwake2(needAwake2);
-                if(favorite.equals(name))
+                if (favorite.equals(name))
                     cardSetInfo.setFavorite(true);
                 getInfo.add((cardSetInfo));
             }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
+public class SettingCardViewPagerAdapter extends RecyclerView.Adapter<SettingCardViewPagerAdapter.ViewHolder> {
     private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
     private Context context;
 
@@ -36,7 +36,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     private SettingCardAdapter testSettingCardAdapter;
 
-    public ViewPagerAdapter(Context context) {
+    public SettingCardViewPagerAdapter(Context context) {
         this.context = context;
         cardListInfo = new ArrayList<>();
         settingCardList();
@@ -292,41 +292,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
         notifyDataSetChanged();
     }
-/*
-    // DB에 도감을 완성 시킨 경우 true else false
-    private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
-        if (cardBookInfo.getHaveCard() == cardBookInfo.getCompleteCardBook())
-            return true;
-        else
-            return false;
-    }
-
-
-    //스텟, 도감 달성 개수 업데이트 메소드
-    private void haveStatUpdate() {
-        int[] haveStat = new int[]{0, 0, 0};
-
-        for (int i = 0; i < haveStat.length; i++) {
-            for (int j = 0; j < cardBookInfo.size(); j++) {
-                if (cardBookInfo.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBookInfo.get(j))) {
-                    haveStat[i] += cardBookInfo.get(j).getValue();
-                }
-            }
-        }
-        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-    }
-
-    //DED Dmb 값
-    private void haveDEDUpdate() {
-        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
-        DEDDmg = 0;
-        for (int i = 0; i < DEDInfo.size(); i++) {
-            DEDDmg += DEDInfo.get(i).getDmgSum();
-        }
-        DEDDmg = Float.parseFloat(df.format(DEDDmg));
-        ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(DEDDmg);
-    }
-*/
 
     //카드 목록 update
     private void settingCardList() {

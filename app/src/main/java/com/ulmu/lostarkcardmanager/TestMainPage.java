@@ -1,16 +1,15 @@
 package com.ulmu.lostarkcardmanager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager2.widget.ViewPager2;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,15 +17,21 @@ import java.util.ArrayList;
 public class TestMainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
     protected ArrayList<CardInfo> cardInfo;         //카드목록
-    protected ArrayList<DemonExtraDmgInfo> DEDInfo; //악추피 목록
+    protected ArrayList<TestExtraDmgInfo> beastExtraDmgInfo; //야추피 목록
+    protected ArrayList<TestExtraDmgInfo> demonExtraDmgInfo; //악추피 목록
+
+    private ViewPager2 vpXED;
+    private TestMainPageExtraDmgViewPagerAdapter extraDmgViewPagerAdapter;
+    private ArrayList<ArrayList<TestExtraDmgInfo>> extraDmgList;
+
     private DrawerLayout drawerLayout_Main;         //메인페이지 메뉴
 
     private ImageView imgBtnMenu_Main;              //메뉴 버튼
 
-    private TextView txtBtn_Draw;                //메뉴 안에 있는 추피 페이지 버튼
-
     public static Context testMainContext;
 
+    private static final String TABLE_DEMON_EXTRA_DMG = "demon_extra_dmg";  //악추피 테이블 명
+    private static final String TABLE_BEAST_EXTRA_DMG = "beast_extra_dmg";  //야추피 테이블 명
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +51,17 @@ public class TestMainPage extends AppCompatActivity {
         //카드 DB 정보 ArrayList 전달
         cardInfo = cardDBHelper.getCardInfo_All();
 
+        //추피 DB 정보 ArrayList 전달
+        demonExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_DEMON_EXTRA_DMG);
+        beastExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_BEAST_EXTRA_DMG);
 
-        //악추피 DB 정보 ArrayList 전달
-        DEDInfo = cardDBHelper.getDemonExtraDmgInfo();
+        extraDmgList = new ArrayList<>();
+        extraDmgList.add(demonExtraDmgInfo);
+        extraDmgList.add(beastExtraDmgInfo);
+
+        extraDmgViewPagerAdapter = new TestMainPageExtraDmgViewPagerAdapter(this, extraDmgList);
+        vpXED = findViewById(R.id.vpExtraDmg);
+        vpXED.setAdapter(extraDmgViewPagerAdapter);
 
         //drawerLayout
         imgBtnMenu_Main = (ImageView) findViewById(R.id.imgBtnMenu_Main);
@@ -64,16 +77,6 @@ public class TestMainPage extends AppCompatActivity {
             }
         });
 
-        //drawerLayout 메뉴에 추피 터치시 이동
-        txtBtn_Draw = (TextView) findViewById(R.id.txtBtnXED_Draw);
-        txtBtn_Draw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TestExtraDmgPage.class);
-                startActivity(intent);
-                drawerLayout_Main.closeDrawer(Gravity.LEFT);
-            }
-        });
 
     }
 
@@ -107,6 +110,15 @@ public class TestMainPage extends AppCompatActivity {
         }
     }
 
-
+    public void setExtraDmgList(String EDName, ArrayList<TestExtraDmgInfo> extraDmgInfo) {
+        String[] extraDmgName = {"악마", "야수", "정령", "인간", "기계", "불사", "식물", "물질"};
+        for (int i = 0; i < extraDmgName.length; i++) {
+            if (extraDmgName[i].equals(EDName)) {
+                extraDmgList.remove(i);
+                extraDmgList.add(i, extraDmgInfo);
+            }
+        }
+        extraDmgViewPagerAdapter.setExtraDmgValue(extraDmgList);
+    }
 
 }

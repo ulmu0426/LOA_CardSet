@@ -43,6 +43,9 @@
         <activity
             android:name=".TestMainPage"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".TestExtraDmgPage"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

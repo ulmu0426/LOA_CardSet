@@ -46,7 +46,7 @@ public class SettingCard extends AppCompatActivity {
     private ViewPager2 viewPager;                   //뷰페이저
     private TabLayout tabLayout;                    //뷰페이저탭
 
-    private ViewPagerAdapter viewPagerAdapter;      //뷰페이저 어뎁터
+    private SettingCardViewPagerAdapter viewPagerAdapter;      //뷰페이저 어뎁터
     private ArrayList<CardInfo> cardInfo;           //카드정보
     private ArrayList<CardInfo> cardLegend;         //카드정보 : 전설
     private ArrayList<CardInfo> cardEpic;           //카드정보 : 영웅
@@ -95,7 +95,7 @@ public class SettingCard extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayoutCardList);
         viewPager = findViewById(R.id.vpCardList);
 
-        viewPagerAdapter = new ViewPagerAdapter(this);
+        viewPagerAdapter = new SettingCardViewPagerAdapter(this);
 
         viewPager.setAdapter(viewPagerAdapter); //리사이클러뷰 형태로 어뎁팅
 

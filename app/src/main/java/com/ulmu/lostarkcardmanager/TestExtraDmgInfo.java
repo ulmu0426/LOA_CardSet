@@ -1,8 +1,12 @@
 package com.ulmu.lostarkcardmanager;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class TestExtraDmgInfo implements Comparable<TestExtraDmgInfo> {
+public class TestExtraDmgInfo implements Comparable<TestExtraDmgInfo>, Parcelable {
     private ArrayList<CardInfo> cardInfo;
 
     private int id;
@@ -33,10 +37,43 @@ public class TestExtraDmgInfo implements Comparable<TestExtraDmgInfo> {
     private int needCard;
 
     public TestExtraDmgInfo() {
-        this.cardInfo = ((MainPage)MainPage.mainContext).cardInfo;
+        this.cardInfo = ((TestMainPage) TestMainPage.testMainContext).cardInfo;
         this.haveCard = 0;
     }
 
+
+    protected TestExtraDmgInfo(Parcel in) {
+        cardInfo = ((TestMainPage) TestMainPage.testMainContext).cardInfo;
+        id = in.readInt();
+        name = in.readString();
+        card0 = in.readString();
+        card1 = in.readString();
+        card2 = in.readString();
+        card3 = in.readString();
+        card4 = in.readString();
+        card5 = in.readString();
+        card6 = in.readString();
+        card7 = in.readString();
+        card8 = in.readString();
+        card9 = in.readString();
+        dmgP0 = in.readFloat();
+        dmgP1 = in.readFloat();
+        dmgP2 = in.readFloat();
+        haveCard = in.readInt();
+        needCard = in.readInt();
+    }
+
+    public static final Creator<TestExtraDmgInfo> CREATOR = new Creator<TestExtraDmgInfo>() {
+        @Override
+        public TestExtraDmgInfo createFromParcel(Parcel in) {
+            return new TestExtraDmgInfo(in);
+        }
+
+        @Override
+        public TestExtraDmgInfo[] newArray(int size) {
+            return new TestExtraDmgInfo[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -156,6 +193,23 @@ public class TestExtraDmgInfo implements Comparable<TestExtraDmgInfo> {
 
     public void setDmgP2(float dmgP2) {
         this.dmgP2 = dmgP2;
+    }
+
+    //DED 도감 달성시 현재 도감의 악마 추가피해 수치
+    public float getDmgSum() {
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
+        float result = 0;
+        if (!(getHaveCard() == getNeedCard())) {  //도감 미완성시 0 리턴
+            return 0;
+        }
+        if (getAwakeSum0() <= getHaveAwake() && getHaveAwake() < getAwakeSum1())    //각성합이 첫번째 각성 조건 달성시
+            result = getDmgP0();
+        else if (getAwakeSum1() <= getHaveAwake() && getHaveAwake() < getAwakeSum2())    //각성합이 두번째 각성 조건 달성시
+            result = getDmgP0() + getDmgP1();
+        else if (getAwakeSum2() == getHaveAwake())                                   //각성합이 최대 조건 달성시
+            result = getDmgP0() + getDmgP1() + getDmgP2();
+        result = Float.parseFloat(df.format(result));
+        return result;
     }
 
     //도감 완성에 필요 카드 수
@@ -332,7 +386,7 @@ public class TestExtraDmgInfo implements Comparable<TestExtraDmgInfo> {
 
     private boolean getCardCheck(String cardX) {
         for (int i = 0; i < cardInfo.size(); i++) {
-            if (cardInfo.get(i).getName().equals(cardX))
+            if (cardInfo.get(i).getName().equals(cardX) && cardInfo.get(i).getGetCard())
                 return true;
         }
         return false;
@@ -346,4 +400,29 @@ public class TestExtraDmgInfo implements Comparable<TestExtraDmgInfo> {
         return 0;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(card0);
+        dest.writeString(card1);
+        dest.writeString(card2);
+        dest.writeString(card3);
+        dest.writeString(card4);
+        dest.writeString(card5);
+        dest.writeString(card6);
+        dest.writeString(card7);
+        dest.writeString(card8);
+        dest.writeString(card9);
+        dest.writeFloat(dmgP0);
+        dest.writeFloat(dmgP1);
+        dest.writeFloat(dmgP2);
+        dest.writeInt(haveCard);
+        dest.writeInt(needCard);
+    }
 }

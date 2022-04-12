@@ -1849,18 +1849,6 @@ public class DemonExtraDmgAdapter extends RecyclerView.Adapter<DemonExtraDmgAdap
         ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(haveDED);                            //MainPage 악추피 값 갱신한 것 세팅
     }
 
-    //DEDInfo filtering 되지 않은 index 값을 얻는 함수
-    private int getIndex(DemonExtraDmgInfo demonExtraDmgInfo) {
-        int index = 0;
-        for (int i = 0; i < DEDInfo.size(); i++) {
-            if (DEDInfo.get(i).getId() == demonExtraDmgInfo.getId()) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
     // 완성도감 필터
     public void getCompleteFilter() {
         filterDED = DEDInfo;

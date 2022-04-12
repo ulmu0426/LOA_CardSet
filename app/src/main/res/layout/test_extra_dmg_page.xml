@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgBtnBEDSortMenu"
+            android:id="@+id/imgBtnXEDSortMenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
@@ -108,12 +108,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line"
-        tools:listitem="@layout/rv_demon_extra_dmg">
+        tools:listitem="@layout/test_rv_extra_dmg">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <CheckBox
-        android:id="@+id/checkBoxInvisibilityDEDPage"
+        android:id="@+id/checkBoxInvisibilityXEDPage"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_margin="10dp"

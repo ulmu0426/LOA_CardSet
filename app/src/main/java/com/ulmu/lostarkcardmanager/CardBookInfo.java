@@ -176,7 +176,6 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
         return getCardCheck(getCard0());
     }
 
-    //카드 획득 유무
     public boolean isCheckCard1() {
         return getCardCheck(getCard1());
     }
