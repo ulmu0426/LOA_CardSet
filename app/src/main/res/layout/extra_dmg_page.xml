@@ -11,13 +11,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="#535353"
-        app:layout_constraintBottom_toTopOf="@+id/txtDED"
+        app:layout_constraintBottom_toTopOf="@+id/txtXED"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgDtnBEDSortMenu"
+            android:id="@+id/imgBtnXEDSortMenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
@@ -25,17 +25,18 @@
             app:srcCompat="@drawable/menu_white" />
 
         <TextView
+            android:id="@+id/txtXExtraDmg"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="악마 추가 피해"
+            android:text="XX 추가 피해"
             android:textColor="#E3E3E3"
             android:textSize="25dp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imgSearchDED"
+            android:id="@+id/imgSearchExtraDmg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
@@ -46,20 +47,20 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/txtDED"
+        android:id="@+id/txtXED"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:layout_marginStart="10dp"
-        android:text="악마 추가 피해 + 0.00%"
+        android:text="XX 추가 피해 + 0.00%"
         android:textAlignment="textStart"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/lineDemon"
+        app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu" />
 
     <EditText
-        android:id="@+id/editSearchDED"
+        android:id="@+id/editSearchXED"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -68,13 +69,13 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/lineDemon"
+        app:layout_constraintBottom_toTopOf="@+id/rvExtraDmg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu" />
 
     <TextView
-        android:id="@+id/txtCompleteDED"
+        android:id="@+id/txtCompleteXED"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
@@ -82,23 +83,23 @@
         android:text="완성 도감 개수 : 00/00개"
         android:textAlignment="textStart"
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/lineDemon"
+        app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTopMenu"
         app:layout_constraintVertical_bias="0.4" />
 
     <View
-        android:id="@+id/lineDemon"
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:background="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED" />
+        app:layout_constraintTop_toBottomOf="@+id/txtXED" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDemonExtraDmg"
+        android:id="@+id/rvExtraDmg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -106,20 +107,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lineDemon"
-        tools:listitem="@layout/rv_demon_extra_dmg">
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        tools:listitem="@layout/rv_extra_dmg">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <CheckBox
-        android:id="@+id/checkBoxInvisibilityDEDPage"
+        android:id="@+id/checkBoxInvisibilityXEDPage"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_margin="10dp"
         android:background="#E7D4FF"
         android:buttonTint="#676767"
         android:layoutDirection="rtl"
-        android:text="  완성된 악추피 도감 숨기기"
+        android:text="  완성된 도감 숨기기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:ignore="TouchTargetSizeCheck" />

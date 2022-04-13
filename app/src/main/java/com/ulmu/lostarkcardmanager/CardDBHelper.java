@@ -151,61 +151,65 @@ public class CardDBHelper extends SQLiteOpenHelper {
         if (oldVersion < 5) {
             db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET cardListSum = 6, card3 = '에스더 루테란', card4 = '아비시나', card5 ='마법사 로나운' WHERE id = 20");
         }
+        if(oldVersion < 6){
+
+        }
+
     }
 
 
     //UPDATE 카드리스트 카드 수량 수정
     public void UpdateInfoCardNum(int input, int cardId) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 수량 조절.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET number = " + input + " WHERE id = " + cardId);
+        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET number = " + input + " WHERE id = " + cardId);
     }
 
     //UPDATE 카드리스트 카드 각성도 수정
     public void UpdateInfoCardAwake(int input, int cardId) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 각성도 조절.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET awake = " + input + " WHERE id = " + cardId);
+        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET awake = " + input + " WHERE id = " + cardId);
     }
 
     //UPDATE 카드리스트 카드 획득 유무 수정(카드 name)
     public void UpdateInfoCardCheck(boolean input, String cardName) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //카드 name 값으로 카드를 파악하고 해당 카드의 획득 유무 조절.
         if (input)
-            updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 1 + " WHERE name = '" + cardName + "'");
+            updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 1 + " WHERE name = '" + cardName + "'");
         else
-            updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 0 + " WHERE name = '" + cardName + "'");
+            updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 0 + " WHERE name = '" + cardName + "'");
     }
 
     //UPDATE 카드리스트 카드 획득 유무 수정(카드 id)
     public void UpdateInfoCardCheck(boolean input, int cardId) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 획득 유무 변경.
         if (input)
-            updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 1 + " WHERE id = " + cardId + "");
+            updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 1 + " WHERE id = " + cardId + "");
         else
-            updateColumInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 0 + " WHERE id = " + cardId + "");
+            updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET getCard = " + 0 + " WHERE id = " + cardId + "");
     }
 
     //CardSetInfo 에서 즐겨찾기 유무 업데이트
     public void UpdateInfoCardSetCard(String favoriteName, int cardBookId) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
+        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
     }
 
     //즐겨찾기 목록 업데이트
     public void UpdateInfoFavoriteList(int setAwake, int setActivation, String whereName) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
-        updateColumInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + ", activation = " + setActivation + " WHERE name = '" + whereName + "'");
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
+        updateColumnInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + ", activation = " + setActivation + " WHERE name = '" + whereName + "'");
     }
 
     //DED 에서 카드 값 변경시 즐겨찾기 리스트에서 세트 값만 변동
     public void UpdateInfoFavoriteList(int setAwake, String whereName) {
-        SQLiteDatabase updateColumInfo = getWritableDatabase();
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + " WHERE name = '" + whereName + "'");
+        updateColumnInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + " WHERE name = '" + whereName + "'");
     }
 
     @SuppressLint("Range")
@@ -295,61 +299,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
 
     }
 
-
     @SuppressLint("Range")
-    public ArrayList<DemonExtraDmgInfo> getDemonExtraDmgInfo() {       //악추피 항목 가져오기
-        ArrayList<DemonExtraDmgInfo> getInfo = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DEMON_EXTRA_DMG + " ORDER BY id", null);
-        if (cursor.getCount() != 0) {
-            //데이터가 조회된 경우 수행
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                String card0 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD0));
-                String card1 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD1));
-                String card2 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD2));
-                String card3 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD3));
-                String card4 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD4));
-                String card5 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD5));
-                String card6 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD6));
-                String card7 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD7));
-                String card8 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD8));
-                String card9 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD9));
-                float dmg_p0 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P0));
-                float dmg_p1 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P1));
-                float dmg_p2 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P2));
-
-
-                DemonExtraDmgInfo demonExtraDmgInfo = new DemonExtraDmgInfo();
-                demonExtraDmgInfo.setId(id);
-                demonExtraDmgInfo.setName(name);
-                demonExtraDmgInfo.setCard0(card0);
-                demonExtraDmgInfo.setCard1(card1);
-                demonExtraDmgInfo.setCard2(card2);
-                demonExtraDmgInfo.setCard3(card3);
-                demonExtraDmgInfo.setCard4(card4);
-                demonExtraDmgInfo.setCard5(card5);
-                demonExtraDmgInfo.setCard6(card6);
-                demonExtraDmgInfo.setCard7(card7);
-                demonExtraDmgInfo.setCard8(card8);
-                demonExtraDmgInfo.setCard9(card9);
-                demonExtraDmgInfo.setDmg_p0(dmg_p0);
-                demonExtraDmgInfo.setDmg_p1(dmg_p1);
-                demonExtraDmgInfo.setDmg_p2(dmg_p2);
-                getInfo.add(demonExtraDmgInfo);
-            }
-        }
-        cursor.close();
-
-        return getInfo;
-
-    }
-
-    @SuppressLint("Range")
-    public ArrayList<TestExtraDmgInfo> getExtraDmgInfo(String TABLE_NAME) {
-        ArrayList<TestExtraDmgInfo> getExtraDmgInfo = new ArrayList<>();
+    public ArrayList<ExtraDmgInfo> getExtraDmgInfo(String TABLE_NAME) {
+        ArrayList<ExtraDmgInfo> getExtraDmgInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id", null);
@@ -371,7 +323,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 float dmgP1 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P1));
                 float dmgP2 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P2));
 
-                TestExtraDmgInfo extraDmgInfo = new TestExtraDmgInfo();
+                ExtraDmgInfo extraDmgInfo = new ExtraDmgInfo();
                 extraDmgInfo.setId(id);
                 extraDmgInfo.setName(name);
                 extraDmgInfo.setCard0(card0);

@@ -13,7 +13,7 @@ public class LoadingActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(new Intent(this, TestMainPage.class));
+        startActivity(new Intent(this, MainPage.class));
         finish();
 
         try {

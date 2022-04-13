@@ -12,18 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class TestMainPageExtraDmgViewPagerAdapter extends RecyclerView.Adapter<TestMainPageExtraDmgViewPagerAdapter.ViewHolder> {
+public class MainPageExtraDmgVPAdapter extends RecyclerView.Adapter<MainPageExtraDmgVPAdapter.ViewHolder> {
 
     public Context context;
 
     private final String EXTRA_DMG = " 추가 피해";
     private final String EXTRA_DMG_PERCENT = "%";
 
-    private ArrayList<ArrayList<TestExtraDmgInfo>> extraDmgList;
+    private ArrayList<ArrayList<ExtraDmgInfo>> extraDmgList;
     private ArrayList<String> extraDmgName;
     private ArrayList<Float> extraDmgValue;
 
-    public TestMainPageExtraDmgViewPagerAdapter(Context context, ArrayList<ArrayList<TestExtraDmgInfo>> extraDmgList) {
+    public MainPageExtraDmgVPAdapter(Context context, ArrayList<ArrayList<ExtraDmgInfo>> extraDmgList) {
         this.context = context;
         this.extraDmgList = extraDmgList;
         setExtraDmgName();
@@ -32,14 +32,14 @@ public class TestMainPageExtraDmgViewPagerAdapter extends RecyclerView.Adapter<T
 
     @NonNull
     @Override
-    public TestMainPageExtraDmgViewPagerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainPageExtraDmgVPAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.vp_extra_dmg, parent, false);
-        return new TestMainPageExtraDmgViewPagerAdapter.ViewHolder(view);
+        return new MainPageExtraDmgVPAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestMainPageExtraDmgViewPagerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainPageExtraDmgVPAdapter.ViewHolder holder, int position) {
         int pos = position;
         holder.txtBtnExtraDmg.setText(extraDmgName.get(position) + EXTRA_DMG);
         holder.txtExtraDmg.setText(extraDmgValue.get(position) + EXTRA_DMG_PERCENT);
@@ -47,7 +47,7 @@ public class TestMainPageExtraDmgViewPagerAdapter extends RecyclerView.Adapter<T
         holder.txtBtnExtraDmg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, TestExtraDmgPage.class);
+                Intent intent = new Intent(context, ExtraDmgPage.class);
                 intent.putExtra("EDName", extraDmgName.get(pos));
                 intent.putParcelableArrayListExtra("EDList", extraDmgList.get(pos));
                 context.startActivity(intent);
@@ -80,7 +80,7 @@ public class TestMainPageExtraDmgViewPagerAdapter extends RecyclerView.Adapter<T
         }
     }
 
-    public void setExtraDmgValue(ArrayList<ArrayList<TestExtraDmgInfo>> extraDmgList) {
+    public void setExtraDmgValue(ArrayList<ArrayList<ExtraDmgInfo>> extraDmgList) {
         extraDmgValue = new ArrayList<>();
         for (int i = 0; i < getItemCount(); i++) {
             extraDmgValue.add(getEDValue(extraDmgList.get(i)));
@@ -88,7 +88,7 @@ public class TestMainPageExtraDmgViewPagerAdapter extends RecyclerView.Adapter<T
         notifyDataSetChanged();
     }
 
-    private float getEDValue(ArrayList<TestExtraDmgInfo> extraDmgInfo) {
+    private float getEDValue(ArrayList<ExtraDmgInfo> extraDmgInfo) {
         float result = 0;
         for (int i = 0; i < extraDmgInfo.size(); i++) {
             result += extraDmgInfo.get(i).getDmgSum();

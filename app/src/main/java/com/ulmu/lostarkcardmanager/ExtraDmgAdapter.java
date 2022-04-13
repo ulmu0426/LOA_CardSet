@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapter.ViewHolder> {
+public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHolder> {
     private Context context;
     private String EDName;
     private final String ED_TEXT = " 계열 피해량 증가 합 : +";
@@ -35,20 +35,20 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     private final String XED_DIALOG_CARD_AWAKE = "각성 : ";
     private final String XED_DIALOG_CARD_NUM = "보유 : ";
 
-    private ArrayList<CardInfo> cardInfo = ((TestMainPage) TestMainPage.testMainContext).cardInfo;
-    private TestExtraDmgPage extraDmgPage;
-    private ArrayList<TestExtraDmgInfo> extraDmgInfo;
-    private ArrayList<TestExtraDmgInfo> filterXED;
+    private ArrayList<CardInfo> cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+    private ExtraDmgPage extraDmgPage;
+    private ArrayList<ExtraDmgInfo> extraDmgInfo;
+    private ArrayList<ExtraDmgInfo> filterXED;
 
     private CardDBHelper cardDBHelper;
 
     //미완성된 DED 도감 목록
-    private ArrayList<TestExtraDmgInfo> baseFilteredXED;
+    private ArrayList<ExtraDmgInfo> baseFilteredXED;
 
     private float haveXED;
     private int completeXED;
 
-    public TestExtraDmgAdapter(Context context, String EDName, ArrayList<TestExtraDmgInfo> extraDmgInfo, TestExtraDmgPage extraDmgPage) {
+    public ExtraDmgAdapter(Context context, String EDName, ArrayList<ExtraDmgInfo> extraDmgInfo, ExtraDmgPage extraDmgPage) {
         this.context = context;
         this.EDName = EDName;
         this.extraDmgInfo = extraDmgInfo;
@@ -63,7 +63,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_rv_extra_dmg, parent, false);
+        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_extra_dmg, parent, false);
         return new ViewHolder(holder);
     }
 
@@ -135,7 +135,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
             @Override
             public void onClick(View view) {
                 Dialog dialogDEDDetail = new Dialog(context);
-                dialogDEDDetail.setContentView(R.layout.demon_extra_dmg_detail);
+                dialogDEDDetail.setContentView(R.layout.extra_dmg_detail);
                 WindowManager.LayoutParams params = dialogDEDDetail.getWindow().getAttributes();
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
                 params.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -1734,7 +1734,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     }
 
     // 악추피 도감작을 완성시키면 각성도에 따라 도감의 배경을 각 단계별로 흰색->민트색->초록색->노란색으로 바꿈
-    private void isCompleteCardBookBackgroundColor(TestExtraDmgInfo XEDInfo, ConstraintLayout cv) {
+    private void isCompleteCardBookBackgroundColor(ExtraDmgInfo XEDInfo, ConstraintLayout cv) {
         if ((XEDInfo.getHaveCard() == XEDInfo.getNeedCard())) {
             if (XEDInfo.getHaveAwake() == XEDInfo.getAwakeSum2())
                 cv.setBackgroundColor(Color.parseColor("#FFF4BD"));   //노랑 - 전부수집+풀각성
@@ -1749,7 +1749,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     }
 
     //다음 악추피 도달까지 남은 각성도 수
-    private void nextDED(TextView txtXED_NextStep, TestExtraDmgInfo extraDmgInfo) {
+    private void nextDED(TextView txtXED_NextStep, ExtraDmgInfo extraDmgInfo) {
         if (extraDmgInfo.getAwakeSum0() > extraDmgInfo.getHaveAwake()) {
             txtXED_NextStep.setText("다음 활성도까지 : " + (extraDmgInfo.getAwakeSum0() - extraDmgInfo.getHaveAwake()) + " 남음");
         } else if (extraDmgInfo.getAwakeSum0() <= extraDmgInfo.getHaveAwake() && extraDmgInfo.getAwakeSum1() > extraDmgInfo.getHaveAwake()) {
@@ -1763,7 +1763,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     }
 
     // DB에 도감을 완성 시킨 경우(카드 수집만) true else false
-    public boolean isCompleteDED(TestExtraDmgInfo XEDInfo) {
+    public boolean isCompleteDED(ExtraDmgInfo XEDInfo) {
         if (XEDInfo.getHaveCard() == XEDInfo.getNeedCard())
             return true;
         else
@@ -1771,7 +1771,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     }
 
     // DB에 도감을 완성 시킨 경우(카드수집 + 각성도)
-    private boolean isAllCompleteDED(TestExtraDmgInfo XEDInfo) {
+    private boolean isAllCompleteDED(ExtraDmgInfo XEDInfo) {
         if (XEDInfo.getHaveCard() == XEDInfo.getNeedCard()) {
             if (XEDInfo.getHaveAwake() == XEDInfo.getAwakeSum2())
                 return true;
@@ -1852,7 +1852,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
                     if (charString.isEmpty()) {
                         filterXED = baseFilteredXED;
                     } else {
-                        ArrayList<TestExtraDmgInfo> filteringList = new ArrayList<>();
+                        ArrayList<ExtraDmgInfo> filteringList = new ArrayList<>();
                         for (int i = 0; i < baseFilteredXED.size(); i++) {
                             if (baseFilteredXED.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
                                 filteringList.add(baseFilteredXED.get(i));
@@ -1867,7 +1867,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
                     if (charString.isEmpty()) {
                         filterXED = extraDmgInfo;
                     } else {
-                        ArrayList<TestExtraDmgInfo> filteringList = new ArrayList<>();
+                        ArrayList<ExtraDmgInfo> filteringList = new ArrayList<>();
                         for (int i = 0; i < extraDmgInfo.size(); i++) {
                             if (extraDmgInfo.get(i).getName().toLowerCase().contains(charString.toLowerCase())) {
                                 filteringList.add(extraDmgInfo.get(i));
@@ -1883,7 +1883,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filterXED = (ArrayList<TestExtraDmgInfo>) results.values;
+                filterXED = (ArrayList<ExtraDmgInfo>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -1891,7 +1891,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
 
     //완성 안된 DED 도감 세팅
     private void setBaseFilteredXED() {
-        ArrayList<TestExtraDmgInfo> filteringList = new ArrayList<>();
+        ArrayList<ExtraDmgInfo> filteringList = new ArrayList<>();
         for (int i = 0; i < extraDmgInfo.size(); i++) {
             if (!isAllCompleteDED(extraDmgInfo.get(i))) {
                 filteringList.add(extraDmgInfo.get(i));
@@ -1925,7 +1925,7 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
 
     //완성도감 지우기
     private void completePartRemove() {
-        ArrayList<TestExtraDmgInfo> filteringList = new ArrayList<>();
+        ArrayList<ExtraDmgInfo> filteringList = new ArrayList<>();
         for (int i = 0; i < filterXED.size(); i++) {
             if (!isAllCompleteDED(filterXED.get(i))) {
                 filteringList.add(filterXED.get(i));
@@ -1936,9 +1936,9 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
 
     //기본 정렬
     public void getDefaultSort() {
-        Collections.sort(filterXED, new Comparator<TestExtraDmgInfo>() {
+        Collections.sort(filterXED, new Comparator<ExtraDmgInfo>() {
             @Override
-            public int compare(TestExtraDmgInfo o1, TestExtraDmgInfo o2) {
+            public int compare(ExtraDmgInfo o1, ExtraDmgInfo o2) {
                 if (o1.getId() < o2.getId())
                     return -1;
                 else
@@ -1964,9 +1964,9 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     //완성도 정렬
     public void getCompletenessSort() {
         getNameSort();
-        Collections.sort(filterXED, new Comparator<TestExtraDmgInfo>() {
+        Collections.sort(filterXED, new Comparator<ExtraDmgInfo>() {
             @Override
-            public int compare(TestExtraDmgInfo o1, TestExtraDmgInfo o2) {
+            public int compare(ExtraDmgInfo o1, ExtraDmgInfo o2) {
                 if (o1.completePercent() < o2.completePercent())
                     return 1;
                 else
@@ -1984,9 +1984,9 @@ public class TestExtraDmgAdapter extends RecyclerView.Adapter<TestExtraDmgAdapte
     //다음 활성도가 가까운 순 정렬
     public void getFastCompletenessSort() {
         getNameSort();
-        Collections.sort(filterXED, new Comparator<TestExtraDmgInfo>() {
+        Collections.sort(filterXED, new Comparator<ExtraDmgInfo>() {
             @Override
-            public int compare(TestExtraDmgInfo o1, TestExtraDmgInfo o2) {
+            public int compare(ExtraDmgInfo o1, ExtraDmgInfo o2) {
                 if (o1.fastComplete() <= o2.fastComplete()) {
                     return -1;
                 } else

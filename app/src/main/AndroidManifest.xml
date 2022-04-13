@@ -41,10 +41,10 @@
             android:name="com.ulmu.lostarkcardmanager.GuidePage"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".TestMainPage"
+            android:name=".MainPage"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".TestExtraDmgPage"
+            android:name=".ExtraDmgPage"
             android:screenOrientation="portrait"></activity>
 
     </application>

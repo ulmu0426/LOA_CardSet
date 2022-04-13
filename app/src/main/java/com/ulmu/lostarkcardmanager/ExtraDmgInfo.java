@@ -1,33 +1,79 @@
 package com.ulmu.lostarkcardmanager;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
+public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
     private ArrayList<CardInfo> cardInfo;
-    private int id;             //id
-    private String name;        //DED도감 이름
-    private String card0;       //0번 카드 이름
-    private String card1;       //1번 카드 이름
-    private String card2;       //2번 카드 이름
-    private String card3;       //3번 카드 이름
-    private String card4;       //4번 카드 이름
-    private String card5;       //5번 카드 이름
-    private String card6;       //6번 카드 이름
-    private String card7;       //7번 카드 이름
-    private String card8;       //8번 카드 이름
-    private String card9;       //9번 카드 이름
-    private float dmg_p0;       //0번째 활성화시 증가하는 데미지 값
-    private float dmg_p1;       //1번째 활성화시 증가하는 데미지 값
-    private float dmg_p2;       //2번째 활성화시 증가하는 데미지 값
 
-    private int needCard;
+    private int id;
+
+    //야추피 도감 이름
+    private String name;
+
+    //야추피 도감에 필요한 카드
+    private String card0;
+    private String card1;
+    private String card2;
+    private String card3;
+    private String card4;
+    private String card5;
+    private String card6;
+    private String card7;
+    private String card8;
+    private String card9;
+
+    //추가 피해 수치
+    private float dmgP0;
+    private float dmgP1;
+    private float dmgP2;
+
+    //현재 보유한 카드 수
     private int haveCard;
+    //완성에 필요한 카드 수
+    private int needCard;
 
-    public DemonExtraDmgInfo() {
-        this.cardInfo = ((MainPage)MainPage.mainContext).cardInfo;
+    public ExtraDmgInfo() {
+        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.haveCard = 0;
     }
+
+
+    protected ExtraDmgInfo(Parcel in) {
+        cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+        id = in.readInt();
+        name = in.readString();
+        card0 = in.readString();
+        card1 = in.readString();
+        card2 = in.readString();
+        card3 = in.readString();
+        card4 = in.readString();
+        card5 = in.readString();
+        card6 = in.readString();
+        card7 = in.readString();
+        card8 = in.readString();
+        card9 = in.readString();
+        dmgP0 = in.readFloat();
+        dmgP1 = in.readFloat();
+        dmgP2 = in.readFloat();
+        haveCard = in.readInt();
+        needCard = in.readInt();
+    }
+
+    public static final Creator<ExtraDmgInfo> CREATOR = new Creator<ExtraDmgInfo>() {
+        @Override
+        public ExtraDmgInfo createFromParcel(Parcel in) {
+            return new ExtraDmgInfo(in);
+        }
+
+        @Override
+        public ExtraDmgInfo[] newArray(int size) {
+            return new ExtraDmgInfo[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -125,41 +171,45 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         this.card9 = card9;
     }
 
-    public float getDmg_p0() {
-        return dmg_p0;
+    public float getDmgP0() {
+        return dmgP0;
     }
 
-    public void setDmg_p0(float dmg_p0) {
-        this.dmg_p0 = dmg_p0;
+    public void setDmgP0(float dmgP0) {
+        this.dmgP0 = dmgP0;
     }
 
-    public float getDmg_p1() {
-        return dmg_p1;
+    public float getDmgP1() {
+        return dmgP1;
     }
 
-    public void setDmg_p1(float dmg_p1) {
-        this.dmg_p1 = dmg_p1;
+    public void setDmgP1(float dmgP1) {
+        this.dmgP1 = dmgP1;
     }
 
-    public float getDmg_p2() {
-        return dmg_p2;
+    public float getDmgP2() {
+        return dmgP2;
     }
 
-    public void setDmg_p2(float dmg_p2) {
-        this.dmg_p2 = dmg_p2;
+    public void setDmgP2(float dmgP2) {
+        this.dmgP2 = dmgP2;
     }
 
-    //옵션 활성화에 필요한 각성도 수치들
-    public int getAwakeSum0() {
-        return (needCard * 2);
-    }
-
-    public int getAwakeSum1() {
-        return (needCard * 4);
-    }
-
-    public int getAwakeSum2() {
-        return (needCard * 5);
+    //DED 도감 달성시 현재 도감의 악마 추가피해 수치
+    public float getDmgSum() {
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
+        float result = 0;
+        if (!(getHaveCard() == getNeedCard())) {  //도감 미완성시 0 리턴
+            return 0;
+        }
+        if (getAwakeSum0() <= getHaveAwake() && getHaveAwake() < getAwakeSum1())    //각성합이 첫번째 각성 조건 달성시
+            result = getDmgP0();
+        else if (getAwakeSum1() <= getHaveAwake() && getHaveAwake() < getAwakeSum2())    //각성합이 두번째 각성 조건 달성시
+            result = getDmgP0() + getDmgP1();
+        else if (getAwakeSum2() == getHaveAwake())                                   //각성합이 최대 조건 달성시
+            result = getDmgP0() + getDmgP1() + getDmgP2();
+        result = Float.parseFloat(df.format(result));
+        return result;
     }
 
     //도감 완성에 필요 카드 수
@@ -200,6 +250,19 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         if (isCheckCard9()) haveCard++;
 
         return haveCard;
+    }
+
+    //옵션 활성화에 필요한 각성도 수치들
+    public int getAwakeSum0() {
+        return (needCard * 2);
+    }
+
+    public int getAwakeSum1() {
+        return (needCard * 4);
+    }
+
+    public int getAwakeSum2() {
+        return (needCard * 5);
     }
 
     //X번 카드 보유 유무
@@ -284,24 +347,11 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         return getCardAwake(getCard9());
     }
 
-
-    //DED 도감 달성시 현재 도감의 악마 추가피해 수치
-    public float getDmgSum() {
-        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
-        float result = 0;
-        if (!(getHaveCard() == getNeedCard())) {  //도감 미완성시 0 리턴
-            return 0;
-        }
-        if (getAwakeSum0() <= getHaveAwake() && getHaveAwake() < getAwakeSum1())    //각성합이 첫번째 각성 조건 달성시
-            result = getDmg_p0();
-        else if (getAwakeSum1() <= getHaveAwake() && getHaveAwake() < getAwakeSum2())    //각성합이 두번째 각성 조건 달성시
-            result = getDmg_p0() + getDmg_p1();
-        else if (getAwakeSum2() == getHaveAwake())                                   //각성합이 최대 조건 달성시
-            result = getDmg_p0() + getDmg_p1() + getDmg_p2();
-        result = Float.parseFloat(df.format(result));
-        return result;
+    //이름순 정렬을 위한 메소드
+    @Override
+    public int compareTo(ExtraDmgInfo o) {
+        return this.getName().compareTo(o.getName());
     }
-
 
     //완성도 순 정렬을 위해 필요한 메소드. 완성도를 퍼센트로 나타내줌.(모든 카드 수집이 다 됐다는 전제가 필요)
     public double completePercent() {
@@ -318,9 +368,9 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
             return 100;
     }
 
-    //다음 완성도가 가까운 순서대로 정렬을 위해 필요한 메소드
+    //다음 활성화가 가까운 순서대로 정렬을 위해 필요한 메소드
     public int fastComplete() {
-        if (getHaveCard() != getNeedCard()) {  //카드 미획득시 우선순위 하위
+        if (getHaveCard() != getNeedCard()) {
             return 999;
         }
         if (getHaveAwake() < getAwakeSum0()) {
@@ -333,13 +383,6 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
             return 1000;
         }
     }
-    
-    //이름 순서대로 정렬
-    @Override
-    public int compareTo(DemonExtraDmgInfo o) {
-        return this.getName().compareTo(o.getName());
-    }
-
 
     private boolean getCardCheck(String cardX) {
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -357,4 +400,29 @@ public class DemonExtraDmgInfo implements Comparable<DemonExtraDmgInfo> {
         return 0;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(card0);
+        dest.writeString(card1);
+        dest.writeString(card2);
+        dest.writeString(card3);
+        dest.writeString(card4);
+        dest.writeString(card5);
+        dest.writeString(card6);
+        dest.writeString(card7);
+        dest.writeString(card8);
+        dest.writeString(card9);
+        dest.writeFloat(dmgP0);
+        dest.writeFloat(dmgP1);
+        dest.writeFloat(dmgP2);
+        dest.writeInt(haveCard);
+        dest.writeInt(needCard);
+    }
 }

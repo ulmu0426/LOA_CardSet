@@ -25,7 +25,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -300,12 +299,12 @@ public class SettingCard extends AppCompatActivity {
 
     //카드 목록 update
     private void settingCardList() {
-        cardLegend = new ArrayList<CardInfo>();
-        cardEpic = new ArrayList<CardInfo>();
-        cardRare = new ArrayList<CardInfo>();
-        cardUncommon = new ArrayList<CardInfo>();
-        cardCommon = new ArrayList<CardInfo>();
-        cardSpecial = new ArrayList<CardInfo>();
+        cardLegend = new ArrayList<>();
+        cardEpic = new ArrayList<>();
+        cardRare = new ArrayList<>();
+        cardUncommon = new ArrayList<>();
+        cardCommon = new ArrayList<>();
+        cardSpecial = new ArrayList<>();
 
         for (int i = 0; i < cardInfo.size(); i++) {
             CardInfo ci = new CardInfo();
@@ -376,7 +375,7 @@ public class SettingCard extends AppCompatActivity {
             return;
         }
         haveStatUpdate();
-        haveDEDUpdate();
+        ((MainPage) MainPage.mainContext).setExtraDmgList();
         finish();
     }
 
@@ -403,9 +402,7 @@ public class SettingCard extends AppCompatActivity {
 
     private static final String[] STAT = {"치명", "특화", "신속"};
 
-    private float DEDDmg;
     private ArrayList<CardBookInfo> cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
-    private ArrayList<DemonExtraDmgInfo> DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
 
     // DB에 도감을 완성 시킨 경우 true else false
     private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
@@ -428,17 +425,5 @@ public class SettingCard extends AppCompatActivity {
         }
         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
     }
-
-    //DED Dmb 값
-    private void haveDEDUpdate() {
-        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
-        DEDDmg = 0;
-        for (int i = 0; i < DEDInfo.size(); i++) {
-            DEDDmg += DEDInfo.get(i).getDmgSum();
-        }
-        DEDDmg = Float.parseFloat(df.format(DEDDmg));
-        ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(DEDDmg);
-    }
-
 
 }

@@ -325,9 +325,9 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
     //즐겨찾기 순 정렬에서 Collections.sort 를 위해 필요한 메소드
     public int favoriteCheck() {
         if (favorite)
-            return 1;
+            return -1;
         else
-            return 0;
+            return 1;
     }
 
     //이름 순 정렬

@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class TestExtraDmgPage extends AppCompatActivity {
+public class ExtraDmgPage extends AppCompatActivity {
     //XX 추가 피해 TextView
     private TextView txtXExtraDmg;
     private TextView txtXED;
@@ -27,7 +27,7 @@ public class TestExtraDmgPage extends AppCompatActivity {
 
     //RecyclerView and Adapter
     private RecyclerView rv;
-    private TestExtraDmgAdapter adapter;
+    private ExtraDmgAdapter adapter;
 
     private CheckBox checkBoxInvisibilityXEDPage;
 
@@ -36,7 +36,7 @@ public class TestExtraDmgPage extends AppCompatActivity {
     private EditText editSearchXED;
 
     private String EDName;
-    private ArrayList<TestExtraDmgInfo> extraDmgInfo;
+    private ArrayList<ExtraDmgInfo> extraDmgInfo;
 
     private boolean checkDefault = true;
     private boolean checkName = false;
@@ -46,14 +46,14 @@ public class TestExtraDmgPage extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_extra_dmg_page);
+        setContentView(R.layout.extra_dmg_page);
         Intent intent = getIntent();
         init(intent.getStringExtra("EDName"));
         txtXED.setText(intent.getStringExtra("EDName") + " 추가 피해 + " + 0 + "%");
 
         EDName = getIntent().getStringExtra("EDName");
         extraDmgInfo = getIntent().getParcelableArrayListExtra("EDList");
-        adapter = new TestExtraDmgAdapter(this, EDName, extraDmgInfo, this);
+        adapter = new ExtraDmgAdapter(this, EDName, extraDmgInfo, this);
 
         rv.setAdapter(adapter);
 
@@ -98,7 +98,7 @@ public class TestExtraDmgPage extends AppCompatActivity {
         imgBtnXEDSortMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(TestExtraDmgPage.this, imgBtnXEDSortMenu);
+                PopupMenu popupMenu = new PopupMenu(ExtraDmgPage.this, imgBtnXEDSortMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
                 menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
                 popupMenu.getMenu().removeItem(R.id.favoriteSort);
@@ -163,7 +163,7 @@ public class TestExtraDmgPage extends AppCompatActivity {
 
             return;
         }
-        ((TestMainPage) TestMainPage.testMainContext).setExtraDmgList(EDName, extraDmgInfo);
+        ((MainPage) MainPage.mainContext).setExtraDmgList();
         finish();
     }
 

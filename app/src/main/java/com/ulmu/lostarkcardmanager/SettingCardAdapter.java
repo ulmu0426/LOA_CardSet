@@ -21,7 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.ViewHolder> {
@@ -29,10 +28,8 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private static final String[] STAT = {"치명", "특화", "신속"};
 
     //메인 페이지의 값을 변경시키기 위한 ArrayList들
-    private float DEDDmg;
     private ArrayList<CardSetInfo> cardSetInfo;
     private ArrayList<CardBookInfo> cardBookInfo;
-    private ArrayList<DemonExtraDmgInfo> DEDInfo;
     private FavoriteAdapter favoriteAdapter;
     private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
 
@@ -46,7 +43,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.context = context;
         this.cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
-        this.DEDInfo = ((MainPage) MainPage.mainContext).DEDInfo;
         this.favoriteAdapter = ((MainPage) MainPage.mainContext).favoriteAdapter;
         this.favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
         this.cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
@@ -187,7 +183,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                                 favoriteCardSetUpdate(searchCardSet(filterCardInfo.get(positionGet).getName()));
 
                                 haveStatUpdate();
-                                haveDEDUpdate();
                                 notifyDataSetChanged();
                                 awakeHaveDialog.cancel();
                             }
@@ -219,7 +214,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                 }
 
                 haveStatUpdate();
-                haveDEDUpdate();
             }
         });
 
@@ -335,17 +329,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             }
         }
         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-    }
-
-    //DED Dmb 값
-    private void haveDEDUpdate() {
-        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
-        DEDDmg = 0;
-        for (int i = 0; i < DEDInfo.size(); i++) {
-            DEDDmg += DEDInfo.get(i).getDmgSum();
-        }
-        DEDDmg = Float.parseFloat(df.format(DEDDmg));
-        ((MainPage) MainPage.mainContext).setDemonExtraDmgInfo(DEDDmg);
     }
 
     // DB에 도감을 완성 시킨 경우 true else false
