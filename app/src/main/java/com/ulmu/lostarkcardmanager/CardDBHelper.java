@@ -45,7 +45,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     private static final String CARD_COLUMN_ACQUISITION_INFO = "acquisition_info";  //카드 획득처 정보
     private static final String CARD_COLUMN_GRADE = "grade";                        //카드 등급
     private static final String CARD_COLUMN_CHECK = "getCard";                        //카드 획득 유무
-    private static final String CARD_COLUMN_IMGPATH = "path";
+    private static final String CARD_COLUMN_IMG_PATH = "path";
 
     //카드 세트 column
     private static final String TABLE_CARD_SET = "cardSet";                      //카드세트 테이블 명
@@ -72,12 +72,6 @@ public class CardDBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DMG_P1 = "dmg_p1";                   //각성합계 2단계 데미지 보너스
     private static final String COLUMN_DMG_P2 = "dmg_p2";                   //각성합계 3단계 데미지 보너스
 
-
-    //즐겨찾기 목록
-    private static final String FAVORITE_CARD_SET_TABLE_NAME = "favoriteCardSet";
-    private static final String FAVORITE_CARD_SET_COLUMN_AWAKE = "awake";
-
-
     public CardDBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if (android.os.Build.VERSION.SDK_INT >= 17) {
@@ -98,7 +92,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
             try {
                 copyDataBase();
             } catch (IOException mIOException) {
-                Log.v("test", "Error발생");
+                Log.v("test" , "Error발생");
                 throw new Error("ErrorCopyingDataBase");
             }
         }
@@ -151,8 +145,36 @@ public class CardDBHelper extends SQLiteOpenHelper {
         if (oldVersion < 5) {
             db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET cardListSum = 6, card3 = '에스더 루테란', card4 = '아비시나', card5 ='마법사 로나운' WHERE id = 20");
         }
-        if(oldVersion < 6){
-
+        if (oldVersion < 6) {
+            db.execSQL("CREATE TABLE " + TABLE_BEAST_EXTRA_DMG +
+                    " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT, card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT" +
+                    ",dmg_p0 REAL,dmg_p1 REAL,dmg_p2 REAL)");
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST, null);
+            if (cursor.getCount() == 0) {
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(0,'격돌하는 마력','아브렐슈드','아제나&이난나','','','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(1,'누나만 믿어!','사샤','검은이빨','위대한 성 네리아','아제나&이난나','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(2,'다시 살아난다 말할까','루드릭','라하르트','테르나크','지그문트','나베갈','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(3,'루테란 왕위 쟁탈전','슈헤리트','실리안','패자의 검','카마인','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(4,'무기여 잘 있거라','패자의 검','벨크루제','파르쿠나스','진멸의 창','피요르긴','나히니르','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(5,'뼈대있는 가문','마법사 로나운','몬테르크','비슈츠','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(6,'사자탈과 함께 춤을','사자탈','한손','','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(7,'세이크리아의 사제','아만','바루투','집행관 솔라스','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(8,'소녀시대','아나벨','마리 파우렌츠','타냐 벤텀','표류소녀 엠마','레나','투란','첼라','여울','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(9,'시엔 여관','아만','세리아','샨디','진저웨일','모르페오','','','','','',0.13,0.13,0.14)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(10,'알트아이젠','시그나투스','솔 그랑데','','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(11,'애니츠의 수호신','하누마탄','가디언 루','','','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(12,'역병의 인도자들','역병 인도자','역병군단 바르토','','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(13,'오, 아름다운 칼라자여','나비','칼도르','비올레','루티아','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(14,'오레하의 악연','알비온','아르고스','광기를 잃은 쿠크세이튼','','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(15,'욕망군다','비아키스','절망의 레키엘','키즈라','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(16,'운명의 무게','에스더 시엔','사이카','','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(17,'정령의 땅','아브렐슈드','아제나&이난나','에페르니아','게르디아','운다트','그노시스','실페리온','','','',0.13,0.13,0.14)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(18,'카단의 행방','카단','신디','데스칼루다','베른 젠로드','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(19,'토토이크의 지혜야!','하이비 집행관','모카모카','','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(20,'트리시온','신뢰의 아크 아스타','창조의 아크 오르투스','예지의 아크 아가톤','희망의 아크 엘피스','지혜의 아크 라디체','헌신의 아크 카르타','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(21,'하늘을 비추는 사막','소금거인','천둥','모리나','다단','자이언트 웜','타나토스','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(22,'힘의 잔영','아이히만 박사','카인','에스','제이','','','','','','',0.06,0.07,0.07)");
+            }
         }
 
     }
@@ -193,23 +215,10 @@ public class CardDBHelper extends SQLiteOpenHelper {
     }
 
     //CardSetInfo 에서 즐겨찾기 유무 업데이트
-    public void UpdateInfoCardSetCard(String favoriteName, int cardBookId) {
+    public void UpdateInfoCardSetCard(String favoriteName, int cardSetId) {
         SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardBookId);
-    }
-
-    //즐겨찾기 목록 업데이트
-    public void UpdateInfoFavoriteList(int setAwake, int setActivation, String whereName) {
-        SQLiteDatabase updateColumnInfo = getWritableDatabase();
-        updateColumnInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + ", activation = " + setActivation + " WHERE name = '" + whereName + "'");
-    }
-
-    //DED 에서 카드 값 변경시 즐겨찾기 리스트에서 세트 값만 변동
-    public void UpdateInfoFavoriteList(int setAwake, String whereName) {
-        SQLiteDatabase updateColumnInfo = getWritableDatabase();
-        //cardbook name 값으로 파악하고 해당 카드의 획득 유무 수정.
-        updateColumnInfo.execSQL("UPDATE " + FAVORITE_CARD_SET_TABLE_NAME + " SET awake = " + setAwake + " WHERE name = '" + whereName + "'");
+        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_SET + " SET favorite = '" + favoriteName + "' WHERE id = " + cardSetId);
     }
 
     @SuppressLint("Range")
@@ -217,7 +226,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id" , null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -228,7 +237,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 String acquisition_info = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_ACQUISITION_INFO));
                 String grade = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_GRADE));
                 int getCard = cursor.getInt((cursor.getColumnIndex(CARD_COLUMN_CHECK)));
-                String imgPath = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_IMGPATH));
+                String imgPath = cursor.getString(cursor.getColumnIndex(CARD_COLUMN_IMG_PATH));
 
                 CardInfo cardinfo = new CardInfo();
                 cardinfo.setId(id);
@@ -255,7 +264,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardBookInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id" , null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -304,7 +313,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<ExtraDmgInfo> getExtraDmgInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id" , null);
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
@@ -353,7 +362,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardSetInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id" , null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -407,28 +416,6 @@ public class CardDBHelper extends SQLiteOpenHelper {
 
         return getInfo;
 
-    }
-
-    @SuppressLint("Range")
-    public ArrayList<FavoriteCardSetInfo> getFavoriteCardSetInfo() {     //모든카드 리스트 가져오기
-        ArrayList<FavoriteCardSetInfo> getInfo = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + FAVORITE_CARD_SET_TABLE_NAME + " ORDER BY name", null);
-        if (cursor.getCount() != 0) {
-            //데이터가 조회된 경우 수행
-            while (cursor.moveToNext()) {
-                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                int awake = cursor.getInt((cursor.getColumnIndex(FAVORITE_CARD_SET_COLUMN_AWAKE)));
-                FavoriteCardSetInfo cardInfo = new FavoriteCardSetInfo();
-                cardInfo.setName(name);
-                cardInfo.setAwake(awake);
-                getInfo.add(cardInfo);
-            }
-        }
-        cursor.close();
-
-        return getInfo;
     }
 
 

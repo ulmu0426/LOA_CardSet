@@ -347,6 +347,47 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
         return getCardAwake(getCard9());
     }
 
+    //X번 카드 보유 수
+    public int getNumCard0() {
+        return getCardNum(getCard0());
+    }
+
+    public int getNumCard1() {
+        return getCardNum(getCard1());
+    }
+
+    public int getNumCard2() {
+        return getCardNum(getCard2());
+    }
+
+    public int getNumCard3() {
+        return getCardNum(getCard3());
+    }
+
+    public int getNumCard4() {
+        return getCardNum(getCard4());
+    }
+
+    public int getNumCard5() {
+        return getCardNum(getCard5());
+    }
+
+    public int getNumCard6() {
+        return getCardNum(getCard6());
+    }
+
+    public int getNumCard7() {
+        return getCardNum(getCard7());
+    }
+
+    public int getNumCard8() {
+        return getCardNum(getCard8());
+    }
+
+    public int getNumCard9() {
+        return getCardNum(getCard9());
+    }
+
     //이름순 정렬을 위한 메소드
     @Override
     public int compareTo(ExtraDmgInfo o) {
@@ -396,6 +437,14 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
         for (int i = 0; i < cardInfo.size(); i++) {
             if (cardInfo.get(i).getName().equals(cardX))
                 return cardInfo.get(i).getAwake();
+        }
+        return 0;
+    }
+
+    private int getCardNum(String cardX) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardX))
+                return cardInfo.get(i).getNum();
         }
         return 0;
     }

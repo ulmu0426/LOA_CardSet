@@ -376,6 +376,7 @@ public class SettingCard extends AppCompatActivity {
         }
         haveStatUpdate();
         ((MainPage) MainPage.mainContext).setExtraDmgList();
+        ((MainPage) MainPage.mainContext).favoriteAdapter.notifyDataSetChanged();
         finish();
     }
 

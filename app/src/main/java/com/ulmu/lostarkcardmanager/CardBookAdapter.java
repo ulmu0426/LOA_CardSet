@@ -40,18 +40,14 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     private ArrayList<CardBookInfo> baseFilteredCardBook;   //완성되지 않은 카드도감 목록
 
-    public CardBookAdapter(ArrayList<CardBookInfo> cardBookInfo) {
-        this.cardBookInfo = cardBookInfo;
-    }
-
     public CardBookAdapter(Context context, CardBookPage cardBookPage) {
+        cardDBHelper = new CardDBHelper(context);
         this.cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
         this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.context = context;
-        cardDBHelper = new CardDBHelper(context);
-        filterCardBook = ((MainPage) MainPage.mainContext).cardBookInfo;
+        this.filterCardBook = ((MainPage) MainPage.mainContext).cardBookInfo;
         this.cardBookPage = cardBookPage;
-        this.baseFilteredCardBook = new ArrayList<CardBookInfo>();
+        this.baseFilteredCardBook = new ArrayList<>();
         setFilteredCardBook();
         haveStatUpdate(cardBookInfo);
     }

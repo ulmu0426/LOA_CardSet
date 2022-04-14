@@ -31,7 +31,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
     private ArrayList<CardSetInfo> cardSetInfo;
     private ArrayList<CardBookInfo> cardBookInfo;
     private FavoriteAdapter favoriteAdapter;
-    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;
+    private ArrayList<CardSetInfo> favoriteCardSetInfo;
 
     private Context context;
     private ArrayList<CardInfo> cardInfo;
@@ -382,8 +382,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         for (int i = 0; i < cardSetInfo.size(); i++) {
             for (int j = 0; j < favoriteCardSetInfo.size(); j++) {
                 if (favoriteCardSetInfo.get(j).getName().equals(cardSetInfo.get(i).getName())) {
-                    cardDBHelper.UpdateInfoFavoriteList(cardSetInfo.get(i).getHaveAwake(), favoriteCardSetInfo.get(j).getName());
-                    favoriteAdapter.setAwake(favoriteCardSetInfo.get(j).getName(), cardSetInfo.get(i).getHaveAwake());
+                    favoriteAdapter.notifyDataSetChanged();
                 }
             }
         }

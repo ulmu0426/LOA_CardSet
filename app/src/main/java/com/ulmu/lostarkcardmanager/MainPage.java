@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 public class MainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
     protected ArrayList<CardInfo> cardInfo;         //카드목록
-    protected ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;   //즐겨찾기 목록
+    protected ArrayList<CardSetInfo> favoriteCardSetInfo;   //즐겨찾기 목록
     protected ArrayList<CardBookInfo> cardBookInfo; //카드 도감 목록
     protected ArrayList<CardSetInfo> cardSetInfo;   //카드 세트 목록
     protected ArrayList<ExtraDmgInfo> beastExtraDmgInfo; //야추피 목록
@@ -100,7 +99,6 @@ public class MainPage extends AppCompatActivity {
         cardInfo = cardDBHelper.getCardInfo_All();
         //카드 세트, 즐겨찾기 카드세트, 카드 도감 DB 정보 ArrayList 전달
         cardSetInfo = cardDBHelper.getCardSetInfo();
-        favoriteCardSetInfo = cardDBHelper.getFavoriteCardSetInfo();
         cardBookInfo = cardDBHelper.getCardBookInfo();
 
         //추피 DB 정보 ArrayList 전달
@@ -317,16 +315,12 @@ public class MainPage extends AppCompatActivity {
 
     //최초 실행되는 메소드 : cardSet 정보에서 즐겨찾기 기능 DB와 연동
     private void favoriteUpdate() {
+        favoriteCardSetInfo = new ArrayList<>();
         for (int i = 0; i < cardSetInfo.size(); i++) {
-            for (int j = 0; j < favoriteCardSetInfo.size(); j++) {
-                if (cardSetInfo.get(i).getName().equals(favoriteCardSetInfo.get(j).getName()) && cardSetInfo.get(i).getFavorite()) {
-                    Log.v("test", "cardSetInfo : favorite status : " + cardSetInfo.get(i).getName() + cardSetInfo.get(i).getFavorite());
-                    //각성도 정보 및 즐겨찾기 활성화 여부 업데이트
-                    favoriteCardSetInfo.get(j).setActivation(true); //즐겨찾기 활성화
-                    favoriteCardSetInfo.get(j).setAwake(cardSetInfo.get(i).getHaveAwake());
-                }
-
+            if(cardSetInfo.get(i).getFavorite()){
+                favoriteCardSetInfo.add(cardSetInfo.get(i));
             }
+
         }
     }
 

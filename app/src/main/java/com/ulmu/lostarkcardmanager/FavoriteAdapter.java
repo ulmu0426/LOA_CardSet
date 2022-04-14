@@ -11,22 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     public Context context;
     private ArrayList<CardInfo> cardInfo;
     private ArrayList<CardSetInfo> cardSetInfo;
-    private ArrayList<FavoriteCardSetInfo> favoriteCardSetInfo;         //즐겨찾기 리스트 원본
-    protected ArrayList<FavoriteCardSetInfo> activationFavoriteCardSet; //즐겨찾기 리스트 MainPage에 뿌릴 리스트
+    protected ArrayList<CardSetInfo> favoriteCardSet; //즐겨찾기 리스트 MainPage에 뿌릴 리스트
 
     public FavoriteAdapter(Context context) {
         this.context = context;
-        favoriteCardSetInfo = ((MainPage) MainPage.mainContext).favoriteCardSetInfo;
         cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         cardSetInfo = ((MainPage) MainPage.mainContext).cardSetInfo;
-        activationFavoriteCardSet = new ArrayList<>();
-        updateActivationFavoriteCardSet();
+        favoriteCardSet = new ArrayList<>();
+        updateFavoriteCardSet();
+        Collections.sort(favoriteCardSet);
     }
 
 
@@ -40,17 +40,17 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String cardSetName = cardSetMainImg(activationFavoriteCardSet.get(position).getName());
+        String cardSetName = cardSetMainImg(favoriteCardSet.get(position).getName());
 
         holder.imgFavoriteCardSet.setImageResource(getCardImg(cardSetName));
-        holder.txtFavoriteCardSetName.setText(activationFavoriteCardSet.get(position).getName());
-        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + activationFavoriteCardSet.get(position).getAwake());
+        holder.txtFavoriteCardSetName.setText(favoriteCardSet.get(position).getName());
+        holder.txtFavoriteCardSetAwake.setText("각성도 합계 : " + favoriteCardSet.get(position).getHaveAwake());
 
     }
 
     @Override
     public int getItemCount() {
-        return activationFavoriteCardSet.size();
+        return favoriteCardSet.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,52 +66,34 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
     }
 
-    // MainPage에 뿌릴 즐겨찾기 list update
-    public void updateActivationFavoriteCardSet() {
-        activationFavoriteCardSet.clear();
-        for (int i = 0; i < favoriteCardSetInfo.size(); i++) {
-            if (favoriteCardSetInfo.get(i).getActivation()) {
-                FavoriteCardSetInfo favorite = favoriteCardSetInfo.get(i);
-                activationFavoriteCardSet.add(favorite);
+    // 실행시 최초 MainPage에 뿌릴 즐겨찾기 list update
+    public void updateFavoriteCardSet() {
+        favoriteCardSet.clear();
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getFavorite()) {
+                CardSetInfo favorite = cardSetInfo.get(i);
+                favoriteCardSet.add(favorite);
             }
         }
         notifyDataSetChanged();
     }
 
-    //즐겨찾기 해제 함수
-    public void removeItem(FavoriteCardSetInfo item) {
+    //즐겨찾기 해제
+    public void removeItem(CardSetInfo item) {
         int position = 0;
-        for (int i = 0; i < activationFavoriteCardSet.size(); i++) {
-            if (activationFavoriteCardSet.get(i).getName().equals(item.getName())) {
-                activationFavoriteCardSet.remove(i);
+        for (int i = 0; i < favoriteCardSet.size(); i++) {
+            if (favoriteCardSet.get(i).getName().equals(item.getName())) {
+                favoriteCardSet.remove(i);
                 position = i;
             }
         }
         notifyItemRemoved(position);
     }
 
-
-    //CardSet에서 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
-    public void setAwake(String awakeSetName, int changeAwake) {
-        for (int i = 0; i < activationFavoriteCardSet.size(); i++) {
-            if (activationFavoriteCardSet.get(i).getName().equals(awakeSetName)) {
-                activationFavoriteCardSet.get(i).setAwake(changeAwake);
-                break;
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    //DED에서 FavoriteList의 Awake값 변경시 즉시 메인 페이지에서 Awake 값이 바로 변경되도록 하는 메소드
-    public void setAwake(ArrayList<CardSetInfo> awakeSetName) {
-        for (int i = 0; i < awakeSetName.size(); i++) {
-            for (int j = 0; j < activationFavoriteCardSet.size(); j++) {
-                if (activationFavoriteCardSet.get(j).getName().equals(awakeSetName.get(i).getName())) {
-                    activationFavoriteCardSet.get(j).setAwake(awakeSetName.get(i).getHaveAwake());
-                    break;
-                }
-            }
-        }
+    //즐겨찾기 추가
+    public void addItem(CardSetInfo item) {
+        favoriteCardSet.add(item);
+        Collections.sort(favoriteCardSet);
         notifyDataSetChanged();
     }
 
@@ -124,12 +106,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 break;
             }
         }
-        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+        int imageResource = context.getResources().getIdentifier(name, "drawable" , context.getPackageName());
 
         return imageResource;
     }
 
-    //
     private String cardSetMainImg(String cardSetName) {
         String mainImgName = "";
         for (int i = 0; i < cardSetInfo.size(); i++) {

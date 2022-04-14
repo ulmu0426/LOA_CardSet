@@ -168,7 +168,7 @@ public class CardBookPage extends AppCompatActivity {
 
         });
 
-        cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
+
 
     }
 
@@ -180,9 +180,10 @@ public class CardBookPage extends AppCompatActivity {
 
             return;
         }
-        haveStatUpdate(cardBookInfo);
-        setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
+        haveStatUpdate();
         ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
+        ((MainPage) MainPage.mainContext).setExtraDmgList();
+        ((MainPage) MainPage.mainContext).favoriteAdapter.notifyDataSetChanged();
         finish();
     }
 
@@ -195,7 +196,8 @@ public class CardBookPage extends AppCompatActivity {
     }
 
     //스텟, 도감 달성 개수 업데이트 메소드
-    private void haveStatUpdate(ArrayList<CardBookInfo> cardBookInfo) {
+    private void haveStatUpdate() {
+        cardBookInfo = ((MainPage) MainPage.mainContext).cardBookInfo;
         haveStat = new int[]{0, 0, 0};
         haveStatCardBook = new int[]{0, 0, 0};
         haveStatCardBookCount = new int[]{0, 0, 0};
@@ -212,7 +214,7 @@ public class CardBookPage extends AppCompatActivity {
         }
     }
 
-    // 현재 도감 완성 현황 및 스탯 증가치 현황
+    // 현재 도감 완성 현황 및 스탯 증가치 현황(어뎁터에서 사용)
     public void setStatAndStatBook(int[] stat, int[] statBookComplete, int[] statBookAll) {
         txtBtnCritical.setText(CRITICAL + stat[0]);
         txtBtnSpeciality.setText(SPECIALITY + stat[1]);

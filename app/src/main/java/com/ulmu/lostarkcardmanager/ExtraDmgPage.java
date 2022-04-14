@@ -43,6 +43,8 @@ public class ExtraDmgPage extends AppCompatActivity {
     private boolean checkCompleteness = false;
     private boolean checkFastCompleteness = false;
 
+    private FavoriteAdapter favoriteAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,6 +166,7 @@ public class ExtraDmgPage extends AppCompatActivity {
             return;
         }
         ((MainPage) MainPage.mainContext).setExtraDmgList();
+        ((MainPage) MainPage.mainContext).favoriteAdapter.notifyDataSetChanged();
         finish();
     }
 
@@ -177,6 +180,7 @@ public class ExtraDmgPage extends AppCompatActivity {
         imgSearchExtraDmg = findViewById(R.id.imgSearchExtraDmg);
         editSearchXED = findViewById(R.id.editSearchXED);
         txtXExtraDmg.setText(EDName + " 추가 피해");
+        favoriteAdapter = ((MainPage)MainPage.mainContext).favoriteAdapter;
     }
 
     public boolean completeChecked() {
