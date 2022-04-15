@@ -288,6 +288,35 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         return getCardAwake(getCard6());
     }
 
+    //X번 카드 보유수
+    public int getNumCard0() {
+        return getCardNum(getCard0());
+    }
+
+    public int getNumCard1() {
+        return getCardNum(getCard1());
+    }
+
+    public int getNumCard2() {
+        return getCardNum(getCard2());
+    }
+
+    public int getNumCard3() {
+        return getCardNum(getCard3());
+    }
+
+    public int getNumCard4() {
+        return getCardNum(getCard4());
+    }
+
+    public int getNumCard5() {
+        return getCardNum(getCard5());
+    }
+
+    public int getNumCard6() {
+        return getCardNum(getCard6());
+    }
+
     //즐겨찾기 유무
     public boolean getFavorite() {
         return favorite;
@@ -349,6 +378,14 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         for (int i = 0; i < cardInfo.size(); i++) {
             if (cardInfo.get(i).getName().equals(cardX))
                 return cardInfo.get(i).getAwake();
+        }
+        return 0;
+    }
+
+    private int getCardNum(String cardX) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardX))
+                return cardInfo.get(i).getNum();
         }
         return 0;
     }

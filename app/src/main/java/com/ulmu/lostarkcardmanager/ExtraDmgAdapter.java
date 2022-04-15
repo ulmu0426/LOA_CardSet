@@ -134,112 +134,112 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
         holder.cvExtraDmgBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialogDEDDetail = new Dialog(context);
-                dialogDEDDetail.setContentView(R.layout.extra_dmg_detail);
-                WindowManager.LayoutParams params = dialogDEDDetail.getWindow().getAttributes();
+                Dialog dialogXEDDetail = new Dialog(context);
+                dialogXEDDetail.setContentView(R.layout.extra_dmg_detail);
+                WindowManager.LayoutParams params = dialogXEDDetail.getWindow().getAttributes();
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
                 params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                dialogDEDDetail.getWindow().setAttributes((WindowManager.LayoutParams) params);
+                dialogXEDDetail.getWindow().setAttributes((WindowManager.LayoutParams) params);
                 int pos = positionGet;
 
-                TextView txtDEDCardBookName = dialogDEDDetail.findViewById(R.id.txtDEDCardBookName);
-                TextView txtDED_AwakeValue = dialogDEDDetail.findViewById(R.id.txtDED_AwakeValue);
-                TextView txtDED_NextStep = dialogDEDDetail.findViewById(R.id.txtDED_NextStep);
-                txtDEDCardBookName.setText(filterXED.get(pos).getName());
-                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
-                nextDED(txtDED_NextStep, filterXED.get(pos));
+                TextView txtXEDCardBookName = dialogXEDDetail.findViewById(R.id.txtXEDCardBookName);
+                TextView txtXED_AwakeValue = dialogXEDDetail.findViewById(R.id.txtXED_AwakeValue);
+                TextView txtXED_NextStep = dialogXEDDetail.findViewById(R.id.txtXED_NextStep);
+                txtXEDCardBookName.setText(filterXED.get(pos).getName());
+                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                nextXED(txtXED_NextStep, filterXED.get(pos));
 
-                ImageView imgDED_Detail_Card0 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card0);
-                ImageView imgDED_Detail_Card1 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card1);
-                ImageView imgDED_Detail_Card2 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card2);
-                ImageView imgDED_Detail_Card3 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card3);
-                ImageView imgDED_Detail_Card4 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card4);
-                ImageView imgDED_Detail_Card5 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card5);
-                ImageView imgDED_Detail_Card6 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card6);
-                ImageView imgDED_Detail_Card7 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card7);
-                ImageView imgDED_Detail_Card8 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card8);
-                ImageView imgDED_Detail_Card9 = dialogDEDDetail.findViewById(R.id.imgDED_Detail_Card9);
+                ImageView imgXED_Detail_Card0 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card0);
+                ImageView imgXED_Detail_Card1 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card1);
+                ImageView imgXED_Detail_Card2 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card2);
+                ImageView imgXED_Detail_Card3 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card3);
+                ImageView imgXED_Detail_Card4 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card4);
+                ImageView imgXED_Detail_Card5 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card5);
+                ImageView imgXED_Detail_Card6 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card6);
+                ImageView imgXED_Detail_Card7 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card7);
+                ImageView imgXED_Detail_Card8 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card8);
+                ImageView imgXED_Detail_Card9 = dialogXEDDetail.findViewById(R.id.imgXED_Detail_Card9);
 
-                //카드 이미지 세팅 - 추후 변경 예정
-                imgDED_Detail_Card0.setImageResource(getCardImg(filterXED.get(pos).getCard0()));
-                imgDED_Detail_Card1.setImageResource(getCardImg(filterXED.get(pos).getCard1()));
-                imgDED_Detail_Card2.setImageResource(getCardImg(filterXED.get(pos).getCard2()));
-                imgDED_Detail_Card3.setImageResource(getCardImg(filterXED.get(pos).getCard3()));
-                imgDED_Detail_Card4.setImageResource(getCardImg(filterXED.get(pos).getCard4()));
-                imgDED_Detail_Card5.setImageResource(getCardImg(filterXED.get(pos).getCard5()));
-                imgDED_Detail_Card6.setImageResource(getCardImg(filterXED.get(pos).getCard6()));
-                imgDED_Detail_Card7.setImageResource(getCardImg(filterXED.get(pos).getCard7()));
-                imgDED_Detail_Card8.setImageResource(getCardImg(filterXED.get(pos).getCard8()));
-                imgDED_Detail_Card9.setImageResource(getCardImg(filterXED.get(pos).getCard9()));
+                //카드 이미지 세팅
+                imgXED_Detail_Card0.setImageResource(getCardImg(filterXED.get(pos).getCard0()));
+                imgXED_Detail_Card1.setImageResource(getCardImg(filterXED.get(pos).getCard1()));
+                imgXED_Detail_Card2.setImageResource(getCardImg(filterXED.get(pos).getCard2()));
+                imgXED_Detail_Card3.setImageResource(getCardImg(filterXED.get(pos).getCard3()));
+                imgXED_Detail_Card4.setImageResource(getCardImg(filterXED.get(pos).getCard4()));
+                imgXED_Detail_Card5.setImageResource(getCardImg(filterXED.get(pos).getCard5()));
+                imgXED_Detail_Card6.setImageResource(getCardImg(filterXED.get(pos).getCard6()));
+                imgXED_Detail_Card7.setImageResource(getCardImg(filterXED.get(pos).getCard7()));
+                imgXED_Detail_Card8.setImageResource(getCardImg(filterXED.get(pos).getCard8()));
+                imgXED_Detail_Card9.setImageResource(getCardImg(filterXED.get(pos).getCard9()));
 
                 //이미지 기본 색상 : 획득카드가 아니면 흑백
-                imgDefaultColor(imgDED_Detail_Card0, filter, filterXED.get(pos).isCheckCard0(), filterXED.get(pos).getCard0());
-                imgDefaultColor(imgDED_Detail_Card1, filter, filterXED.get(pos).isCheckCard1(), filterXED.get(pos).getCard1());
-                imgDefaultColor(imgDED_Detail_Card2, filter, filterXED.get(pos).isCheckCard2(), filterXED.get(pos).getCard2());
-                imgDefaultColor(imgDED_Detail_Card3, filter, filterXED.get(pos).isCheckCard3(), filterXED.get(pos).getCard3());
-                imgDefaultColor(imgDED_Detail_Card4, filter, filterXED.get(pos).isCheckCard4(), filterXED.get(pos).getCard4());
-                imgDefaultColor(imgDED_Detail_Card5, filter, filterXED.get(pos).isCheckCard5(), filterXED.get(pos).getCard5());
-                imgDefaultColor(imgDED_Detail_Card6, filter, filterXED.get(pos).isCheckCard6(), filterXED.get(pos).getCard6());
-                imgDefaultColor(imgDED_Detail_Card7, filter, filterXED.get(pos).isCheckCard7(), filterXED.get(pos).getCard7());
-                imgDefaultColor(imgDED_Detail_Card8, filter, filterXED.get(pos).isCheckCard8(), filterXED.get(pos).getCard8());
-                imgDefaultColor(imgDED_Detail_Card9, filter, filterXED.get(pos).isCheckCard9(), filterXED.get(pos).getCard9());
+                imgDefaultColor(imgXED_Detail_Card0, filter, filterXED.get(pos).isCheckCard0(), filterXED.get(pos).getCard0());
+                imgDefaultColor(imgXED_Detail_Card1, filter, filterXED.get(pos).isCheckCard1(), filterXED.get(pos).getCard1());
+                imgDefaultColor(imgXED_Detail_Card2, filter, filterXED.get(pos).isCheckCard2(), filterXED.get(pos).getCard2());
+                imgDefaultColor(imgXED_Detail_Card3, filter, filterXED.get(pos).isCheckCard3(), filterXED.get(pos).getCard3());
+                imgDefaultColor(imgXED_Detail_Card4, filter, filterXED.get(pos).isCheckCard4(), filterXED.get(pos).getCard4());
+                imgDefaultColor(imgXED_Detail_Card5, filter, filterXED.get(pos).isCheckCard5(), filterXED.get(pos).getCard5());
+                imgDefaultColor(imgXED_Detail_Card6, filter, filterXED.get(pos).isCheckCard6(), filterXED.get(pos).getCard6());
+                imgDefaultColor(imgXED_Detail_Card7, filter, filterXED.get(pos).isCheckCard7(), filterXED.get(pos).getCard7());
+                imgDefaultColor(imgXED_Detail_Card8, filter, filterXED.get(pos).isCheckCard8(), filterXED.get(pos).getCard8());
+                imgDefaultColor(imgXED_Detail_Card9, filter, filterXED.get(pos).isCheckCard9(), filterXED.get(pos).getCard9());
 
                 //텍스트 연결
                 //카드 이름
-                TextView txtDED_Detail_Card0 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card0);
-                TextView txtDED_Detail_Card1 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card1);
-                TextView txtDED_Detail_Card2 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card2);
-                TextView txtDED_Detail_Card3 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card3);
-                TextView txtDED_Detail_Card4 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card4);
-                TextView txtDED_Detail_Card5 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card5);
-                TextView txtDED_Detail_Card6 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card6);
-                TextView txtDED_Detail_Card7 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card7);
-                TextView txtDED_Detail_Card8 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card8);
-                TextView txtDED_Detail_Card9 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_Card9);
+                TextView txtXED_Detail_Card0 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card0);
+                TextView txtXED_Detail_Card1 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card1);
+                TextView txtXED_Detail_Card2 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card2);
+                TextView txtXED_Detail_Card3 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card3);
+                TextView txtXED_Detail_Card4 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card4);
+                TextView txtXED_Detail_Card5 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card5);
+                TextView txtXED_Detail_Card6 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card6);
+                TextView txtXED_Detail_Card7 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card7);
+                TextView txtXED_Detail_Card8 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card8);
+                TextView txtXED_Detail_Card9 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_Card9);
                 //각성도
-                TextView txtDED_Detail_CardAwakeHaveCard0 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard0);
-                TextView txtDED_Detail_CardAwakeHaveCard1 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard1);
-                TextView txtDED_Detail_CardAwakeHaveCard2 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard2);
-                TextView txtDED_Detail_CardAwakeHaveCard3 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard3);
-                TextView txtDED_Detail_CardAwakeHaveCard4 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard4);
-                TextView txtDED_Detail_CardAwakeHaveCard5 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard5);
-                TextView txtDED_Detail_CardAwakeHaveCard6 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard6);
-                TextView txtDED_Detail_CardAwakeHaveCard7 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard7);
-                TextView txtDED_Detail_CardAwakeHaveCard8 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard8);
-                TextView txtDED_Detail_CardAwakeHaveCard9 = dialogDEDDetail.findViewById(R.id.txtDED_Detail_CardAwakeHaveCard9);
+                TextView txtXED_Detail_CardAwakeHaveCard0 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard0);
+                TextView txtXED_Detail_CardAwakeHaveCard1 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard1);
+                TextView txtXED_Detail_CardAwakeHaveCard2 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard2);
+                TextView txtXED_Detail_CardAwakeHaveCard3 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard3);
+                TextView txtXED_Detail_CardAwakeHaveCard4 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard4);
+                TextView txtXED_Detail_CardAwakeHaveCard5 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard5);
+                TextView txtXED_Detail_CardAwakeHaveCard6 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard6);
+                TextView txtXED_Detail_CardAwakeHaveCard7 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard7);
+                TextView txtXED_Detail_CardAwakeHaveCard8 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard8);
+                TextView txtXED_Detail_CardAwakeHaveCard9 = dialogXEDDetail.findViewById(R.id.txtXED_Detail_CardAwakeHaveCard9);
 
                 //카드 이름 세팅
-                txtDED_Detail_Card0.setText(filterXED.get(pos).getCard0());
-                txtDED_Detail_Card1.setText(filterXED.get(pos).getCard1());
-                txtDED_Detail_Card2.setText(filterXED.get(pos).getCard2());
-                txtDED_Detail_Card3.setText(filterXED.get(pos).getCard3());
-                txtDED_Detail_Card4.setText(filterXED.get(pos).getCard4());
-                txtDED_Detail_Card5.setText(filterXED.get(pos).getCard5());
-                txtDED_Detail_Card6.setText(filterXED.get(pos).getCard6());
-                txtDED_Detail_Card7.setText(filterXED.get(pos).getCard7());
-                txtDED_Detail_Card8.setText(filterXED.get(pos).getCard8());
-                txtDED_Detail_Card9.setText(filterXED.get(pos).getCard9());
+                txtXED_Detail_Card0.setText(filterXED.get(pos).getCard0());
+                txtXED_Detail_Card1.setText(filterXED.get(pos).getCard1());
+                txtXED_Detail_Card2.setText(filterXED.get(pos).getCard2());
+                txtXED_Detail_Card3.setText(filterXED.get(pos).getCard3());
+                txtXED_Detail_Card4.setText(filterXED.get(pos).getCard4());
+                txtXED_Detail_Card5.setText(filterXED.get(pos).getCard5());
+                txtXED_Detail_Card6.setText(filterXED.get(pos).getCard6());
+                txtXED_Detail_Card7.setText(filterXED.get(pos).getCard7());
+                txtXED_Detail_Card8.setText(filterXED.get(pos).getCard8());
+                txtXED_Detail_Card9.setText(filterXED.get(pos).getCard9());
                 //카드 각성, 보유 세팅
-                txtDED_Detail_CardAwakeHaveCard0.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard0() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard0());
-                txtDED_Detail_CardAwakeHaveCard1.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard1() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard1());
-                txtDED_Detail_CardAwakeHaveCard2.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard2() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard2());
-                txtDED_Detail_CardAwakeHaveCard3.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard3() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard3());
-                txtDED_Detail_CardAwakeHaveCard4.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard4() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard4());
-                txtDED_Detail_CardAwakeHaveCard5.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard5() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard5());
-                txtDED_Detail_CardAwakeHaveCard6.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard6() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard6());
-                txtDED_Detail_CardAwakeHaveCard7.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard7() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard7());
-                txtDED_Detail_CardAwakeHaveCard8.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard8() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard8());
-                txtDED_Detail_CardAwakeHaveCard9.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard9() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard9());
+                txtXED_Detail_CardAwakeHaveCard0.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard0() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard0());
+                txtXED_Detail_CardAwakeHaveCard1.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard1() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard1());
+                txtXED_Detail_CardAwakeHaveCard2.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard2() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard2());
+                txtXED_Detail_CardAwakeHaveCard3.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard3() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard3());
+                txtXED_Detail_CardAwakeHaveCard4.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard4() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard4());
+                txtXED_Detail_CardAwakeHaveCard5.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard5() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard5());
+                txtXED_Detail_CardAwakeHaveCard6.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard6() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard6());
+                txtXED_Detail_CardAwakeHaveCard7.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard7() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard7());
+                txtXED_Detail_CardAwakeHaveCard8.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard8() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard8());
+                txtXED_Detail_CardAwakeHaveCard9.setText(XED_DIALOG_CARD_AWAKE + filterXED.get(pos).getAwakeCard9() + "\n" + XED_DIALOG_CARD_NUM + filterXED.get(pos).getNumCard9());
 
                 //없는 카드 안 보이게 - 카드 이미지, 카드 이름, 카드 각성도, 카드 보유 수
-                imgVisibility(filterXED.get(pos).getCard2(), imgDED_Detail_Card2, txtDED_Detail_Card2, txtDED_Detail_CardAwakeHaveCard2);
-                imgVisibility(filterXED.get(pos).getCard3(), imgDED_Detail_Card3, txtDED_Detail_Card3, txtDED_Detail_CardAwakeHaveCard3);
-                imgVisibility(filterXED.get(pos).getCard4(), imgDED_Detail_Card4, txtDED_Detail_Card4, txtDED_Detail_CardAwakeHaveCard4);
-                imgVisibility(filterXED.get(pos).getCard5(), imgDED_Detail_Card5, txtDED_Detail_Card5, txtDED_Detail_CardAwakeHaveCard5);
-                imgVisibility(filterXED.get(pos).getCard6(), imgDED_Detail_Card6, txtDED_Detail_Card6, txtDED_Detail_CardAwakeHaveCard6);
-                imgVisibility(filterXED.get(pos).getCard7(), imgDED_Detail_Card7, txtDED_Detail_Card7, txtDED_Detail_CardAwakeHaveCard7);
-                imgVisibility(filterXED.get(pos).getCard8(), imgDED_Detail_Card8, txtDED_Detail_Card8, txtDED_Detail_CardAwakeHaveCard8);
-                imgVisibility(filterXED.get(pos).getCard9(), imgDED_Detail_Card9, txtDED_Detail_Card9, txtDED_Detail_CardAwakeHaveCard9);
+                imgVisibility(filterXED.get(pos).getCard2(), imgXED_Detail_Card2, txtXED_Detail_Card2, txtXED_Detail_CardAwakeHaveCard2);
+                imgVisibility(filterXED.get(pos).getCard3(), imgXED_Detail_Card3, txtXED_Detail_Card3, txtXED_Detail_CardAwakeHaveCard3);
+                imgVisibility(filterXED.get(pos).getCard4(), imgXED_Detail_Card4, txtXED_Detail_Card4, txtXED_Detail_CardAwakeHaveCard4);
+                imgVisibility(filterXED.get(pos).getCard5(), imgXED_Detail_Card5, txtXED_Detail_Card5, txtXED_Detail_CardAwakeHaveCard5);
+                imgVisibility(filterXED.get(pos).getCard6(), imgXED_Detail_Card6, txtXED_Detail_Card6, txtXED_Detail_CardAwakeHaveCard6);
+                imgVisibility(filterXED.get(pos).getCard7(), imgXED_Detail_Card7, txtXED_Detail_Card7, txtXED_Detail_CardAwakeHaveCard7);
+                imgVisibility(filterXED.get(pos).getCard8(), imgXED_Detail_Card8, txtXED_Detail_Card8, txtXED_Detail_CardAwakeHaveCard8);
+                imgVisibility(filterXED.get(pos).getCard9(), imgXED_Detail_Card9, txtXED_Detail_Card9, txtXED_Detail_CardAwakeHaveCard9);
 
                 Dialog dialogChangeAwakeAndNum = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                 dialogChangeAwakeAndNum.setContentView(R.layout.awake_havecard_change);
@@ -256,7 +256,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                 Button btnOK = dialogChangeAwakeAndNum.findViewById(R.id.btnOK);
 
 
-                txtDED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard0());
@@ -287,8 +287,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setNum(number);
 
-                                txtDED_Detail_CardAwakeHaveCard0.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard0.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
                                 updateFavoriteCardSet(getCardSet(filterXED.get(pos).getCard0(), awake));
@@ -299,7 +299,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -320,7 +320,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard1());
@@ -349,8 +349,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard1.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard1.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard1(), awake));
@@ -362,7 +362,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -383,7 +383,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard2());
@@ -411,8 +411,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard2.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard2.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 if (filterXED.get(pos).isCheckCard2() & awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setGetCard(true);
@@ -423,7 +423,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard2(), awake));
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -445,7 +445,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard3());
@@ -473,8 +473,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard3.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard3.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard3(), awake));
@@ -485,7 +485,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -507,7 +507,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard4());
@@ -535,8 +535,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard4.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard4.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard4(), awake));
@@ -547,7 +547,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -569,7 +569,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard5());
@@ -597,8 +597,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard5.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard5.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard5(), awake));
@@ -609,7 +609,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -631,7 +631,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard6());
@@ -659,8 +659,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard6.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard6.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard6(), awake));
@@ -671,7 +671,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -693,7 +693,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard7.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard7());
@@ -721,8 +721,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard7.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard7.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard7(), awake));
@@ -733,7 +733,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -754,7 +754,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard8.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard8());
@@ -782,8 +782,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard8.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard8.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 if (filterXED.get(pos).isCheckCard8() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setGetCard(true);
@@ -794,7 +794,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard8(), awake));
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -815,7 +815,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         });
                     }
                 });
-                txtDED_Detail_CardAwakeHaveCard9.setOnClickListener(new View.OnClickListener() {
+                txtXED_Detail_CardAwakeHaveCard9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         numberPickerAwake.setValue(filterXED.get(pos).getAwakeCard9());
@@ -844,8 +844,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setNum(number);
-                                txtDED_Detail_CardAwakeHaveCard9.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
-                                txtDED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
+                                txtXED_Detail_CardAwakeHaveCard9.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
+                                txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
 //                                updateAwakeFavoriteCardSetInfoAndDB(getCardSet(filterXED.get(pos).getCard9(), awake));
@@ -856,7 +856,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
-                                nextDED(txtDED_NextStep, filterXED.get(pos));
+                                nextXED(txtXED_NextStep, filterXED.get(pos));
 
                                 /*
                                 if (extraDmgPage.checkFastCompleteness()) {
@@ -879,7 +879,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                 });
 
 
-                imgDED_Detail_Card0.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card0.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -916,15 +916,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card0.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card0.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card0, filter, filterXED.get(pos).getCard0());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card0, filter, filterXED.get(pos).getCard0());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card0, filterXED.get(pos).getCard0());
+                            cardAwake(imgXED_Detail_Card0, filterXED.get(pos).getCard0());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -949,7 +949,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card1.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card1.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -986,15 +986,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card1.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card1, filter, filterXED.get(pos).getCard1());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card1, filter, filterXED.get(pos).getCard1());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card1, filterXED.get(pos).getCard1());
+                            cardAwake(imgXED_Detail_Card1, filterXED.get(pos).getCard1());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1020,7 +1020,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card2.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card2.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1057,15 +1057,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card2.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card2, filter, filterXED.get(pos).getCard2());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card2, filter, filterXED.get(pos).getCard2());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card2, filterXED.get(pos).getCard2());
+                            cardAwake(imgXED_Detail_Card2, filterXED.get(pos).getCard2());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1091,7 +1091,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card3.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card3.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1128,15 +1128,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card3.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card3, filter, filterXED.get(pos).getCard3());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card3, filter, filterXED.get(pos).getCard3());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card3, filterXED.get(pos).getCard3());
+                            cardAwake(imgXED_Detail_Card3, filterXED.get(pos).getCard3());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1162,7 +1162,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card4.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card4.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1199,15 +1199,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card4.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card4, filter, filterXED.get(pos).getCard4());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card4, filter, filterXED.get(pos).getCard4());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card4, filterXED.get(pos).getCard4());
+                            cardAwake(imgXED_Detail_Card4, filterXED.get(pos).getCard4());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1233,7 +1233,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card5.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card5.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1270,15 +1270,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card5.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card5, filter, filterXED.get(pos).getCard5());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card5, filter, filterXED.get(pos).getCard5());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card5, filterXED.get(pos).getCard5());
+                            cardAwake(imgXED_Detail_Card5, filterXED.get(pos).getCard5());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1304,7 +1304,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card6.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card6.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1341,15 +1341,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card6.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card6, filter, filterXED.get(pos).getCard6());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card6, filter, filterXED.get(pos).getCard6());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card6, filterXED.get(pos).getCard6());
+                            cardAwake(imgXED_Detail_Card6, filterXED.get(pos).getCard6());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1375,7 +1375,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card7.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card7.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1412,15 +1412,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card7.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card7, filter, filterXED.get(pos).getCard7());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card7, filter, filterXED.get(pos).getCard7());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard7());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card7, filterXED.get(pos).getCard7());
+                            cardAwake(imgXED_Detail_Card7, filterXED.get(pos).getCard7());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1446,7 +1446,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card8.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card8.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1483,15 +1483,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card8.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card8, filter, filterXED.get(pos).getCard8());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card8, filter, filterXED.get(pos).getCard8());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard8());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card8, filterXED.get(pos).getCard8());
+                            cardAwake(imgXED_Detail_Card8, filterXED.get(pos).getCard8());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1517,7 +1517,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                     }
                 });
 
-                imgDED_Detail_Card9.setOnLongClickListener(new View.OnLongClickListener() {
+                imgXED_Detail_Card9.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Dialog cardInfoDialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
@@ -1554,15 +1554,15 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         return false;
                     }
                 });
-                imgDED_Detail_Card9.setOnClickListener(new View.OnClickListener() {
+                imgXED_Detail_Card9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean cardCheck = imgGrayScale(imgDED_Detail_Card9, filter, filterXED.get(pos).getCard9());
+                        boolean cardCheck = imgGrayScale(imgXED_Detail_Card9, filter, filterXED.get(pos).getCard9());
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard9());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
                         if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getAwake() > 0) {
-                            cardAwake(imgDED_Detail_Card9, filterXED.get(pos).getCard9());
+                            cardAwake(imgXED_Detail_Card9, filterXED.get(pos).getCard9());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
 
@@ -1590,7 +1590,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                 });
 
 
-                dialogDEDDetail.show();
+                dialogXEDDetail.show();
 
             }
         });
@@ -1752,7 +1752,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
     }
 
     //다음 악추피 도달까지 남은 각성도 수
-    private void nextDED(TextView txtXED_NextStep, ExtraDmgInfo extraDmgInfo) {
+    private void nextXED(TextView txtXED_NextStep, ExtraDmgInfo extraDmgInfo) {
         if (extraDmgInfo.getAwakeSum0() > extraDmgInfo.getHaveAwake()) {
             txtXED_NextStep.setText("다음 활성도까지 : " + (extraDmgInfo.getAwakeSum0() - extraDmgInfo.getHaveAwake()) + " 남음");
         } else if (extraDmgInfo.getAwakeSum0() <= extraDmgInfo.getHaveAwake() && extraDmgInfo.getAwakeSum1() > extraDmgInfo.getHaveAwake()) {

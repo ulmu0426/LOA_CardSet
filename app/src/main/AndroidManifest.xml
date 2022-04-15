@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LostArkCardStatus">
         <activity
-            android:name="com.ulmu.lostarkcardmanager.LoadingActivity"
+            android:name=".LoadingActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -23,25 +23,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ulmu.lostarkcardmanager.CardSetPage"
+            android:name=".CardSetPage"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.ulmu.lostarkcardmanager.CardBookPage"
+            android:name=".CardBookPage"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.ulmu.lostarkcardmanager.DemonExtraDmgPage"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.ulmu.lostarkcardmanager.SettingCard"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.ulmu.lostarkcardmanager.MainPage"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.ulmu.lostarkcardmanager.GuidePage"
+            android:name=".SettingCard"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MainPage"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".GuidePage"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ExtraDmgPage"

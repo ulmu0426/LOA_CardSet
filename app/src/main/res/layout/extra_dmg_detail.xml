@@ -5,18 +5,18 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txtDEDCardBookName"
+        android:id="@+id/txtXEDCardBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="악추피 도감 이름"
+        android:text="추피 도감 이름"
         android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtDED_AwakeValue"
+        android:id="@+id/txtXED_AwakeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -26,14 +26,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtDED_NextStep"
+        android:id="@+id/txtXED_NextStep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginRight="20dp"
         android:text="다음 활성도까지 : 0 남음"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED_AwakeValue" />
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_AwakeValue" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDED_NextStep">
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_NextStep">
 
         <TableLayout
             android:id="@+id/tablelayoutDEDDetail"
@@ -62,7 +62,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card0"
+                        android:id="@+id/imgXED_Detail_Card0"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -79,7 +79,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card1"
+                        android:id="@+id/imgXED_Detail_Card1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -95,24 +95,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:padding="2dp"
-                        app:srcCompat="@drawable/card_common_alberto" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="2dp">
-
-                    <ImageView
-                        android:id="@+id/imgDED_Detail_Card3"
+                        android:id="@+id/imgXED_Detail_Card2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -129,7 +112,24 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card4"
+                        android:id="@+id/imgXED_Detail_Card3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/card_common_alberto" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgXED_Detail_Card4"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -145,35 +145,35 @@
                 android:layout_marginTop="5dp">
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card0"
+                    android:id="@+id/txtXED_Detail_Card0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card1"
+                    android:id="@+id/txtXED_Detail_Card1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card2"
+                    android:id="@+id/txtXED_Detail_Card2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card3"
+                    android:id="@+id/txtXED_Detail_Card3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card4"
+                    android:id="@+id/txtXED_Detail_Card4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
@@ -183,7 +183,7 @@
             <TableRow android:layout_marginTop="4dp">
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard0"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -191,7 +191,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard1"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -199,7 +199,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard2"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -207,7 +207,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard3"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -215,7 +215,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard4"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -235,7 +235,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card5"
+                        android:id="@+id/imgXED_Detail_Card5"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -251,7 +251,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card6"
+                        android:id="@+id/imgXED_Detail_Card6"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -267,7 +267,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card7"
+                        android:id="@+id/imgXED_Detail_Card7"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -283,7 +283,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card8"
+                        android:id="@+id/imgXED_Detail_Card8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -299,7 +299,7 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/imgDED_Detail_Card9"
+                        android:id="@+id/imgXED_Detail_Card9"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
@@ -312,35 +312,35 @@
             <TableRow android:layout_marginTop="5dp">
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card5"
+                    android:id="@+id/txtXED_Detail_Card5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card6"
+                    android:id="@+id/txtXED_Detail_Card6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card7"
+                    android:id="@+id/txtXED_Detail_Card7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card8"
+                    android:id="@+id/txtXED_Detail_Card8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_Card9"
+                    android:id="@+id/txtXED_Detail_Card9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="카드 이름"
@@ -350,7 +350,7 @@
             <TableRow android:layout_marginTop="4dp">
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard5"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -358,7 +358,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard6"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -366,7 +366,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard7"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -374,7 +374,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard8"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
@@ -382,7 +382,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/txtDED_Detail_CardAwakeHaveCard9"
+                    android:id="@+id/txtXED_Detail_CardAwakeHaveCard9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"

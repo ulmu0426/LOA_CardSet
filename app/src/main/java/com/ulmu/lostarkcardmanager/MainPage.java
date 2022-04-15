@@ -58,6 +58,7 @@ public class MainPage extends AppCompatActivity {
     public static Context mainContext;
 
     private Button btnGuide;
+    private Button txtSeGuBitch;
     protected SharedPreferences preferences;        //최초 실행시 가이드 페이지 호출을 위한 변수
 
     private static final String TABLE_DEMON_EXTRA_DMG = "demon_extra_dmg";  //악추피 테이블 명
@@ -264,6 +265,8 @@ public class MainPage extends AppCompatActivity {
         txtBtnCardBook_Draw = (TextView) findViewById(R.id.txtBtnCardBook_Draw);
         txtBtnDED_Draw = (TextView) findViewById(R.id.txtBtnDED_Draw);
         txtBtnBED_Draw = (TextView) findViewById(R.id.txtBtnBED_Draw);
+
+        txtSeGuBitch = findViewById(R.id.txtSeGuBitch);
     }
 
     //뒤로가기 2회 터치시 종료(2.5초 안에 두번 눌러야 함)
@@ -317,7 +320,7 @@ public class MainPage extends AppCompatActivity {
     private void favoriteUpdate() {
         favoriteCardSetInfo = new ArrayList<>();
         for (int i = 0; i < cardSetInfo.size(); i++) {
-            if(cardSetInfo.get(i).getFavorite()){
+            if (cardSetInfo.get(i).getFavorite()) {
                 favoriteCardSetInfo.add(cardSetInfo.get(i));
             }
 
@@ -362,4 +365,50 @@ public class MainPage extends AppCompatActivity {
         }
 
     };
+
+    private CardSetInfo getSeGuBit() {
+        CardSetInfo cardSet = new CardSetInfo();
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛"))
+                cardSet = cardSetInfo.get(i);
+        }
+
+        return cardSet;
+    }
+
+    private int[] needCardInfo(CardSetInfo cardSetSEGUBIT) {
+
+        int[] cardAwake = {0, 0, 0, 0, 0, 0, 0};
+        int[] cardNum = {0, 0, 0, 0, 0, 0, 0};
+        int[] needCardNum = {0, 0, 0, 0, 0, 0, 0};
+        int goal = 18;
+        if (cardSetSEGUBIT.getHaveAwake() >= 18)
+            goal = 30;
+        cardAwake[0] = cardSetSEGUBIT.getAwakeCard0();
+        cardAwake[1] = cardSetSEGUBIT.getAwakeCard1();
+        cardAwake[2] = cardSetSEGUBIT.getAwakeCard2();
+        cardAwake[3] = cardSetSEGUBIT.getAwakeCard3();
+        cardAwake[4] = cardSetSEGUBIT.getAwakeCard4();
+        cardAwake[5] = cardSetSEGUBIT.getAwakeCard5();
+        cardAwake[6] = cardSetSEGUBIT.getAwakeCard6();
+
+        cardNum[0] = cardSetSEGUBIT.getNumCard0();
+        cardNum[1] = cardSetSEGUBIT.getNumCard1();
+        cardNum[2] = cardSetSEGUBIT.getNumCard2();
+        cardNum[3] = cardSetSEGUBIT.getNumCard3();
+        cardNum[4] = cardSetSEGUBIT.getNumCard4();
+        cardNum[5] = cardSetSEGUBIT.getNumCard5();
+        cardNum[6] = cardSetSEGUBIT.getNumCard6();
+
+        int minAwakeIndex = 0;
+        int minAwake = 6;
+        for (int i = 0; i < cardAwake.length; i++) {
+            if(minAwake < cardAwake[i])
+                minAwake = cardAwake[i];
+        }
+
+
+        return cardAwake;
+    }
+
 }

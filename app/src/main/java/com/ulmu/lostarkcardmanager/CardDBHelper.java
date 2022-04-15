@@ -3,6 +3,7 @@ package com.ulmu.lostarkcardmanager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     //assets 폴더
     private static String DB_PATH = "";
@@ -92,7 +93,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
             try {
                 copyDataBase();
             } catch (IOException mIOException) {
-                Log.v("test" , "Error발생");
+                Log.v("test", "Error발생");
                 throw new Error("ErrorCopyingDataBase");
             }
         }
@@ -146,10 +147,15 @@ public class CardDBHelper extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET cardListSum = 6, card3 = '에스더 루테란', card4 = '아비시나', card5 ='마법사 로나운' WHERE id = 20");
         }
         if (oldVersion < 6) {
-            db.execSQL("CREATE TABLE " + TABLE_BEAST_EXTRA_DMG +
-                    " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT, card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT" +
-                    ",dmg_p0 REAL,dmg_p1 REAL,dmg_p2 REAL)");
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST, null);
+            try {
+                db.execSQL("CREATE TABLE " + TABLE_BEAST_EXTRA_DMG +
+                        " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT, card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT" +
+                        ",dmg_p0 REAL,dmg_p1 REAL,dmg_p2 REAL)");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_BEAST_EXTRA_DMG, null);
+
             if (cursor.getCount() == 0) {
                 db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(0,'격돌하는 마력','아브렐슈드','아제나&이난나','','','','','','','','',0.1,0.1,0.1)");
                 db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(1,'누나만 믿어!','사샤','검은이빨','위대한 성 네리아','아제나&이난나','','','','','','',0.1,0.1,0.1)");
@@ -226,7 +232,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -264,7 +270,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardBookInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
@@ -313,7 +319,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<ExtraDmgInfo> getExtraDmgInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
@@ -362,7 +368,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
         ArrayList<CardSetInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
             //데이터가 조회된 경우 수행
             while (cursor.moveToNext()) {
