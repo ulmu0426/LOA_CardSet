@@ -22,7 +22,7 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
     private int haveCard;   //현재 수집한 카드 수
 
     public CardBookInfo() {
-        this.cardInfo = ((MainPage)MainPage.mainContext).cardInfo;
+        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
         this.haveCard = 0;
     }
 
@@ -211,7 +211,88 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
     public boolean isCheckCard9() {
         return getCardCheck(getCard9());
     }
-    
+
+    //X번 카드 각성도
+    public int getCardAwake0() {
+        return getCardAwake(getCard0());
+    }
+
+    public int getCardAwake1() {
+        return getCardAwake(getCard1());
+    }
+
+    public int getCardAwake2() {
+        return getCardAwake(getCard2());
+    }
+
+    public int getCardAwake3() {
+        return getCardAwake(getCard3());
+    }
+
+    public int getCardAwake4() {
+        return getCardAwake(getCard4());
+    }
+
+    public int getCardAwake5() {
+        return getCardAwake(getCard5());
+    }
+
+    public int getCardAwake6() {
+        return getCardAwake(getCard6());
+    }
+
+    public int getCardAwake7() {
+        return getCardAwake(getCard7());
+    }
+
+    public int getCardAwake8() {
+        return getCardAwake(getCard8());
+    }
+
+    public int getCardAwake9() {
+        return getCardAwake(getCard9());
+    }
+
+    //X번 카드 보유 수
+    public int getCardNum0() {
+        return getCardNum(getCard0());
+    }
+
+    public int getCardNum1() {
+        return getCardNum(getCard1());
+    }
+
+    public int getCardNum2() {
+        return getCardNum(getCard2());
+    }
+
+    public int getCardNum3() {
+        return getCardNum(getCard3());
+    }
+
+    public int getCardNum4() {
+        return getCardNum(getCard4());
+    }
+
+    public int getCardNum5() {
+        return getCardNum(getCard5());
+    }
+
+    public int getCardNum6() {
+        return getCardNum(getCard6());
+    }
+
+    public int getCardNum7() {
+        return getCardNum(getCard7());
+    }
+
+    public int getCardNum8() {
+        return getCardNum(getCard8());
+    }
+
+    public int getCardNum9() {
+        return getCardNum(getCard9());
+    }
 
     //완성도 순 정렬에 호출할 함수
     public int getSubComplete() {
@@ -233,7 +314,7 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
             return 8;
         else if (getNeedCard() - getHaveCard() == 9)
             return 9;
-        else if(getNeedCard() - getHaveCard() == 10)
+        else if (getNeedCard() - getHaveCard() == 10)
             return 10;
         else
             return 0;
@@ -244,13 +325,28 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
         return this.getName().compareTo(o.getName());
     }
 
-
     private boolean getCardCheck(String cardX) {
         for (int i = 0; i < cardInfo.size(); i++) {
             if (cardInfo.get(i).getName().equals(cardX) && cardInfo.get(i).getGetCard())
                 return true;
         }
         return false;
+    }
+
+    private int getCardAwake(String cardX) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardX) && cardInfo.get(i).getGetCard())
+                return cardInfo.get(i).getAwake();
+        }
+        return 0;
+    }
+
+    private int getCardNum(String cardX) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (cardInfo.get(i).getName().equals(cardX) && cardInfo.get(i).getGetCard())
+                return cardInfo.get(i).getNum();
+        }
+        return 0;
     }
 
 }

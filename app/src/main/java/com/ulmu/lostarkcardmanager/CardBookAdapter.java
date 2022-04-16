@@ -224,8 +224,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard0());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard0()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard0())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard0())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake0() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum0() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard0())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -286,8 +286,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard1());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard1()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard1())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard1())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake1() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum1() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard1())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -344,8 +344,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard2());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard2()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard2())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard2())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake2() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum2() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard2())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -402,8 +402,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard3());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard3()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard3())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard3())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake3() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum3() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard3())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -460,8 +460,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard4());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard4()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard4())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard4())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake4() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum4() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard4())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -518,8 +518,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard5());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard5()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard5())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard5())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake5() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum5() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard5())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -576,8 +576,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard6());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard6()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard6())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard6())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake6() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum6() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard6())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -634,8 +634,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard7());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard7()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard7())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard7())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake7() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum7() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard7())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -692,8 +692,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard8());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard8()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard8())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard8())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake8() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum8() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard8())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -750,8 +750,8 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard9());
                         imgJustCard.setImageResource(getCardImg(filterCardBook.get(positionGet).getCard9()));
-                        txtJustCardAwake.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard9())).getAwake() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard9())).getNum() + "");
+                        txtJustCardAwake.setText(filterCardBook.get(pos).getCardAwake9() + "");
+                        txtJustCardHave.setText(filterCardBook.get(pos).getCardNum9() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterCardBook.get(positionGet).getCard9())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {

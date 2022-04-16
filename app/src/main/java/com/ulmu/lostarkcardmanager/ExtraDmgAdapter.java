@@ -902,7 +902,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard0());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard0()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard0() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard0() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -972,7 +972,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard1());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard1()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard1() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard1() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1043,7 +1043,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard2());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard2()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard2() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard2() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1114,7 +1114,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard3());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard3()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard3() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard3() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1185,7 +1185,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard4());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard4()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard4() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard4() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1256,7 +1256,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard5());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard5()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard5() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard5() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1327,7 +1327,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard6());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard6()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard6() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard6() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1398,7 +1398,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard7());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard7()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard7() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard7() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1469,7 +1469,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard8());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard8()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard8() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard8() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -1540,7 +1540,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         txtJustCardName.setText(filterXED.get(pos).getCard9());
                         imgJustCard.setImageResource(getCardImg(filterXED.get(pos).getCard9()));
                         txtJustCardAwake.setText(filterXED.get(pos).getAwakeCard9() + "");
-                        txtJustCardHave.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getNum() + "");
+                        txtJustCardHave.setText(filterXED.get(pos).getNumCard9() + "");
                         txtJustCardAcquisition_info.setText(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getAcquisition_info());
 
                         btnOk.setOnClickListener(new View.OnClickListener() {
