@@ -267,7 +267,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard0());
 
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -282,8 +282,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
                                 //cardList 각성도 및 보유카드 수 DB 업데이트
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getId());
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getId());
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard0());
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard0());
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setNum(number);
 
@@ -295,7 +295,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard0() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard0());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -331,7 +331,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard1());
                         dialogChangeAwakeAndNum.show();
 
                         btnCancer.setOnClickListener(new View.OnClickListener() {
@@ -345,8 +345,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard1());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard1());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard1.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -357,7 +357,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard1() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard1());
                                 }
 
 
@@ -394,7 +394,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard2());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -407,8 +407,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard2());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard2());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard2.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -416,7 +416,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard2() & awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard2());
                                 }
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
@@ -456,7 +456,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard3());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -469,8 +469,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard3());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard3());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard3.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -481,7 +481,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard3() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard3());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -518,7 +518,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard4());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -531,8 +531,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard4());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard4());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard4.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -543,7 +543,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard4() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard4());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -580,7 +580,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard5());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -593,8 +593,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard5());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard5());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard5.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -605,7 +605,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard5() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard5());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -642,7 +642,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard5());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -655,8 +655,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard6());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard6());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard6.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -667,7 +667,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard6() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard6());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -704,7 +704,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard7());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -717,8 +717,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard7());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard7());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard7.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -729,7 +729,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard7() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard7());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -765,7 +765,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard8());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -778,8 +778,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard8());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard8());    //카드 각성도 업데이트(cardListDB)
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setNum(number);
                                 txtXED_Detail_CardAwakeHaveCard8.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
@@ -787,7 +787,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard8() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard8());
                                 }
 
                                 //즐겨찾기 리스트 DB 갱신 및 업데이트
@@ -826,7 +826,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             }
                         });
                         numberPickerHave.setMaxValue(maxHaveValue(numberPickerAwake.getValue()));
-                        numberPickerHave.setValue(cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getNum());
+                        numberPickerHave.setValue(filterXED.get(pos).getNumCard9());
                         dialogChangeAwakeAndNum.show();
                         btnCancer.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -839,8 +839,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                             public void onClick(View v) {
                                 int awake = numberPickerAwake.getValue();
                                 int number = numberPickerHave.getValue();
-                                cardDBHelper.UpdateInfoCardNum(number, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getId());     //카드 수집 업데이트(cardList DB)
-                                cardDBHelper.UpdateInfoCardAwake(awake, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getId());    //카드 각성도 업데이트(cardListDB)
+                                cardDBHelper.UpdateInfoCardNum(number, filterXED.get(pos).getCard9());     //카드 수집 업데이트(cardList DB)
+                                cardDBHelper.UpdateInfoCardAwake(awake, filterXED.get(pos).getCard9());    //카드 각성도 업데이트(cardListDB)
 
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setAwake(awake);
                                 cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setNum(number);
@@ -852,7 +852,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                                 if (filterXED.get(pos).isCheckCard9() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setGetCard(true);
-                                    cardDBHelper.UpdateInfoCardCheck(true, cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getId());
+                                    cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard9());
                                 }
 
                                 isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -923,7 +923,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard0());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard0() > 0) {
                             cardAwake(imgXED_Detail_Card0, filterXED.get(pos).getCard0());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -993,7 +993,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard1());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard1())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard1() > 0) {
                             cardAwake(imgXED_Detail_Card1, filterXED.get(pos).getCard1());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1064,7 +1064,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard2());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard2())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard2() > 0) {
                             cardAwake(imgXED_Detail_Card2, filterXED.get(pos).getCard2());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1135,7 +1135,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard3());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard3())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard3() > 0) {
                             cardAwake(imgXED_Detail_Card3, filterXED.get(pos).getCard3());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1206,7 +1206,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard4());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard4())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard4() > 0) {
                             cardAwake(imgXED_Detail_Card4, filterXED.get(pos).getCard4());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1277,7 +1277,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard5());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard5())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard5() > 0) {
                             cardAwake(imgXED_Detail_Card5, filterXED.get(pos).getCard5());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1348,7 +1348,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard6());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard6())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard6() > 0) {
                             cardAwake(imgXED_Detail_Card6, filterXED.get(pos).getCard6());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1419,7 +1419,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard7());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard7())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard7() > 0) {
                             cardAwake(imgXED_Detail_Card7, filterXED.get(pos).getCard7());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1490,7 +1490,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard8());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard8())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard8() > 0) {
                             cardAwake(imgXED_Detail_Card8, filterXED.get(pos).getCard8());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }
@@ -1561,7 +1561,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                         cardDBHelper.UpdateInfoCardCheck(cardCheck, filterXED.get(pos).getCard9());     //카드 수집 유무 업데이트(cardList DB)
                         cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).setGetCard(cardCheck);                //카드 수집 유무 업데이트(현재 cardList array)
 
-                        if (cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard9())).getAwake() > 0) {
+                        if (filterXED.get(pos).getAwakeCard9() > 0) {
                             cardAwake(imgXED_Detail_Card9, filterXED.get(pos).getCard9());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
                         }

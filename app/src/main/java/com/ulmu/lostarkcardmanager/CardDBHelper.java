@@ -193,11 +193,25 @@ public class CardDBHelper extends SQLiteOpenHelper {
         updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET number = " + input + " WHERE id = " + cardId);
     }
 
+    //UPDATE 카드리스트 카드 수량 수정(이름으로)
+    public void UpdateInfoCardNum(int input, String cardName) {
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
+        //카드 id 값으로 카드를 파악하고 해당 카드의 수량 조절.
+        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET number = " + input + " WHERE name = '" + cardName + "'");
+    }
+
     //UPDATE 카드리스트 카드 각성도 수정
     public void UpdateInfoCardAwake(int input, int cardId) {
         SQLiteDatabase updateColumnInfo = getWritableDatabase();
         //카드 id 값으로 카드를 파악하고 해당 카드의 각성도 조절.
         updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET awake = " + input + " WHERE id = " + cardId);
+    }
+
+    //UPDATE 카드리스트 카드 각성도 수정(이름으로)
+    public void UpdateInfoCardAwake(int input, String cardName) {
+        SQLiteDatabase updateColumnInfo = getWritableDatabase();
+        //카드 id 값으로 카드를 파악하고 해당 카드의 각성도 조절.
+        updateColumnInfo.execSQL("UPDATE " + TABLE_CARD_LIST + " SET awake = " + input + " WHERE name = '" + cardName + "'");
     }
 
     //UPDATE 카드리스트 카드 획득 유무 수정(카드 name)

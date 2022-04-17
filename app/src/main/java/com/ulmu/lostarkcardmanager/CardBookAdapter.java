@@ -245,14 +245,14 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         boolean cardCheck = imgGrayScale(imgCardBookImg0, filter, filterCardBook.get(pos).getCard0());
                         //업데이트 된 정보 갱신
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard0())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake0() > 0) {
                             cardAwake(imgCardBookImg0, filterCardBook.get(pos).getCard0());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         //카드 db 갱신,카드리스트 갱신
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard0())).setGetCard(cardCheck);
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard0())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard0());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -306,13 +306,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg1, filter, filterCardBook.get(pos).getCard1());
                         //카드리스트 갱신
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard1())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake1() > 0) {
                             cardAwake(imgCardBookImg1, filterCardBook.get(pos).getCard1());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard1())).setGetCard(cardCheck);
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard1())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard1());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -364,13 +364,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg2, filter, filterCardBook.get(pos).getCard2());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard2())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake2() > 0) {
                             cardAwake(imgCardBookImg2, filterCardBook.get(pos).getCard2());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard2())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard2())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard2());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -422,13 +422,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg3, filter, filterCardBook.get(pos).getCard3());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard3())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake3() > 0) {
                             cardAwake(imgCardBookImg3, filterCardBook.get(pos).getCard3());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard3())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard3())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard3());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -480,13 +480,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg4, filter, filterCardBook.get(pos).getCard4());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard4())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake4() > 0) {
                             cardAwake(imgCardBookImg4, filterCardBook.get(pos).getCard4());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard4())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard4())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard4());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -538,13 +538,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg5, filter, filterCardBook.get(pos).getCard5());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard5())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake5() > 0) {
                             cardAwake(imgCardBookImg5, filterCardBook.get(pos).getCard5());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard5())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard5())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard5());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -596,13 +596,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg6, filter, filterCardBook.get(pos).getCard6());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard6())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake6() > 0) {
                             cardAwake(imgCardBookImg6, filterCardBook.get(pos).getCard6());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard6())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard6())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard6());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -654,13 +654,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg7, filter, filterCardBook.get(pos).getCard7());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard7())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake7() > 0) {
                             cardAwake(imgCardBookImg7, filterCardBook.get(pos).getCard7());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard7())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard7())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard7());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -712,13 +712,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg8, filter, filterCardBook.get(pos).getCard8());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard8())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake8() > 0) {
                             cardAwake(imgCardBookImg8, filterCardBook.get(pos).getCard8());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard8())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard8())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard8());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -770,13 +770,13 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                     public void onClick(View v) {
                         boolean cardCheck = imgGrayScale(imgCardBookImg9, filter, filterCardBook.get(pos).getCard9());
 
-                        if (cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard9())).getAwake() > 0) {
+                        if (cardBookInfo.get(pos).getCardAwake9() > 0) {
                             cardAwake(imgCardBookImg9, filterCardBook.get(pos).getCard9());
                             Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard9())).setGetCard(cardCheck);             //카드리스트 갱신
-                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardInfo.get(getIndex(cardInfo, filterCardBook.get(pos).getCard9())).getId());
+                        cardDBHelper.UpdateInfoCardCheck(cardCheck, cardBookInfo.get(pos).getCard9());
 
                         haveStatUpdate(cardBookInfo);
                         cardBookPage.setStatAndStatBook(haveStat, haveStatCardBookCount, haveStatCardBook);
@@ -927,17 +927,6 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
             if (cardInfo.get(i).getName().equals(name)) {
                 index = i;
                 break;
-            }
-        }
-        return index;
-    }
-
-    //cardBookInfo 갱신을 위한 메소드
-    private int getIndex(int id) {
-        int index = 0;
-        for (int i = 0; i < cardBookInfo.size(); i++) {
-            if (cardBookInfo.get(i).getId() == id) {
-                index = i;
             }
         }
         return index;
