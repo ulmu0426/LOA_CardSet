@@ -1,6 +1,452 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
 
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvCardSetBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/txtSegubitName"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="세상을 구하는 빛"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSegubitAwake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:autoSizeTextType="uniform"
+        android:text="현재 각성 합계 : 00"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSegubitName" />
+
+    <TextView
+        android:id="@+id/txtGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="00각에 필요한 세구빛 카드 수"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/tlSegu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSegubitAwake" />
+
+    <TableLayout
+        android:id="@+id/tlSegu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="#000000"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toTopOf="@+id/txtNeedCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtGoal">
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="현재 각성도"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="현재 보유 카드"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="필요 카드 수"
+                android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtShandi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="샨디"
+                android:textAlignment="center" />
+
+
+            <TextView
+                android:id="@+id/txtShandiAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtShandiNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtShandiNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="아제나&amp;이난나"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtAzenaInannaAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtAzenaInannaNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtAzenaInannaNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtNinab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="니나브"
+                android:textAlignment="center" />
+
+
+            <TextView
+                android:id="@+id/txtNinabAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtNinabNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtNinabNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtKadan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="카단"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtKadanAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtKadanNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtKadanNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtBahuntur"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="바훈투르"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtBahunturAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtBahunturNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtBahunturNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtSillian"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="실리안"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtSillianAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtSillianNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtSillianNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtWei"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="웨이"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtWeiAwake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtWeiNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtWeiNeedNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="#FFE9B6"
+                android:gravity="center"
+                android:text="0장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/txtNeedCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="총 필요 카드 수 : "
+        app:layout_constraintTop_toBottomOf="@+id/tlSegu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtExpectedValue"/>
+
+    <TextView
+        android:id="@+id/txtExpectedValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="전카팩 기댓값 : "
+        app:layout_constraintTop_toBottomOf="@+id/txtNeedCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

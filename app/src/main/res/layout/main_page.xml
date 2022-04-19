@@ -376,7 +376,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent">btnSegubit
+
+            <Button
+                android:id="@+id/btnSegubit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingVertical="5dp"
+                android:text="세구빛 필요 카드"
+                android:textAlignment="center"
+                android:textColor="#E8E8E8"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtGuide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="#B6B6B6"
+                app:strokeColor="#9C9C9C" />
 
             <Button
                 android:id="@+id/txtGuide"

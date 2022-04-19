@@ -1,16 +1,21 @@
 package com.ulmu.lostarkcardmanager;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +23,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
@@ -58,10 +66,12 @@ public class MainPage extends AppCompatActivity {
     public static Context mainContext;
 
     private Button btnGuide;
+    private Button btnSegubit;
     protected SharedPreferences preferences;        //최초 실행시 가이드 페이지 호출을 위한 변수
 
     private static final String TABLE_DEMON_EXTRA_DMG = "demon_extra_dmg";  //악추피 테이블 명
     private static final String TABLE_BEAST_EXTRA_DMG = "beast_extra_dmg";  //야추피 테이블 명
+    int goal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +89,86 @@ public class MainPage extends AppCompatActivity {
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }
         });
+
+
+        btnSegubit.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
+                Dialog segubitDialog = new Dialog(mainContext, android.R.style.Theme_Material_Light_Dialog);
+
+                segubitDialog.setContentView(R.layout.segubit);
+
+                WindowManager.LayoutParams params = segubitDialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                segubitDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
+
+                goal = nextSegubit();
+
+                TextView txtSegubitAwake = segubitDialog.findViewById(R.id.txtSegubitAwake);
+                txtSegubitAwake.setText("현재 각성 합계 : " + nowSegubit());
+                TextView txtGoal = segubitDialog.findViewById(R.id.txtGoal);
+                txtGoal.setText(goal + "각성에 필요한 세구빛 카드 수");
+
+                setSegubit();
+                //각성도
+                TextView txtShandiAwake = segubitDialog.findViewById(R.id.txtShandiAwake);
+                TextView txtAzenaInannaAwake = segubitDialog.findViewById(R.id.txtAzenaInannaAwake);
+                TextView txtNinabAwake = segubitDialog.findViewById(R.id.txtNinabAwake);
+                TextView txtKadanAwake = segubitDialog.findViewById(R.id.txtKadanAwake);
+                TextView txtBahunturAwake = segubitDialog.findViewById(R.id.txtBahunturAwake);
+                TextView txtSillianAwake = segubitDialog.findViewById(R.id.txtSillianAwake);
+                TextView txtWeiAwake = segubitDialog.findViewById(R.id.txtWeiAwake);
+                txtShandiAwake.setText(findAwake("샨디"));
+                txtAzenaInannaAwake.setText(findAwake("아제나&이난나"));
+                txtNinabAwake.setText(findAwake("니나브"));
+                txtKadanAwake.setText(findAwake("카단"));
+                txtBahunturAwake.setText(findAwake("바훈투르"));
+                txtSillianAwake.setText(findAwake("실리안"));
+                txtWeiAwake.setText(findAwake("웨이"));
+                //현재 보유카드
+                TextView txtShandiNum = segubitDialog.findViewById(R.id.txtShandiNum);
+                TextView txtAzenaInannaNum = segubitDialog.findViewById(R.id.txtAzenaInannaNum);
+                TextView txtNinabNum = segubitDialog.findViewById(R.id.txtNinabNum);
+                TextView txtKadanNum = segubitDialog.findViewById(R.id.txtKadanNum);
+                TextView txtBahunturNum = segubitDialog.findViewById(R.id.txtBahunturNum);
+                TextView txtSillianNum = segubitDialog.findViewById(R.id.txtSillianNum);
+                TextView txtWeiNum = segubitDialog.findViewById(R.id.txtWeiNum);
+                txtShandiNum.setText(findNum("샨디"));
+                txtAzenaInannaNum.setText(findNum("아제나&이난나"));
+                txtNinabNum.setText(findNum("니나브"));
+                txtKadanNum.setText(findNum("카단"));
+                txtBahunturNum.setText(findNum("바훈투르"));
+                txtSillianNum.setText(findNum("실리안"));
+                txtWeiNum.setText(findNum("웨이"));
+
+
+                segubitGoal(goal);
+                //필요카드
+                TextView txtShandiNeedNum = segubitDialog.findViewById(R.id.txtShandiNeedNum);
+                TextView txtAzenaInannaNeedNum = segubitDialog.findViewById(R.id.txtAzenaInannaNeedNum);
+                TextView txtNinabNeedNum = segubitDialog.findViewById(R.id.txtNinabNeedNum);
+                TextView txtKadanNeedNum = segubitDialog.findViewById(R.id.txtKadanNeedNum);
+                TextView txtBahunturNeedNum = segubitDialog.findViewById(R.id.txtBahunturNeedNum);
+                TextView txtSillianNeedNum = segubitDialog.findViewById(R.id.txtSillianNeedNum);
+                TextView txtWeiNeedNum = segubitDialog.findViewById(R.id.txtWeiNeedNum);
+                txtShandiNeedNum.setText(findNeedCard(segubit, "샨디") + "");
+                txtAzenaInannaNeedNum.setText(findNeedCard(segubit, "아제나&이난나") + "");
+                txtNinabNeedNum.setText(findNeedCard(segubit, "니나브") + "");
+                txtKadanNeedNum.setText(findNeedCard(segubit, "카단") + "");
+                txtBahunturNeedNum.setText(findNeedCard(segubit, "바훈투르") + "");
+                txtSillianNeedNum.setText(findNeedCard(segubit, "실리안") + "");
+                txtWeiNeedNum.setText(findNeedCard(segubit, "웨이") + "");
+
+                TextView txtNeedCard = segubitDialog.findViewById(R.id.txtNeedCard);
+                txtNeedCard.setText("총 필요 카드 수 : " + Arrays.stream(needCard).sum());
+
+                segubitDialog.show();
+            }
+        });
+
 
         preferences = getSharedPreferences("Pref", MODE_PRIVATE);
         boolean isFirstRun = preferences.getBoolean("isFirstRun", true);
@@ -225,6 +315,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+
     }
 
     //DB정보 App에 입력
@@ -236,7 +327,7 @@ public class MainPage extends AppCompatActivity {
 
     private void initXml() {
         btnGuide = findViewById(R.id.txtGuide);
-
+        btnSegubit = findViewById(R.id.btnSegubit);
         //치,특,신 값
         txtCardBookStat_Critical = (TextView) findViewById(R.id.txtCardBookStat_Critical);
         txtCardBookStat_Speciality = (TextView) findViewById(R.id.txtCardBookStat_Speciality);
@@ -364,5 +455,243 @@ public class MainPage extends AppCompatActivity {
 
     };
 
+    private ArrayList<CardInfo> segubit;
+    private int[] needCard;
+
+    private void setSegubit() {
+        segubit = new ArrayList<>();
+        for (int i = 0; i < cardInfo.size(); i++) {
+            CardInfo tempInfo = new CardInfo();
+            if (cardInfo.get(i).getName().equals("샨디")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+            if (cardInfo.get(i).getName().equals("아제나&이난나")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+            if (cardInfo.get(i).getName().equals("니나브")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+            if (cardInfo.get(i).getName().equals("카단")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+            if (cardInfo.get(i).getName().equals("바훈투르")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+            if (cardInfo.get(i).getName().equals("실리안")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+            if (cardInfo.get(i).getName().equals("웨이")) {
+                tempInfo.setId(cardInfo.get(i).getId());
+                tempInfo.setName(cardInfo.get(i).getName());
+                tempInfo.setAwake(cardInfo.get(i).getAwake());
+                tempInfo.setNum(cardInfo.get(i).getNum());
+                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
+                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
+                tempInfo.setPath(cardInfo.get(i).getPath());
+                segubit.add(tempInfo);
+            }
+        }
+    }
+
+    private String findNum(String name) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (name.equals(cardInfo.get(i).getName())) {
+                return cardInfo.get(i).getNum() + "";
+            }
+        }
+        return "0";
+    }
+
+    private String findAwake(String name) {
+        for (int i = 0; i < cardInfo.size(); i++) {
+            if (name.equals(cardInfo.get(i).getName())) {
+                return cardInfo.get(i).getAwake() + "";
+            }
+        }
+        return "0";
+    }
+
+    private int findNeedCard(ArrayList<CardInfo> segubit, String name) {
+        for (int i = 0; i < segubit.size(); i++) {
+            if (segubit.get(i).getName().equals(name))
+                return needCard[i];
+        }
+        return 0;
+    }
+
+    private void segubitGoal(int goal) {
+        Log.v("test", "목표 각성도 : " + goal);
+        needCard = new int[]{0, 0, 0, 0, 0, 0};
+        //각성도 순 정렬 완료.
+        Collections.sort(segubit, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if (o1.getAwake() < o2.getAwake())
+                    return 1;
+                else
+                    return -1;
+            }
+        });
+        int minIndex = 0;
+        //가장 낮은 각성도 수치가 같은 카드
+        for (int i = 0; i < segubit.size(); i++) {
+            if (segubit.get(i).getAwake() <= segubit.get(minIndex).getAwake()) {
+                minIndex = i;
+            }
+        }
+        //보유카드가 가장 적은 카드를 리스트에서 지우기 위해(카단 우선순위 낮춤)
+        for (int i = 0; i < segubit.size(); i++) {
+            Log.v("test", "이름 : " + segubit.get(i).getName());
+            if (segubit.get(i).getAwake() == segubit.get(minIndex).getAwake()) {
+                if (segubit.get(i).getNum() <= segubit.get(minIndex).getNum()) {
+                    if(segubit.get(minIndex).getName().equals("카단")){
+                        continue;
+                    }else {
+                        minIndex = i;
+                    }
+                }
+            }
+        }
+
+
+        segubit.remove(minIndex);
+
+        Collections.sort(segubit, new Comparator<CardInfo>() {
+            @Override
+            public int compare(CardInfo o1, CardInfo o2) {
+                if ((o1.nextAwake() - o1.getNum()) < (o2.nextAwake() - o2.getNum()))
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+        if (goal == 18) {
+            int i = 0;
+            while (!(getHaveAwake() >= goal)) {
+                if ((getHaveAwake() >= goal))
+                    break;
+                //현재 인덱스의 카드보다 각성도가 낮거나 보유카드가 작은 카드가 있는 경우 continue;
+                if (smallerThanOtherCardsNextAwake(i)) {
+                    i++;
+                    if (i == segubit.size()) {
+                        i = 0;
+                    }
+                    continue;
+                }
+
+                //각성에 필요한 카드가 충분한 경우
+                if (segubit.get(i).getNum() >= segubit.get(i).nextAwake()) {
+                    segubit.get(i).setNum(segubit.get(i).getNum() - segubit.get(i).nextAwake());
+                    segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
+                } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
+                else if (segubit.get(i).getNum() < segubit.get(i).nextAwake()) {
+                    needCard[i] = needCard[i] + (segubit.get(i).nextAwake() - segubit.get(i).getNum());
+                    segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
+                    segubit.get(i).setNum(0);
+                }
+
+                i++;
+
+                //무한루프(목표 각성도가 될때까지)
+                if (i == segubit.size()) {
+                    i = 0;
+                }
+            }
+        } else if (goal == 30) {
+            for (int i = 0; i < needCard.length; i++) {
+                needCard[i] = segubit.get(i).awakeMax();
+            }
+        }
+    }
+
+    //해당 인덱스의 카드보다 다음 각성에 필요한 카드 수가 적은 경우 true
+    private boolean smallerThanOtherCardsNextAwake(int index) {
+        if (segubit.get(index).nextAwake() - segubit.get(index).getNum() <= 0)
+            return false;
+        for (int i = 0; i < segubit.size(); i++) {
+            if (i == index)
+                continue;
+            if (segubit.get(i).nextAwake() - segubit.get(i).getNum() < segubit.get(index).nextAwake() - segubit.get(index).getNum()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getHaveAwake() {
+        int awakeSum = 0;
+        int min = 5;
+        for (int i = 0; i < segubit.size(); i++) {
+            awakeSum += segubit.get(i).getAwake();
+            if (min > segubit.get(i).getAwake()) {
+                min = segubit.get(i).getAwake();
+            }
+        }
+
+        return awakeSum;
+    }
+
+    private int nowSegubit() {
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
+                return cardSetInfo.get(i).getHaveAwake();
+            }
+        }
+        return 18;
+    }
+
+    private int nextSegubit() {
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
+                if (cardSetInfo.get(i).getHaveAwake() < 18)
+                    return 18;
+                else
+                    return 30;
+            }
+        }
+        return 18;
+    }
 
 }

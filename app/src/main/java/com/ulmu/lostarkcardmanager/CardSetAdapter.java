@@ -132,8 +132,8 @@ public class CardSetAdapter extends RecyclerView.Adapter<CardSetAdapter.ViewHold
                 dialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
 
                 ImageView imgFavorites = dialog.findViewById(R.id.imgFavorites);
-                TextView txtCardSetName_Detail = dialog.findViewById(R.id.txtCardSetName_Detail);
-                TextView txtCardSetAwake_Detail = dialog.findViewById(R.id.txtCardSetAwake_Detail);
+                TextView txtCardSetName_Detail = dialog.findViewById(R.id.txtSegubitName);
+                TextView txtCardSetAwake_Detail = dialog.findViewById(R.id.txtSegubitAwake);
                 TextView txtCardSetNextStep_Detail = dialog.findViewById(R.id.txtCardSetNextStep_Detail);
 
                 ImageView imgCardSetDetail0 = dialog.findViewById(R.id.imgCardSetDetail0);

@@ -12,12 +12,12 @@
         android:layout_height="30dp"
         android:layout_margin="10dp"
         android:adjustViewBounds="true"
-        app:layout_constraintEnd_toStartOf="@+id/txtCardSetName_Detail"
+        app:layout_constraintEnd_toStartOf="@+id/txtSegubitName"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gold_star" />
 
     <TextView
-        android:id="@+id/txtCardSetName_Detail"
+        android:id="@+id/txtSegubitName"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtCardSetAwake_Detail"
+        android:id="@+id/txtSegubitAwake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -37,7 +37,7 @@
         android:text="각성 합계 : 00"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCardSetName_Detail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSegubitName" />
 
     <TextView
         android:id="@+id/txtCardSetNextStep_Detail"
@@ -49,7 +49,7 @@
         android:text="다음 효과 까지 : 00 남음"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCardSetAwake_Detail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSegubitAwake" />
 
     <TableLayout
         android:id="@+id/tablelayoutCardSetDetail"
