@@ -29,18 +29,18 @@ import java.util.Comparator;
 
 public class MainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
-    protected ArrayList<CardInfo> cardInfo;         //카드목록
+    protected ArrayList<CardInfo> cardInfo;                 //카드목록
     protected ArrayList<CardSetInfo> favoriteCardSetInfo;   //즐겨찾기 목록
-    protected ArrayList<CardBookInfo> cardBookInfo; //카드 도감 목록
-    protected ArrayList<CardSetInfo> cardSetInfo;   //카드 세트 목록
-    protected ArrayList<ExtraDmgInfo> beastExtraDmgInfo; //야추피 목록
-    protected ArrayList<ExtraDmgInfo> demonExtraDmgInfo; //악추피 목록
+    protected ArrayList<CardBookInfo> cardBookInfo;         //카드 도감 목록
+    protected ArrayList<CardSetInfo> cardSetInfo;           //카드 세트 목록
+    protected ArrayList<ExtraDmgInfo> beastExtraDmgInfo;    //야추피 목록
+    protected ArrayList<ExtraDmgInfo> demonExtraDmgInfo;    //악추피 목록
 
     private TextView txtBtnCardSet;
     private TextView txtBtnCardBook;
 
     private RecyclerView rvFavorite;                        //카드세트의 즐겨찾기 리스트를 보여주기 위한 리사이클러뷰
-    protected FavoriteAdapter favoriteAdapter;      //즐겨찾기 어뎁터
+    protected FavoriteAdapter favoriteAdapter;              //즐겨찾기 어뎁터
 
     private String[] EDName = {"악마", "야수", "정령", "인간", "기계", "불사", "식물", "물질"};
     private ViewPager2 vpXED;
@@ -163,7 +163,7 @@ public class MainPage extends AppCompatActivity {
                 txtWeiNeedNum.setText(findNeedCard(segubit, "웨이") + "");
 
                 TextView txtNeedCard = segubitDialog.findViewById(R.id.txtNeedCard);
-                txtNeedCard.setText("총 필요 카드 수 : " + Arrays.stream(needCard).sum());
+                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + Arrays.stream(needCard).sum());
 
                 segubitDialog.show();
             }
@@ -535,6 +535,7 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
+    //세구빛 카드 보유 수
     private String findNum(String name) {
         for (int i = 0; i < cardInfo.size(); i++) {
             if (name.equals(cardInfo.get(i).getName())) {
@@ -544,6 +545,7 @@ public class MainPage extends AppCompatActivity {
         return "0";
     }
 
+    //세구빛 카드 각성도
     private String findAwake(String name) {
         for (int i = 0; i < cardInfo.size(); i++) {
             if (name.equals(cardInfo.get(i).getName())) {
@@ -553,6 +555,7 @@ public class MainPage extends AppCompatActivity {
         return "0";
     }
 
+    //세구빛 카드 필요카드
     private int findNeedCard(ArrayList<CardInfo> segubit, String name) {
         for (int i = 0; i < segubit.size(); i++) {
             if (segubit.get(i).getName().equals(name))
@@ -586,9 +589,9 @@ public class MainPage extends AppCompatActivity {
             Log.v("test", "이름 : " + segubit.get(i).getName());
             if (segubit.get(i).getAwake() == segubit.get(minIndex).getAwake()) {
                 if (segubit.get(i).getNum() <= segubit.get(minIndex).getNum()) {
-                    if(segubit.get(minIndex).getName().equals("카단")){
+                    if (segubit.get(minIndex).getName().equals("카단")) {
                         continue;
-                    }else {
+                    } else {
                         minIndex = i;
                     }
                 }

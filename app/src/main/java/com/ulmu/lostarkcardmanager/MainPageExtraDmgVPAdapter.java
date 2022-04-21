@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainPageExtraDmgVPAdapter extends RecyclerView.Adapter<MainPageExtraDmgVPAdapter.ViewHolder> {
@@ -93,6 +94,8 @@ public class MainPageExtraDmgVPAdapter extends RecyclerView.Adapter<MainPageExtr
         for (int i = 0; i < extraDmgInfo.size(); i++) {
             result += extraDmgInfo.get(i).getDmgSum();
         }
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
+        result = Float.parseFloat(df.format(result));
         return result;
     }
 

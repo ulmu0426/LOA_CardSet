@@ -9,8 +9,8 @@ android {
         applicationId "com.lostarkcardmanager"
         minSdk 21
         targetSdk 31
-        versionCode 10
-        versionName "1.01"
+        versionCode 13
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
