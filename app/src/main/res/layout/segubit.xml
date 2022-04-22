@@ -146,7 +146,7 @@
         <TableRow android:gravity="center">
 
             <TextView
-                android:id="@+id/wrap_content"
+                android:id="@+id/txtAzenaInanna"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -379,7 +379,9 @@
 
         </TableRow>
 
-        <TableRow android:gravity="center">
+        <TableRow
+            android:id="@+id/lastRow"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/txtWei"
