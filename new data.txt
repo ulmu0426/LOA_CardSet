@@ -1,0 +1,64 @@
+카드팩 추가
+전설 카드 팩 Ⅱ - 전카팩, 심연의 전설 카드 팩
+심연의 전설 카드 팩[세구빛7종, 틀구빛 3종, 베아트리스, 광잃쿠, 진저웨일, 암구빛6종 ]
+
+앱 db onUpdate 추가 항목
+카드리스트
+1.세구빛7종, 틀구빛3종, 베아, 광잃쿠, 진저웨일, 암구빛6종의 획득경로 update
+2.신카드14종 추가
+3.진저웨일,데런 아만, 에버그레이스 획득경로 변경([수집품]이그네아의 징표(xx)로 수정)
+
+카드 도감
+신규 특화도감 1종 추가
+신규 치명도감 1종 추가
+트리시온 도감 수정.(CardBookInfo 내에 자체 함수로 트리시온의 경우 6종 수집으로 효과 발동하도록 예외 처리해야함)
+
+악추피
+악추피 도감 1종 추가
+
+야추피
+야추피 도감 1종 추가
+트리시온의 경우 추가 라인 생성 및 추가해야함.
+--------------------------------------------------------
+카드 목록
+INSERT INTO cardList VALUES (10025, '에버그레이스', 0,0,'','전설',0,'card_legend_evergrace');
+
+INSERT INTO cardList VALUES (20081, '라우리엘', 0,0,'','영웅',0,'card_epic_rauriel');
+INSERT INTO cardList VALUES (20082, '영원의 아크 카양겔', 0,0,'','영웅',0,'card_epic_kayangel');
+
+INSERT INTO cardList VALUES (30110, '아자키엘', 0,0,'','희귀',0,'card_rare_azakiel');
+INSERT INTO cardList VALUES (30111, '디오게네스', 0,0,'','희귀',0,'card_rare_diogenes');
+INSERT INTO cardList VALUES (30112, '벨루마테', 0,0,'','희귀',0,'card_rare_bellumate');
+INSERT INTO cardList VALUES (30113, '다이나웨일', 0,0,'','희귀',0,'card_rare_dienawhale');
+
+INSERT INTO cardList VALUES (40060, '하늘 고래', 0,0,'','고급',0,'card_uncommonm_sky_whale');
+INSERT INTO cardList VALUES (40061, '별자리 큰뱀', 0,0,'','고급',0,'card_uncommonm_constellation_bic_snake');
+INSERT INTO cardList VALUES (40062, '티엔', 0,0,'','고급',0,'card_uncommonm_tien');
+INSERT INTO cardList VALUES (40063, '프리우나', 0,0,'','고급',0,'card_uncommonm_priuna');
+INSERT INTO cardList VALUES (40064, '유클리드', 0,0,'','고급',0,'card_uncommonm_euclid');
+INSERT INTO cardList VALUES (40065, '키르케', 0,0,'','고급',0,'card_uncommonm_circe');
+
+
+INSERT INTO cardList VALUES (50029, '코니', 0,0,'','일반',0,'card_commonm_connie');
+
+
+---------------------------
+카드 세트
+INSERT INTO cardSet VALUES (36, '플라티나의 주민들', '에버그레이스', '두키킹', '혼재의 추오','','','','', '3세트 : 가디언 토벌 시 가디언에게 받는 피해 7.5% 감소', '3세트(6각성합계) : 헤드어택 성공 시 적에게 주는 피해 % 증가', '3세트(15각성합계) : 헤드어택 성공 시 적에게 주는 피해 10% 증가','','','',6,12,0,'');
+
+
+-------------------------------
+카드 도감
+INSERT INTO cardbook_all VALUES(53,'사슬전쟁의 종장',3,'에버그레이스','에스더 루테란', '미스틱', '알비온', '카단', '니나브','','','','','치명');
+INSERT INTO cardbook_all VALUES(54,'플라티나의 주민들',2,'에버그레이스','두키킹', '혼재의 추오', '', '', '','','','','','특화');
+
+
+--------------------------------
+악추피
+INSERT INTO demon_extra_dmg VALUES(23,'엘베리아의 기적','에버그레이스','라하르트', '에아달린', '아델', '지그문트', '가룸','','','','',0.1,0.1,0.1);
+
+
+--------------------------------
+야추피
+INSERT INTO beast_extra_dmg VALUES(23,'빛의 생명체들','다이나웨일','하늘 고래', '별자리 큰뱀', '코니', '', '','','','','',0.06,0.07,0.07);
+트리시온 추가효과 (카드 7장 수집 (각성단계 합계 35): 야수 계열 피해량 증가 +0.07%
