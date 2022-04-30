@@ -290,9 +290,6 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                                 txtXED_Detail_CardAwakeHaveCard0.setText(XED_DIALOG_CARD_AWAKE + awake + "\n" + XED_DIALOG_CARD_NUM + number);
                                 txtXED_AwakeValue.setText("현재 각성 합계 : " + filterXED.get(pos).getHaveAwake());
 
-                                //즐겨찾기 리스트 DB 갱신 및 업데이트
-                                updateFavoriteCardSet(getCardSet(filterXED.get(pos).getCard0(), awake));
-
                                 if (filterXED.get(pos).isCheckCard0() && awake > 0) {
                                     cardInfo.get(getIndex(cardInfo, filterXED.get(pos).getCard0())).setGetCard(true);
                                     cardDBHelper.UpdateInfoCardCheck(true, filterXED.get(pos).getCard0());
@@ -2033,11 +2030,6 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
         }
 
         return 0;
-    }
-
-    // 즐겨찾기 각성도 수정 반영
-    private void updateFavoriteCardSet(int cardSetAwake) {
-
     }
 
 }

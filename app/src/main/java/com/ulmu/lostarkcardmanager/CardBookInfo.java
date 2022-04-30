@@ -151,6 +151,8 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
         if (!getCard7().isEmpty()) needCard++;
         if (!getCard8().isEmpty()) needCard++;
         if (!getCard9().isEmpty()) needCard++;
+        if (trision())
+            needCard--;
         return needCard;
     }
 
@@ -296,26 +298,16 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
 
     //완성도 순 정렬에 호출할 함수
     public int getSubComplete() {
-        if (getNeedCard() - getHaveCard() == 1)
-            return 1;
-        else if (getNeedCard() - getHaveCard() == 2)
-            return 2;
-        else if (getNeedCard() - getHaveCard() == 3)
-            return 3;
-        else if (getNeedCard() - getHaveCard() == 4)
-            return 4;
-        else if (getNeedCard() - getHaveCard() == 5)
-            return 5;
-        else if (getNeedCard() - getHaveCard() == 6)
-            return 6;
-        else if (getNeedCard() - getHaveCard() == 7)
-            return 7;
-        else if (getNeedCard() - getHaveCard() == 8)
-            return 8;
-        else if (getNeedCard() - getHaveCard() == 9)
-            return 9;
-        else if (getNeedCard() - getHaveCard() == 10)
-            return 10;
+        if (getNeedCard() - getHaveCard() == 1) return 1;
+        else if (getNeedCard() - getHaveCard() == 2) return 2;
+        else if (getNeedCard() - getHaveCard() == 3) return 3;
+        else if (getNeedCard() - getHaveCard() == 4) return 4;
+        else if (getNeedCard() - getHaveCard() == 5) return 5;
+        else if (getNeedCard() - getHaveCard() == 6) return 6;
+        else if (getNeedCard() - getHaveCard() == 7) return 7;
+        else if (getNeedCard() - getHaveCard() == 8) return 8;
+        else if (getNeedCard() - getHaveCard() == 9) return 9;
+        else if (getNeedCard() - getHaveCard() == 10) return 10;
         else
             return 0;
     }
@@ -347,6 +339,12 @@ public class CardBookInfo implements Comparable<CardBookInfo> {
                 return cardInfo.get(i).getNum();
         }
         return 0;
+    }
+
+    private boolean trision() {
+        if (getName().equals("트리시온"))
+            return true;
+        return false;
     }
 
 }

@@ -914,7 +914,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     // DB에 도감을 완성시키면 도감의 배경을 노란색으로 칠해 획득유무를 추가로 알려줌.
     private void isCompleteCardBookBackgroundColor(CardBookInfo cardBookInfo, ConstraintLayout cv) {
-        if (cardBookInfo.getHaveCard() == cardBookInfo.getNeedCard())
+        if (isCompleteCardBook(cardBookInfo))
             cv.setBackgroundColor(parseColor("#FFF4BD"));
         else
             cv.setBackgroundColor(parseColor("#FFFFFF"));
@@ -934,7 +934,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
 
     // DB에 도감을 완성 시킨 경우 true else false
     public boolean isCompleteCardBook(CardBookInfo cardbook_all) {
-        if (cardbook_all.getHaveCard() == cardbook_all.getNeedCard())
+        if (cardbook_all.getHaveCard() >= cardbook_all.getNeedCard())
             return true;
         else
             return false;

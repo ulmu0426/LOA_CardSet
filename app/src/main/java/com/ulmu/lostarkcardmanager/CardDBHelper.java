@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     //assets 폴더
     private static String DB_PATH = "";
@@ -55,6 +55,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     private static final String CARDSET_SETBONUS2 = "set_bonus2";               //카드세트 효과 3번째
     private static final String CARDSET_SETBONUS3 = "set_bonus3";               //카드세트 효과 4번째
     private static final String CARDSET_SETBONUS4 = "set_bonus4";               //카드세트 효과 5번째
+
     private static final String CARDSET_SETBONUS5 = "set_bonus5";               //카드세트 효과 6번째
     private static final String CARDSET_NEEDAWAKE0 = "needAwake0";              //0번째 효과발동에 필요한 각성도
     private static final String CARDSET_NEEDAWAKE1 = "needAwake1";              //1번째 효과발동에 필요한 각성도
@@ -182,9 +183,153 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(22,'힘의 잔영','아이히만 박사','카인','에스','제이','','','','','','',0.06,0.07,0.07)");
             }
         }
+        if (oldVersion < 7) {
 
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST, null);
+
+            db.execSQL("INSERT INTO cardList VALUES (10025, '에버그레이스', 0,0,'','전설',0,'card_legend_evergrace')");
+            db.execSQL("INSERT INTO cardList VALUES (20081, '라우리엘', 0,0,'','영웅',0,'card_epic_rauriel')");
+            db.execSQL("INSERT INTO cardList VALUES (20082, '영원의 아크 카양겔', 0,0,'','영웅',0,'card_epic_kayangel');");
+            db.execSQL("INSERT INTO cardList VALUES (30110, '아자키엘', 0,0,'','희귀',0,'card_rare_azakiel')");
+            db.execSQL("INSERT INTO cardList VALUES (30111, '디오게네스', 0,0,'','희귀',0,'card_rare_diogenes')");
+            db.execSQL("INSERT INTO cardList VALUES (30112, '벨루마테', 0,0,'','희귀',0,'card_rare_bellumate')");
+            db.execSQL("INSERT INTO cardList VALUES (30113, '다이나웨일', 0,0,'','희귀',0,'card_rare_dienawhale')");
+            db.execSQL("INSERT INTO cardList VALUES (40060, '하늘 고래', 0,0,'','고급',0,'card_uncommonm_sky_whale')");
+            db.execSQL("INSERT INTO cardList VALUES (40061, '별자리 큰뱀', 0,0,'','고급',0,'card_uncommonm_constellation_bic_snake')");
+            db.execSQL("INSERT INTO cardList VALUES (40062, '티엔', 0,0,'','고급',0,'card_uncommonm_tien')");
+            db.execSQL("INSERT INTO cardList VALUES (40063, '프리우나', 0,0,'','고급',0,'card_uncommonm_priuna')");
+            db.execSQL("INSERT INTO cardList VALUES (40064, '유클리드', 0,0,'','고급',0,'card_uncommonm_euclid')");
+            db.execSQL("INSERT INTO cardList VALUES (40065, '키르케', 0,0,'','고급',0,'card_uncommonm_circe')");
+            db.execSQL("INSERT INTO cardList VALUES (50029, '코니', 0,0,'','일반',0,'card_commonm_connie')");
+
+            //신규 카드세트 추가
+            db.execSQL("INSERT INTO cardSet VALUES (36, '플라티나의 주민들', '에버그레이스', '두키킹', '혼재의 추오','','','','', '3세트 : 가디언 토벌 시 가디언에게 받는 피해 7.5% 감소', '3세트(6각성합계) : 헤드어택 성공 시 적에게 주는 피해 % 증가', '3세트(15각성합계) : 헤드어택 성공 시 적에게 주는 피해 10% 증가','','','',6,12,0,'')");
+            //신규 카드 도감 추가(치,특)
+            db.execSQL("INSERT INTO cardbook_all VALUES(53,'사슬전쟁의 종장',3,'에버그레이스','에스더 루테란', '미스틱', '알비온', '카단', '니나브','','','','','치명')");
+            db.execSQL("INSERT INTO cardbook_all VALUES(54,'플라티나의 주민들',2,'에버그레이스','두키킹', '혼재의 추오', '', '', '','','','','','특화')");
+            //악추피 추가
+            db.execSQL("INSERT INTO demon_extra_dmg VALUES(23,'엘베리아의 기적','에버그레이스','라하르트', '에아달린', '아델', '지그문트', '가룸','','','','',0.1,0.1,0.1)");
+            //야추피 추가
+            db.execSQL("INSERT INTO beast_extra_dmg VALUES(23,'빛의 생명체들','다이나웨일','하늘 고래', '별자리 큰뱀', '코니', '', '','','','','',0.06,0.07,0.07)");
+
+            //트리시온 카드 수정
+            db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
+            db.execSQL("UPDATE " + TABLE_BEAST_EXTRA_DMG + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
+            db.execSQL("UPDATE " + TABLE_CARD_SET + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
+
+            //카드 수집 경로 추가
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[모험의 서] 루테란 동부\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '실리안'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[업적] 격동하는 대지에 침묵을\n" +
+                    "[군단장 레이드] 마수군단장 발탄\n" +
+                    "심연의 전설 카드 팩\n" +
+                    "군단장 카드 선택 상자' WHERE name = '발탄'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[업적 달성] : 업적 미구현 \n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '샨디'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[수집품] 이그네아의 징표(6)\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '진저웨일'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[군단장 레이드] 광기군단장 쿠크세이튼\n" +
+                    "[업적] 그 광기, 내가 치료해주지\n" +
+                    "심연의 전설 카드 팩\n" +
+                    "군단장 카드 선택 상자' WHERE name = '쿠크세이튼'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[대도시] 떠돌이 상인\n" +
+                    "[업적 달성] 보스 헌터 : 고급\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '웨이'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[군단장 레이드] 욕망군단장 비아키스\n" +
+                    "[업적] 욕망군단장을 정복한 자\n" +
+                    "심연의 전설 카드 팩\n" +
+                    "군단장 카드 선택 상자' WHERE name = '비아키스'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[업적 달성] 흉가 체험\n" +
+                    "[대항해] 악몽을 떠도는 유령선\n" +
+                    "[대항해] 그림자를 헤매는 유령선\n" +
+                    "[대항해] 폭풍을 부르는 유령선\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩\n" +
+                    "군단장 카드 선택 상자' WHERE name = '일리아칸'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '심연의 전설 카드 팩\n" +
+                    "군단장 카드 선택 상자' WHERE name = '카멘'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[군단장 레이드] 몽환군단장 아브렐슈드\n" +
+                    "[업적] 현실과 꿈의 경계\n" +
+                    "심연의 전설 카드 팩\n" +
+                    "군단장 카드 선택 상자' WHERE name = '아브렐슈드'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[호감도] 트리시온 - 베아트리스\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '베아트리스'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전 - 몽환의 궁전 부터 드랍\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[호감도] 로아룬 - 아제나\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩' WHERE name = '아제나&이난나'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전 - 오만의 방주부터 드랍\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[업적 달성] 쇼는 계속되어야 한다!\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '바훈투르'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[비밀지도]\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[업적 달성] 비밀의 공간\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '에스더 루테란'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[비밀지도]\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[업적 달성] 비밀의 공간\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '에스더 시엔'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[비밀지도]\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[업적 달성] 비밀의 공간\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '에스더 갈라투르'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전 - 낙원의 문부터 드랍\n" +
+                    "어비스 레이드\n" +
+                    "군단장 레이드\n" +
+                    "[호감도] 속삭이는 작은 섬 - 니나브\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '니나브'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[퀘스트] 상처 입은 새의 눈물\n" +
+                    "전설 카드 팩\n" +
+                    "심연의 전설 카드 팩\n" +
+                    "참고 : 전설카드 선택 팩으로 획득할 수 없음' WHERE name = '카단'");
+            db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전 - 오레하의 우물\n" +
+                    "[업적 달성] 모험의 서 : 파푸니카\n" +
+                    "전설 카드 팩\n" +
+                    "전설 카드 선택 팩\n" +
+                    "심연의 전설 카드 팩' WHERE name = '광기를 잃은 쿠크세이튼'");
+
+        }
     }
-
 
     //UPDATE 카드리스트 카드 수량 수정
     public void UpdateInfoCardNum(int input, int cardId) {

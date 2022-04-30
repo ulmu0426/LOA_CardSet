@@ -407,7 +407,6 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
-
     }
 
     //DB정보 App에 입력
@@ -943,4 +942,5 @@ public class MainPage extends AppCompatActivity {
         }
         return "0";
     }
+
 }
