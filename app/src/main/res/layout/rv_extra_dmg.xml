@@ -405,10 +405,24 @@
         android:autoSizeTextType="uniform"
         android:text="00장 수집(각성단계 합계00) : XX 계열 피해량 증가 +0.00%"
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/XEDBottomLine"
+        app:layout_constraintBottom_toTopOf="@+id/txtXED_cardAwake3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake1" />
+
+    <TextView
+        android:id="@+id/txtXED_cardAwake3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:text="00장 수집(각성단계 합계00) : XX 계열 피해량 증가 +0.00%"
+        android:textSize="15dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/XEDBottomLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake2" />
 
     <View
         android:id="@+id/XEDBottomLine"
@@ -419,6 +433,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtXED_cardAwake3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

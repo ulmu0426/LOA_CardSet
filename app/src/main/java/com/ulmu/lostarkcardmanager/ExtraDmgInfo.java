@@ -208,6 +208,10 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
             result = getDmgP0() + getDmgP1();
         else if (getAwakeSum2() == getHaveAwake())                                   //각성합이 최대 조건 달성시
             result = getDmgP0() + getDmgP1() + getDmgP2();
+        if (trision()) {
+            if ((getAwakeSum2() + 5) == getHaveAwake())
+                result = getDmgP0() + getDmgP1() + getDmgP2() + getDmgP2();
+        }
         result = Float.parseFloat(df.format(result));
         return result;
     }
@@ -225,6 +229,7 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
         if (!getCard7().isEmpty()) needCard++;
         if (!getCard8().isEmpty()) needCard++;
         if (!getCard9().isEmpty()) needCard++;
+        if (trision()) needCard--;
 
         return needCard;
     }
@@ -248,6 +253,7 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
         if (isCheckCard7()) haveCard++;
         if (isCheckCard8()) haveCard++;
         if (isCheckCard9()) haveCard++;
+        if (trision()) haveCard--;
 
         return haveCard;
     }
@@ -473,5 +479,11 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
         dest.writeFloat(dmgP2);
         dest.writeInt(haveCard);
         dest.writeInt(needCard);
+    }
+
+    public boolean trision() {
+        if (getName().equals("트리시온"))
+            return true;
+        return false;
     }
 }

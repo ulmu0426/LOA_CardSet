@@ -134,7 +134,10 @@ public class CardInfo implements Comparable<CardInfo> {
         } else if (awake == 1) {
             return 2;
         } else if (awake == 0) {
-            return 1;
+            if (getGetCard())
+                return 1;
+            else
+                return 2;
         } else
             return 0;
     }

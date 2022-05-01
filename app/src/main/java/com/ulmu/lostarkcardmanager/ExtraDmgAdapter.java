@@ -127,6 +127,11 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                 filterXED.get(position).getAwakeSum1() + ") : " + EDName + ED_TEXT_ + filterXED.get(position).getDmgP1() + ED_PERCENT);
         holder.txtXED_cardAwake2.setText(filterXED.get(position).getNeedCard() + "장 수집(각성단계 합계" +
                 filterXED.get(position).getAwakeSum2() + ") : " + EDName + ED_TEXT_ + filterXED.get(position).getDmgP2() + ED_PERCENT);
+        if (filterXED.get(position).trision()) {
+            setTrisionText(holder.txtXED_cardAwake3);
+            holder.txtXED_cardAwake3.setText((filterXED.get(position).getNeedCard() + 1) + "장 수집(각성단계 합계" +
+                    (filterXED.get(position).getAwakeSum2() + 5) + ") : " + EDName + ED_TEXT_ + filterXED.get(position).getDmgP2() + ED_PERCENT);
+        }
 
         //카드 모두 획득 + 각성도에 따라 배경 색 변환 흰/보라/민트/연두/노랑 순으로(노랑은 완전수집+풀각성)
         isCompleteCardBookBackgroundColor(filterXED.get(position), holder.cvExtraDmgBackground);
@@ -922,7 +927,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard0() > 0) {
                             cardAwake(imgXED_Detail_Card0, filterXED.get(pos).getCard0());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -992,7 +997,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard1() > 0) {
                             cardAwake(imgXED_Detail_Card1, filterXED.get(pos).getCard1());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1063,7 +1068,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard2() > 0) {
                             cardAwake(imgXED_Detail_Card2, filterXED.get(pos).getCard2());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1134,7 +1139,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard3() > 0) {
                             cardAwake(imgXED_Detail_Card3, filterXED.get(pos).getCard3());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1205,7 +1210,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard4() > 0) {
                             cardAwake(imgXED_Detail_Card4, filterXED.get(pos).getCard4());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1276,7 +1281,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard5() > 0) {
                             cardAwake(imgXED_Detail_Card5, filterXED.get(pos).getCard5());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1347,7 +1352,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard6() > 0) {
                             cardAwake(imgXED_Detail_Card6, filterXED.get(pos).getCard6());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1418,7 +1423,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard7() > 0) {
                             cardAwake(imgXED_Detail_Card7, filterXED.get(pos).getCard7());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1489,7 +1494,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard8() > 0) {
                             cardAwake(imgXED_Detail_Card8, filterXED.get(pos).getCard8());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         isCompleteCardBookBackgroundColor(filterXED.get(pos), holder.cvExtraDmgBackground);              //악추피 수집단계에 따라 효과를 줌(색 변경)
@@ -1560,7 +1565,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
                         if (filterXED.get(pos).getAwakeCard9() > 0) {
                             cardAwake(imgXED_Detail_Card9, filterXED.get(pos).getCard9());
-                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다." , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
                         imgDefaultColor(holder.imgXEDCard9, filter, filterXED.get(pos).isCheckCard9(), filterXED.get(pos).getCard9());
@@ -1629,6 +1634,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
         private TextView txtXED_cardAwake0;
         private TextView txtXED_cardAwake1;
         private TextView txtXED_cardAwake2;
+        private TextView txtXED_cardAwake3;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -1659,6 +1665,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
             txtXED_cardAwake0 = itemView.findViewById(R.id.txtXED_cardAwake0);
             txtXED_cardAwake1 = itemView.findViewById(R.id.txtXED_cardAwake1);
             txtXED_cardAwake2 = itemView.findViewById(R.id.txtXED_cardAwake2);
+            txtXED_cardAwake3 = itemView.findViewById(R.id.txtXED_cardAwake3);
         }
     }
 
@@ -1736,7 +1743,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
     // 악추피 도감작을 완성시키면 각성도에 따라 도감의 배경을 각 단계별로 흰색->민트색->초록색->노란색으로 바꿈
     private void isCompleteCardBookBackgroundColor(ExtraDmgInfo XEDInfo, ConstraintLayout cv) {
         if ((XEDInfo.getHaveCard() == XEDInfo.getNeedCard())) {
-            if (XEDInfo.getHaveAwake() == XEDInfo.getAwakeSum2())
+            if (XEDInfo.getHaveAwake() >= XEDInfo.getAwakeSum2())
                 cv.setBackgroundColor(Color.parseColor("#FFF4BD"));   //노랑 - 전부수집+풀각성
             else if (XEDInfo.getHaveAwake() < XEDInfo.getAwakeSum2() && XEDInfo.getHaveAwake() >= XEDInfo.getAwakeSum1())
                 cv.setBackgroundColor(Color.parseColor("#CFFFCC"));//초록 - 전부수집+올4각성 이상
@@ -1756,6 +1763,10 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
             txtXED_NextStep.setText("다음 활성도까지 : " + (extraDmgInfo.getAwakeSum1() - extraDmgInfo.getHaveAwake()) + " 남음");
         } else if (extraDmgInfo.getAwakeSum1() <= extraDmgInfo.getHaveAwake() && extraDmgInfo.getAwakeSum2() > extraDmgInfo.getHaveAwake()) {
             txtXED_NextStep.setText("다음 활성도까지 : " + (extraDmgInfo.getAwakeSum2() - extraDmgInfo.getHaveAwake()) + " 남음");
+            txtXED_NextStep.setVisibility(View.VISIBLE);
+        } else if (extraDmgInfo.trision() && (extraDmgInfo.getAwakeSum2() <= extraDmgInfo.getHaveAwake() && (extraDmgInfo.getAwakeSum2()+5) > extraDmgInfo.getHaveAwake())) {
+            txtXED_NextStep.setText("다음 활성도까지 : " + ((extraDmgInfo.getAwakeSum2()+5) - extraDmgInfo.getHaveAwake()) + " 남음");
+            txtXED_NextStep.setVisibility(View.VISIBLE);
         } else {
             txtXED_NextStep.setVisibility(View.GONE);
         }
@@ -1837,7 +1848,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
                 break;
             }
         }
-        int imageResource = context.getResources().getIdentifier(name, "drawable" , context.getPackageName());
+        int imageResource = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
 
         return imageResource;
     }
@@ -2009,27 +2020,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    // 즐겨찾기 각성도 수정
-    private int getCardSet(String cardName, int awake) {
-        ArrayList<CardSetInfo> cardSetInfo = ((MainPage)MainPage.mainContext).cardSetInfo;
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if(cardSetInfo.get(i).getCard0().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-            if(cardSetInfo.get(i).getCard1().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-            if(cardSetInfo.get(i).getCard2().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-            if(cardSetInfo.get(i).getCard3().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-            if(cardSetInfo.get(i).getCard4().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-            if(cardSetInfo.get(i).getCard5().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-            if(cardSetInfo.get(i).getCard6().equals(cardName))
-                return cardSetInfo.get(i).getHaveAwake();
-        }
-
-        return 0;
+    private void setTrisionText(TextView tv) {
+        tv.setVisibility(View.VISIBLE);
     }
 
 }
