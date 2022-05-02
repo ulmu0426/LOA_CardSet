@@ -1020,7 +1020,7 @@ public class MainPage extends AppCompatActivity {
     private ArrayList<CardInfo> amgubit;
     private int[] amgubitNeedCard;
 
-    //남바절
+    //암구빛
     private void setAmgubit() {
         amgubit = new ArrayList<>();
         for (int i = 0; i < cardInfo.size(); i++) {

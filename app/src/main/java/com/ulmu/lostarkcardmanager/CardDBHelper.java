@@ -185,7 +185,11 @@ public class CardDBHelper extends SQLiteOpenHelper {
         }
         if (oldVersion < 7) {
 
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_LIST, null);
+            try {
+                db.execSQL("DROP TABLE favoriteCardSet");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             db.execSQL("INSERT INTO cardList VALUES (10025, '에버그레이스', 0,0,'','전설',0,'card_legend_evergrace')");
             db.execSQL("INSERT INTO cardList VALUES (20081, '라우리엘', 0,0,'','영웅',0,'card_epic_rauriel')");
