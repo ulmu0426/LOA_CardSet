@@ -47,7 +47,7 @@ sqlite3 데이터베이스파일 명(확장자까지)
 create table (TABLE_NAME) (columnName Type, columnName Type, columnName Type, ...)
 
 (테이블 삭제)
-drop table (TABLE_NAME)
+drop table TABLE_NAME
 
 (테이블 보기)
 select * from (테이블명)

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -97,7 +98,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
-
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         txtJustCardName.setText(filterCardInfo.get(positionGet).getName());
                         imgJustCard.setImageResource(getCardImg(filterCardInfo.get(positionGet).getName()));
                         txtJustCardAwake.setText(filterCardInfo.get(positionGet).getAwake() + "");

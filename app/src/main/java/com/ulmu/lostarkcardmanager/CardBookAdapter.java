@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -220,6 +221,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard0());
@@ -282,6 +284,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard1());
@@ -340,6 +343,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard2());
@@ -398,6 +402,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard3());
@@ -456,6 +461,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard4());
@@ -514,6 +520,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard5());
@@ -572,6 +579,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard6());
@@ -630,6 +638,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard7());
@@ -688,6 +697,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard8());
@@ -746,6 +756,7 @@ public class CardBookAdapter extends RecyclerView.Adapter<CardBookAdapter.ViewHo
                         TextView txtJustCardHave = cardInfoDialog.findViewById(R.id.etxtJustCardHave);
 
                         TextView txtJustCardAcquisition_info = cardInfoDialog.findViewById(R.id.txtJustCardAcquisition_info);
+                        txtJustCardAcquisition_info.setMovementMethod(new ScrollingMovementMethod());
                         Button btnOk = cardInfoDialog.findViewById(R.id.btnOK_JustCard);
 
                         txtJustCardName.setText(filterCardBook.get(positionGet).getCard9());
