@@ -11,10 +11,10 @@ public class ExtraDmgInfo implements Comparable<ExtraDmgInfo>, Parcelable {
 
     private int id;
 
-    //야추피 도감 이름
+    //추피 도감 이름
     private String name;
 
-    //야추피 도감에 필요한 카드
+    //추피 도감에 필요한 카드
     private String card0;
     private String card1;
     private String card2;

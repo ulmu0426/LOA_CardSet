@@ -52,6 +52,10 @@ public class CardBookPage extends AppCompatActivity {
     private boolean checkDefault = true;
     private boolean checkName = false;
     private boolean checkCompleteness = false;
+    private boolean checkOnlyCritical = false;
+    private boolean checkOnlySpeciality = false;
+    private boolean checkOnlyAgility = false;
+    private boolean checkAll = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +131,7 @@ public class CardBookPage extends AppCompatActivity {
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(CardBookPage.this, imgBtnCardBookSortMenu);
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
-                menuInflater.inflate(R.menu.item_sort_menu, popupMenu.getMenu());
-                popupMenu.getMenu().removeItem(R.id.fastCompletenessSort);
-                popupMenu.getMenu().removeItem(R.id.favoriteSort);
+                menuInflater.inflate(R.menu.item_cardbook_sort_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -140,6 +142,10 @@ public class CardBookPage extends AppCompatActivity {
                                 checkDefault = true;
                                 checkName = false;
                                 checkCompleteness = false;
+                                checkOnlyCritical = false;
+                                checkOnlySpeciality = false;
+                                checkOnlyAgility = false;
+                                checkAll = false;
                                 return true;
 
                             case R.id.nameSort:
@@ -148,15 +154,70 @@ public class CardBookPage extends AppCompatActivity {
                                 checkDefault = false;
                                 checkName = true;
                                 checkCompleteness = false;
+                                checkOnlyCritical = false;
+                                checkOnlySpeciality = false;
+                                checkOnlyAgility = false;
+                                checkAll = false;
                                 return true;
 
                             case R.id.completenessSort:
+                                adapter.getCompletenessSort();
 
                                 checkDefault = false;
                                 checkName = false;
                                 checkCompleteness = true;
-                                adapter.getCompletenessSort();
+                                checkOnlyCritical = false;
+                                checkOnlySpeciality = false;
+                                checkOnlyAgility = false;
+                                checkAll = false;
+                                return true;
 
+                            case R.id.onlyCriticalSort:
+                                adapter.getOnlyCriticalSort();
+
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = false;
+                                checkOnlyCritical = true;
+                                checkOnlySpeciality = false;
+                                checkOnlyAgility = false;
+                                checkAll = false;
+                                return true;
+
+                            case R.id.onlySpecialitySort:
+                                adapter.getOnlySpecialitySort();
+
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = false;
+                                checkOnlyCritical = false;
+                                checkOnlySpeciality = true;
+                                checkOnlyAgility = false;
+                                checkAll = false;
+                                return true;
+
+                            case R.id.onlyAgilitySort:
+                                adapter.getOnlyAgilitySort();
+
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = false;
+                                checkOnlyCritical = false;
+                                checkOnlySpeciality = false;
+                                checkOnlyAgility = true;
+                                checkAll = false;
+                                return true;
+
+                            case R.id.allSort:
+                                adapter.getAllSort();
+
+                                checkDefault = false;
+                                checkName = false;
+                                checkCompleteness = false;
+                                checkOnlyCritical = false;
+                                checkOnlySpeciality = false;
+                                checkOnlyAgility = false;
+                                checkAll = true;
                                 return true;
                         }
 
@@ -167,7 +228,6 @@ public class CardBookPage extends AppCompatActivity {
             }
 
         });
-
 
 
     }
@@ -240,5 +300,21 @@ public class CardBookPage extends AppCompatActivity {
 
     public boolean checkCompleteness() {
         return checkCompleteness;
+    }
+
+    public boolean checkOnlyCritical() {
+        return checkOnlyCritical;
+    }
+
+    public boolean checkOnlySpeciality() {
+        return checkOnlySpeciality;
+    }
+
+    public boolean checkOnlyAgility() {
+        return checkOnlyAgility;
+    }
+
+    public boolean checkAll() {
+        return checkAll;
     }
 }

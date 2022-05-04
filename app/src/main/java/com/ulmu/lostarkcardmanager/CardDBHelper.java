@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 9;
 
     //assets 폴더
     private static String DB_PATH = "";
@@ -70,6 +70,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     //추피 테이블 column
     private static final String TABLE_DEMON_EXTRA_DMG = "demon_extra_dmg";  //악추피 테이블 명
     private static final String TABLE_BEAST_EXTRA_DMG = "beast_extra_dmg";  //야추피 테이블 명
+    private static final String TABLE_HUMAN_EXTRA_DMG = "human_extra_dmg";  //인추피 테이블 명
     private static final String COLUMN_DMG_P0 = "dmg_p0";                   //각성합계 1단계 데미지 보너스
     private static final String COLUMN_DMG_P1 = "dmg_p1";                   //각성합계 2단계 데미지 보너스
     private static final String COLUMN_DMG_P2 = "dmg_p2";                   //각성합계 3단계 데미지 보너스
@@ -191,23 +192,39 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
 
-            db.execSQL("INSERT INTO cardList VALUES (10025, '에버그레이스', 0,0,'','전설',0,'card_legend_evergrace')");
-            db.execSQL("INSERT INTO cardList VALUES (20081, '라우리엘', 0,0,'','영웅',0,'card_epic_rauriel')");
-            db.execSQL("INSERT INTO cardList VALUES (20082, '영원의 아크 카양겔', 0,0,'','영웅',0,'card_epic_kayangel');");
-            db.execSQL("INSERT INTO cardList VALUES (30110, '아자키엘', 0,0,'','희귀',0,'card_rare_azakiel')");
-            db.execSQL("INSERT INTO cardList VALUES (30111, '디오게네스', 0,0,'','희귀',0,'card_rare_diogenes')");
-            db.execSQL("INSERT INTO cardList VALUES (30112, '벨루마테', 0,0,'','희귀',0,'card_rare_bellumate')");
-            db.execSQL("INSERT INTO cardList VALUES (30113, '다이나웨일', 0,0,'','희귀',0,'card_rare_dienawhale')");
-            db.execSQL("INSERT INTO cardList VALUES (40060, '하늘 고래', 0,0,'','고급',0,'card_uncommonm_sky_whale')");
-            db.execSQL("INSERT INTO cardList VALUES (40061, '별자리 큰뱀', 0,0,'','고급',0,'card_uncommonm_constellation_bic_snake')");
-            db.execSQL("INSERT INTO cardList VALUES (40062, '티엔', 0,0,'','고급',0,'card_uncommonm_tien')");
-            db.execSQL("INSERT INTO cardList VALUES (40063, '프리우나', 0,0,'','고급',0,'card_uncommonm_priuna')");
-            db.execSQL("INSERT INTO cardList VALUES (40064, '유클리드', 0,0,'','고급',0,'card_uncommonm_euclid')");
-            db.execSQL("INSERT INTO cardList VALUES (40065, '키르케', 0,0,'','고급',0,'card_uncommonm_circe')");
-            db.execSQL("INSERT INTO cardList VALUES (50029, '코니', 0,0,'','일반',0,'card_commonm_connie')");
+            db.execSQL("INSERT INTO cardList VALUES (10025, '에버그레이스', 0,0,'[수집품] 이그네아의 징표(16)\n" +
+                    "[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','전설',0,'card_legend_evergrace')");
+            db.execSQL("INSERT INTO cardList VALUES (20081, '라우리엘', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','영웅',0,'card_epic_rauriel')");
+            db.execSQL("INSERT INTO cardList VALUES (20082, '영원의 아크 카양겔', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','영웅',0,'card_epic_kayangel');");
+            db.execSQL("INSERT INTO cardList VALUES (30110, '아자키엘', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','희귀',0,'card_rare_azakiel')");
+            db.execSQL("INSERT INTO cardList VALUES (30111, '디오게네스', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','희귀',0,'card_rare_diogenes')");
+            db.execSQL("INSERT INTO cardList VALUES (30112, '벨루마테', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','희귀',0,'card_rare_bellumate')");
+            db.execSQL("INSERT INTO cardList VALUES (30113, '다이나웨일', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','희귀',0,'card_rare_dienawhale')");
+            db.execSQL("INSERT INTO cardList VALUES (40060, '하늘 고래', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','고급',0,'card_uncommon_sky_whale')");
+            db.execSQL("INSERT INTO cardList VALUES (40061, '별자리 큰뱀', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','고급',0,'card_uncommon_constellation_bic_snake')");
+            db.execSQL("INSERT INTO cardList VALUES (40062, '티엔', 0,0,'[호감도] 엘가시아 - 티엔\n" +
+                    "[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','고급',0,'card_uncommon_tien')");
+            db.execSQL("INSERT INTO cardList VALUES (40063, '프리우나', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','고급',0,'card_uncommon_priuna')");
+            db.execSQL("INSERT INTO cardList VALUES (40064, '유클리드', 0,0,'[호감도] 엘가시아 - 예언자 유클리드\n" +
+                    "[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','고급',0,'card_uncommon_euclid')");
+            db.execSQL("INSERT INTO cardList VALUES (40065, '키르케', 0,0,'[호감도] 엘가시아 - 예언자 키르케\n" +
+                    "[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','고급',0,'card_uncommon_circe')");
+            db.execSQL("INSERT INTO cardList VALUES (50029, '코니', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
+                    "[어비스던전]카양겔(규율의 카드 팩)','일반',0,'card_common_connie')");
 
-            //신규 카드세트 추가
-            db.execSQL("INSERT INTO cardSet VALUES (36, '플라티나의 주민들', '에버그레이스', '두키킹', '혼재의 추오','','','','', '3세트 : 가디언 토벌 시 가디언에게 받는 피해 7.5% 감소', '3세트(6각성합계) : 헤드어택 성공 시 적에게 주는 피해 % 증가', '3세트(15각성합계) : 헤드어택 성공 시 적에게 주는 피해 10% 증가','','','',6,12,0,'')");
             //신규 카드 도감 추가(치,특)
             db.execSQL("INSERT INTO cardbook_all VALUES(53,'사슬전쟁의 종장',3,'에버그레이스','에스더 루테란', '미스틱', '알비온', '카단', '니나브','','','','','치명')");
             db.execSQL("INSERT INTO cardbook_all VALUES(54,'플라티나의 주민들',2,'에버그레이스','두키킹', '혼재의 추오', '', '', '','','','','','특화')");
@@ -332,6 +349,58 @@ public class CardDBHelper extends SQLiteOpenHelper {
                     "전설 카드 선택 팩\n" +
                     "심연의 전설 카드 팩' WHERE name = '광기를 잃은 쿠크세이튼'");
 
+        }
+
+        if (oldVersion < 8) {
+            try {
+                db.execSQL("CREATE TABLE " + TABLE_HUMAN_EXTRA_DMG +
+                        " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT, card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT" +
+                        ",dmg_p0 REAL,dmg_p1 REAL,dmg_p2 REAL)");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_HUMAN_EXTRA_DMG, null);
+
+            if (cursor.getCount() == 0) {
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(0,'고블리하도다!','고블린 장로 발루','고비우스 24세','네스','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(1,'광기군단','쿠크세이튼','크란테루스','멜피셔스','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(2,'굶주린 늑대의 길','뮨 히다카','오스피어','다르시','빌헬름','레퓌스','하눈','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(3,'그림자도 밟지 말라 했거늘','난민 파밀리아','고블린 장로 발루','베나르','바루투','천둥','샨디','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(4,'기록되지 않은 승부','일리아칸','에스더 시엔','','','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(5,'남부에 떠오른 태양','제레온','루드벡','하템','키에사','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(6,'내 동료가 되어라!','모카모카','검은이빨','칼스 모론토','아나벨','세비엘','포포','다쿠쿠','표류소녀 엠마','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(7,'냠냠꿀꺽 먹고 싶어!','알리페르','아벤','투란','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(8,'라제니스','베아트리스','니나브','알레그로','','','','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(9,'무쇠팔 무쇠다리','바스티안','진화의 군주 카인','시그나투스','솔 그랑데','에스','제이','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(10,'백귀야행','반다','미령','도철','삭월','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(11,'부정한 자를 포박하라!','하백','파한','웨이','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(12,'사슬전쟁의 에스더','샨디','아제나&이난나','니나브','카단','에스더 갈라투르','에스더 루테란','에스더 시엔','','','',0.13,0.13,0.14)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(13,'살아서 다시 보길 바란다','진 매드닉','바에단','시안','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(14,'세계의 방랑자','카드리','에스더 시엔','샨디','진저웨일','표류소녀 엠마','','','','','',0.13,0.13,0.14)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(15,'왕위를 물려받을 준비','슈헤리트','베르하트','','','','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(16,'우마르 맙소사!','우르르','피에르','이마르','에이케르','나베르','이와르','케이사르','바훈투르','에스더 갈라투르','위대한 성 네리아',0.13,0.13,0.14)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(17,'주인님, 명령을 내려주십시오!','사교도 대제사장','바에단','도굴단장 우고','붉은 남작 에디','삭월','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(18,'질병군단','일리아칸','역병 인도자','하르잘','칼라도세','역병군단 바르토','루아브','나크슌','도륙자 아르르','나잔','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(19,'창의 달인','라하르트','진저웨일','몽환의 나이트','엘버하스틱','아르카디아','하이비 집행관','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(20,'창천의 수호자','웨이','객주도사','수령도사','월향도사','파한','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(21,'추락한 태양','라하르트','테르나크','나베갈','지그문트','가룸','','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(22,'필드 보스II','마네스','타르실라','솔 그랑데','브리아레오스','수신 아포라스','고르카그로스','아드린느','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(23,'둥지 위로 날아간 뻐꾸기','에버그레이스','혼재의 추오','','','','','','','','',0.1,0.1,0.1)");
+            }
+        }
+        if (oldVersion < 9) {
+            //오류대응을 위한 db update
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET, null);
+            if (cursor.getCount() != 0) {
+                while (cursor.moveToNext()) {
+                    @SuppressLint("Range")
+                    String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                    if (!name.equals("플라티나의 주민들")){
+                        return;
+                    }
+                }
+                db.execSQL("INSERT INTO cardSet VALUES(36, '플라티나의 주민들', '에버그레이스', '두키킹', '혼재의 추오','','','','', '3세트 : 가디언 토벌 시 가디언에게 받는 피해 7.5% 감소', '3세트(6각성합계) : 헤드어택 성공 시 적에게 주는 피해 % 증가', '3세트(15각성합계) : 헤드어택 성공 시 적에게 주는 피해 10% 증가','','','',6,12,0,'')");
+            }
         }
     }
 

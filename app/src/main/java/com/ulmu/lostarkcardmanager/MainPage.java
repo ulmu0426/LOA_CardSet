@@ -35,6 +35,7 @@ public class MainPage extends AppCompatActivity {
     protected ArrayList<CardSetInfo> cardSetInfo;           //카드 세트 목록
     protected ArrayList<ExtraDmgInfo> beastExtraDmgInfo;    //야추피 목록
     protected ArrayList<ExtraDmgInfo> demonExtraDmgInfo;    //악추피 목록
+    protected ArrayList<ExtraDmgInfo> humanExtraDmgInfo;    //인추피 목록
 
     private TextView txtBtnCardSet;
     private TextView txtBtnCardBook;
@@ -42,7 +43,7 @@ public class MainPage extends AppCompatActivity {
     private RecyclerView rvFavorite;                        //카드세트의 즐겨찾기 리스트를 보여주기 위한 리사이클러뷰
     protected FavoriteAdapter favoriteAdapter;              //즐겨찾기 어뎁터
 
-    private String[] EDName = {"악마", "야수", "정령", "인간", "기계", "불사", "식물", "물질"};
+    private String[] EDName = {"악마", "야수", "인간", "정령", "기계", "불사", "식물", "물질"};
     private ViewPager2 vpXED;
     private ImageView btnVpPrevious;
     private ImageView btnVpNext;
@@ -56,6 +57,7 @@ public class MainPage extends AppCompatActivity {
     private TextView txtBtnCardBook_Draw;           //메뉴 안에 있는 카드 도감 페이지 버튼
     private TextView txtBtnDED_Draw;                //메뉴 안에 있는 악추피 페이지 버튼
     private TextView txtBtnBED_Draw;                //메뉴 안에 있는 야추피 페이지 버튼
+    private TextView txtBtnHED_Draw;                //메뉴 안에 있는 야추피 페이지 버튼
     private TextView txtBtnCardList;                //메뉴 안에 있는 카드 목록 페이지 버튼
 
     //메인화면 값들
@@ -77,6 +79,7 @@ public class MainPage extends AppCompatActivity {
 
     private static final String TABLE_DEMON_EXTRA_DMG = "demon_extra_dmg";  //악추피 테이블 명
     private static final String TABLE_BEAST_EXTRA_DMG = "beast_extra_dmg";  //야추피 테이블 명
+    private static final String TABLE_HUMAN_EXTRA_DMG = "human_extra_dmg";  //야추피 테이블 명
     int goal = 0;
 
     @Override
@@ -377,10 +380,12 @@ public class MainPage extends AppCompatActivity {
         //추피 DB 정보 ArrayList 전달
         demonExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_DEMON_EXTRA_DMG);
         beastExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_BEAST_EXTRA_DMG);
+        humanExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_HUMAN_EXTRA_DMG);
 
         extraDmgList = new ArrayList<>();
         extraDmgList.add(demonExtraDmgInfo);
         extraDmgList.add(beastExtraDmgInfo);
+        extraDmgList.add(humanExtraDmgInfo);
 
         extraDmgViewPagerAdapter = new MainPageExtraDmgVPAdapter(this, extraDmgList);
         vpXED.setAdapter(extraDmgViewPagerAdapter);
@@ -478,6 +483,16 @@ public class MainPage extends AppCompatActivity {
                 drawerLayout_Main.closeDrawer(Gravity.LEFT);
             }
         });
+        txtBtnHED_Draw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = getEDIndex("인간");
+                intentED.putExtra("EDName", "인간");
+                intentED.putParcelableArrayListExtra("EDList", extraDmgList.get(index));
+                startActivity(intentED);
+                drawerLayout_Main.closeDrawer(Gravity.LEFT);
+            }
+        });
 
         //메인 페이지
         //카드 세트로 이동.
@@ -541,6 +556,7 @@ public class MainPage extends AppCompatActivity {
         txtBtnCardBook_Draw = (TextView) findViewById(R.id.txtBtnCardBook_Draw);
         txtBtnDED_Draw = (TextView) findViewById(R.id.txtBtnDED_Draw);
         txtBtnBED_Draw = (TextView) findViewById(R.id.txtBtnBED_Draw);
+        txtBtnHED_Draw = (TextView) findViewById(R.id.txtBtnHED_Draw);
 
     }
 

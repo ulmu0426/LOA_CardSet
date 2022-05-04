@@ -1614,7 +1614,7 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return extraDmgInfo.size();
+        return filterXED.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

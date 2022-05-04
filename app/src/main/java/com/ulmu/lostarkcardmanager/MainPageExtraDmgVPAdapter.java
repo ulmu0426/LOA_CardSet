@@ -74,7 +74,7 @@ public class MainPageExtraDmgVPAdapter extends RecyclerView.Adapter<MainPageExtr
     }
 
     private void setExtraDmgName() {
-        String[] EDName = {"악마", "야수", "정령", "인간", "기계", "불사", "식물", "물질"};
+        String[] EDName = {"악마", "야수", "인간", "정령", "기계", "불사", "식물", "물질"};
         extraDmgName = new ArrayList<>();
         for (int i = 0; i < getItemCount(); i++) {
             extraDmgName.add(EDName[i]);

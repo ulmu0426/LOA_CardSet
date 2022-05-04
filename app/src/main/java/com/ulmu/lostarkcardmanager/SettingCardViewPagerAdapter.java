@@ -263,10 +263,10 @@ public class SettingCardViewPagerAdapter extends RecyclerView.Adapter<SettingCar
         Collections.sort(cardInfo, new Comparator<CardInfo>() {
             @Override
             public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getAcquired() <= o2.getAcquired())
-                    return 1;
-                else
+                if (o1.getAcquired() >= o2.getAcquired())
                     return -1;
+                else
+                    return 1;
             }
         });
         notifyDataSetChanged();

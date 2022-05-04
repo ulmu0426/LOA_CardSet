@@ -179,11 +179,7 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
 
 
                                 holder.txtAwakeAndHave.setText("각성 : " + awake + "  보유 : " + number);
-                                ;
-                                //즐겨찾기 DB Update, 및 갱신
-                                favoriteCardSetUpdate(searchCardSet(filterCardInfo.get(positionGet).getName()));
 
-                                haveStatUpdate();
                                 notifyDataSetChanged();
                                 awakeHaveDialog.cancel();
                             }
@@ -214,7 +210,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
                     Toast.makeText(context, "해당 카드는 각성도가 존재하여 획득취소되지 않습니다.", Toast.LENGTH_LONG).show();
                 }
 
-                haveStatUpdate();
             }
         });
 
@@ -280,16 +275,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
         }
     }
 
-    private boolean isChecked(int check) {
-        boolean tf = false;
-        if (check == 0) {
-            tf = false;
-        } else if (check == 1) {
-            tf = true;
-        }
-        return tf;
-    }
-
     private int matchIndex(int id) {
         int index = 0;
         for (int i = 0; i < cardInfo.size(); i++) {
@@ -316,28 +301,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             return 15;
         } else
             return 0;
-    }
-
-    //스텟, 도감 달성 개수 업데이트 메소드
-    private void haveStatUpdate() {
-        int[] haveStat = new int[]{0, 0, 0};
-
-        for (int i = 0; i < haveStat.length; i++) {
-            for (int j = 0; j < cardBookInfo.size(); j++) {
-                if (cardBookInfo.get(j).getOption().equals(STAT[i]) && isCompleteCardBook(cardBookInfo.get(j))) {
-                    haveStat[i] += cardBookInfo.get(j).getValue();
-                }
-            }
-        }
-        ((MainPage) MainPage.mainContext).setCardBookStatInfo(haveStat);
-    }
-
-    // DB에 도감을 완성 시킨 경우 true else false
-    private boolean isCompleteCardBook(CardBookInfo cardBookInfo) {
-        if (cardBookInfo.getHaveCard() == cardBookInfo.getNeedCard())
-            return true;
-        else
-            return false;
     }
 
     //변경한 카드의 이름이 포함된 카드세트 찾기
@@ -374,19 +337,6 @@ public class SettingCardAdapter extends RecyclerView.Adapter<SettingCardAdapter.
             }
         }
         return tempCardSet;
-    }
-
-    //즐겨찾기된 cardSet가 있다면 해당 카드세트의 각성도 정보 수정 및 DB갱신
-    private void favoriteCardSetUpdate(ArrayList<CardSetInfo> cardSetInfo) {
-        if (cardSetInfo.isEmpty())
-            return;
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            for (int j = 0; j < favoriteCardSetInfo.size(); j++) {
-                if (favoriteCardSetInfo.get(j).getName().equals(cardSetInfo.get(i).getName())) {
-                    favoriteAdapter.notifyDataSetChanged();
-                }
-            }
-        }
     }
 
 }

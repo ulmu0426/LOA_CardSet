@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/defaultSort"
+            android:title="기본 정렬" />
+        <item
+            android:id="@+id/nameSort"
+            android:title="이름 정렬" />
+        <item
+            android:id="@+id/completenessSort"
+            android:title="도감 완성도 순 정렬" />
+        <item
+            android:id="@+id/onlyCriticalSort"
+            android:title="치명 도감만 보기" />
+        <item
+            android:id="@+id/onlySpecialitySort"
+            android:title="특화 도감만 보기" />
+        <item
+            android:id="@+id/onlyAgilitySort"
+            android:title="신속 도감만 보기" />
+        <item
+            android:id="@+id/allSort"
+            android:title="전체보기" />
+    </group>
+
+</menu>
