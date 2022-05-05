@@ -122,6 +122,27 @@ public class CardInfo implements Comparable<CardInfo> {
     }
 
     //각성 수치에 따라 다음 각성까지 필요한 카드 수
+    public int needCard() {
+        if (awake == 5) {
+            return 0;
+        } else if (awake == 4) {
+            return 5 - getNum();
+        } else if (awake == 3) {
+            return 4 - getNum();
+        } else if (awake == 2) {
+            return 3 - getNum();
+        } else if (awake == 1) {
+            return 2 - getNum();
+        } else if (awake == 0) {
+            if (getGetCard())
+                return 1 - getNum();
+            else
+                return 2 - getNum();
+        } else
+            return 0;
+    }
+
+    //각성 수치에 따라 다음 각성까지 필요한 카드 수
     public int nextAwake() {
         if (awake == 5) {
             return 0;

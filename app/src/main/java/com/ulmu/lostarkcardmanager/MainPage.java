@@ -779,7 +779,6 @@ public class MainPage extends AppCompatActivity {
             }
         }
 
-
         segubit.remove(minIndex);
 
         Collections.sort(segubit, new Comparator<CardInfo>() {
@@ -793,9 +792,7 @@ public class MainPage extends AppCompatActivity {
         });
         if (goal == 18) {
             int i = 0;
-            while (!(getHaveAwake(segubit) >= goal)) {
-                if ((getHaveAwake(segubit) >= goal))
-                    break;
+            while (getHaveAwake(segubit) < goal) {
                 //현재 인덱스의 카드보다 각성도가 낮거나 보유카드가 작은 카드가 있는 경우 continue;
                 if (smallerThanOtherCardsNextAwake(i, segubit)) {
                     i++;
@@ -804,18 +801,18 @@ public class MainPage extends AppCompatActivity {
                     }
                     continue;
                 }
-
-                //각성에 필요한 카드가 충분한 경우
-                if (segubit.get(i).getNum() >= segubit.get(i).nextAwake()) {
-                    segubit.get(i).setNum(segubit.get(i).getNum() - segubit.get(i).nextAwake());
-                    segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
-                } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
-                else if (segubit.get(i).getNum() < segubit.get(i).nextAwake()) {
-                    segubitNeedCard[i] = segubitNeedCard[i] + (segubit.get(i).nextAwake() - segubit.get(i).getNum());
-                    segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
-                    segubit.get(i).setNum(0);
+                if (segubit.get(i).getAwake() < 5) {
+                    //각성에 필요한 카드가 충분한 경우
+                    if (segubit.get(i).getNum() >= segubit.get(i).nextAwake()) {
+                        segubit.get(i).setNum(segubit.get(i).getNum() - segubit.get(i).nextAwake());
+                        segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
+                    } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
+                    else if (segubit.get(i).getNum() < segubit.get(i).nextAwake()) {
+                        segubitNeedCard[i] += (segubit.get(i).nextAwake() - segubit.get(i).getNum());
+                        segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
+                        segubit.get(i).setNum(0);
+                    }
                 }
-
                 i++;
 
                 //무한루프(목표 각성도가 될때까지)
@@ -832,13 +829,20 @@ public class MainPage extends AppCompatActivity {
 
     //해당 인덱스의 카드보다 다음 각성에 필요한 카드 수가 적은 경우 true
     private boolean smallerThanOtherCardsNextAwake(int index, ArrayList<CardInfo> seguNamba) {
-        if (seguNamba.get(index).nextAwake() - seguNamba.get(index).getNum() <= 0)
+        //현재 카드의 보유카드 량이 다음 각성에 필요한 카드수보다 많은 경우
+        if (seguNamba.get(index).needCard() <= 0)
             return false;
+
         for (int i = 0; i < seguNamba.size(); i++) {
             if (i == index)
                 continue;
-            if (seguNamba.get(i).nextAwake() - seguNamba.get(i).getNum() < seguNamba.get(index).nextAwake() - seguNamba.get(index).getNum()) {
-                return true;
+
+            //i번째 카드 중 필요 카드 수가 더 적은 카드가 있는 경우
+            if (seguNamba.get(i).needCard() < seguNamba.get(index).needCard()) {
+                if (seguNamba.get(i).getAwake() == 5)
+                    return false;
+                else
+                    return true;
             }
         }
         return false;
@@ -976,15 +980,17 @@ public class MainPage extends AppCompatActivity {
                     continue;
                 }
 
-                //각성에 필요한 카드가 충분한 경우
-                if (namba.get(i).getNum() >= namba.get(i).nextAwake()) {
-                    namba.get(i).setNum(namba.get(i).getNum() - namba.get(i).nextAwake());
-                    namba.get(i).setAwake(namba.get(i).getAwake() + 1);
-                } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
-                else if (namba.get(i).getNum() < namba.get(i).nextAwake()) {
-                    nambaNeedCard[i] = nambaNeedCard[i] + (namba.get(i).nextAwake() - namba.get(i).getNum());
-                    namba.get(i).setAwake(namba.get(i).getAwake() + 1);
-                    namba.get(i).setNum(0);
+                if (namba.get(i).getAwake() < 5) {
+                    //각성에 필요한 카드가 충분한 경우
+                    if (namba.get(i).getNum() >= namba.get(i).nextAwake()) {
+                        namba.get(i).setNum(namba.get(i).getNum() - namba.get(i).nextAwake());
+                        namba.get(i).setAwake(namba.get(i).getAwake() + 1);
+                    } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
+                    else if (namba.get(i).getNum() < namba.get(i).nextAwake()) {
+                        nambaNeedCard[i] = nambaNeedCard[i] + (namba.get(i).nextAwake() - namba.get(i).getNum());
+                        namba.get(i).setAwake(namba.get(i).getAwake() + 1);
+                        namba.get(i).setNum(0);
+                    }
                 }
 
                 i++;
@@ -1130,17 +1136,18 @@ public class MainPage extends AppCompatActivity {
                     continue;
                 }
 
-                //각성에 필요한 카드가 충분한 경우
-                if (amgubit.get(i).getNum() >= amgubit.get(i).nextAwake()) {
-                    amgubit.get(i).setNum(amgubit.get(i).getNum() - amgubit.get(i).nextAwake());
-                    amgubit.get(i).setAwake(amgubit.get(i).getAwake() + 1);
-                } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
-                else if (amgubit.get(i).getNum() < amgubit.get(i).nextAwake()) {
-                    amgubitNeedCard[i] = amgubitNeedCard[i] + (amgubit.get(i).nextAwake() - amgubit.get(i).getNum());
-                    amgubit.get(i).setAwake(amgubit.get(i).getAwake() + 1);
-                    amgubit.get(i).setNum(0);
+                if (amgubit.get(i).getAwake() < 5) {
+                    //각성에 필요한 카드가 충분한 경우
+                    if (amgubit.get(i).getNum() >= amgubit.get(i).nextAwake()) {
+                        amgubit.get(i).setNum(amgubit.get(i).getNum() - amgubit.get(i).nextAwake());
+                        amgubit.get(i).setAwake(amgubit.get(i).getAwake() + 1);
+                    } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
+                    else if (amgubit.get(i).getNum() < amgubit.get(i).nextAwake()) {
+                        amgubitNeedCard[i] = amgubitNeedCard[i] + (amgubit.get(i).nextAwake() - amgubit.get(i).getNum());
+                        amgubit.get(i).setAwake(amgubit.get(i).getAwake() + 1);
+                        amgubit.get(i).setNum(0);
+                    }
                 }
-
                 i++;
 
                 //무한루프(목표 각성도가 될때까지)
@@ -1157,7 +1164,7 @@ public class MainPage extends AppCompatActivity {
 
     private int nowAmgubit() {
         for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (cardSetInfo.get(i).getName().equals("남겨진 바람의 절벽")) {
+            if (cardSetInfo.get(i).getName().equals("카제로스의 군단장")) {
                 return cardSetInfo.get(i).getHaveAwake();
             }
         }
