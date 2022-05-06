@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class CardDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "loaCardDb.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
     //assets 폴더
     private static String DB_PATH = "";
@@ -401,6 +401,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 }
                 db.execSQL("INSERT INTO cardSet VALUES(36, '플라티나의 주민들', '에버그레이스', '두키킹', '혼재의 추오','','','','', '3세트 : 가디언 토벌 시 가디언에게 받는 피해 7.5% 감소', '3세트(6각성합계) : 헤드어택 성공 시 적에게 주는 피해 % 증가', '3세트(15각성합계) : 헤드어택 성공 시 적에게 주는 피해 10% 증가','','','',6,12,0,'')");
             }
+        }
+        if (oldVersion < 10) {
+            db.execSQL("UPDATE " + TABLE_BEAST_EXTRA_DMG + " SET card3 = '페데리코', card4 = '데메타르' WHERE id = 7");
         }
     }
 
