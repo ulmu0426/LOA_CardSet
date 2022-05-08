@@ -36,6 +36,25 @@ public class CardSetInfo implements Comparable<CardSetInfo> {
         this.favorite = false;
     }
 
+    public CardSetInfo(CardSetInfo selectCardSet) {
+        this.cardInfo = ((MainPage) MainPage.mainContext).cardInfo;
+        this.id = selectCardSet.getId();
+        this.name = selectCardSet.getName();
+        this.card0 = selectCardSet.getCard0();
+        this.card1 = selectCardSet.getCard1();
+        this.card2 = selectCardSet.getCard2();
+        this.card3 = selectCardSet.getCard3();
+        this.card4 = selectCardSet.getCard4();
+        this.card5 = selectCardSet.getCard5();
+        this.card6 = selectCardSet.getCard6();
+        this.needAwake0 = selectCardSet.getNeedAwake0();
+        this.needAwake1 = selectCardSet.getNeedAwake1();
+        this.needAwake2 = selectCardSet.getNeedAwake2();
+    }
+
+    public ArrayList<CardInfo> getCardInfo() {
+        return cardInfo;
+    }
 
     public int getId() {
         return id;

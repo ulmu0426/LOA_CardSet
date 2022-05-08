@@ -225,20 +225,19 @@ public class CardDBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO cardList VALUES (50029, '코니', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
                     "[어비스던전]카양겔(규율의 카드 팩)','일반',0,'card_common_connie')");
 
-            //신규 카드 도감 추가(치,특)
             db.execSQL("INSERT INTO cardbook_all VALUES(53,'사슬전쟁의 종장',3,'에버그레이스','에스더 루테란', '미스틱', '알비온', '카단', '니나브','','','','','치명')");
             db.execSQL("INSERT INTO cardbook_all VALUES(54,'플라티나의 주민들',2,'에버그레이스','두키킹', '혼재의 추오', '', '', '','','','','','특화')");
-            //악추피 추가
+
             db.execSQL("INSERT INTO demon_extra_dmg VALUES(23,'엘베리아의 기적','에버그레이스','라하르트', '에아달린', '아델', '지그문트', '가룸','','','','',0.1,0.1,0.1)");
-            //야추피 추가
+
             db.execSQL("INSERT INTO beast_extra_dmg VALUES(23,'빛의 생명체들','다이나웨일','하늘 고래', '별자리 큰뱀', '코니', '', '','','','','',0.06,0.07,0.07)");
 
-            //트리시온 카드 수정
+
             db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
             db.execSQL("UPDATE " + TABLE_BEAST_EXTRA_DMG + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
             db.execSQL("UPDATE " + TABLE_CARD_SET + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
 
-            //카드 수집 경로 추가
+
             db.execSQL("UPDATE " + TABLE_CARD_LIST + " SET acquisition_info = '[던전] 어비스 던전\n" +
                     "어비스 레이드\n" +
                     "군단장 레이드\n" +
@@ -389,7 +388,6 @@ public class CardDBHelper extends SQLiteOpenHelper {
             }
         }
         if (oldVersion < 9) {
-            //오류대응을 위한 db update
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET, null);
             if (cursor.getCount() != 0) {
                 while (cursor.moveToNext()) {

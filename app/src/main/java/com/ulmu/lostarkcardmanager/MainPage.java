@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -67,7 +68,12 @@ public class MainPage extends AppCompatActivity {
 
     public static Context mainContext;
 
+
     private Button btnGuide;
+
+    private CardSetNeedCardInfo cardSetNeedCardInfo;
+    private CardSetInfo selectedCardSet;
+
     private Button btnSegubit;
     private String[] segubitName = {"샨디", "아제나&이난나", "니나브", "카단", "바훈투르", "실리안", "웨이"};
     private Button btnNamba;
@@ -99,6 +105,29 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+        //DB정보 가져오기
+        try {
+            setInit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //카드 DB 정보 ArrayList 전달
+        cardInfo = cardDBHelper.getCardInfo_All();
+        //카드 세트, 즐겨찾기 카드세트, 카드 도감 DB 정보 ArrayList 전달
+        cardSetInfo = cardDBHelper.getCardSetInfo();
+        cardBookInfo = cardDBHelper.getCardBookInfo();
+
+        //추피 DB 정보 ArrayList 전달
+        demonExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_DEMON_EXTRA_DMG);
+        beastExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_BEAST_EXTRA_DMG);
+        humanExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_HUMAN_EXTRA_DMG);
+
+        extraDmgList = new ArrayList<>();
+        extraDmgList.add(demonExtraDmgInfo);
+        extraDmgList.add(beastExtraDmgInfo);
+        extraDmgList.add(humanExtraDmgInfo);
+
 
         btnSegubit.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -115,9 +144,11 @@ public class MainPage extends AppCompatActivity {
                 segubitDialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
 
                 goal = nextSegubit();
+                selectCardSet("세상을 구하는 빛");
+                cardSetNeedCardInfo = new CardSetNeedCardInfo(selectedCardSet, goal);
 
                 TextView txtSegubitAwake = segubitDialog.findViewById(R.id.txtSegubitAwake);
-                txtSegubitAwake.setText("현재 각성 합계 : " + nowSegubit());
+                txtSegubitAwake.setText("현재 각성 합계 : " + cardSetNeedCardInfo.getHaveAwake());
                 TextView txtGoal = segubitDialog.findViewById(R.id.txtGoal);
                 txtGoal.setText(goal + "각성에 필요한 세구빛 카드 수");
 
@@ -130,13 +161,13 @@ public class MainPage extends AppCompatActivity {
                 TextView txtBahunturAwake = segubitDialog.findViewById(R.id.txtBahunturAwake);
                 TextView txtSillianAwake = segubitDialog.findViewById(R.id.txtSillianAwake);
                 TextView txtWeiAwake = segubitDialog.findViewById(R.id.txtWeiAwake);
-                txtShandiAwake.setText(findAwake(segubitName[0]));
-                txtAzenaInannaAwake.setText(findAwake(segubitName[1]));
-                txtNinabAwake.setText(findAwake(segubitName[2]));
-                txtKadanAwake.setText(findAwake(segubitName[3]));
-                txtBahunturAwake.setText(findAwake(segubitName[4]));
-                txtSillianAwake.setText(findAwake(segubitName[5]));
-                txtWeiAwake.setText(findAwake(segubitName[6]));
+                txtShandiAwake.setText(cardSetNeedCardInfo.getAwakeCard0()+"");
+                txtAzenaInannaAwake.setText(cardSetNeedCardInfo.getAwakeCard1()+"");
+                txtNinabAwake.setText(cardSetNeedCardInfo.getAwakeCard2()+"");
+                txtKadanAwake.setText(cardSetNeedCardInfo.getAwakeCard3()+"");
+                txtBahunturAwake.setText(cardSetNeedCardInfo.getAwakeCard4()+"");
+                txtSillianAwake.setText(cardSetNeedCardInfo.getAwakeCard5()+"");
+                txtWeiAwake.setText(cardSetNeedCardInfo.getAwakeCard6()+"");
                 //현재 보유카드
                 TextView txtShandiNum = segubitDialog.findViewById(R.id.txtShandiNum);
                 TextView txtAzenaInannaNum = segubitDialog.findViewById(R.id.txtAzenaInannaNum);
@@ -145,13 +176,13 @@ public class MainPage extends AppCompatActivity {
                 TextView txtBahunturNum = segubitDialog.findViewById(R.id.txtBahunturNum);
                 TextView txtSillianNum = segubitDialog.findViewById(R.id.txtSillianNum);
                 TextView txtWeiNum = segubitDialog.findViewById(R.id.txtWeiNum);
-                txtShandiNum.setText(findNum(segubitName[0]));
-                txtAzenaInannaNum.setText(findNum(segubitName[1]));
-                txtNinabNum.setText(findNum(segubitName[2]));
-                txtKadanNum.setText(findNum(segubitName[3]));
-                txtBahunturNum.setText(findNum(segubitName[4]));
-                txtSillianNum.setText(findNum(segubitName[5]));
-                txtWeiNum.setText(findNum(segubitName[6]));
+                txtShandiNum.setText(cardSetNeedCardInfo.getNumCard0()+"");
+                txtAzenaInannaNum.setText(cardSetNeedCardInfo.getNumCard1()+"");
+                txtNinabNum.setText(cardSetNeedCardInfo.getNumCard2()+"");
+                txtKadanNum.setText(cardSetNeedCardInfo.getNumCard3()+"");
+                txtBahunturNum.setText(cardSetNeedCardInfo.getNumCard4()+"");
+                txtSillianNum.setText(cardSetNeedCardInfo.getNumCard5()+"");
+                txtWeiNum.setText(cardSetNeedCardInfo.getNumCard6()+"");
 
 
                 segubitGoal(goal);
@@ -163,16 +194,16 @@ public class MainPage extends AppCompatActivity {
                 TextView txtBahunturNeedNum = segubitDialog.findViewById(R.id.txtBahunturNeedNum);
                 TextView txtSillianNeedNum = segubitDialog.findViewById(R.id.txtSillianNeedNum);
                 TextView txtWeiNeedNum = segubitDialog.findViewById(R.id.txtWeiNeedNum);
-                txtShandiNeedNum.setText(findSegubitNeedCard(segubit, segubitName[0]) + "");
-                txtAzenaInannaNeedNum.setText(findSegubitNeedCard(segubit, segubitName[1]) + "");
-                txtNinabNeedNum.setText(findSegubitNeedCard(segubit, segubitName[2]) + "");
-                txtKadanNeedNum.setText(findSegubitNeedCard(segubit, segubitName[3]) + "");
-                txtBahunturNeedNum.setText(findSegubitNeedCard(segubit, segubitName[4]) + "");
-                txtSillianNeedNum.setText(findSegubitNeedCard(segubit, segubitName[5]) + "");
-                txtWeiNeedNum.setText(findSegubitNeedCard(segubit, segubitName[6]) + "");
+                txtShandiNeedNum.setText(cardSetNeedCardInfo.getCard0NeedCard() + "");
+                txtAzenaInannaNeedNum.setText(cardSetNeedCardInfo.getCard1NeedCard() + "");
+                txtNinabNeedNum.setText(cardSetNeedCardInfo.getCard2NeedCard() + "");
+                txtKadanNeedNum.setText(cardSetNeedCardInfo.getCard3NeedCard() + "");
+                txtBahunturNeedNum.setText(cardSetNeedCardInfo.getCard4NeedCard() + "");
+                txtSillianNeedNum.setText(cardSetNeedCardInfo.getCard5NeedCard() + "");
+                txtWeiNeedNum.setText(cardSetNeedCardInfo.getCard6NeedCard() + "");
 
                 TextView txtNeedCard = segubitDialog.findViewById(R.id.txtNeedCard);
-                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + Arrays.stream(segubitNeedCard).sum());
+                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + cardSetNeedCardInfo.getCardSetNeedCardSum());
 
                 segubitDialog.show();
             }
@@ -364,28 +395,6 @@ public class MainPage extends AppCompatActivity {
             preferences.edit().putBoolean("isFirstRun", false).apply();
         }
 
-        //DB정보 가져오기
-        try {
-            setInit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //카드 DB 정보 ArrayList 전달
-        cardInfo = cardDBHelper.getCardInfo_All();
-        //카드 세트, 즐겨찾기 카드세트, 카드 도감 DB 정보 ArrayList 전달
-        cardSetInfo = cardDBHelper.getCardSetInfo();
-        cardBookInfo = cardDBHelper.getCardBookInfo();
-
-        //추피 DB 정보 ArrayList 전달
-        demonExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_DEMON_EXTRA_DMG);
-        beastExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_BEAST_EXTRA_DMG);
-        humanExtraDmgInfo = cardDBHelper.getExtraDmgInfo(TABLE_HUMAN_EXTRA_DMG);
-
-        extraDmgList = new ArrayList<>();
-        extraDmgList.add(demonExtraDmgInfo);
-        extraDmgList.add(beastExtraDmgInfo);
-        extraDmgList.add(humanExtraDmgInfo);
 
         extraDmgViewPagerAdapter = new MainPageExtraDmgVPAdapter(this, extraDmgList);
         vpXED.setAdapter(extraDmgViewPagerAdapter);
@@ -656,6 +665,19 @@ public class MainPage extends AppCompatActivity {
         }
 
     };
+
+
+    private void selectCardSet(String cardSetName) {
+        selectedCardSet = new CardSetInfo();
+        for (int i = 0; i < cardSetInfo.size(); i++) {
+            if (cardSetInfo.get(i).getName().equals(cardSetName)) {
+                Log.d("test", "selectCardSet: " + cardSetInfo.get(i));
+                selectedCardSet = cardSetInfo.get(i);
+            }
+
+        }
+    }
+
 
     private ArrayList<CardInfo> segubit;
     private int[] segubitNeedCard;
