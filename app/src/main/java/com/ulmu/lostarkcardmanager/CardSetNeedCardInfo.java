@@ -84,9 +84,9 @@ public class CardSetNeedCardInfo extends CardSetInfo {
     private void setCardList() {
         tempCardList = new ArrayList<>();
         ArrayList<CardInfo> cardInfo = super.getCardInfo();
-        CardInfo tempInfo = new CardInfo();
         for (int i = 0; i < cardInfo.size(); i++) {
-            if(getCard0().equals(cardInfo.get(i).getName())){
+            CardInfo tempInfo = new CardInfo();
+            if (getCard0().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -94,10 +94,11 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
-            if(getCard1().equals(((MainPage) MainPage.mainContext).cardInfo.get(i).getName())){
+            if (getCard1().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -105,10 +106,11 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
-            if(getCard2().equals(((MainPage) MainPage.mainContext).cardInfo.get(i).getName())){
+            if (getCard2().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -116,10 +118,11 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
-            if(getCard3().equals(((MainPage) MainPage.mainContext).cardInfo.get(i).getName())){
+            if (getCard3().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -127,10 +130,11 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
-            if(getCard4().equals(((MainPage) MainPage.mainContext).cardInfo.get(i).getName())){
+            if (getCard4().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -138,10 +142,11 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
-            if(getCard5().equals(((MainPage) MainPage.mainContext).cardInfo.get(i).getName())){
+            if (getCard5().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -149,10 +154,11 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
-            if(getCard6().equals(((MainPage) MainPage.mainContext).cardInfo.get(i).getName())){
+            if (getCard6().equals(cardInfo.get(i).getName())) {
                 tempInfo.setId(cardInfo.get(i).getId());
                 tempInfo.setName(cardInfo.get(i).getName());
                 tempInfo.setAwake(cardInfo.get(i).getAwake());
@@ -160,9 +166,13 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 tempInfo.setGetCard(cardInfo.get(i).getGetCard());
                 tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
                 tempInfo.setPath(cardInfo.get(i).getPath());
+                Log.v("test", tempInfo.getName());
                 tempCardList.add(tempInfo);
                 continue;
             }
+        }
+        for (int i = 0; i < tempCardList.size(); i++) {
+            Log.v("test", "tempCardList"+i+tempCardList.get(i).getName());
         }
 
     }
@@ -175,6 +185,9 @@ public class CardSetNeedCardInfo extends CardSetInfo {
             goalAwake[0] = getNeedAwake1();
             goalAwake[1] = getNeedAwake2();
         }
+
+        Log.v("test", "goalAwake[0]" + goalAwake[0]);
+        Log.v("test", "goalAwake[1]" + goalAwake[1]);
     }
 
     private void setCardSetNeedCard(int goal) {
@@ -205,6 +218,13 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 cardSetNeedCard[i] = tempCardList.get(i).awakeMax();
             }
         }
+        Log.v("test", tempCardList.get(0).getName() + "cardSetNeedCard0 : " + cardSetNeedCard[0]);
+        Log.v("test", tempCardList.get(1).getName() + "cardSetNeedCard1 : " + cardSetNeedCard[1]);
+        Log.v("test", tempCardList.get(2).getName() + "cardSetNeedCard2 : " + cardSetNeedCard[2]);
+        Log.v("test", tempCardList.get(3).getName() + "cardSetNeedCard3 : " + cardSetNeedCard[3]);
+        Log.v("test", tempCardList.get(4).getName() + "cardSetNeedCard4 : " + cardSetNeedCard[4]);
+        Log.v("test", tempCardList.get(5).getName() + "cardSetNeedCard5 : " + cardSetNeedCard[5]);
+
     }
 
     //카드세트의 포함 카드가 6장 이상인 경우(각성도가 제일 낮은 카드 한장을 빼야 함)

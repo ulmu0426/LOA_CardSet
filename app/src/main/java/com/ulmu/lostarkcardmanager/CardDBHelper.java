@@ -461,7 +461,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<CardInfo> getCardInfo_All() {     //모든카드 리스트 가져오기
+    public ArrayList<CardInfo> getCardInfo() {     //모든카드 리스트 가져오기
         ArrayList<CardInfo> getInfo = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 

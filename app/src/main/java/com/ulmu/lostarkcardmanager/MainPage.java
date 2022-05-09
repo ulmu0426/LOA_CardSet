@@ -24,9 +24,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class MainPage extends AppCompatActivity {
     private CardDBHelper cardDBHelper;
@@ -75,11 +72,8 @@ public class MainPage extends AppCompatActivity {
     private CardSetInfo selectedCardSet;
 
     private Button btnSegubit;
-    private String[] segubitName = {"샨디", "아제나&이난나", "니나브", "카단", "바훈투르", "실리안", "웨이"};
     private Button btnNamba;
-    private String[] nambaName = {"아만", "세리아", "집행관 솔라스", "국왕 실리안", "카마인", "데런 아만"};
     private Button btnAmgubit;
-    private String[] amgubitName = {"발탄", "일리아칸", "비아키스", "아브렐슈드", "카멘", "쿠크세이튼"};
 
     protected SharedPreferences preferences;        //최초 실행시 가이드 페이지 호출을 위한 변수
 
@@ -113,7 +107,7 @@ public class MainPage extends AppCompatActivity {
         }
 
         //카드 DB 정보 ArrayList 전달
-        cardInfo = cardDBHelper.getCardInfo_All();
+        cardInfo = cardDBHelper.getCardInfo();
         //카드 세트, 즐겨찾기 카드세트, 카드 도감 DB 정보 ArrayList 전달
         cardSetInfo = cardDBHelper.getCardSetInfo();
         cardBookInfo = cardDBHelper.getCardBookInfo();
@@ -152,7 +146,6 @@ public class MainPage extends AppCompatActivity {
                 TextView txtGoal = segubitDialog.findViewById(R.id.txtGoal);
                 txtGoal.setText(goal + "각성에 필요한 세구빛 카드 수");
 
-                setSegubit();
                 //각성도
                 TextView txtShandiAwake = segubitDialog.findViewById(R.id.txtShandiAwake);
                 TextView txtAzenaInannaAwake = segubitDialog.findViewById(R.id.txtAzenaInannaAwake);
@@ -161,13 +154,13 @@ public class MainPage extends AppCompatActivity {
                 TextView txtBahunturAwake = segubitDialog.findViewById(R.id.txtBahunturAwake);
                 TextView txtSillianAwake = segubitDialog.findViewById(R.id.txtSillianAwake);
                 TextView txtWeiAwake = segubitDialog.findViewById(R.id.txtWeiAwake);
-                txtShandiAwake.setText(cardSetNeedCardInfo.getAwakeCard0()+"");
-                txtAzenaInannaAwake.setText(cardSetNeedCardInfo.getAwakeCard1()+"");
-                txtNinabAwake.setText(cardSetNeedCardInfo.getAwakeCard2()+"");
-                txtKadanAwake.setText(cardSetNeedCardInfo.getAwakeCard3()+"");
-                txtBahunturAwake.setText(cardSetNeedCardInfo.getAwakeCard4()+"");
-                txtSillianAwake.setText(cardSetNeedCardInfo.getAwakeCard5()+"");
-                txtWeiAwake.setText(cardSetNeedCardInfo.getAwakeCard6()+"");
+                txtShandiAwake.setText(cardSetNeedCardInfo.getAwakeCard0() + "");
+                txtAzenaInannaAwake.setText(cardSetNeedCardInfo.getAwakeCard1() + "");
+                txtNinabAwake.setText(cardSetNeedCardInfo.getAwakeCard2() + "");
+                txtKadanAwake.setText(cardSetNeedCardInfo.getAwakeCard3() + "");
+                txtBahunturAwake.setText(cardSetNeedCardInfo.getAwakeCard4() + "");
+                txtSillianAwake.setText(cardSetNeedCardInfo.getAwakeCard5() + "");
+                txtWeiAwake.setText(cardSetNeedCardInfo.getAwakeCard6() + "");
                 //현재 보유카드
                 TextView txtShandiNum = segubitDialog.findViewById(R.id.txtShandiNum);
                 TextView txtAzenaInannaNum = segubitDialog.findViewById(R.id.txtAzenaInannaNum);
@@ -176,16 +169,14 @@ public class MainPage extends AppCompatActivity {
                 TextView txtBahunturNum = segubitDialog.findViewById(R.id.txtBahunturNum);
                 TextView txtSillianNum = segubitDialog.findViewById(R.id.txtSillianNum);
                 TextView txtWeiNum = segubitDialog.findViewById(R.id.txtWeiNum);
-                txtShandiNum.setText(cardSetNeedCardInfo.getNumCard0()+"");
-                txtAzenaInannaNum.setText(cardSetNeedCardInfo.getNumCard1()+"");
-                txtNinabNum.setText(cardSetNeedCardInfo.getNumCard2()+"");
-                txtKadanNum.setText(cardSetNeedCardInfo.getNumCard3()+"");
-                txtBahunturNum.setText(cardSetNeedCardInfo.getNumCard4()+"");
-                txtSillianNum.setText(cardSetNeedCardInfo.getNumCard5()+"");
-                txtWeiNum.setText(cardSetNeedCardInfo.getNumCard6()+"");
+                txtShandiNum.setText(cardSetNeedCardInfo.getNumCard0() + "");
+                txtAzenaInannaNum.setText(cardSetNeedCardInfo.getNumCard1() + "");
+                txtNinabNum.setText(cardSetNeedCardInfo.getNumCard2() + "");
+                txtKadanNum.setText(cardSetNeedCardInfo.getNumCard3() + "");
+                txtBahunturNum.setText(cardSetNeedCardInfo.getNumCard4() + "");
+                txtSillianNum.setText(cardSetNeedCardInfo.getNumCard5() + "");
+                txtWeiNum.setText(cardSetNeedCardInfo.getNumCard6() + "");
 
-
-                segubitGoal(goal);
                 //필요카드
                 TextView txtShandiNeedNum = segubitDialog.findViewById(R.id.txtShandiNeedNum);
                 TextView txtAzenaInannaNeedNum = segubitDialog.findViewById(R.id.txtAzenaInannaNeedNum);
@@ -227,26 +218,28 @@ public class MainPage extends AppCompatActivity {
                 lastRow.setVisibility(View.GONE);
 
                 goal = nextNamba();
+                selectCardSet("남겨진 바람의 절벽");
+                cardSetNeedCardInfo = new CardSetNeedCardInfo(selectedCardSet, goal);
+
                 TextView txtNambaName = nambaDialog.findViewById(R.id.txtSegubitName);
                 txtNambaName.setText("남겨진 바람의 절벽");
                 TextView txtSegubitAwake = nambaDialog.findViewById(R.id.txtSegubitAwake);
-                txtSegubitAwake.setText("현재 각성 합계 : " + nowNamba());
+                txtSegubitAwake.setText("현재 각성 합계 : " + cardSetNeedCardInfo.getHaveAwake());
                 TextView txtGoal = nambaDialog.findViewById(R.id.txtGoal);
                 txtGoal.setText(goal + "각성에 필요한 남바절 카드 수");
 
-                setNamba();
                 TextView txtAman = nambaDialog.findViewById(R.id.txtShandi);
                 TextView txtSeria = nambaDialog.findViewById(R.id.txtAzenaInanna);
                 TextView txtSolas = nambaDialog.findViewById(R.id.txtNinab);
                 TextView txtKingSillian = nambaDialog.findViewById(R.id.txtKadan);
                 TextView txtKamain = nambaDialog.findViewById(R.id.txtBahuntur);
                 TextView txtDerunAman = nambaDialog.findViewById(R.id.txtSillian);
-                txtAman.setText(nambaName[0]);
-                txtSeria.setText(nambaName[1]);
-                txtSolas.setText(nambaName[2]);
-                txtKingSillian.setText(nambaName[3]);
-                txtKamain.setText(nambaName[4]);
-                txtDerunAman.setText(nambaName[5]);
+                txtAman.setText(cardSetNeedCardInfo.getCard0());
+                txtSeria.setText(cardSetNeedCardInfo.getCard1());
+                txtSolas.setText(cardSetNeedCardInfo.getCard2());
+                txtKingSillian.setText(cardSetNeedCardInfo.getCard3());
+                txtKamain.setText(cardSetNeedCardInfo.getCard4());
+                txtDerunAman.setText(cardSetNeedCardInfo.getCard5());
 
                 //각성도
                 TextView txtAmanAwake = nambaDialog.findViewById(R.id.txtShandiAwake);
@@ -255,12 +248,12 @@ public class MainPage extends AppCompatActivity {
                 TextView txtKingSillianAwake = nambaDialog.findViewById(R.id.txtKadanAwake);
                 TextView txtKamainAwake = nambaDialog.findViewById(R.id.txtBahunturAwake);
                 TextView txtDerunAmanAwake = nambaDialog.findViewById(R.id.txtSillianAwake);
-                txtAmanAwake.setText(findAwake(nambaName[0]));
-                txtSeriaAwake.setText(findAwake(nambaName[1]));
-                txtSolasAwake.setText(findAwake(nambaName[2]));
-                txtKingSillianAwake.setText(findAwake(nambaName[3]));
-                txtKamainAwake.setText(findAwake(nambaName[4]));
-                txtDerunAmanAwake.setText(findAwake(nambaName[5]));
+                txtAmanAwake.setText(cardSetNeedCardInfo.getAwakeCard0() + "");
+                txtSeriaAwake.setText(cardSetNeedCardInfo.getAwakeCard1() + "");
+                txtSolasAwake.setText(cardSetNeedCardInfo.getAwakeCard2() + "");
+                txtKingSillianAwake.setText(cardSetNeedCardInfo.getAwakeCard3() + "");
+                txtKamainAwake.setText(cardSetNeedCardInfo.getAwakeCard4() + "");
+                txtDerunAmanAwake.setText(cardSetNeedCardInfo.getAwakeCard5() + "");
                 //현재 보유카드
                 TextView txtAmanNum = nambaDialog.findViewById(R.id.txtShandiNum);
                 TextView txtSeriaNum = nambaDialog.findViewById(R.id.txtAzenaInannaNum);
@@ -268,14 +261,13 @@ public class MainPage extends AppCompatActivity {
                 TextView txtKingSillianNum = nambaDialog.findViewById(R.id.txtKadanNum);
                 TextView txtKamainNum = nambaDialog.findViewById(R.id.txtBahunturNum);
                 TextView txtDerunAmanNum = nambaDialog.findViewById(R.id.txtSillianNum);
-                txtAmanNum.setText(findNum(nambaName[0]));
-                txtSeriaNum.setText(findNum(nambaName[1]));
-                txtSolasNum.setText(findNum(nambaName[2]));
-                txtKingSillianNum.setText(findNum(nambaName[3]));
-                txtKamainNum.setText(findNum(nambaName[4]));
-                txtDerunAmanNum.setText(findNum(nambaName[5]));
+                txtAmanNum.setText(cardSetNeedCardInfo.getNumCard0() + "");
+                txtSeriaNum.setText(cardSetNeedCardInfo.getNumCard1() + "");
+                txtSolasNum.setText(cardSetNeedCardInfo.getNumCard2() + "");
+                txtKingSillianNum.setText(cardSetNeedCardInfo.getNumCard3() + "");
+                txtKamainNum.setText(cardSetNeedCardInfo.getNumCard4() + "");
+                txtDerunAmanNum.setText(cardSetNeedCardInfo.getNumCard5() + "");
 
-                nambaGoal(goal);
                 //필요카드
                 TextView txtAmanNeedNum = nambaDialog.findViewById(R.id.txtShandiNeedNum);
                 TextView txtSeriaNeedNum = nambaDialog.findViewById(R.id.txtAzenaInannaNeedNum);
@@ -283,15 +275,15 @@ public class MainPage extends AppCompatActivity {
                 TextView txtKingSillianNeedNum = nambaDialog.findViewById(R.id.txtKadanNeedNum);
                 TextView txtKamainNeedNum = nambaDialog.findViewById(R.id.txtBahunturNeedNum);
                 TextView txtDerunAmanNeedNum = nambaDialog.findViewById(R.id.txtSillianNeedNum);
-                txtAmanNeedNum.setText(findNambaNeedCard(namba, nambaName[0]) + "");
-                txtSeriaNeedNum.setText(findNambaNeedCard(namba, nambaName[1]) + "");
-                txtSolasNeedNum.setText(findNambaNeedCard(namba, nambaName[2]) + "");
-                txtKingSillianNeedNum.setText(findNambaNeedCard(namba, nambaName[3]) + "");
-                txtKamainNeedNum.setText(findNambaNeedCard(namba, nambaName[4]) + "");
-                txtDerunAmanNeedNum.setText(findNambaNeedCard(namba, nambaName[5]) + "");
+                txtAmanNeedNum.setText(cardSetNeedCardInfo.getCard0NeedCard() + "");
+                txtSeriaNeedNum.setText(cardSetNeedCardInfo.getCard1NeedCard() + "");
+                txtSolasNeedNum.setText(cardSetNeedCardInfo.getCard2NeedCard() + "");
+                txtKingSillianNeedNum.setText(cardSetNeedCardInfo.getCard3NeedCard() + "");
+                txtKamainNeedNum.setText(cardSetNeedCardInfo.getCard4NeedCard() + "");
+                txtDerunAmanNeedNum.setText(cardSetNeedCardInfo.getCard5NeedCard() + "");
 
                 TextView txtNeedCard = nambaDialog.findViewById(R.id.txtNeedCard);
-                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + Arrays.stream(nambaNeedCard).sum());
+                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + cardSetNeedCardInfo.getCardSetNeedCardSum());
 
                 nambaDialog.show();
             }
@@ -315,26 +307,28 @@ public class MainPage extends AppCompatActivity {
                 lastRow.setVisibility(View.GONE);
 
                 goal = nextAmgubit();
+                selectCardSet("카제로스의 군단장");
+                cardSetNeedCardInfo = new CardSetNeedCardInfo(selectedCardSet, goal);
+
                 TextView txtAmgubitName = amgubitDialog.findViewById(R.id.txtSegubitName);
                 txtAmgubitName.setText("카제로스의 군단장");
                 TextView txtAmgubitAwake = amgubitDialog.findViewById(R.id.txtSegubitAwake);
-                txtAmgubitAwake.setText("현재 각성 합계 : " + nowAmgubit());
+                txtAmgubitAwake.setText("현재 각성 합계 : " + cardSetNeedCardInfo.getHaveAwake());
                 TextView txtGoal = amgubitDialog.findViewById(R.id.txtGoal);
                 txtGoal.setText(goal + "각성에 필요한 암구빛 카드 수");
 
-                setAmgubit();
                 TextView txtBaltan = amgubitDialog.findViewById(R.id.txtShandi);
                 TextView txtIllakan = amgubitDialog.findViewById(R.id.txtAzenaInanna);
                 TextView txtBiakiss = amgubitDialog.findViewById(R.id.txtNinab);
                 TextView txtAbrelshud = amgubitDialog.findViewById(R.id.txtKadan);
                 TextView txtKamen = amgubitDialog.findViewById(R.id.txtBahuntur);
                 TextView txtKuksaiten = amgubitDialog.findViewById(R.id.txtSillian);
-                txtBaltan.setText(amgubitName[0]);
-                txtIllakan.setText(amgubitName[1]);
-                txtBiakiss.setText(amgubitName[2]);
-                txtAbrelshud.setText(amgubitName[3]);
-                txtKamen.setText(amgubitName[4]);
-                txtKuksaiten.setText(amgubitName[5]);
+                txtBaltan.setText(cardSetNeedCardInfo.getCard0());
+                txtIllakan.setText(cardSetNeedCardInfo.getCard1());
+                txtBiakiss.setText(cardSetNeedCardInfo.getCard2());
+                txtAbrelshud.setText(cardSetNeedCardInfo.getCard3());
+                txtKamen.setText(cardSetNeedCardInfo.getCard4());
+                txtKuksaiten.setText(cardSetNeedCardInfo.getCard5());
 
                 //각성도
                 TextView txtBaltanAwake = amgubitDialog.findViewById(R.id.txtShandiAwake);
@@ -343,12 +337,12 @@ public class MainPage extends AppCompatActivity {
                 TextView txtAbrelshudAwake = amgubitDialog.findViewById(R.id.txtKadanAwake);
                 TextView txtKamenAwake = amgubitDialog.findViewById(R.id.txtBahunturAwake);
                 TextView txtKuksaitenAwake = amgubitDialog.findViewById(R.id.txtSillianAwake);
-                txtBaltanAwake.setText(findAwake(amgubitName[0]));
-                txtIllakanAwake.setText(findAwake(amgubitName[1]));
-                txtBiakissAwake.setText(findAwake(amgubitName[2]));
-                txtAbrelshudAwake.setText(findAwake(amgubitName[3]));
-                txtKamenAwake.setText(findAwake(amgubitName[4]));
-                txtKuksaitenAwake.setText(findAwake(amgubitName[5]));
+                txtBaltanAwake.setText(cardSetNeedCardInfo.getAwakeCard0() + "");
+                txtIllakanAwake.setText(cardSetNeedCardInfo.getAwakeCard1() + "");
+                txtBiakissAwake.setText(cardSetNeedCardInfo.getAwakeCard2() + "");
+                txtAbrelshudAwake.setText(cardSetNeedCardInfo.getAwakeCard3() + "");
+                txtKamenAwake.setText(cardSetNeedCardInfo.getAwakeCard4() + "");
+                txtKuksaitenAwake.setText(cardSetNeedCardInfo.getAwakeCard5() + "");
 
                 //현재 보유카드
                 TextView txtBaltanNum = amgubitDialog.findViewById(R.id.txtShandiNum);
@@ -357,14 +351,13 @@ public class MainPage extends AppCompatActivity {
                 TextView txtAbrelshudNum = amgubitDialog.findViewById(R.id.txtKadanNum);
                 TextView txtKamenNum = amgubitDialog.findViewById(R.id.txtBahunturNum);
                 TextView txtKuksaitenNum = amgubitDialog.findViewById(R.id.txtSillianNum);
-                txtBaltanNum.setText(findNum(amgubitName[0]));
-                txtIllakanNum.setText(findNum(amgubitName[1]));
-                txtBiakissNum.setText(findNum(amgubitName[2]));
-                txtAbrelshudNum.setText(findNum(amgubitName[3]));
-                txtKamenNum.setText(findNum(amgubitName[4]));
-                txtKuksaitenNum.setText(findNum(amgubitName[5]));
+                txtBaltanNum.setText(cardSetNeedCardInfo.getNumCard0() + "");
+                txtIllakanNum.setText(cardSetNeedCardInfo.getNumCard1() + "");
+                txtBiakissNum.setText(cardSetNeedCardInfo.getNumCard2() + "");
+                txtAbrelshudNum.setText(cardSetNeedCardInfo.getNumCard3() + "");
+                txtKamenNum.setText(cardSetNeedCardInfo.getNumCard4() + "");
+                txtKuksaitenNum.setText(cardSetNeedCardInfo.getNumCard5() + "");
 
-                amgubitGoal(goal);
                 //필요카드
                 TextView txtBaltanNeedNum = amgubitDialog.findViewById(R.id.txtShandiNeedNum);
                 TextView txtIllakanNeedNum = amgubitDialog.findViewById(R.id.txtAzenaInannaNeedNum);
@@ -372,15 +365,15 @@ public class MainPage extends AppCompatActivity {
                 TextView txtAbrelshudNeedNum = amgubitDialog.findViewById(R.id.txtKadanNeedNum);
                 TextView txtKamenNeedNum = amgubitDialog.findViewById(R.id.txtBahunturNeedNum);
                 TextView txtKuksaitenNeedNum = amgubitDialog.findViewById(R.id.txtSillianNeedNum);
-                txtBaltanNeedNum.setText(findAmgubitNeedCard(amgubit, amgubitName[0]) + "");
-                txtIllakanNeedNum.setText(findAmgubitNeedCard(amgubit, amgubitName[1]) + "");
-                txtBiakissNeedNum.setText(findAmgubitNeedCard(amgubit, amgubitName[2]) + "");
-                txtAbrelshudNeedNum.setText(findAmgubitNeedCard(amgubit, amgubitName[3]) + "");
-                txtKamenNeedNum.setText(findAmgubitNeedCard(amgubit, amgubitName[4]) + "");
-                txtKuksaitenNeedNum.setText(findAmgubitNeedCard(amgubit, amgubitName[5]) + "");
+                txtBaltanNeedNum.setText(cardSetNeedCardInfo.getCard0NeedCard() + "");
+                txtIllakanNeedNum.setText(cardSetNeedCardInfo.getCard1NeedCard() + "");
+                txtBiakissNeedNum.setText(cardSetNeedCardInfo.getCard2NeedCard() + "");
+                txtAbrelshudNeedNum.setText(cardSetNeedCardInfo.getCard3NeedCard() + "");
+                txtKamenNeedNum.setText(cardSetNeedCardInfo.getCard4NeedCard() + "");
+                txtKuksaitenNeedNum.setText(cardSetNeedCardInfo.getCard5NeedCard() + "");
 
                 TextView txtNeedCard = amgubitDialog.findViewById(R.id.txtNeedCard);
-                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + Arrays.stream(amgubitNeedCard).sum());
+                txtNeedCard.setText(goal + "각 까지 최소 필요 카드 수 : " + cardSetNeedCardInfo.getCardSetNeedCardSum());
 
                 amgubitDialog.show();
             }
@@ -671,226 +664,13 @@ public class MainPage extends AppCompatActivity {
         selectedCardSet = new CardSetInfo();
         for (int i = 0; i < cardSetInfo.size(); i++) {
             if (cardSetInfo.get(i).getName().equals(cardSetName)) {
-                Log.d("test", "selectCardSet: " + cardSetInfo.get(i));
+                Log.d("test", "selectCardSet: " + cardSetInfo.get(i).getName());
                 selectedCardSet = cardSetInfo.get(i);
             }
 
         }
     }
 
-
-    private ArrayList<CardInfo> segubit;
-    private int[] segubitNeedCard;
-
-    private void setSegubit() {
-        segubit = new ArrayList<>();
-        for (int i = 0; i < cardInfo.size(); i++) {
-            CardInfo tempInfo = new CardInfo();
-            if (cardInfo.get(i).getName().equals(segubitName[0])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(segubitName[1])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(segubitName[2])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(segubitName[3])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(segubitName[4])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(segubitName[5])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(segubitName[6])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                segubit.add(tempInfo);
-            }
-        }
-    }
-
-
-    //세구빛 카드 필요카드
-    private int findSegubitNeedCard(ArrayList<CardInfo> segubit, String name) {
-        for (int i = 0; i < segubit.size(); i++) {
-            if (segubit.get(i).getName().equals(name))
-                return segubitNeedCard[i];
-        }
-        return 0;
-    }
-
-    private void segubitGoal(int goal) {
-        segubitNeedCard = new int[]{0, 0, 0, 0, 0, 0};
-        //각성도 순 정렬 완료.
-        Collections.sort(segubit, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getAwake() < o2.getAwake())
-                    return 1;
-                else
-                    return -1;
-            }
-        });
-        int minIndex = 0;
-        //가장 낮은 각성도 수치가 같은 카드
-        for (int i = 0; i < segubit.size(); i++) {
-            if (segubit.get(i).getAwake() <= segubit.get(minIndex).getAwake()) {
-                minIndex = i;
-            }
-        }
-        //보유카드가 가장 적은 카드를 리스트에서 지우기 위해(카단 우선순위 낮춤)
-        for (int i = 0; i < segubit.size(); i++) {
-            if (segubit.get(i).getAwake() == segubit.get(minIndex).getAwake()) {
-                if (segubit.get(i).getNum() <= segubit.get(minIndex).getNum()) {
-                    if (segubit.get(minIndex).getName().equals(segubitName[3])) {
-                        continue;
-                    } else {
-                        minIndex = i;
-                    }
-                }
-            }
-        }
-
-        segubit.remove(minIndex);
-
-        Collections.sort(segubit, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if ((o1.nextAwake() - o1.getNum()) < (o2.nextAwake() - o2.getNum()))
-                    return -1;
-                else
-                    return 1;
-            }
-        });
-        if (goal == 18) {
-            int i = 0;
-            while (getHaveAwake(segubit) < goal) {
-                //현재 인덱스의 카드보다 각성도가 낮거나 보유카드가 작은 카드가 있는 경우 continue;
-                if (smallerThanOtherCardsNextAwake(i, segubit)) {
-                    i++;
-                    if (i == segubit.size()) {
-                        i = 0;
-                    }
-                    continue;
-                }
-                if (segubit.get(i).getAwake() < 5) {
-                    //각성에 필요한 카드가 충분한 경우
-                    if (segubit.get(i).getNum() >= segubit.get(i).nextAwake()) {
-                        segubit.get(i).setNum(segubit.get(i).getNum() - segubit.get(i).nextAwake());
-                        segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
-                    } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
-                    else if (segubit.get(i).getNum() < segubit.get(i).nextAwake()) {
-                        segubitNeedCard[i] += (segubit.get(i).nextAwake() - segubit.get(i).getNum());
-                        segubit.get(i).setAwake(segubit.get(i).getAwake() + 1);
-                        segubit.get(i).setNum(0);
-                    }
-                }
-                i++;
-
-                //무한루프(목표 각성도가 될때까지)
-                if (i == segubit.size()) {
-                    i = 0;
-                }
-            }
-        } else if (goal == 30) {
-            for (int i = 0; i < segubitNeedCard.length; i++) {
-                segubitNeedCard[i] = segubit.get(i).awakeMax();
-            }
-        }
-    }
-
-    //해당 인덱스의 카드보다 다음 각성에 필요한 카드 수가 적은 경우 true
-    private boolean smallerThanOtherCardsNextAwake(int index, ArrayList<CardInfo> seguNamba) {
-        //현재 카드의 보유카드 량이 다음 각성에 필요한 카드수보다 많은 경우
-        if (seguNamba.get(index).needCard() <= 0)
-            return false;
-
-        for (int i = 0; i < seguNamba.size(); i++) {
-            if (i == index)
-                continue;
-
-            //i번째 카드 중 필요 카드 수가 더 적은 카드가 있는 경우
-            if (seguNamba.get(i).needCard() < seguNamba.get(index).needCard()) {
-                if (seguNamba.get(i).getAwake() == 5)
-                    return false;
-                else
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    private int getHaveAwake(ArrayList<CardInfo> setInfo) {
-        int awakeSum = 0;
-        int min = 5;
-        for (int i = 0; i < setInfo.size(); i++) {
-            awakeSum += setInfo.get(i).getAwake();
-            if (min > setInfo.get(i).getAwake()) {
-                min = setInfo.get(i).getAwake();
-            }
-        }
-
-        return awakeSum;
-    }
-
-    private int nowSegubit() {
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (cardSetInfo.get(i).getName().equals("세상을 구하는 빛")) {
-                return cardSetInfo.get(i).getHaveAwake();
-            }
-        }
-        return 0;
-    }
 
     private int nextSegubit() {
         for (int i = 0; i < cardSetInfo.size(); i++) {
@@ -902,141 +682,6 @@ public class MainPage extends AppCompatActivity {
             }
         }
         return 18;
-    }
-
-
-    private ArrayList<CardInfo> namba;
-    private int[] nambaNeedCard;
-
-    //남바절
-    private void setNamba() {
-        namba = new ArrayList<>();
-        for (int i = 0; i < cardInfo.size(); i++) {
-            CardInfo tempInfo = new CardInfo();
-            if (cardInfo.get(i).getName().equals(nambaName[0])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                namba.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(nambaName[1])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                namba.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(nambaName[2])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                namba.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(nambaName[3])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                namba.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(nambaName[4])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                namba.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(nambaName[5])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                namba.add(tempInfo);
-            }
-
-        }
-    }
-
-    private void nambaGoal(int goal) {
-        nambaNeedCard = new int[]{0, 0, 0, 0, 0, 0};
-        Collections.sort(namba, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getAwake() < o2.getAwake())
-                    return -1;
-                else
-                    return 1;
-            }
-        });
-        if (goal == 12) {
-            int i = 0;
-            while (!(getHaveAwake(namba) >= goal)) {
-                if ((getHaveAwake(namba) >= goal))
-                    break;
-                //현재 인덱스의 카드보다 각성도가 낮거나 보유카드가 작은 카드가 있는 경우 continue;
-                if (smallerThanOtherCardsNextAwake(i, namba)) {
-                    i++;
-                    if (i == namba.size()) {
-                        i = 0;
-                    }
-                    continue;
-                }
-
-                if (namba.get(i).getAwake() < 5) {
-                    //각성에 필요한 카드가 충분한 경우
-                    if (namba.get(i).getNum() >= namba.get(i).nextAwake()) {
-                        namba.get(i).setNum(namba.get(i).getNum() - namba.get(i).nextAwake());
-                        namba.get(i).setAwake(namba.get(i).getAwake() + 1);
-                    } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
-                    else if (namba.get(i).getNum() < namba.get(i).nextAwake()) {
-                        nambaNeedCard[i] = nambaNeedCard[i] + (namba.get(i).nextAwake() - namba.get(i).getNum());
-                        namba.get(i).setAwake(namba.get(i).getAwake() + 1);
-                        namba.get(i).setNum(0);
-                    }
-                }
-
-                i++;
-
-                //무한루프(목표 각성도가 될때까지)
-                if (i == namba.size()) {
-                    i = 0;
-                }
-            }
-        } else {
-            for (int i = 0; i < nambaNeedCard.length; i++) {
-                nambaNeedCard[i] = namba.get(i).awakeMax();
-            }
-        }
-    }
-
-
-    private int nowNamba() {
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (cardSetInfo.get(i).getName().equals("남겨진 바람의 절벽")) {
-                return cardSetInfo.get(i).getHaveAwake();
-            }
-        }
-        return 0;
     }
 
     private int nextNamba() {
@@ -1051,148 +696,6 @@ public class MainPage extends AppCompatActivity {
         return 12;
     }
 
-    //남바절 카드 필요카드
-    private int findNambaNeedCard(ArrayList<CardInfo> namba, String name) {
-        for (int i = 0; i < namba.size(); i++) {
-            if (namba.get(i).getName().equals(name))
-                return nambaNeedCard[i];
-        }
-        return 0;
-    }
-
-
-    private ArrayList<CardInfo> amgubit;
-    private int[] amgubitNeedCard;
-
-    //암구빛
-    private void setAmgubit() {
-        amgubit = new ArrayList<>();
-        for (int i = 0; i < cardInfo.size(); i++) {
-            CardInfo tempInfo = new CardInfo();
-            if (cardInfo.get(i).getName().equals(amgubitName[0])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                amgubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(amgubitName[1])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                amgubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(amgubitName[2])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                amgubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(amgubitName[3])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                amgubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(amgubitName[4])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                amgubit.add(tempInfo);
-            }
-            if (cardInfo.get(i).getName().equals(amgubitName[5])) {
-                tempInfo.setId(cardInfo.get(i).getId());
-                tempInfo.setName(cardInfo.get(i).getName());
-                tempInfo.setAwake(cardInfo.get(i).getAwake());
-                tempInfo.setNum(cardInfo.get(i).getNum());
-                tempInfo.setGetCard(cardInfo.get(i).getGetCard());
-                tempInfo.setAcquisition_info(cardInfo.get(i).getAcquisition_info());
-                tempInfo.setPath(cardInfo.get(i).getPath());
-                amgubit.add(tempInfo);
-            }
-
-        }
-    }
-
-    private void amgubitGoal(int goal) {
-        amgubitNeedCard = new int[]{0, 0, 0, 0, 0, 0};
-        Collections.sort(amgubit, new Comparator<CardInfo>() {
-            @Override
-            public int compare(CardInfo o1, CardInfo o2) {
-                if (o1.getAwake() < o2.getAwake())
-                    return -1;
-                else
-                    return 1;
-            }
-        });
-        if (goal == 18) {
-            int i = 0;
-            while (!(getHaveAwake(amgubit) >= goal)) {
-                if ((getHaveAwake(amgubit) >= goal))
-                    break;
-                //현재 인덱스의 카드보다 각성도가 낮거나 보유카드가 작은 카드가 있는 경우 continue;
-                if (smallerThanOtherCardsNextAwake(i, amgubit)) {
-                    i++;
-                    if (i == amgubit.size()) {
-                        i = 0;
-                    }
-                    continue;
-                }
-
-                if (amgubit.get(i).getAwake() < 5) {
-                    //각성에 필요한 카드가 충분한 경우
-                    if (amgubit.get(i).getNum() >= amgubit.get(i).nextAwake()) {
-                        amgubit.get(i).setNum(amgubit.get(i).getNum() - amgubit.get(i).nextAwake());
-                        amgubit.get(i).setAwake(amgubit.get(i).getAwake() + 1);
-                    } //각성에 필요한 카드가 충분하지 않은 경우 or 각성에 필요한 카드가 없는 경우
-                    else if (amgubit.get(i).getNum() < amgubit.get(i).nextAwake()) {
-                        amgubitNeedCard[i] = amgubitNeedCard[i] + (amgubit.get(i).nextAwake() - amgubit.get(i).getNum());
-                        amgubit.get(i).setAwake(amgubit.get(i).getAwake() + 1);
-                        amgubit.get(i).setNum(0);
-                    }
-                }
-                i++;
-
-                //무한루프(목표 각성도가 될때까지)
-                if (i == amgubit.size()) {
-                    i = 0;
-                }
-            }
-        } else {
-            for (int i = 0; i < amgubitNeedCard.length; i++) {
-                amgubitNeedCard[i] = amgubit.get(i).awakeMax();
-            }
-        }
-    }
-
-    private int nowAmgubit() {
-        for (int i = 0; i < cardSetInfo.size(); i++) {
-            if (cardSetInfo.get(i).getName().equals("카제로스의 군단장")) {
-                return cardSetInfo.get(i).getHaveAwake();
-            }
-        }
-        return 0;
-    }
-
     private int nextAmgubit() {
         for (int i = 0; i < cardSetInfo.size(); i++) {
             if (cardSetInfo.get(i).getName().equals("카제로스의 군단장")) {
@@ -1203,37 +706,6 @@ public class MainPage extends AppCompatActivity {
             }
         }
         return 18;
-    }
-
-
-    //암구빛 카드 필요카드
-    private int findAmgubitNeedCard(ArrayList<CardInfo> namba, String name) {
-        for (int i = 0; i < namba.size(); i++) {
-            if (namba.get(i).getName().equals(name))
-                return amgubitNeedCard[i];
-        }
-        return 0;
-    }
-
-
-    //카드 보유 수
-    private String findNum(String name) {
-        for (int i = 0; i < cardInfo.size(); i++) {
-            if (name.equals(cardInfo.get(i).getName())) {
-                return cardInfo.get(i).getNum() + "";
-            }
-        }
-        return "0";
-    }
-
-    //카드 각성도
-    private String findAwake(String name) {
-        for (int i = 0; i < cardInfo.size(); i++) {
-            if (name.equals(cardInfo.get(i).getName())) {
-                return cardInfo.get(i).getAwake() + "";
-            }
-        }
-        return "0";
     }
 
 }
