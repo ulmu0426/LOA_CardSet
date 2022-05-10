@@ -183,7 +183,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(21,'하늘을 비추는 사막','소금거인','천둥','모리나','다단','자이언트 웜','타나토스','','','','',0.06,0.07,0.07)");
                 db.execSQL("INSERT INTO " + TABLE_BEAST_EXTRA_DMG + " VALUES(22,'힘의 잔영','아이히만 박사','카인','에스','제이','','','','','','',0.06,0.07,0.07)");
             }
+            cursor.close();
         }
+        //여기부터 문제
         if (oldVersion < 7) {
 
             try {
@@ -225,12 +227,16 @@ public class CardDBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO cardList VALUES (50029, '코니', 0,0,'[필드보스]이스라펠(규율의 카드 팩)\n" +
                     "[어비스던전]카양겔(규율의 카드 팩)','일반',0,'card_common_connie')");
 
-            db.execSQL("INSERT INTO cardbook_all VALUES(53,'사슬전쟁의 종장',3,'에버그레이스','에스더 루테란', '미스틱', '알비온', '카단', '니나브','','','','','치명')");
-            db.execSQL("INSERT INTO cardbook_all VALUES(54,'플라티나의 주민들',2,'에버그레이스','두키킹', '혼재의 추오', '', '', '','','','','','특화')");
+            try {
+                db.execSQL("INSERT INTO cardbook_all VALUES(53,'사슬전쟁의 종장',3,'에버그레이스','에스더 루테란', '미스틱', '알비온', '카단', '니나브','','','','','치명')");
+                db.execSQL("INSERT INTO cardbook_all VALUES(54,'플라티나의 주민들',2,'에버그레이스','두키킹', '혼재의 추오', '', '', '','','','','','특화')");
 
-            db.execSQL("INSERT INTO demon_extra_dmg VALUES(23,'엘베리아의 기적','에버그레이스','라하르트', '에아달린', '아델', '지그문트', '가룸','','','','',0.1,0.1,0.1)");
+                db.execSQL("INSERT INTO demon_extra_dmg VALUES(23,'엘베리아의 기적','에버그레이스','라하르트', '에아달린', '아델', '지그문트', '가룸','','','','',0.1,0.1,0.1)");
 
-            db.execSQL("INSERT INTO beast_extra_dmg VALUES(23,'빛의 생명체들','다이나웨일','하늘 고래', '별자리 큰뱀', '코니', '', '','','','','',0.06,0.07,0.07)");
+                db.execSQL("INSERT INTO beast_extra_dmg VALUES(23,'빛의 생명체들','다이나웨일','하늘 고래', '별자리 큰뱀', '코니', '', '','','','','',0.06,0.07,0.07)");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
             db.execSQL("UPDATE " + TABLE_CARDBOOK_ALL + " SET card6 = '영원의 아크 카양겔' WHERE name = '트리시온'");
@@ -386,19 +392,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(22,'필드 보스II','마네스','타르실라','솔 그랑데','브리아레오스','수신 아포라스','고르카그로스','아드린느','','','',0.06,0.07,0.07)");
                 db.execSQL("INSERT INTO " + TABLE_HUMAN_EXTRA_DMG + " VALUES(23,'둥지 위로 날아간 뻐꾸기','에버그레이스','혼재의 추오','','','','','','','','',0.1,0.1,0.1)");
             }
-        }
-        if (oldVersion < 9) {
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET, null);
-            if (cursor.getCount() != 0) {
-                while (cursor.moveToNext()) {
-                    @SuppressLint("Range")
-                    String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                    if (!name.equals("플라티나의 주민들")){
-                        return;
-                    }
-                }
-                db.execSQL("INSERT INTO cardSet VALUES(36, '플라티나의 주민들', '에버그레이스', '두키킹', '혼재의 추오','','','','', '3세트 : 가디언 토벌 시 가디언에게 받는 피해 7.5% 감소', '3세트(6각성합계) : 헤드어택 성공 시 적에게 주는 피해 % 증가', '3세트(15각성합계) : 헤드어택 성공 시 적에게 주는 피해 10% 증가','','','',6,12,0,'')");
-            }
+            cursor.close();
         }
         if (oldVersion < 10) {
             db.execSQL("UPDATE " + TABLE_BEAST_EXTRA_DMG + " SET card3 = '페데리코', card4 = '데메타르' WHERE id = 7");
@@ -501,7 +495,7 @@ public class CardDBHelper extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public ArrayList<CardBookInfo> getCardBookInfo() {       //카드도감 전체 항목 가져오기
         ArrayList<CardBookInfo> getInfo = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id", null);
         if (cursor.getCount() != 0) {
