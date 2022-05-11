@@ -1,6 +1,7 @@
 package com.ulmu.lostarkcardmanager;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -15,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CardDBHelper extends SQLiteOpenHelper {
@@ -28,16 +30,12 @@ public class CardDBHelper extends SQLiteOpenHelper {
     //DB 공통 column
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_CARD0 = "card0";
-    private static final String COLUMN_CARD1 = "card1";
-    private static final String COLUMN_CARD2 = "card2";
-    private static final String COLUMN_CARD3 = "card3";
-    private static final String COLUMN_CARD4 = "card4";
-    private static final String COLUMN_CARD5 = "card5";
-    private static final String COLUMN_CARD6 = "card6";
-    private static final String COLUMN_CARD7 = "card7";
-    private static final String COLUMN_CARD8 = "card8";
-    private static final String COLUMN_CARD9 = "card9";
+    private static final String[] COLUMN_CARD = {
+            "card0", "card1", "card2",
+            "card3", "card4", "card5",
+            "card6", "card7", "card8",
+            "card9"
+    };
 
     //카드 목록 테이블 column
     private static final String TABLE_CARD_LIST = "cardList";                       //카드정보 테이블 명
@@ -187,6 +185,9 @@ public class CardDBHelper extends SQLiteOpenHelper {
         }
         //여기부터 문제
         if (oldVersion < 7) {
+            copyTableCardSet(db);
+            copyTableCardBook(db);
+            copyTableDED(db);
 
             try {
                 db.execSQL("DROP TABLE favoriteCardSet");
@@ -504,32 +505,34 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
                 int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
-                String card0 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD0));
-                String card1 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD1));
-                String card2 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD2));
-                String card3 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD3));
-                String card4 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD4));
-                String card5 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD5));
-                String card6 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD6));
-                String card7 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD7));
-                String card8 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD8));
-                String card9 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD9));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[7])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[8])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[9]))
+                };
                 String option = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_OPTION));
 
                 CardBookInfo cardBookInfo = new CardBookInfo();
                 cardBookInfo.setId(id);
                 cardBookInfo.setName(name);
                 cardBookInfo.setValue(value);
-                cardBookInfo.setCard0(card0);
-                cardBookInfo.setCard1(card1);
-                cardBookInfo.setCard2(card2);
-                cardBookInfo.setCard3(card3);
-                cardBookInfo.setCard4(card4);
-                cardBookInfo.setCard5(card5);
-                cardBookInfo.setCard6(card6);
-                cardBookInfo.setCard7(card7);
-                cardBookInfo.setCard8(card8);
-                cardBookInfo.setCard9(card9);
+                cardBookInfo.setCard0(cardX[0]);
+                cardBookInfo.setCard1(cardX[1]);
+                cardBookInfo.setCard2(cardX[2]);
+                cardBookInfo.setCard3(cardX[3]);
+                cardBookInfo.setCard4(cardX[4]);
+                cardBookInfo.setCard5(cardX[5]);
+                cardBookInfo.setCard6(cardX[6]);
+                cardBookInfo.setCard7(cardX[7]);
+                cardBookInfo.setCard8(cardX[8]);
+                cardBookInfo.setCard9(cardX[9]);
                 cardBookInfo.setOption(option);
 
                 getInfo.add((cardBookInfo));
@@ -551,16 +554,18 @@ public class CardDBHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                String card0 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD0));
-                String card1 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD1));
-                String card2 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD2));
-                String card3 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD3));
-                String card4 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD4));
-                String card5 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD5));
-                String card6 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD6));
-                String card7 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD7));
-                String card8 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD8));
-                String card9 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD9));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[7])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[8])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[9]))
+                };
                 float dmgP0 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P0));
                 float dmgP1 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P1));
                 float dmgP2 = cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P2));
@@ -568,16 +573,16 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 ExtraDmgInfo extraDmgInfo = new ExtraDmgInfo();
                 extraDmgInfo.setId(id);
                 extraDmgInfo.setName(name);
-                extraDmgInfo.setCard0(card0);
-                extraDmgInfo.setCard1(card1);
-                extraDmgInfo.setCard2(card2);
-                extraDmgInfo.setCard3(card3);
-                extraDmgInfo.setCard4(card4);
-                extraDmgInfo.setCard5(card5);
-                extraDmgInfo.setCard6(card6);
-                extraDmgInfo.setCard7(card7);
-                extraDmgInfo.setCard8(card8);
-                extraDmgInfo.setCard9(card9);
+                extraDmgInfo.setCard0(cardX[0]);
+                extraDmgInfo.setCard1(cardX[1]);
+                extraDmgInfo.setCard2(cardX[2]);
+                extraDmgInfo.setCard3(cardX[3]);
+                extraDmgInfo.setCard4(cardX[4]);
+                extraDmgInfo.setCard5(cardX[5]);
+                extraDmgInfo.setCard6(cardX[6]);
+                extraDmgInfo.setCard7(cardX[7]);
+                extraDmgInfo.setCard8(cardX[8]);
+                extraDmgInfo.setCard9(cardX[9]);
                 extraDmgInfo.setDmgP0(dmgP0);
                 extraDmgInfo.setDmgP1(dmgP1);
                 extraDmgInfo.setDmgP2(dmgP2);
@@ -601,13 +606,15 @@ public class CardDBHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                String card0 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD0));
-                String card1 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD1));
-                String card2 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD2));
-                String card3 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD3));
-                String card4 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD4));
-                String card5 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD5));
-                String card6 = cursor.getString(cursor.getColumnIndex(COLUMN_CARD6));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6]))
+                };
                 String set_bonus0 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS0));
                 String set_bonus1 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS1));
                 String set_bonus2 = cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS2));
@@ -623,13 +630,13 @@ public class CardDBHelper extends SQLiteOpenHelper {
                 CardSetInfo cardSetInfo = new CardSetInfo();
                 cardSetInfo.setId(id);
                 cardSetInfo.setName(name);
-                cardSetInfo.setCard0(card0);
-                cardSetInfo.setCard1(card1);
-                cardSetInfo.setCard2(card2);
-                cardSetInfo.setCard3(card3);
-                cardSetInfo.setCard4(card4);
-                cardSetInfo.setCard5(card5);
-                cardSetInfo.setCard6(card6);
+                cardSetInfo.setCard0(cardX[0]);
+                cardSetInfo.setCard1(cardX[1]);
+                cardSetInfo.setCard2(cardX[2]);
+                cardSetInfo.setCard3(cardX[3]);
+                cardSetInfo.setCard4(cardX[4]);
+                cardSetInfo.setCard5(cardX[5]);
+                cardSetInfo.setCard6(cardX[6]);
                 cardSetInfo.setSet_bonus0(set_bonus0);
                 cardSetInfo.setSet_bonus1(set_bonus1);
                 cardSetInfo.setSet_bonus2(set_bonus2);
@@ -652,4 +659,284 @@ public class CardDBHelper extends SQLiteOpenHelper {
     }
 
 
+    private final String COPY_TABLE_CARD_SET = "copyCardSet";
+    private final String COPY_TABLE_CARD_BOOK = "copyCardBook";
+    private final String COPY_TABLE_DED = "copyDemonExtraDmg";
+
+    private ContentValues insertCardSet(int id, String name, String[] cardX, String[] setBonus, int[] needAwake, String favorite) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ID, id);
+        cv.put(COLUMN_NAME, name);
+        for (int i = 0; i < cardX.length; i++) {
+            cv.put(COLUMN_CARD[i], cardX[i]);
+        }
+
+        cv.put(CARDSET_SETBONUS0, setBonus[0]);
+        cv.put(CARDSET_SETBONUS1, setBonus[1]);
+        cv.put(CARDSET_SETBONUS2, setBonus[2]);
+        cv.put(CARDSET_SETBONUS3, setBonus[3]);
+        cv.put(CARDSET_SETBONUS4, setBonus[4]);
+        cv.put(CARDSET_SETBONUS5, setBonus[5]);
+        cv.put(CARDSET_NEEDAWAKE0, needAwake[0]);
+        cv.put(CARDSET_NEEDAWAKE1, needAwake[1]);
+        cv.put(CARDSET_NEEDAWAKE2, needAwake[2]);
+        cv.put(CARDSET_COLUMN_FAVORITE, favorite);
+        return cv;
+    }
+
+    //DB Table Update
+    @SuppressLint("Range")
+    private void copyTableCardSet(SQLiteDatabase db) {
+        //복사할 테이블 생성
+        db.execSQL("CREATE TABLE " + COPY_TABLE_CARD_SET +
+                " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT, card5 TEXT, card6 TEXT, " +
+                "set_bonus0 TEXT, set_bonus1 TEXT, set_bonus2 TEXT, set_bonus3 TEXT, set_bonus4 TEXT, set_bonus5 TEXT, " +
+                "needAwake0 INTEGER, needAwake1 INTEGER, needAwake2 INTEGER, favorite TEXT)");
+        //원본 테이블 검색 및 테이블 복사
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARD_SET + " ORDER BY id", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6]))
+                };
+                String[] setBonusX = {
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS0)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS1)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS2)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS3)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS4)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS5))
+                };
+                int[] needAwakeX = {
+                        cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE0)),
+                        cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE1)),
+                        cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE2)),
+                };
+                String favorite = cursor.getString(cursor.getColumnIndex(CARDSET_COLUMN_FAVORITE));
+
+                db.insert(COPY_TABLE_CARD_SET, null, insertCardSet(id, name, cardX, setBonusX, needAwakeX, favorite));
+            }
+        }
+        //기존 원본 테이블 삭제
+        db.execSQL("DROP TABLE " + TABLE_CARD_SET);
+        //기존 원본 테이블 재생성
+        db.execSQL("CREATE TABLE " + TABLE_CARD_SET +
+                " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT, card5 TEXT, card6 TEXT, " +
+                "set_bonus0 TEXT, set_bonus1 TEXT, set_bonus2 TEXT, set_bonus3 TEXT, set_bonus4 TEXT, set_bonus5 TEXT, " +
+                "needAwake0 INTEGER, needAwake1 INTEGER, needAwake2 INTEGER, favorite TEXT)");
+        //카피한 테이블에서 원본테이블로 복제
+        cursor = db.rawQuery("SELECT * FROM " + COPY_TABLE_CARD_SET + " ORDER BY id", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6]))
+                };
+                String[] setBonusX = {
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS0)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS1)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS2)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS3)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS4)),
+                        cursor.getString(cursor.getColumnIndex(CARDSET_SETBONUS5))
+                };
+                int[] needAwakeX = {
+                        cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE0)),
+                        cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE1)),
+                        cursor.getInt(cursor.getColumnIndex(CARDSET_NEEDAWAKE2)),
+                };
+                String favorite = cursor.getString(cursor.getColumnIndex(CARDSET_COLUMN_FAVORITE));
+
+                db.insert(TABLE_CARD_SET, null, insertCardSet(id, name, cardX, setBonusX, needAwakeX, favorite));
+            }
+        }
+        cursor.close();
+        //복사했던 테이블 제거
+        db.execSQL("DROP TABLE " + COPY_TABLE_CARD_SET);
+    }
+
+    private ContentValues insertCardBook(int id, String name, int value, String[] cardX, String option) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ID, id);
+        cv.put(COLUMN_NAME, name);
+        cv.put(CARDBOOK_COLUMN_VALUE, value);
+        for (int i = 0; i < cardX.length; i++) {
+            cv.put(COLUMN_CARD[i], cardX[i]);
+        }
+        cv.put(CARDBOOK_COLUMN_OPTION, option);
+        return cv;
+    }
+
+    @SuppressLint("Range")
+    private void copyTableCardBook(SQLiteDatabase db) {
+        //복사할 테이블 생성
+        db.execSQL("CREATE TABLE " + COPY_TABLE_CARD_BOOK +
+                " (id INTEGER, name TEXT, value INTEGER, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT" +
+                ", card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT, option TEXT)");
+        //원본 테이블 검색 및 테이블 복사
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CARDBOOK_ALL + " ORDER BY id", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[7])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[8])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[9]))
+                };
+                String option = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_OPTION));
+                db.insert(COPY_TABLE_CARD_BOOK,null,insertCardBook(id, name, value, cardX, option));
+            }
+        }
+        //기존 원본 테이블 삭제
+        db.execSQL("DROP TABLE " + TABLE_CARDBOOK_ALL);
+        //기존 원본 테이블 재생성
+        db.execSQL("CREATE TABLE " + TABLE_CARDBOOK_ALL +
+                "(id INTEGER, name TEXT, value INTEGER, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT" +
+                ", card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT, option TEXT)");
+        //카피한 테이블에서 원본테이블로 복제
+        cursor = db.rawQuery("SELECT * FROM " + COPY_TABLE_CARD_BOOK + " ORDER BY id", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                int value = cursor.getInt(cursor.getColumnIndex(CARDBOOK_COLUMN_VALUE));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[7])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[8])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[9]))
+                };
+                String option = cursor.getString(cursor.getColumnIndex(CARDBOOK_COLUMN_OPTION));
+                db.insert(TABLE_CARDBOOK_ALL,null,insertCardBook(id, name, value, cardX, option));
+
+            }
+        }
+        cursor.close();
+        //복사했던 테이블 제거
+        db.execSQL("DROP TABLE " + COPY_TABLE_CARD_BOOK);
+    }
+
+    private ContentValues insertDED(int id, String name, String[] cardX, float[] dmgPX) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ID, id);
+        cv.put(COLUMN_NAME, name);
+        for (int i = 0; i < cardX.length; i++) {
+            cv.put(COLUMN_CARD[i], cardX[i]);
+        }
+        DecimalFormat df = new DecimalFormat("0.00");//소수점 둘째자리까지 출력
+        dmgPX[0] = Float.parseFloat(df.format(dmgPX[0]));
+        dmgPX[1] = Float.parseFloat(df.format(dmgPX[1]));
+        dmgPX[2] = Float.parseFloat(df.format(dmgPX[2]));
+        cv.put(COLUMN_DMG_P0, dmgPX[0]);
+        cv.put(COLUMN_DMG_P1, dmgPX[1]);
+        cv.put(COLUMN_DMG_P2, dmgPX[2]);
+        return cv;
+    }
+
+    @SuppressLint("Range")
+    private void copyTableDED(SQLiteDatabase db) {
+        //복사할 테이블 생성
+        db.execSQL("CREATE TABLE " + COPY_TABLE_DED +
+                " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT" +
+                ", card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT, dmg_p0 REAL, dmg_p1 REAL, dmg_p2 REAL)");
+        //원본 테이블 검색 및 테이블 복사
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DEMON_EXTRA_DMG + " ORDER BY id", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[7])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[8])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[9]))
+                };
+                float[] dmg_PX = {
+                        cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P0)),
+                        cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P1)),
+                        cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P2))
+                };
+
+                db.insert(COPY_TABLE_DED, null, insertDED(id, name, cardX, dmg_PX));
+            }
+        }
+        //기존 원본 테이블 삭제
+        db.execSQL("DROP TABLE " + TABLE_DEMON_EXTRA_DMG);
+        //기존 원본 테이블 재생성
+        db.execSQL("CREATE TABLE " + TABLE_DEMON_EXTRA_DMG +
+                " (id INTEGER, name TEXT, card0 TEXT, card1 TEXT, card2 TEXT, card3 TEXT, card4 TEXT" +
+                ", card5 TEXT, card6 TEXT, card7 TEXT, card8 TEXT, card9 TEXT, dmg_p0 REAL, dmg_p1 REAL, dmg_p2 REAL)");
+        //카피한 테이블에서 원본테이블로 복제
+        cursor = db.rawQuery("SELECT * FROM " + COPY_TABLE_DED + " ORDER BY id", null);
+        if (cursor.getCount() != 0) {
+            //데이터가 조회된 경우 수행
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                String[] cardX = {
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[0])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[1])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[2])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[3])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[4])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[5])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[6])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[7])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[8])),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_CARD[9]))
+                };
+                float[] dmg_PX = {
+                        cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P0)),
+                        cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P1)),
+                        cursor.getFloat(cursor.getColumnIndex(COLUMN_DMG_P2))
+                };
+
+                db.insert(TABLE_DEMON_EXTRA_DMG, null, insertDED(id, name, cardX, dmg_PX));
+            }
+        }
+        cursor.close();
+        //복사했던 테이블 제거
+        db.execSQL("DROP TABLE " + COPY_TABLE_DED);
+    }
 }
