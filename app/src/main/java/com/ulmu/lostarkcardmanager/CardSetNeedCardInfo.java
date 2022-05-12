@@ -27,17 +27,13 @@ public class CardSetNeedCardInfo extends CardSetInfo {
 
     public CardSetNeedCardInfo(CardSetInfo selectCardSet, int goal) {
         super(selectCardSet);
-        Log.v("test", "Error 1");
         setDefault();
-        Log.v("test", "Error 2");
         setCardList();
-        Log.v("test", "Error 3");
         setGoalAwake();
-        Log.v("test", "Error 4");
         cardListCheck();
-        Log.v("test", "Error 5");         //카드세트의 포함카드가 7장인지 확인 후 7장 미만으로 조정
+        //카드세트의 포함카드가 7장인지 확인 후 7장 미만으로 조정
         setCardSetNeedCard(goal);
-        Log.v("test", "Error 6");  //목표 각성수치에 따라 cardSetNeedCard 값 조정.
+        //목표 각성수치에 따라 cardSetNeedCard 값 조정.
         setCardXNeedCard();
     }
 
@@ -172,7 +168,7 @@ public class CardSetNeedCardInfo extends CardSetInfo {
             }
         }
         for (int i = 0; i < tempCardList.size(); i++) {
-            Log.v("test", "tempCardList"+i+tempCardList.get(i).getName());
+            Log.v("test", "tempCardList" + i + tempCardList.get(i).getName());
         }
 
     }
@@ -186,8 +182,6 @@ public class CardSetNeedCardInfo extends CardSetInfo {
             goalAwake[1] = getNeedAwake2();
         }
 
-        Log.v("test", "goalAwake[0]" + goalAwake[0]);
-        Log.v("test", "goalAwake[1]" + goalAwake[1]);
     }
 
     private void setCardSetNeedCard(int goal) {
@@ -218,12 +212,6 @@ public class CardSetNeedCardInfo extends CardSetInfo {
                 cardSetNeedCard[i] = tempCardList.get(i).awakeMax();
             }
         }
-        Log.v("test", tempCardList.get(0).getName() + "cardSetNeedCard0 : " + cardSetNeedCard[0]);
-        Log.v("test", tempCardList.get(1).getName() + "cardSetNeedCard1 : " + cardSetNeedCard[1]);
-        Log.v("test", tempCardList.get(2).getName() + "cardSetNeedCard2 : " + cardSetNeedCard[2]);
-        Log.v("test", tempCardList.get(3).getName() + "cardSetNeedCard3 : " + cardSetNeedCard[3]);
-        Log.v("test", tempCardList.get(4).getName() + "cardSetNeedCard4 : " + cardSetNeedCard[4]);
-        Log.v("test", tempCardList.get(5).getName() + "cardSetNeedCard5 : " + cardSetNeedCard[5]);
 
     }
 

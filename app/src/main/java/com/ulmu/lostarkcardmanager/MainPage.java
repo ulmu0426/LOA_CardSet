@@ -41,7 +41,7 @@ public class MainPage extends AppCompatActivity {
     private RecyclerView rvFavorite;                        //카드세트의 즐겨찾기 리스트를 보여주기 위한 리사이클러뷰
     protected FavoriteAdapter favoriteAdapter;              //즐겨찾기 어뎁터
 
-    private String[] EDName = {"악마", "야수", "인간", "정령", "기계", "불사", "식물", "물질"};
+    private String[] EDName = {"악마", "야수", "인간", "정령", "기계", "불사", "식물", "물질", "곤충"};
     private ViewPager2 vpXED;
     private ImageView btnVpPrevious;
     private ImageView btnVpNext;
