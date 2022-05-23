@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -664,7 +663,6 @@ public class MainPage extends AppCompatActivity {
         selectedCardSet = new CardSetInfo();
         for (int i = 0; i < cardSetInfo.size(); i++) {
             if (cardSetInfo.get(i).getName().equals(cardSetName)) {
-                Log.d("test", "selectCardSet: " + cardSetInfo.get(i).getName());
                 selectedCardSet = cardSetInfo.get(i);
             }
 

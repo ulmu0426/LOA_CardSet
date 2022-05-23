@@ -74,8 +74,8 @@ public class ExtraDmgAdapter extends RecyclerView.Adapter<ExtraDmgAdapter.ViewHo
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
-        holder.txtXEDName.setText(extraDmgInfo.get(position).getName());
-        holder.txtXEDSumValue.setText(EDName + ED_TEXT + extraDmgInfo.get(position).getDmgSum() + ED_PERCENT);
+        holder.txtXEDName.setText(filterXED.get(position).getName());
+        holder.txtXEDSumValue.setText(EDName + ED_TEXT + filterXED.get(position).getDmgSum() + ED_PERCENT);
 
         holder.imgXEDCard0.setImageResource(getCardImg(filterXED.get(position).getCard0()));
         holder.imgXEDCard1.setImageResource(getCardImg(filterXED.get(position).getCard1()));
